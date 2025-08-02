@@ -103,9 +103,9 @@ if manual_aberto:
     st.markdown("""
     ### 📘 Guia de Uso – Sistema de Aconselhamento Médico
 
-    Muitos recorrem a bancos de pesquisa como o google quando se sentem doentes,não por ignorância,mas por desespero diante de um sistema de saúde que fecha as portas para quem não tem cartão de crédito.Esse sistema vem para tentar atenuar,nem que seja minimamente,essa diferença,e para oferecer,de forma ética e responsável,um aconselhamento inteligente,confiável e acessível,não porque somos melhores,mas sim porque somos iguais.
-    
-    Além disso,também montamos um dicionário,e tentamos adaptar tudo para a linguagem mais popular possível,pois estamos cansados de uma linguagem médica técnica demais e que limita o entendimento do que é dito a uma elite intelectual.
+    Muitos recorrem a bancos de pesquisa, como o Google, quando se sentem doentes — não por ignorância, mas por desespero diante de um sistema de saúde que fecha as portas para quem não tem cartão de crédito. Este sistema foi criado para tentar atenuar, ainda que minimamente, essa desigualdade, oferecendo, de forma ética e responsável, um aconselhamento inteligente, confiável e acessível. Não porque somos melhores, mas sim porque somos iguais.
+
+    Além disso, também desenvolvemos um dicionário e buscamos adaptar tudo para a linguagem mais popular possível, pois estamos cansados de uma linguagem médica excessivamente técnica,limitando o entendimento real da situação.
     
     Este sistema foi feito pra ajudar você a **entender melhor seus sintomas** antes de buscar um atendimento,ao final do aconselhamento principal será fornecida uma cor a você,ao receber o resultado receberá uma legenda explicando quais são os melhores próximos passos a serem tomados,mas o sistema se manifesta em todas as suas nuances,não somente no resultado final,fique atento a todas as mensagens fornecidas pelo sistema para uma experiência mais completa.
 
@@ -137,7 +137,7 @@ def aumentar_cor_em_1_nivel(cor_atual):
         if idx < len(ordem) - 1:
             return ordem[idx + 1]
         else:
-            return cor_atual  # já é vermelho, não sobe mais
+   Além disso, também desenvolvemos um dicionário e buscamos adaptar tudo para a linguagem mais popular possível, pois estamos cansados de uma linguagem médica excessivamente técnica, que limita o entendimento do que é dito a uma elite intelectual.         return cor_atual  # já é vermelho, não sobe mais
     except ValueError:
         return cor_atual  # cor inválida, retorna como veio
 
