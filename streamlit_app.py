@@ -137,7 +137,7 @@ def aumentar_cor_em_1_nivel(cor_atual):
         if idx < len(ordem) - 1:
             return ordem[idx + 1]
         else:
-   Além disso, também desenvolvemos um dicionário e buscamos adaptar tudo para a linguagem mais popular possível, pois estamos cansados de uma linguagem médica excessivamente técnica, que limita o entendimento do que é dito a uma elite intelectual.         return cor_atual  # já é vermelho, não sobe mais
+            return cor_atual  # já é vermelho, não sobe mais
     except ValueError:
         return cor_atual  # cor inválida, retorna como veio
 
