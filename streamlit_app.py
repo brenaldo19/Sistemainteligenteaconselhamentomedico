@@ -2469,7 +2469,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição
         if st.button("🔈 Frequência alta (8000 Hz)"):
             st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/beep_8000Hz.mp3", format="audio/mp3")
 
-    resposta = st.radio("Você ouviu todos os sons com clareza?", ["Sim", "Não ouvi o grave (8000 Hz)", "Não ouvi o médio", "Não ouvi o agudo (250 Hz)"])
+    resposta = st.radio("Você ouviu todos os sons com clareza?", ["Sim", "Não ouvi o grave (250 Hz)", "Não ouvi o médio", "Não ouvi o agudo (8000 Hz)"])
     if resposta != "Sim":
         st.warning("⚠️ Pode indicar perda auditiva seletiva.")
         st.markdown("🔎 Possíveis sintomas relacionados: **Alteração na audição**")
