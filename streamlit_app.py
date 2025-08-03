@@ -2445,7 +2445,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição
     st.info("Use fones de ouvido. Ajuste o volume para um nível confortável.")
 
     if st.button("▶️ Tocar som de teste"):
-        st.audio("https://huggingface.co/datasets/brenopereira/public-audios/resolve/main/beep_medio.mp3", format="audio/mp3")  # Som leve de bip
+        st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/beep_medio.mp3", format="audio/mp3")  # Som leve de bip
 
     resposta = st.radio("Você conseguiu ouvir o som com clareza?", ["Sim", "Não", "Somente em um dos ouvidos"])
     if resposta != "":
