@@ -2444,9 +2444,10 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição
 
     st.info("Use fones de ouvido. Ajuste o volume para um nível confortável.")
 
-    if st.button("▶️ Tocar som de teste"):
-        st.audio("https://www.soundjay.com/button/beep-07.wav")  # Som leve de bip
-
+if st.button("▶️ Mostrar som de teste"):
+    st.markdown("🔈 Clique no play abaixo para ouvir:")
+    st.audio("https://www.soundjay.com/button/beep-07.wav", format='audio/wav', start_time=0)
+    
     resposta = st.radio("Você conseguiu ouvir o som com clareza?", ["Sim", "Não", "Somente em um dos ouvidos"])
     if resposta != "":
         if resposta == "Não" or resposta == "Somente em um dos ouvidos":
@@ -2462,12 +2463,12 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição
     col1, col2 = st.columns(2)
     with col1:
         if st.button("🔈 Frequência baixa (250 Hz)"):
-            st.audio("https://www.soundjay.com/button/beep-01a.wav")
+            st.audio("https://www.soundjay.com/button/beep-01a.wav", format='audio/wav', start_time=0)
         if st.button("🔈 Frequência média (1000 Hz)"):
-            st.audio("https://www.soundjay.com/button/beep-03.wav")
+            st.audio("https://www.soundjay.com/button/beep-03.wav", format='audio/wav', start_time=0)
     with col2:
         if st.button("🔈 Frequência alta (8000 Hz)"):
-            st.audio("https://www.soundjay.com/button/beep-08b.wav")
+            st.audio("https://www.soundjay.com/button/beep-08b.wav", format='audio/wav', start_time=0)
 
     resposta = st.radio("Você ouviu todos os sons com clareza?", ["Sim", "Não ouvi o grave", "Não ouvi o médio", "Não ouvi o agudo"])
     if resposta != "Sim":
