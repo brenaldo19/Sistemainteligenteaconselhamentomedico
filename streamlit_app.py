@@ -116,13 +116,15 @@ if manual_aberto:
 
     > 🧭 A ideia é funcionar como um **guia de viagem pelo seu corpo**, não como um diagnóstico final.
 
+    **Observações importantes**:Se estiver no celular,consulte o dicionário antes de escolher os sintomas,pois a escolha manual de sintomas no celular se manifesta melhor ao escrever-se o sintoma,e para escrever corretamente e ter certeza que o sintoma selecionado é o certo a ser selecionado para seu caso,siga a instrução de consulta.
+    
     **Observações importantes**:No menu lateral esquerda,você terá três opções,'Nenhuma','Dicionário de sintomas' e 'Autotestes para apuração de sintomas',caso você selecione o primeiro a tela ficará livre para você seguir o aconselhamento principal normalmente,já se você escolher algum dos outros dois,o escolhido ficará na parte de cima da tela,onde você poderá interagir com ele,mantendo o aconselhamento principal na parte de baixo da tela
     
     **Observações importantes**:Os autotestes só ficarão disponíveis após você preencher todos os seus dados na primeira etapa,pois estes serão importantes para cálculos posteriores
     
     **Observações importantes**:O sistema NÃO guarda seus dados,tudo é feito internamente e sem qualquer tipo de exportação de dados
     
-    **Importante**:O sistema **NÃO substitui consulta médica**. Se estiver em dúvida, procure um profissional.
+    **⚠️ Importante**:O sistema **NÃO substitui consulta médica**. Se estiver em dúvida, procure um profissional.
 
     """)
 
@@ -239,6 +241,7 @@ def classificar_combinacao(sintomas, cores):
 st.title("Sistema Inteligente de Aconselhamento médico")
 st.markdown("⚠️ Este sistema é apenas um aconselhamento inicial e **não substitui atendimento médico.**")
 st.markdown("👋 Olá! Bem-vindo ao sistema de aconselhamento interativo.")
+st.markdown("Consulte o manual do sistema para coompreender todas as funcionalidades do site e usá-lo mais proveitosamente para o seu caso"0)
 st.markdown("Responda com sinceridade. O único beneficiado por sua honestidade nesse sistema é você mesmo")
 st.markdown("---")
 
