@@ -2445,7 +2445,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição
     st.info("Use fones de ouvido. Ajuste o volume para um nível confortável.")
 
     if st.button("▶️ Tocar som de teste"):
-        st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/beep_medio.mp3", format="audio/mp3")  # Som leve de bip
+        st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/bip_bip_1000Hz_4s.mp3", format="audio/mp3")  # Som leve de bip
 
     resposta = st.radio("Você conseguiu ouvir o som com clareza?", ["Sim", "Não", "Somente em um dos ouvidos"])
     if resposta != "":
@@ -2462,14 +2462,14 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição
     col1, col2 = st.columns(2)
     with col1:
         if st.button("🔈 Frequência baixa (250 Hz)"):
-            st.audio("https://www.soundjay.com/button/beep-01a.wav")
+            st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/beep_250Hz.mp3", format="audio/mp3")
         if st.button("🔈 Frequência média (1000 Hz)"):
-            st.audio("https://www.soundjay.com/button/beep-03.wav")
+            st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/beep_1000Hz.mp3", format="audio/mp3")
     with col2:
         if st.button("🔈 Frequência alta (8000 Hz)"):
-            st.audio("https://www.soundjay.com/button/beep-08b.wav")
+            st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/beep_8000Hz.mp3", format="audio/mp3")
 
-    resposta = st.radio("Você ouviu todos os sons com clareza?", ["Sim", "Não ouvi o grave", "Não ouvi o médio", "Não ouvi o agudo"])
+    resposta = st.radio("Você ouviu todos os sons com clareza?", ["Sim", "Não ouvi o grave (8000 Hz)", "Não ouvi o médio", "Não ouvi o agudo (250 Hz)"])
     if resposta != "Sim":
         st.warning("⚠️ Pode indicar perda auditiva seletiva.")
         st.markdown("🔎 Possíveis sintomas relacionados: **Alteração na audição**")
