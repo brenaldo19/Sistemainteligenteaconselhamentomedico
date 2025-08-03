@@ -241,7 +241,7 @@ def classificar_combinacao(sintomas, cores):
 st.title("Sistema Inteligente de Aconselhamento médico")
 st.markdown("⚠️ Este sistema é apenas um aconselhamento inicial e **não substitui atendimento médico.**")
 st.markdown("👋 Olá! Bem-vindo ao sistema de aconselhamento interativo.")
-st.markdown("Consulte o manual do sistema para coompreender todas as funcionalidades do site e usá-lo mais proveitosamente para o seu caso"0)
+st.markdown("Consulte o manual do sistema para coompreender todas as funcionalidades do site e usá-lo mais eficientemente")
 st.markdown("Responda com sinceridade. O único beneficiado por sua honestidade nesse sistema é você mesmo")
 st.markdown("---")
 
