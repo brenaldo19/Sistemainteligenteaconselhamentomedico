@@ -1904,7 +1904,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Percepç�
     """
     st.markdown(html, unsafe_allow_html=True)
 
-    resposta = st.text_input("Digite as cores que você enxerga (separe por vírgulas)").lower()
+    resposta = st.text_input("Digite as cores que você enxerga (Não diga tons,digite somente as cores) (separe por vírgulas)").lower()
 
     if st.button("Ver resultado"):
         cores_corretas = ["vermelho", "verde", "azul", "amarelo", "turquesa"]
