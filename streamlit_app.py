@@ -103,7 +103,7 @@ if manual_aberto:
     st.markdown("""
     ### 📘 Guia de Uso – Sistema de Aconselhamento Médico
 
-    Muitos recorrem a bancos de pesquisa, como o Google, quando se sentem doentes, não por ignorância, mas por desespero diante de um sistema de saúde que fecha as portas para quem não tem cartão de crédito. Este sistema de aconselhamento médico foi criado para tentar atenuar, ainda que minimamente, essa desigualdade, oferecendo, de forma ética e responsável, um aconselhamento inteligente, confiável e acessível. Não porque somos melhores, mas sim porque somos iguais.
+    Muitos recorrem a bancos de pesquisa, como o Google, quando se sentem doentes — não por ignorância, mas por desespero diante de um sistema de saúde que fecha as portas para quem não tem cartão de crédito. Este sistema foi criado para tentar atenuar, ainda que minimamente, essa desigualdade, oferecendo, de forma ética e responsável, um aconselhamento inteligente, confiável e acessível. Não porque somos melhores, mas sim porque somos iguais.
 
     Além disso, também desenvolvemos um dicionário e buscamos adaptar tudo para a linguagem mais popular possível, pois estamos cansados de uma linguagem médica excessivamente técnica,limitando o entendimento real da situação.
     
@@ -1214,7 +1214,7 @@ sistemas = {
         "Tempo de Reação", "Memória Curta", "Reflexo Seletivo", "Coordenação Fina", "Equilíbrio", "Humor e Ansiedade"
     ],
     "👁️ Sensorial": [
-        "Visão", "Campo Visual", "Percepção de Cores"
+        "Visão", "Campo Visual", "Percepção de Cores", "Audição (Frequências altas e baixas)", "Audição (Detecção de som)"
     ],
     "💓 Cardíaco": [
         "Cardíaco", "Recuperação Cardíaca", "Palpitações"
@@ -2439,6 +2439,42 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Variaçã
         else:
             st.warning("🚨 Variação significativa! Considere investigar causas clínicas ou comportamentais.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Náusea ou enjoo, Hiperglicemia, Hipoglicemia, Ansiedade ou agitação intensa, Comportamento estranho à normalidade**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição (Detecção de som)":
+    st.subheader("🔊 Teste de Detecção de Som")
+
+    st.info("Use fones de ouvido. Ajuste o volume para um nível confortável.")
+
+    if st.button("▶️ Tocar som de teste"):
+        st.audio("https://media.githubusercontent.com/media/rasmusab/beepr/master/sounds/beep-2.wav")  # Som leve de bip
+
+    resposta = st.radio("Você conseguiu ouvir o som com clareza?", ["Sim", "Não", "Somente em um dos ouvidos"])
+    if resposta != "":
+        if resposta == "Não" or resposta == "Somente em um dos ouvidos":
+            st.warning("⚠️ Sinal de alteração auditiva.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Alteração auditiva**")
+        else:
+            st.success("✅ Tudo certo com sua audição.")
+
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição (Frequências altas e baixas)":
+    st.subheader("🎧 Teste de Frequências Auditivas")
+
+    st.markdown("Clique para ouvir cada frequência. Use fones de ouvido.")
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("🔈 Frequência baixa (250 Hz)"):
+            st.audio("https://www.soundjay.com/button/beep-01a.wav")
+        if st.button("🔈 Frequência média (1000 Hz)"):
+            st.audio("https://www.soundjay.com/button/beep-03.wav")
+    with col2:
+        if st.button("🔈 Frequência alta (8000 Hz)"):
+            st.audio("https://www.soundjay.com/button/beep-08b.wav")
+
+    resposta = st.radio("Você ouviu todos os sons com clareza?", ["Sim", "Não ouvi o grave", "Não ouvi o médio", "Não ouvi o agudo"])
+    if resposta != "Sim":
+        st.warning("⚠️ Pode indicar perda auditiva seletiva.")
+        st.markdown("🔎 Possíveis sintomas relacionados: **Alteração na audição**")
+    else:
+        st.success("✅ Sem alterações aparentes.")
 
 def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
     media_esperada = calcular_media_esperada(idade, imc, sexo, gravida, grupo_risco)
