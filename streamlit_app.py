@@ -1241,7 +1241,7 @@ sistemas = {
         "Pele e Coceira"
     ],
     "☕ Energia e Vitalidade": [
-        "Energia Matinal", "Variação de peso (últimos 30 dias)", "Humor e Ansiedade" , "Avaliação de humor (últimos 7 dias)
+        "Energia Matinal", "Variação de peso (últimos 30 dias)", "Humor e Ansiedade" , "Avaliação de humor (últimos 7 dias)"
     ]
 }
 
@@ -2380,11 +2380,10 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Energia M
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor e Ansiedade":
     st.subheader("🧠 Teste de Humor e Pensamentos Acelerados")
 
-    st.markdown("""
-    Este teste ajuda a refletir sobre **aspectos emocionais e mentais recentes**.
+    st.markdown("""Este teste ajuda a refletir sobre **aspectos emocionais e mentais recentes**.""")
 
-    ### Como você tem se sentido nos últimos 7 dias?
-    """)
+    st.markdown(""" Como você tem se sentido nos últimos 7 dias?""")
+    
 
     humor = st.slider("Numa escala de 0 a 10, como está seu humor geral?", 0, 10, 5)
     acelerado = st.radio("Você tem tido pensamentos acelerados ou dificuldade de desligar a mente?", ["Não", "Às vezes", "Sim, com frequência"])
