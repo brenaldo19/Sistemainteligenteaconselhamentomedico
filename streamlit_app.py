@@ -1214,7 +1214,7 @@ opcao = st.sidebar.selectbox("Escolha uma opção", opcoes_disponiveis)
 # --- MENU DE SISTEMAS E TESTES INFORMAL ---
 sistemas = {
     "🧠 Neurológico": [
-        "Tempo de Reação", "Memória Curta", "Reflexo Seletivo", "Coordenação Fina", "Equilíbrio", "Humor e Ansiedade" , "Humor (últimos 7 dias)"
+        "Tempo de Reação", "Memória Curta", "Reflexo Seletivo", "Coordenação Fina", "Equilíbrio", "Humor e Ansiedade" , "Humor na última semana"
     ],
     "👁️ Sensorial": [
         "Visão", "Campo Visual", "Percepção de Cores", "Audição (Frequências altas e baixas)", "Audição (Detecção de som)"
@@ -2377,6 +2377,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Energia M
         else:
             st.error("🚨 Sinais de fadiga importante. Avalie seu sono, rotina e alimentação.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Hipotensão ou colapso, Náusea ou enjoo, Confusão mental**")
+
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor e Ansiedade":
     st.subheader("🧠 Teste de Humor e Pensamentos Acelerados")
 
@@ -2384,7 +2385,6 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor e A
 
     st.markdown(""" Como você tem se sentido nos últimos 7 dias?""")
     
-
     humor = st.slider("Numa escala de 0 a 10, como está seu humor geral?", 0, 10, 5)
     acelerado = st.radio("Você tem tido pensamentos acelerados ou dificuldade de desligar a mente?", ["Não", "Às vezes", "Sim, com frequência"])
     sono = st.radio("Tem dormido bem?", ["Sim", "Sono leve ou interrompido", "Insônia ou dificuldade para dormir"])
@@ -2401,7 +2401,8 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor e A
             st.warning("⚠️ Leves sinais de estresse ou alteração emocional.")
         else:
             st.error("🚨 Sinais de sobrecarga mental ou emocional. Procure ajuda se persistir.")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor (últimos 7 dias)":
+
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor na última semana":
     st.subheader("🧠 Avaliação de Humor nos Últimos 7 Dias")
     st.write("Pense em como você se sentiu em cada um dos últimos 7 dias. Avalie seu humor em uma escala de 1 a 5:")
 
