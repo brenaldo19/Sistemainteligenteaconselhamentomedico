@@ -1241,7 +1241,7 @@ sistemas = {
         "Pele e Coceira"
     ],
     "☕ Energia e Vitalidade": [
-        "Energia Matinal", "Variação de peso (últimos 30 dias)", "Humor e ansiedade"
+        "Energia Matinal", "Variação de peso (últimos 30 dias)", "Humor e Ansiedade" , "Avaliação de humor (últimos 7 dias)
     ]
 }
 
