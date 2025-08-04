@@ -1214,7 +1214,7 @@ opcao = st.sidebar.selectbox("Escolha uma opção", opcoes_disponiveis)
 # --- MENU DE SISTEMAS E TESTES INFORMAL ---
 sistemas = {
     "🧠 Neurológico": [
-        "Tempo de Reação", "Memória Curta", "Reflexo Seletivo", "Coordenação Fina", "Equilíbrio", "Humor e Ansiedade"
+        "Tempo de Reação", "Memória Curta", "Reflexo Seletivo", "Coordenação Fina", "Equilíbrio"
     ],
     "👁️ Sensorial": [
         "Visão", "Campo Visual", "Percepção de Cores", "Audição (Frequências altas e baixas)", "Audição (Detecção de som)"
