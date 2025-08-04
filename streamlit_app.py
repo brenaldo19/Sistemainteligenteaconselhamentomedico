@@ -1214,34 +1214,55 @@ opcao = st.sidebar.selectbox("Escolha uma opção", opcoes_disponiveis)
 # --- MENU DE SISTEMAS E TESTES INFORMAL ---
 sistemas = {
     "🧠 Neurológico": [
-        "Tempo de Reação", "Memória Curta", "Reflexo Seletivo", "Coordenação Fina", "Equilíbrio", "Humor e Ansiedade" , "Humor na última semana"
+        "Tempo de Reação",
+        "Memória Curta",
+        "Reflexo Seletivo",
+        "Coordenação Fina",
+        "Equilíbrio",
+        "Humor e Ansiedade",
+        "Humor na Última Semana"
     ],
     "👁️ Sensorial": [
-        "Visão", "Campo Visual", "Percepção de Cores", "Audição (Frequências altas e baixas)", "Audição (Detecção de som)"
+        "Visão",
+        "Campo Visual",
+        "Percepção de Cores",
+        "Audição (Frequências Altas e Baixas)",
+        "Audição (Detecção de Som)"
     ],
     "💓 Cardíaco": [
-        "Cardíaco", "Recuperação Cardíaca", "Palpitações"
+        "Cardíaco",
+        "Recuperação Cardíaca",
+        "Palpitações"
     ],
     "🫁 Respiratório": [
-        "Respiração", "Apneia Simples", "Sopro Sustentado"
+        "Respiração",
+        "Apneia Simples",
+        "Sopro Sustentado"
     ],
     "🧬 Vascular / Circulatório": [
-        "Enchimento Capilar", "Varizes"
+        "Enchimento Capilar",
+        "Varizes"
     ],
     "🦵 Musculoesquelético": [
-        "Força da Mão", "Subir Escada com Uma Perna", "Levantar do Chão"
+        "Força da Mão",
+        "Subir Escada com Uma Perna",
+        "Levantar do Chão"
     ],
     "🚽 Digestivo / Intestinal": [
-        "Digestão", "Ritmo Intestinal"
+        "Digestão",
+        "Ritmo Intestinal"
     ],
     "💧 Urinário e Hidratação": [
-        "Urinário", "Hidratação", "Cor da Urina"
+        "Urinário",
+        "Hidratação",
+        "Cor da Urina"
     ],
     "🧴 Cutâneo": [
         "Pele e Coceira"
     ],
     "☕ Energia e Vitalidade": [
-        "Energia Matinal", "Variação de peso (últimos 30 dias)"
+        "Energia Matinal",
+        "Variação de Peso (Últimos 30 Dias)"
     ]
 }
 
