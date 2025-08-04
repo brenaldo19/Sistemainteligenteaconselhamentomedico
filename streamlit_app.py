@@ -1,3 +1,4 @@
+#Primeira coisa q vc vai fzr qnd voltar aq é fzr o reflexo seletivo certo pq tá um lixo,e botar o humor na última semana p funcionar seu animal
 import streamlit as st
 from datetime import datetime
 import pandas as pd
