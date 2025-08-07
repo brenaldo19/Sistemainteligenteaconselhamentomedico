@@ -1508,10 +1508,10 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo S
 
         
 
-        st.write(f"Números 7 apresentados: {total_7}")
-        st.write(f"Cliques corretos: {cliques_certos}")
-        st.write(f"Cliques errados (falsos positivos): {cliques_errados}")
-        st.write(f"Números 7 ignorados (erros por omissão): {deixou_passar}")
+    st.write(f"Números 7 apresentados: {total_7}")
+    st.write(f"Cliques corretos: {cliques_certos}")
+    st.write(f"Cliques errados (falsos positivos): {cliques_errados}")
+    st.write(f"Números 7 ignorados (erros por omissão): {deixou_passar}")
 
         if media_tempo is not None:
             st.write(f"⏱️ Tempo médio de reação nos acertos: **{media_tempo:.2f} segundos**")
