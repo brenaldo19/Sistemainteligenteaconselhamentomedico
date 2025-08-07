@@ -1458,77 +1458,79 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Visão":
 
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo Seletivo":
     st.subheader("✋ Teste de Reflexo Seletivo – Clique apenas quando aparecer o número 7")
-    st.write("Você verá 10 números. Clique **somente** quando aparecer o número 7.")
+    st.write("Você verá 10 números, um por vez. Clique **somente** se o número mostrado for 7.")
 
-    if "clique_reflexo" not in st.session_state:
-        st.session_state.clique_reflexo = {
+    # Inicialização do estado
+    if "reflexo_seletivo" not in st.session_state:
+        st.session_state.reflexo_seletivo = {
             "numeros": [random.randint(0, 9) for _ in range(10)],
             "respostas": [],
             "indice": 0,
-            "inicio_tempo": time.time()
+            "inicio": time.time(),
+            "tempo_exibicao": None
         }
 
-    dados = st.session_state.clique_reflexo
+    dados = st.session_state.reflexo_seletivo
     total = len(dados["numeros"])
 
+    # Teste em andamento
     if dados["indice"] < total:
         atual = dados["numeros"][dados["indice"]]
+
+        if dados["tempo_exibicao"] is None:
+            dados["tempo_exibicao"] = time.time()
+
         st.markdown(f"### Número mostrado: **{atual}**")
         st.markdown(f"Rodada {dados['indice'] + 1} de {total}")
-
-        # Guarda o tempo de exibição do número se ainda não estiver registrado
-        if "tempo_inicio_atual" not in st.session_state or st.session_state.get("ultima_rodada", -1) != dados["indice"]:
-            st.session_state.tempo_inicio_atual = time.time()
-            st.session_state.ultima_rodada = dados["indice"]
 
         col1, col2 = st.columns([2, 1])
         with col1:
             if st.button("Clique se for 7", key=f"clicar_{dados['indice']}"):
-                tempo_reacao = time.time() - st.session_state.tempo_inicio_atual
-                dados["respostas"].append(("clicou", atual, tempo_reacao))
+                tempo = time.time() - dados["tempo_exibicao"]
+                dados["respostas"].append(("clicou", atual, tempo))
                 dados["indice"] += 1
+                dados["tempo_exibicao"] = None
                 st.rerun()
         with col2:
             if st.button("Ignorar", key=f"ignorar_{dados['indice']}"):
-                tempo_reacao = time.time() - st.session_state.tempo_inicio_atual
-                dados["respostas"].append(("ignorou", atual, tempo_reacao))
+                tempo = time.time() - dados["tempo_exibicao"]
+                dados["respostas"].append(("ignorou", atual, tempo))
                 dados["indice"] += 1
+                dados["tempo_exibicao"] = None
                 st.rerun()
+
+    # Teste finalizado
     else:
-        st.subheader("📊 Resultado do Teste")
+        st.subheader("📊 Resultado do Teste de Reflexo Seletivo")
 
-        # Filtra apenas as respostas válidas com 3 elementos (ação, número, tempo)
-respostas_filtradas = [r for r in dados["respostas"] if len(r) == 3]
+        respostas = dados["respostas"]
+        total_7 = sum(1 for _, n, _ in respostas if n == 7)
+        cliques_certos = sum(1 for acao, n, _ in respostas if acao == "clicou" and n == 7)
+        cliques_errados = sum(1 for acao, n, _ in respostas if acao == "clicou" and n != 7)
+        ignorou_7 = sum(1 for acao, n, _ in respostas if acao == "ignorou" and n == 7)
 
-        # Agora processa só o que tem formato correto
-cliques_certos = sum(1 for acao, n, t in respostas_filtradas if acao == "clicou" and n == 7)
-cliques_errados = sum(1 for acao, n, t in respostas_filtradas if acao == "clicou" and n != 7)
-deixou_passar = sum(1 for acao, n, t in respostas_filtradas if acao == "ignorou" and n == 7)
-total_7 = sum(1 for _, n, _ in respostas_filtradas if n == 7)
+        tempos_reacao = [t for acao, n, t in respostas if acao == "clicou" and n == 7]
+        media_tempo = sum(tempos_reacao) / len(tempos_reacao) if tempos_reacao else None
 
-tempos_reacao_corretos = [t for acao, n, t in respostas_filtradas if acao == "clicou" and n == 7]
-media_tempo = sum(tempos_reacao_corretos) / len(tempos_reacao_corretos) if tempos_reacao_corretos else None
+        st.write(f"🔢 Números 7 apresentados: {total_7}")
+        st.write(f"✅ Cliques corretos: {cliques_certos}")
+        st.write(f"❌ Cliques errados (não era 7): {cliques_errados}")
+        st.write(f"😶 Números 7 ignorados: {ignorou_7}")
 
-        # Exibição
-st.write(f"Números 7 apresentados: {total_7}")
-st.write(f"Cliques corretos: {cliques_certos}")
-st.write(f"Cliques errados (falsos positivos): {cliques_errados}")
-st.write(f"Números 7 ignorados (erros por omissão): {deixou_passar}")
+        if media_tempo is not None:
+            st.write(f"⏱️ Tempo médio de reação (cliques corretos): **{media_tempo:.2f} segundos**")
+            if media_tempo <= 0.8:
+                st.success("🧠 Tempo de reação excelente!")
+            elif media_tempo <= 1.5:
+                st.info("⚠️ Tempo de reação dentro do esperado.")
+            else:
+                st.warning("🐢 Tempo de reação um pouco lento. Pode ser cansaço ou distração.")
+        else:
+            st.write("⚠️ Nenhum clique correto registrado — tempo de reação não avaliado.")
 
-if media_tempo is not None:
-    st.write(f"⏱️ Tempo médio de reação nos acertos: **{media_tempo:.2f} segundos**")
-    if media_tempo <= 0.8:
-        st.success("🧠 Tempo de reação excelente!")
-    elif media_tempo <= 1.5:
-        st.info("⚠️ Tempo de reação dentro do esperado.")
-    else:
-        st.warning("🐢 Tempo de reação um pouco lento. Pode ser cansaço, distração ou atenção baixa.")
-else:
-    st.write("⚠️ Nenhum clique correto registrado, tempo de reação não avaliado.")
-
-if st.button("Refazer teste"):
-    del st.session_state["clique_reflexo"]
-    st.rerun()
+        if st.button("Refazer teste"):
+            del st.session_state["reflexo_seletivo"]
+            st.rerun()
 
     elif opcao == "Autotestes para apuração de sintoma" and subteste == "Respiração":
     st.subheader("🌬️ Teste de Frequência Respiratória")
