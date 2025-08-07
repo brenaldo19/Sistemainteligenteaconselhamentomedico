@@ -2457,7 +2457,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor na 
         else:
             st.warning("😟 Humor predominantemente baixo. Avalie se algo está afetando seu bem-estar.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Ansiedade ou agitação intensa, Comportamento estranho à normalidade, Confusão mental**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Variação de peso (últimos 30 dias)":
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Variação de Peso (Últimos 30 Dias)":
     st.subheader("⚖️ Variação de Peso nos Últimos 30 Dias")
     peso_atual = st.number_input("Digite seu peso atual (kg):", min_value=20.0, max_value=300.0, step=0.1)
     peso_passado = st.number_input("Digite seu peso de 30 dias atrás (kg):", min_value=20.0, max_value=300.0, step=0.1)
