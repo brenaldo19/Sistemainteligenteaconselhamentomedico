@@ -1221,7 +1221,7 @@ sistemas = {
         "Coordenação Fina",
         "Equilíbrio",
         "Humor e Ansiedade",
-        "Humor na Última Semana"
+        "Humor na última semana"
     ],
     "👁️ Sensorial": [
         "Visão",
@@ -1458,51 +1458,60 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Visão":
             st.rerun()
 
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo Seletivo":
-    st.subheader("✋ Teste de Reflexo Seletivo – Clique apenas no número 7")
+    st.subheader("✋ Teste de Reflexo Seletivo – Clique apenas quando aparecer o número 7")
+    st.write("Você verá 10 números. Clique **somente** quando aparecer o número 7.")
 
-    if "numeros_clique" not in st.session_state:
-        # Gera sequência de 10 números aleatórios entre 0 e 9
-        st.session_state.numeros_clique = [random.randint(0, 9) for _ in range(10)]
-        st.session_state.resultados_clique = []
-        st.session_state.index_clique = 0
+    if "clique_reflexo" not in st.session_state:
+        st.session_state.clique_reflexo = {
+            "numeros": [random.randint(0, 9) for _ in range(10)],
+            "respostas": [],
+            "indice": 0
+        }
 
-    if st.session_state.index_clique < len(st.session_state.numeros_clique):
-        atual = st.session_state.numeros_clique[st.session_state.index_clique]
+    dados = st.session_state.clique_reflexo
+    total = len(dados["numeros"])
+
+    if dados["indice"] < total:
+        atual = dados["numeros"][dados["indice"]]
         st.markdown(f"### Número mostrado: **{atual}**")
-        if st.button("Clique aqui se for 7"):
-            clicou = (atual == 7)
-            st.session_state.resultados_clique.append(clicou)
-            st.session_state.index_clique += 1
-            st.rerun()
-        else:
-            st.session_state.resultados_clique.append(False)
+        st.markdown(f"Rodada {dados['indice'] + 1} de {total}")
+
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            if st.button("Clique se for 7", key=f"clicar_{dados['indice']}"):
+                clicou = (atual == 7)
+                dados["respostas"].append(("clicou", atual))
+                dados["indice"] += 1
+                st.rerun()
+        with col2:
+            if st.button("Ignorar", key=f"ignorar_{dados['indice']}"):
+                dados["respostas"].append(("ignorou", atual))
+                dados["indice"] += 1
+                st.rerun()
     else:
         st.subheader("📊 Resultado do Teste")
-        mostrados = st.session_state.numeros_clique
-        respostas = st.session_state.resultados_clique
-        total_7 = mostrados.count(7)
-        cliques_certos = sum(1 for i, n in enumerate(mostrados) if n == 7 and respostas[i])
-        cliques_errados = sum(1 for i, n in enumerate(mostrados) if n != 7 and respostas[i])
-        deixou_passar = total_7 - cliques_certos
+
+        cliques_certos = sum(1 for acao, n in dados["respostas"] if acao == "clicou" and n == 7)
+        cliques_errados = sum(1 for acao, n in dados["respostas"] if acao == "clicou" and n != 7)
+        deixou_passar = sum(1 for acao, n in dados["respostas"] if acao == "ignorou" and n == 7)
+        total_7 = dados["numeros"].count(7)
 
         st.write(f"Números 7 apresentados: {total_7}")
         st.write(f"Cliques corretos: {cliques_certos}")
         st.write(f"Cliques errados (falsos positivos): {cliques_errados}")
-        st.write(f"Números 7 que você deixou passar: {deixou_passar}")
+        st.write(f"Números 7 ignorados (erros por omissão): {deixou_passar}")
 
         if cliques_errados == 0 and deixou_passar == 0:
             st.success("✅ Excelente! Atenção e reflexos muito bons.")
         elif cliques_errados <= 1 and deixou_passar <= 1:
             st.info("⚠️ Bom desempenho, mas pode melhorar atenção seletiva.")
-            st.markdown("🔎 Possíveis sintomas relacionado: **Ansiedade ou agitação intensa,Tremores ou movimentos involuntários**")
+            st.markdown("🔎 Sintomas relacionados: **Ansiedade, Agitação, Tremores**")
         else:
-            st.warning("🔄 Atenção baixa ou reflexo impreciso. Treinar esse tipo de foco pode ajudar.")
-            st.markdown("🔎 Possíveis sintomas relacionado: **Ansiedade ou agitação intensa,Tremores ou movimentos involuntários,Confusão mental,Comportamento estranho à normalidade**")
+            st.warning("🔄 Atenção baixa ou reflexo impreciso. Praticar foco seletivo pode ajudar.")
+            st.markdown("🔎 Sintomas relacionados: **Confusão mental, Agitação intensa, Comportamento estranho à normalidade**")
 
         if st.button("Refazer teste"):
-            for key in ["numeros_clique", "resultados_clique", "index_clique"]:
-                if key in st.session_state:
-                    del st.session_state[key]
+            del st.session_state["clique_reflexo"]
             st.rerun()
 
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Respiração":
