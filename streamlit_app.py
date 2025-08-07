@@ -1497,13 +1497,16 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo S
     else:
         st.subheader("📊 Resultado do Teste")
 
-        cliques_certos = sum(1 for acao, n, _ in dados["respostas"] if acao == "clicou" and n == 7)
-        cliques_errados = sum(1 for acao, n, _ in dados["respostas"] if acao == "clicou" and n != 7)
-        deixou_passar = sum(1 for acao, n, _ in dados["respostas"] if acao == "ignorou" and n == 7)
-        total_7 = dados["numeros"].count(7)
+        respostas_filtradas = [r for r in dados["respostas"] if len(r) == 3]
 
-        tempos_reacao_corretos = [t for acao, n, t in dados["respostas"] if acao == "clicou" and n == 7]
-        media_tempo = sum(tempos_reacao_corretos) / len(tempos_reacao_corretos) if tempos_reacao_corretos else None
+    cliques_certos = sum(1 for acao, n, t in respostas_filtradas if acao == "clicou" and n == 7)
+    cliques_errados = sum(1 for acao, n, t in respostas_filtradas if acao == "clicou" and n != 7)
+    deixou_passar = sum(1 for acao, n, t in respostas_filtradas if acao == "ignorou" and n == 7)
+
+    tempos_reacao_corretos = [t for acao, n, t in respostas_filtradas if acao == "clicou" and n == 7]
+    media_tempo = sum(tempos_reacao_corretos) / len(tempos_reacao_corretos) if tempos_reacao_corretos else None
+
+        
 
         st.write(f"Números 7 apresentados: {total_7}")
         st.write(f"Cliques corretos: {cliques_certos}")
