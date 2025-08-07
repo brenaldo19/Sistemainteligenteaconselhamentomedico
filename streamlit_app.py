@@ -1500,7 +1500,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo S
         # Filtra apenas as respostas válidas com 3 elementos (ação, número, tempo)
 respostas_filtradas = [r for r in dados["respostas"] if len(r) == 3]
 
-# Agora processa só o que tem formato correto
+        # Agora processa só o que tem formato correto
 cliques_certos = sum(1 for acao, n, t in respostas_filtradas if acao == "clicou" and n == 7)
 cliques_errados = sum(1 for acao, n, t in respostas_filtradas if acao == "clicou" and n != 7)
 deixou_passar = sum(1 for acao, n, t in respostas_filtradas if acao == "ignorou" and n == 7)
