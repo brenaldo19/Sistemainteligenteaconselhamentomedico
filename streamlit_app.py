@@ -1528,7 +1528,7 @@ else:
 
 if st.button("Refazer teste"):
     del st.session_state["clique_reflexo"]
-            st.rerun()
+    st.rerun()
 
     elif opcao == "Autotestes para apuração de sintoma" and subteste == "Respiração":
         st.subheader("🌬️ Teste de Frequência Respiratória")
