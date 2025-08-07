@@ -1515,14 +1515,14 @@ st.write(f"Cliques corretos: {cliques_certos}")
 st.write(f"Cliques errados (falsos positivos): {cliques_errados}")
 st.write(f"Números 7 ignorados (erros por omissão): {deixou_passar}")
 
-    if media_tempo is not None:
-        st.write(f"⏱️ Tempo médio de reação nos acertos: **{media_tempo:.2f} segundos**")
-        if media_tempo <= 0.8:
-            st.success("🧠 Tempo de reação excelente!")
-        elif media_tempo <= 1.5:
-            st.info("⚠️ Tempo de reação dentro do esperado.")
-        else:
-            st.warning("🐢 Tempo de reação um pouco lento. Pode ser cansaço, distração ou atenção baixa.")
+if media_tempo is not None:
+    st.write(f"⏱️ Tempo médio de reação nos acertos: **{media_tempo:.2f} segundos**")
+    if media_tempo <= 0.8:
+        st.success("🧠 Tempo de reação excelente!")
+    elif media_tempo <= 1.5:
+        st.info("⚠️ Tempo de reação dentro do esperado.")
+    else:
+        st.warning("🐢 Tempo de reação um pouco lento. Pode ser cansaço, distração ou atenção baixa.")
     else:
         st.write("⚠️ Nenhum clique correto registrado, tempo de reação não avaliado.")
 
