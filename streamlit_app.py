@@ -2476,7 +2476,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Variaçã
         else:
             st.warning("🚨 Variação significativa! Considere investigar causas clínicas ou comportamentais.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Náusea ou enjoo, Hiperglicemia, Hipoglicemia, Ansiedade ou agitação intensa, Comportamento estranho à normalidade**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição (Detecção de som)":
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição (Detecção de Som)":
     st.subheader("🔊 Teste de Detecção de Som")
 
     st.info("Use fones de ouvido. Ajuste o volume para um nível confortável.")
@@ -2492,7 +2492,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição
         else:
             st.success("✅ Tudo certo com sua audição.")
 
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição (Frequências altas e baixas)":
+elif opcao == "Autotestes para apuração de sintoma" and subteste ==  "Audição (Frequências Altas e Baixas)":
     st.subheader("🎧 Teste de Frequências Auditivas")
 
     st.markdown("Clique para ouvir cada frequência. Use fones de ouvido.")
