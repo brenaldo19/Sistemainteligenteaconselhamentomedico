@@ -1461,11 +1461,15 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo S
     st.write("Você verá 10 números. Clique **somente** quando aparecer o número 7.")
 
     if "clique_reflexo" not in st.session_state:
+        numeros = [random.randint(0, 9) for _ in range(9)]  # gera 9 aleatórios
+        numeros.append(7)  # garante que pelo menos 1 seja 7
+        random.shuffle(numeros)  # embaralha a posição do 7
         st.session_state.clique_reflexo = {
-            "numeros": [random.randint(0, 9) for _ in range(10)],
+            "numeros": numeros,
             "respostas": [],
             "indice": 0
-        }
+    }
+
 
     dados = st.session_state.clique_reflexo
     total = len(dados["numeros"])
