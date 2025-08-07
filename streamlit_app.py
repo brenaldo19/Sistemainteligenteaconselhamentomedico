@@ -1266,14 +1266,12 @@ sistemas = {
     ]
 }
 
-subteste = None
 if opcao == "Autotestes para apuração de sintoma":
     st.title("📋 Autotestes para apuração de sintoma de Saúde")
     st.caption("Esses testes são apenas indicativos e não substituem avaliação médica.")
     sistema_escolhido = st.selectbox("🔍 Escolha o sistema para testar:", list(sistemas.keys()))
     subteste = st.radio("🧪 Escolha o teste específico:", sistemas[sistema_escolhido])
 
-# --- DICIONÁRIO DE SINTOMAS ---
 if opcao == "Dicionário de sintomas":
     sintoma_selecionado = st.selectbox("Escolha um sintoma:", list(dic.keys()))
     st.subheader(f"🔎 {sintoma_selecionado}")
@@ -1284,8 +1282,7 @@ if opcao == "Dicionário de sintomas":
     for subtitulo, explicacao in dic[sintoma_selecionado]["termos"].items():
         st.markdown(f"- **{subtitulo}:** {explicacao}")
 
-#AUTO TESTES
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Tempo de Reação":
+if opcao == "Autotestes para apuração de sintoma" and subteste == "Tempo de Reação":
     st.subheader("🧠 Teste de Tempo de Reação")
     st.warning("⚠️ A primeira tentativa é apenas um teste de preparação e **não será contabilizada na média final**.")
 
