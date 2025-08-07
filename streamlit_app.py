@@ -1529,7 +1529,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo S
             del st.session_state["reflexo_seletivo"]
             st.rerun()
 
-    elif opcao == "Autotestes para apuração de sintoma" and subteste == "Respiração":
+    if opcao == "Autotestes para apuração de sintoma" and subteste == "Respiração":
     st.subheader("🌬️ Teste de Frequência Respiratória")
 
     st.markdown("Este teste avalia sua frequência respiratória. Respire normalmente.")
