@@ -1531,7 +1531,7 @@ if st.button("Refazer teste"):
     st.rerun()
 
     elif opcao == "Autotestes para apuração de sintoma" and subteste == "Respiração":
-        st.subheader("🌬️ Teste de Frequência Respiratória")
+    st.subheader("🌬️ Teste de Frequência Respiratória")
 
     st.markdown("Este teste avalia sua frequência respiratória. Respire normalmente.")
 
