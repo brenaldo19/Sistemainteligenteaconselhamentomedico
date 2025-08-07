@@ -1,4 +1,3 @@
-#Primeira coisa q vc vai fzr qnd voltar aq é fzr o reflexo seletivo certo pq tá um lixo,e botar o humor na última semana p funcionar seu animal
 import streamlit as st
 from datetime import datetime
 import pandas as pd
@@ -1465,7 +1464,8 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo S
         st.session_state.clique_reflexo = {
             "numeros": [random.randint(0, 9) for _ in range(10)],
             "respostas": [],
-            "indice": 0
+            "indice": 0,
+            "inicio_tempo": time.time()
         }
 
     dados = st.session_state.clique_reflexo
@@ -1476,44 +1476,54 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo S
         st.markdown(f"### Número mostrado: **{atual}**")
         st.markdown(f"Rodada {dados['indice'] + 1} de {total}")
 
+        # Guarda o tempo de exibição do número se ainda não estiver registrado
+        if "tempo_inicio_atual" not in st.session_state or st.session_state.get("ultima_rodada", -1) != dados["indice"]:
+            st.session_state.tempo_inicio_atual = time.time()
+            st.session_state.ultima_rodada = dados["indice"]
+
         col1, col2 = st.columns([2, 1])
         with col1:
             if st.button("Clique se for 7", key=f"clicar_{dados['indice']}"):
-                clicou = (atual == 7)
-                dados["respostas"].append(("clicou", atual))
+                tempo_reacao = time.time() - st.session_state.tempo_inicio_atual
+                dados["respostas"].append(("clicou", atual, tempo_reacao))
                 dados["indice"] += 1
                 st.rerun()
         with col2:
             if st.button("Ignorar", key=f"ignorar_{dados['indice']}"):
-                dados["respostas"].append(("ignorou", atual))
+                tempo_reacao = time.time() - st.session_state.tempo_inicio_atual
+                dados["respostas"].append(("ignorou", atual, tempo_reacao))
                 dados["indice"] += 1
                 st.rerun()
     else:
         st.subheader("📊 Resultado do Teste")
 
-        cliques_certos = sum(1 for acao, n in dados["respostas"] if acao == "clicou" and n == 7)
-        cliques_errados = sum(1 for acao, n in dados["respostas"] if acao == "clicou" and n != 7)
-        deixou_passar = sum(1 for acao, n in dados["respostas"] if acao == "ignorou" and n == 7)
+        cliques_certos = sum(1 for acao, n, _ in dados["respostas"] if acao == "clicou" and n == 7)
+        cliques_errados = sum(1 for acao, n, _ in dados["respostas"] if acao == "clicou" and n != 7)
+        deixou_passar = sum(1 for acao, n, _ in dados["respostas"] if acao == "ignorou" and n == 7)
         total_7 = dados["numeros"].count(7)
+
+        tempos_reacao_corretos = [t for acao, n, t in dados["respostas"] if acao == "clicou" and n == 7]
+        media_tempo = sum(tempos_reacao_corretos) / len(tempos_reacao_corretos) if tempos_reacao_corretos else None
 
         st.write(f"Números 7 apresentados: {total_7}")
         st.write(f"Cliques corretos: {cliques_certos}")
         st.write(f"Cliques errados (falsos positivos): {cliques_errados}")
         st.write(f"Números 7 ignorados (erros por omissão): {deixou_passar}")
 
-        if cliques_errados == 0 and deixou_passar == 0:
-            st.success("✅ Excelente! Atenção e reflexos muito bons.")
-        elif cliques_errados <= 1 and deixou_passar <= 1:
-            st.info("⚠️ Bom desempenho, mas pode melhorar atenção seletiva.")
-            st.markdown("🔎 Sintomas relacionados: **Ansiedade, Agitação, Tremores**")
+        if media_tempo is not None:
+            st.write(f"⏱️ Tempo médio de reação nos acertos: **{media_tempo:.2f} segundos**")
+            if media_tempo <= 0.8:
+                st.success("🧠 Tempo de reação excelente!")
+            elif media_tempo <= 1.5:
+                st.info("⚠️ Tempo de reação dentro do esperado.")
+            else:
+                st.warning("🐢 Tempo de reação um pouco lento. Pode ser cansaço, distração ou atenção baixa.")
         else:
-            st.warning("🔄 Atenção baixa ou reflexo impreciso. Praticar foco seletivo pode ajudar.")
-            st.markdown("🔎 Sintomas relacionados: **Confusão mental, Agitação intensa, Comportamento estranho à normalidade**")
+            st.write("⚠️ Nenhum clique correto registrado, tempo de reação não avaliado.")
 
         if st.button("Refazer teste"):
             del st.session_state["clique_reflexo"]
             st.rerun()
-
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Respiração":
     st.subheader("🌬️ Teste de Frequência Respiratória")
 
