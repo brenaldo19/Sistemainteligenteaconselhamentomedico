@@ -1266,12 +1266,12 @@ sistemas = {
     ]
 }
 
-if opcao == "Autotestes para apuração de sintoma":
+if opcao == "Autotestes para apuração de sintoma" :
     st.title("📋 Autotestes para apuração de sintoma de Saúde")
     st.caption("Esses testes são apenas indicativos e não substituem avaliação médica.")
     sistema_escolhido = st.selectbox("🔍 Escolha o sistema para testar:", list(sistemas.keys()))
     subteste = st.radio("🧪 Escolha o teste específico:", sistemas[sistema_escolhido])
-
+    
 if opcao == "Dicionário de sintomas":
     sintoma_selecionado = st.selectbox("Escolha um sintoma:", list(dic.keys()))
     st.subheader(f"🔎 {sintoma_selecionado}")
@@ -1282,7 +1282,7 @@ if opcao == "Dicionário de sintomas":
     for subtitulo, explicacao in dic[sintoma_selecionado]["termos"].items():
         st.markdown(f"- **{subtitulo}:** {explicacao}")
 
-if opcao == "Autotestes para apuração de sintoma" and subteste == "Tempo de Reação":
+if subteste == "Tempo de Reação":
     st.subheader("🧠 Teste de Tempo de Reação")
     st.warning("⚠️ A primeira tentativa é apenas um teste de preparação e **não será contabilizada na média final**.")
 
@@ -1382,7 +1382,7 @@ if opcao == "Autotestes para apuração de sintoma" and subteste == "Tempo de Re
                 if key in st.session_state:
                     del st.session_state[key]
             st.rerun()
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Memória Curta":
+elif subteste == "Memória Curta":
     st.subheader("🧠 Teste de Memória Curta")
 
     if "palavras_memoria" not in st.session_state:
@@ -1412,7 +1412,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Memória 
                     if key in st.session_state:
                         del st.session_state[key]
                 st.rerun()
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Visão":
+elif subteste == "Visão":
     st.subheader("👁️ Teste Visual com Dificuldade Progressiva")
 
     st.markdown("Você verá 5 números com níveis diferentes de visibilidade. Tente identificar todos que conseguir. Eles variam do mais visível até o mais apagado.")
@@ -1453,7 +1453,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Visão":
                     del st.session_state[key]
             st.rerun()
 
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo Seletivo":
+elif   and subteste == "Reflexo Seletivo":
     st.subheader("✋ Teste de Reflexo Seletivo – Clique apenas quando aparecer o número 7")
     st.write("Você verá 10 números, um por vez. Clique **somente** se o número mostrado for 7.")
 
@@ -1529,7 +1529,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo S
             del st.session_state["reflexo_seletivo"]
             st.rerun()
 
-    if opcao == "Autotestes para apuração de sintoma" and subteste == "Respiração":
+    if   and subteste == "Respiração":
         st.subheader("🌬️ Teste de Frequência Respiratória")
 
     st.markdown("Este teste avalia sua frequência respiratória. Respire normalmente.")
@@ -1591,7 +1591,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo S
                 if key in st.session_state:
                     del st.session_state[key]
             st.rerun()
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Cardíaco":
+elif   and subteste == "Cardíaco":
     st.subheader("❤️ Teste de Frequência Cardíaca pós-esforço")
 
     st.markdown("Este teste simula uma avaliação leve da resposta do seu coração ao esforço. Você fará 1 minuto de movimento e depois medirá seus batimentos por 15 segundos.")
@@ -1678,7 +1678,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Cardíaco
                 if key in st.session_state:
                     del st.session_state[key]
             st.rerun()
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Urinário":
+elif   and subteste == "Urinário":
     st.subheader("💧 Teste Informal de Frequência Urinária")
 
     st.markdown("Este teste avalia seu padrão diário de urina para identificar possíveis sinais de alteração na função renal ou urinária.")
@@ -1721,7 +1721,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Urinário
         if st.button("Refazer teste urinário"):
             st.rerun()
 
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Força da Mão":
+elif   and subteste == "Força da Mão":
     st.subheader("✊ Teste de Força de Pegada Manual (ambas as mãos)")
 
     st.markdown("""
@@ -1797,7 +1797,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Força da
                     del st.session_state[key]
             st.rerun()
 
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Hidratação":
+elif   and subteste == "Hidratação":
     st.subheader("💦 Teste de Hidratação pela Pele (Turgor Cutâneo)")
 
     st.markdown("""
@@ -1852,7 +1852,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Hidrataç
             if st.button("Refazer teste de hidratação"):
                 del st.session_state.etapa_hidrat
                 st.rerun()
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Coordenação Fina":
+elif   and subteste == "Coordenação Fina":
     st.subheader("✍️ Teste de Coordenação Fina – Espiral com a mão não dominante")
 
     st.markdown("""
@@ -1879,7 +1879,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Coordena�
             st.markdown("🔎 Possíveis sintomas relacionados: **Tremores ou movimentos involuntários**")
         else:
             st.success("✅ Coordenação fina preservada. Diferença entre as mãos dentro do esperado.")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Equilíbrio":
+elif   and subteste == "Equilíbrio":
     st.subheader("🦶 Teste de Equilíbrio com Olhos Fechados")
 
     st.markdown("""
@@ -1904,7 +1904,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Equilíbr
         else:
             st.error("🚨 Dificuldade de equilíbrio aparente. Pode indicar alteração neurológica ou vestibular.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Tremores ou movimentos involuntários,Formigamento ou perda de força**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Campo Visual":
+elif   and subteste == "Campo Visual":
     st.subheader("👁️ Teste de Campo Visual – Dedos Laterais")
 
     st.markdown("""
@@ -1932,7 +1932,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Campo Vis
         else:
             st.error("🚨 Campo visual comprometido. Procure avaliação oftalmológica.")
             st.markdown("🔎 Possíveis sintomas relacionados: **(Não temos sintomas para condições visuais progressivas,procure um médico o quanto antes)**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Percepção de Cores":
+elif   and subteste == "Percepção de Cores":
     st.subheader("🌈 Teste de Percepção de Cores")
 
     st.markdown("""
@@ -1969,7 +1969,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Percepç�
         else:
             st.error("🚨 Dificuldade significativa em distinguir cores. Pode ser bom investigar daltonismo.")
             st.markdown("🔎 Possíveis sintomas relacionados: **(Não temos sintomas para condições visuais possivelmente daltônicas,procure um médico oftalmologista o quanto antes)**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Recuperação Cardíaca":
+elif   and subteste == "Recuperação Cardíaca":
     st.subheader("❤️ Teste de Recuperação da Frequência Cardíaca")
 
     st.markdown("""
@@ -2006,7 +2006,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Recupera�
         else:
             st.error("🚨 Frequência alta mesmo após 1 min de descanso. Atenção recomendada.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Dor no peito,queimação no peito,palpitações ou batimentos acelerados**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Palpitações":
+elif   and subteste == "Palpitações":
     st.subheader("💓 Teste de Palpitações com a Mão no Peito")
 
     st.markdown("""
@@ -2044,7 +2044,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Palpitaç
         else:
             st.error("🚨 Sinais de alteração cardíaca percebidos. Procure avaliação especializada.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Dor no peito,queimação no peito,palpitações ou batimentos acelerados**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Apneia Simples":
+elif   and subteste == "Apneia Simples":
     st.subheader("🌬️ Teste de Apneia Simples (Prender a Respiração)")
 
     st.markdown("""
@@ -2094,7 +2094,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Apneia Si
                 if key in st.session_state:
                     del st.session_state[key]
             st.rerun()
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Sopro Sustentado":
+elif   and subteste == "Sopro Sustentado":
     st.subheader("🫁 Teste do Sopro Sustentado – Som 'Fffff'")
 
     st.markdown("""
@@ -2142,7 +2142,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Sopro Sus
                 if key in st.session_state:
                     del st.session_state[key]
             st.rerun()
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Enchimento Capilar":
+elif   and subteste == "Enchimento Capilar":
     st.subheader("🩸 Teste de Enchimento Capilar (Unha)")
 
     st.markdown("""
@@ -2169,7 +2169,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Enchiment
 
         if st.button("Refazer teste capilar"):
             st.rerun()
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Varizes":
+elif   and subteste == "Varizes":
     st.subheader("🦵 Teste de Peso nas Pernas (Possível Sinal de Varizes)")
 
     st.markdown("""
@@ -2203,7 +2203,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Varizes":
         else:
             st.error("🚨 Possível comprometimento venoso nas pernas. Pode indicar início de quadro de varizes.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Formigamento ou perda de força,dor na perna ou dificuldade pra caminhar**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Subir Escada com Uma Perna":
+elif   and subteste == "Subir Escada com Uma Perna":
     st.subheader("🦿 Teste de Força Unilateral (Subir Escada com Uma Perna)")
 
     st.markdown("""
@@ -2235,7 +2235,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Subir Esc
         else:
             st.error("🚨 Dificuldade significativa. Avaliação profissional pode ser indicada.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Formigamento ou perda de força,trauma ou queda,dor ou dificuldade pra caminhar**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Levantar do Chão":
+elif   and subteste == "Levantar do Chão":
     st.subheader("🧍‍♂️ Teste de Mobilidade: Levantar do Chão sem Apoio")
 
     st.markdown("""
@@ -2269,7 +2269,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Levantar 
 
         if idade > 60 and apoio != "Apenas as pernas (sem mãos)":
             st.markdown("👴 Em pessoas acima de 60 anos, esse tipo de teste é um forte preditor de risco de quedas.")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Cor da Urina":
+elif   and subteste == "Cor da Urina":
     st.subheader("💧 Teste Visual da Cor da Urina")
 
     st.markdown("""
@@ -2301,7 +2301,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Cor da Ur
         else:
             st.error("🚨 Sangue na urina. **Procure um médico imediatamente.**")
             st.markdown("🔎 Possíveis sintomas relacionados: **Infecção urinária,dor ou dificuldade ao urinar**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Pele e Coceira":
+elif   and subteste == "Pele e Coceira":
     st.subheader("🧴 Autoavaliação de Manchas ou Coceiras na Pele")
 
     st.markdown("""
@@ -2331,7 +2331,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Pele e Co
             st.markdown("🔎 Possíveis sintomas relacionados: **Coceira, Infecção em ferida,lesões na pele,alergia cutânea**")
         else:
             st.info("🔎 Pequena alteração percebida. Se persistir por dias, procure um profissional.")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Digestão":
+elif   and subteste == "Digestão":
     st.subheader("🍽️ Teste de Sensações Pós-Refeição")
 
     st.markdown("""
@@ -2359,7 +2359,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Digestão
         else:
             st.error("🚨 Múltiplos sintomas digestivos. Avaliação médica pode ser indicada.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Gases,dor abdominal,diarreia,náusea e enjoo**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Ritmo Intestinal":
+elif   and subteste == "Ritmo Intestinal":
     st.subheader("🚽 Teste de Ritmo Intestinal")
 
     st.markdown("""
@@ -2391,7 +2391,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Ritmo Int
         else:
             st.error("🚨 Alterações importantes. Pode ser bom conversar com um profissional.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Diarreia,sangramento gastrointestinal,sangramento retal**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Energia Matinal":
+elif   and subteste == "Energia Matinal":
     st.subheader("☕ Teste de Energia ao Acordar")
 
     st.markdown("""
@@ -2424,7 +2424,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Energia M
             st.error("🚨 Sinais de fadiga importante. Avalie seu sono, rotina e alimentação.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Hipotensão ou colapso, Náusea ou enjoo, Confusão mental**")
 
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor e Ansiedade":
+elif   and subteste == "Humor e Ansiedade":
     st.subheader("🧠 Teste de Humor e Pensamentos Acelerados")
 
     st.markdown("""Este teste ajuda a refletir sobre **aspectos emocionais e mentais recentes**.""")
@@ -2448,7 +2448,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor e A
         else:
             st.error("🚨 Sinais de sobrecarga mental ou emocional. Procure ajuda se persistir.")
 
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor na última semana":
+elif   and subteste == "Humor na última semana":
     st.subheader("🧠 Avaliação de Humor nos Últimos 7 Dias")
     st.write("Pense em como você se sentiu em cada um dos últimos 7 dias. Avalie seu humor em uma escala de 1 a 5:")
 
@@ -2469,7 +2469,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Humor na 
         else:
             st.warning("😟 Humor predominantemente baixo. Avalie se algo está afetando seu bem-estar.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Ansiedade ou agitação intensa, Comportamento estranho à normalidade, Confusão mental**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Variação de peso (últimos 30 dias)":
+elif   and subteste == "Variação de peso (últimos 30 dias)":
     st.subheader("⚖️ Variação de Peso nos Últimos 30 Dias")
     peso_atual = st.number_input("Digite seu peso atual (kg):", min_value=20.0, max_value=300.0, step=0.1)
     peso_passado = st.number_input("Digite seu peso de 30 dias atrás (kg):", min_value=20.0, max_value=300.0, step=0.1)
@@ -2488,7 +2488,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Variaçã
         else:
             st.warning("🚨 Variação significativa! Considere investigar causas clínicas ou comportamentais.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Náusea ou enjoo, Hiperglicemia, Hipoglicemia, Ansiedade ou agitação intensa, Comportamento estranho à normalidade**")
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição (Detecção de som)":
+elif   and subteste == "Audição (Detecção de som)":
     st.subheader("🔊 Teste de Detecção de Som")
 
     st.info("Use fones de ouvido. Ajuste o volume para um nível confortável.")
@@ -2504,7 +2504,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição
         else:
             st.success("✅ Tudo certo com sua audição.")
 
-elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição (Frequências altas e baixas)":
+elif   and subteste == "Audição (Frequências altas e baixas)":
     st.subheader("🎧 Teste de Frequências Auditivas")
 
     st.markdown("Clique para ouvir cada frequência. Use fones de ouvido.")
