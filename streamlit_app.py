@@ -1520,7 +1520,7 @@ if media_tempo is not None:
     if media_tempo <= 0.8:
         st.success("🧠 Tempo de reação excelente!")
     if media_tempo is not None:
-    st.write(f"⏱️ Tempo médio de reação nos acertos: **{media_tempo:.2f} segundos**")
+        st.write(f"⏱️ Tempo médio de reação nos acertos: **{media_tempo:.2f} segundos**")
     if media_tempo <= 0.8:
         st.success("🧠 Tempo de reação excelente!")
     elif media_tempo <= 1.5:
