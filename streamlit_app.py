@@ -256,29 +256,31 @@ def verificar_se_deve_subir_cor(sintomas_escolhidos, sistemas_afetados, sintoma_
 
 def classificar_combinacao(sintomas, cores):
     """
-    Combina as cores individuais de até 3 sintomas em uma cor final.
-    Versão conservadora: é mais difícil subir para amarelo/laranja sem evidência forte.
+    Combina de forma conservadora:
+    1) Nunca rebaixa abaixo da maior cor individual.
+    2) Usa soma de pesos para ESCALAR quando fizer sentido.
     """
     pesos = {"verde": 0.2, "amarelo": 1.0, "laranja": 3.5, "vermelho": 6.5}
     total = sum(pesos.get(c, 0) for c in cores)
 
-    # Regra dura: qualquer vermelho individual prevalece
+    # 1) Maior cor individual (nunca abaixo disso)
+    cor_individual_max = max_cor(*cores)
+
+    # 2) Escalonamento por soma
     if any(c == "vermelho" for c in cores):
-        return "vermelho"
-
-    # Se tiver só um sintoma e ele for laranja, mantém laranja (como já era na sua lógica)
-    if len(cores) == 1 and cores[0] == "laranja":
-        return "laranja"
-
-    # Limiar mais alto para subir de cor
-    if total >= 6.5:
-        return "vermelho"
-    elif total >= 4.0:
-        return "laranja"
+        cor_por_total = "vermelho"
+    elif total >= 4.5:
+        cor_por_total = "vermelho"
     elif total >= 2.2:
-        return "amarelo"
+        cor_por_total = "laranja"
+    elif total >= 1.0:
+        cor_por_total = "amarelo"
     else:
-        return "verde"
+        cor_por_total = "verde"
+
+    # Resultado final = máximo entre a maior individual e a do total
+    return max_cor(cor_individual_max, cor_por_total)
+
 
 # --- AJUSTE CONSERVADOR POR FATORES (idade/gravidez e duplicidade de sistema) ---
 def calcular_ajuste_por_fatores_conservador(
