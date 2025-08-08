@@ -4370,13 +4370,29 @@ def pontuar_fluxo(sintoma_label, respostas):
 
     cor_final = max_cor(cor_base, min_cor) if min_cor else cor_base
     return cor_final, score
-# <<< FIM DO MOTOR >>>
+
+def labels_fluxos():
+    # retorna os labels humanos de todos os fluxos
+    out = []
+    for k, cfg in FLUXOS.items():
+        lbl = cfg.get("label")
+        if not lbl:
+            # fallback: tenta “des-normalizar” algo legível
+            lbl = k.replace("_", " ").title()
+        out.append(lbl)
+    return out
+
+def eh_fluxo(label):
+    # diz se um label selecionado existe como fluxo
+    return normalizar(label) in FLUXOS
+
 
 
 FLUXOS = {}
 
 # --- Fluxograma: Inchaço dos linfonodos ---
 FLUXOS[normalizar("Inchaço dos linfonodos")] = {
+    "label": "Inchaço dos linfonodos",
     "perguntas": [
         {
             "id": "febre_peso",
@@ -4534,7 +4550,7 @@ elif st.session_state.etapa == 2:
     st.header("2. Selecione até 3 sintomas principais")
 
     dic = dicionario_sintomas()
-    sintomas_disponiveis = list(mapa_sintomas.keys())
+    sintomas_disponiveis = sorted(set(list(mapa_sintomas.keys()) + labels_fluxos()))
 
     if "sintomas_temp" not in st.session_state:
         st.session_state["sintomas_temp"] = ["", "", ""]
@@ -4588,39 +4604,31 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
         st.session_state["respostas_usuario"] = {}
 
     # Renderização (motor novo quando existir)
-    for sintoma in st.session_state.sintomas_escolhidos:
-        chave = normalizar(sintoma)
-        st.markdown(f"### {sintoma}")
-        if chave in FLUXOS:
-            # motor novo
-            coletar_respostas_fluxo(sintoma)
-        else:
-            # fallback antigo
-            func_opcoes, _ = mapa_sintomas[sintoma]
-            opcoes = func_opcoes()
-            escolha = st.radio(f"{sintoma}:", opcoes, key=f"opcao_{sintoma}")
-            st.session_state["respostas_usuario"][sintoma] = escolha
+for sintoma in st.session_state.sintomas_escolhidos:
+    st.markdown(f"### {sintoma}")
+    if eh_fluxo(sintoma):
+        coletar_respostas_fluxo(sintoma)
+    else:
+        func_opcoes, _ = mapa_sintomas[sintoma]
+        opcoes = func_opcoes()
+        escolha = st.radio(f"{sintoma}:", opcoes, key=f"opcao_{sintoma}")
+        st.session_state["respostas_usuario"][sintoma] = escolha
+        
+cores_geradas = []
 
-    if st.button("Ver resultado", key="ver_resultado"):
-        st.session_state["cores_sintomas"] = []
-        st.markdown("---")
+for sintoma in st.session_state.sintomas_escolhidos:
+    if eh_fluxo(sintoma):
+        cor, score = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][normalizar(sintoma)])
+        motivo = f"Pontuação composta: {score:.1f} (fluxograma multi-perguntas)."
+    else:
+        _, func_classificacao = mapa_sintomas[sintoma]
+        escolha = st.session_state["respostas_usuario"][sintoma]
+        cor, motivo = func_classificacao(escolha)
 
-        cores_geradas = []
-
-        for sintoma in st.session_state.sintomas_escolhidos:
-            chave = normalizar(sintoma)
-            if chave in FLUXOS:
-                cor, score = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
-                motivo = f"Pontuação composta: {score:.1f} (fluxograma multi-perguntas)."
-            else:
-                _, func_classificacao = mapa_sintomas[sintoma]
-                escolha = st.session_state["respostas_usuario"][sintoma]
-                cor, motivo = func_classificacao(escolha)
-
-            cores_geradas.append(cor)
-            st.markdown(f"### {sintoma}")
-            st.markdown(f"Motivo: {motivo}")
-            st.markdown("---")
+    cores_geradas.append(cor)
+    st.markdown(f"### {sintoma}")
+    st.markdown(f"Motivo: {motivo}")
+    st.markdown("---")
 
         # Combinação de cores (mantendo tua lógica atual)
         cor_final = classificar_combinacao(
