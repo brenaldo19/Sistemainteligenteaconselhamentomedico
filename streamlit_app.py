@@ -279,6 +279,58 @@ def classificar_combinacao(sintomas, cores):
     else:
         return "verde"
 
+# --- AJUSTE CONSERVADOR POR FATORES (idade/gravidez e duplicidade de sistema) ---
+def calcular_ajuste_por_fatores_conservador(
+    sintomas_escolhidos,
+    cores_individuais,
+    sintoma_para_sistema,
+    idade=None,
+    gravida=False
+):
+    """
+    Retorna 0 (sem ajuste) ou 1 (sobe 1 nível).
+
+    Regras:
+      - Se TODOS os sintomas estão VERDES → NÃO ajusta.
+      - Só considera ajuste se houver pelo menos um sintoma AMARELO, LARANJA ou VERMELHO.
+      - Ajusta (sobe 1) se:
+          a) idade <= 4 ou >= 67, OU gravidez verdadeira; OU
+          b) houver >= 2 sintomas do MESMO sistema corporal.
+    """
+    cores_individuais = cores_individuais or []
+    sintomas_escolhidos = sintomas_escolhidos or []
+
+    # 1) Tudo verde? Não ajusta
+    if all(c == "verde" for c in cores_individuais):
+        return 0
+
+    # 2) Só consideramos ajuste se houver alguma cor >= amarelo
+    if not any(c in ("amarelo", "laranja", "vermelho") for c in cores_individuais):
+        return 0
+
+    # 3) Risco alto por idade/gravidez
+    risco_alto = False
+    if idade is not None and (idade <= 4 or idade >= 67):
+        risco_alto = True
+    if str(gravida).strip().lower() in ["sim", "true", "1"]:
+        risco_alto = True
+
+    # 4) Checa duplicidade de sistema entre os sintomas escolhidos
+    contagem_por_sistema = {}
+    for s in sintomas_escolhidos:
+        sist = sintoma_para_sistema.get(normalizar(s))
+        if not sist:
+            continue
+        contagem_por_sistema[sist] = contagem_por_sistema.get(sist, 0) + 1
+
+    duplicidade_sistema = any(qtd >= 2 for qtd in contagem_por_sistema.values())
+
+    # 5) Critério final de ajuste
+    if risco_alto or duplicidade_sistema:
+        return 1
+
+    return 0
+
 st.title("Sistema Inteligente de Aconselhamento médico")
 st.markdown("⚠️ Este sistema é apenas um aconselhamento inicial e **não substitui atendimento médico.**")
 st.markdown("👋 Olá! Bem-vindo ao sistema de aconselhamento interativo.")
@@ -4661,30 +4713,20 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
             cores=cores_geradas
         )
 
-        # Ajuste por fatores de risco
-        grupos_paciente = st.session_state.get("grupos_risco_refinados", [])
+        # --- AJUSTE CONSERVADOR POR FATORES (idade/gravidez e duplicidade de sistema) ---
         gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
+        idade_paciente = st.session_state.get("idade")
 
-        sistemas_por_fatores = gerar_sistemas_afetados_por_fatores(
-            idade=st.session_state.get("idade"),
-            imc_class=st.session_state.get("classificacao_imc"),
-            gravida=gravidez,
-            condicoes_brutas=grupos_paciente
-        )
-
-        sistemas_secundarios = []
-        for grupo in grupos_paciente:
-            sistemas_secundarios += sistemas_afetados_secundariamente(grupo)
-
-        sistemas_afetados = set(sistemas_por_fatores + sistemas_secundarios)
-
-        ajuste = verificar_se_deve_subir_cor(
+        ajuste_niveis = calcular_ajuste_por_fatores_conservador(
             sintomas_escolhidos=st.session_state.sintomas_escolhidos,
-            sistemas_afetados=sistemas_afetados,
-            sintoma_para_sistema=sintoma_para_sistema
+            cores_individuais=cores_geradas,
+            sintoma_para_sistema=sintoma_para_sistema,
+            idade=idade_paciente,
+            gravida=gravidez
         )
 
-        if ajuste:
+        # Aplica, no máximo, +1 nível
+        if ajuste_niveis >= 1:
             cor_final = aumentar_cor_em_1_nivel(cor_final)
 
         st.success(f"Gravidade estimada: {cor_final.upper()}")
