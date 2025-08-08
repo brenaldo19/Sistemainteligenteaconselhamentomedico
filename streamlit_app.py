@@ -4595,87 +4595,95 @@ elif st.session_state.etapa == 2:
 # ETAPA 3 – DETALHAMENTO DOS SINTOMAS
 # =============================
 elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
-
     st.header("3. Detalhe os sintomas escolhidos")
 
-    if "cores_sintomas" not in st.session_state:
-        st.session_state["cores_sintomas"] = []
+    # Estados seguros
     if "respostas_usuario" not in st.session_state:
         st.session_state["respostas_usuario"] = {}
+    if "fluxo_respostas" not in st.session_state:
+        st.session_state["fluxo_respostas"] = {}
 
-    # Renderização (motor novo quando existir)
-for sintoma in st.session_state.sintomas_escolhidos:
-    st.markdown(f"### {sintoma}")
-    if eh_fluxo(sintoma):
-        coletar_respostas_fluxo(sintoma)
-    else:
-        func_opcoes, _ = mapa_sintomas[sintoma]
-        opcoes = func_opcoes()
-        escolha = st.radio(f"{sintoma}:", opcoes, key=f"opcao_{sintoma}")
-        st.session_state["respostas_usuario"][sintoma] = escolha
-        
-cores_geradas = []
+    # Usamos um FORM: nada calcula/mostra até clicar "Ver resultado"
+    with st.form("form_detalhamento"):
+        # Renderização de perguntas por sintoma
+        for sintoma in st.session_state.sintomas_escolhidos:
+            st.markdown(f"### {sintoma}")
+            if eh_fluxo(sintoma):
+                # Garante estrutura para este fluxo
+                chave = normalizar(sintoma)
+                if chave not in st.session_state["fluxo_respostas"]:
+                    st.session_state["fluxo_respostas"][chave] = {}
+                # Renderiza perguntas do fluxo
+                coletar_respostas_fluxo(sintoma)
+            else:
+                # Fallback antigo (mapa_sintomas)
+                func_opcoes, _ = mapa_sintomas[sintoma]
+                opcoes = func_opcoes()
+                escolha = st.radio(f"{sintoma}:", opcoes, key=f"opcao_{sintoma}")
+                st.session_state["respostas_usuario"][sintoma] = escolha
 
-for sintoma in st.session_state.sintomas_escolhidos:
-    if eh_fluxo(sintoma):
-        cor, score = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][normalizar(sintoma)])
-        motivo = f"Pontuação composta: {score:.1f} (fluxograma multi-perguntas)."
-    else:
-        _, func_classificacao = mapa_sintomas[sintoma]
-        escolha = st.session_state["respostas_usuario"][sintoma]
-        cor, motivo = func_classificacao(escolha)
+        enviado = st.form_submit_button("Ver resultado")
 
-    cores_geradas.append(cor)
-    st.markdown(f"### {sintoma}")
-    st.markdown(f"Motivo: {motivo}")
-    st.markdown("---")
+    # Só processa e exibe resultados SE o botão foi clicado
+    if enviado:
+        st.markdown("---")
+        cores_geradas = []
 
-        # Combinação de cores (mantendo tua lógica atual)
-    cor_final = classificar_combinacao(
-        sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
-        cores=cores_geradas
+        for sintoma in st.session_state.sintomas_escolhidos:
+            if eh_fluxo(sintoma):
+                chave = normalizar(sintoma)
+                cor, score = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
+                motivo = f"Pontuação composta: {score:.1f} (fluxograma multi-perguntas)."
+            else:
+                _, func_classificacao = mapa_sintomas[sintoma]
+                escolha = st.session_state["respostas_usuario"][sintoma]
+                cor, motivo = func_classificacao(escolha)
+
+            cores_geradas.append(cor)
+            st.markdown(f"### {sintoma}")
+            st.markdown(f"Motivo: {motivo}")
+            st.markdown("---")
+
+        # Combinação de cores (tua lógica)
+        cor_final = classificar_combinacao(
+            sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
+            cores=cores_geradas
         )
 
-        # Ajustes por fatores de risco (corrigidos e normalizados)
-    grupos_paciente = st.session_state.get("grupos_risco_refinados", [])
-    gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
+        # Ajuste por fatores de risco
+        grupos_paciente = st.session_state.get("grupos_risco_refinados", [])
+        gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
 
-    sistemas_por_fatores = gerar_sistemas_afetados_por_fatores(
-        idade=st.session_state.get("idade"),
-        imc_class=st.session_state.get("classificacao_imc"),
-        gravida=gravidez,
-        condicoes_brutas=grupos_paciente
+        sistemas_por_fatores = gerar_sistemas_afetados_por_fatores(
+            idade=st.session_state.get("idade"),
+            imc_class=st.session_state.get("classificacao_imc"),
+            gravida=gravidez,
+            condicoes_brutas=grupos_paciente
         )
 
-    sistemas_secundarios = []
-    for grupo in grupos_paciente:
-        sistemas_secundarios += sistemas_afetados_secundariamente(grupo)
+        sistemas_secundarios = []
+        for grupo in grupos_paciente:
+            sistemas_secundarios += sistemas_afetados_secundariamente(grupo)
 
-    sistemas_afetados = set(sistemas_por_fatores + sistemas_secundarios)
+        sistemas_afetados = set(sistemas_por_fatores + sistemas_secundarios)
 
-    ajuste = verificar_se_deve_subir_cor(
-        sintomas_escolhidos=st.session_state.sintomas_escolhidos,
-        sistemas_afetados=sistemas_afetados,
-        sintoma_para_sistema=sintoma_para_sistema
+        ajuste = verificar_se_deve_subir_cor(
+            sintomas_escolhidos=st.session_state.sintomas_escolhidos,
+            sistemas_afetados=sistemas_afetados,
+            sintoma_para_sistema=sintoma_para_sistema
         )
 
-    if ajuste:
-        cor_final = aumentar_cor_em_1_nivel(cor_final)
+        if ajuste:
+            cor_final = aumentar_cor_em_1_nivel(cor_final)
 
-    emoji_cor = {
-        "verde": "🟢",
-        "amarelo": "🟡",
-        "laranja": "🟠",
-        "vermelho": "🔴"
-        }
+        st.success(f"Gravidade estimada: {cor_final.upper()}")
 
-    st.success(f"🩺 Gravidade estimada: **{cor_final.upper()}**")
-
-    st.markdown("---")
-    st.subheader("📘 Legenda de Gravidade")
-    st.markdown("""
+        st.markdown("---")
+        st.subheader("📘 Legenda de Gravidade")
+        st.markdown("""
 - 🔴 **VERMELHO:** Situação crítica. Procure atendimento médico imediatamente.
 - 🟠 **LARANJA:** Caso urgente. Necessita avaliação rápida em unidade de saúde.
 - 🟡 **AMARELO:** Gravidade moderada. Requer atenção, mas pode aguardar avaliação.
 - 🟢 **VERDE:** Baixa gravidade. Pode observar os sintomas ou procurar atendimento não urgente.
 """)
+
