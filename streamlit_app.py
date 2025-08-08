@@ -4,9 +4,30 @@ import pandas as pd
 import unicodedata
 import time
 
-def normalizar(texto):
-    """Remove acentos e coloca em minúsculas para facilitar comparações."""
-    return unicodedata.normalize("NFKD", texto).encode("ASCII", "ignore").decode("ASCII").lower()
+import re
+
+def normalizar(texto: str) -> str:
+    if not isinstance(texto, str):
+        return ""
+    t = unicodedata.normalize("NFKD", texto).encode("ASCII", "ignore").decode("ASCII")
+    t = t.strip().lower()
+    t = re.sub(r"\s+", "_", t)
+    t = re.sub(r"[^a-z0-9_]", "", t)
+    return t
+
+ORDEM_CORES = ["verde", "amarelo", "laranja", "vermelho"]
+
+def max_cor(*cores):
+    idx = [ORDEM_CORES.index(c) for c in cores if c in ORDEM_CORES]
+    return ORDEM_CORES[max(idx)] if idx else "verde"
+
+def score_para_cor(score, tabela):
+    # tabela: lista ordenada por severidade desc. ex.: [(4.0,"vermelho"),(2.5,"laranja"),...]
+    for limiar, cor in tabela:
+        if score >= limiar:
+            return cor
+    return "verde"
+
 
 # ===============================
 # MAPEAMENTO DE SINTOMAS E SISTEMAS
@@ -21,11 +42,12 @@ sistemas_sintomas = {
     ],
     "neurologico": [
         "convulsão", "confusão mental", "comportamento estranho à normalidade",
-        "desmaio ou tontura", "alterações na fala", "alterações visuais súbitas", "tremores ou movimentos involuntários"
+        "desmaio ou tontura", "alterações na fala", "alterações visuais súbitas",
+        "tremores ou movimentos involuntários", "formigamento ou perda de força", "sensação de desmaio"
     ],
     "gastrointestinal": [
         "náusea ou enjoo", "diarreia em criança", "sangramento gastrointestinal",
-        "vômito em criança", "dor abdominal", "gases", "diarreia"
+        "vômito em criança", "dor abdominal", "gases", "diarreia", "sangramento retal", "vômito"
     ],
     "urinario": [
         "dor ou dificuldade ao urinar", "retenção urinária", "incontinência urinária",
@@ -36,45 +58,54 @@ sistemas_sintomas = {
         "trauma ou queda", "dor no ombro ou braço"
     ],
     "cutaneo": [
-        "alergia cutânea", "reação alérgica", "lesões na pele", "manchas na pele", "coceira na pele"
+        "alergia cutânea", "reação alérgica", "lesões na pele", "manchas na pele", "coceira na pele", "inchaço incomum"
     ],
     "oftalmologico": [
-        "alterações visuais súbitas", "dor ou olho vermelho", "inchaço nos olhos ou face", "corpo estranho nos olhos, ouvidos ou nariz"
+        "alterações visuais súbitas", "dor ou olho vermelho", "inchaço nos olhos ou face",
+        "corpo estranho nos olhos, ouvidos ou nariz"
     ],
     "otorrino": [
-        "dor no ouvido", "coriza e espirros", "sangramento nasal", "alteração auditiva", "dificuldade pra engolir"
+        "dor no ouvido", "coriza e espirros", "sangramento nasal", "alteração auditiva", "dificuldade pra engolir", "corpo estranho na garganta"
     ],
     "obstetrico": [
-        "dor durante a gravidez", "trabalho de parto", "redução dos movimentos fetais"
+        "dor durante a gravidez", "trabalho de parto", "redução dos movimentos fetais", "sangramento vaginal"
     ],
     "pediatrico": [
         "febre lactente", "icterícia neonatal", "queda em criança", "choro persistente"
     ],
     "hematologico": [
-        "sangramento ativo", "sangramento gastrointestinal", "sangramento nasal", "sangramento retal"
+        "sangramento ativo", "sangramento gastrointestinal", "sangramento nasal", "sangramento retal", "inchaço dos linfonodos"
     ],
     "psiquiatrico": [
         "ansiedade ou agitação intensas", "comportamento estranho à normalidade"
     ],
     "endocrino": [
-        "hipoglicemia", "hiperglicemia", "hipotensão", "temperatura baixa"
+        "hipoglicemia", "hiperglicemia", "hipotensão", "temperatura muito baixa"
     ],
     "hepatico": [
         "icterícia", "icterícia neonatal"
     ],
     "infeccioso": [
-        "febre", "infecção em ferida", "sinais de intoxicação ou envenenamento", "inchaço dos linfonodos"
+        "febre", "infecção em ferida", "sinais de intoxicação ou envenenamento"
     ],
-    "reprodutor masculino": [
+    "reprodutor_masculino": [
         "nódulo testicular", "dor nos testículos", "sangue no sêmen"
     ],
     "mamario": [
         "nódulo mamário", "secreção mamilar (fora da amamentação)"
     ],
     "ginecologico": [
-        "sangramento vaginal"
+        "sangramento vaginal"  # (também listado em obstétrico por regra de exceção)
     ]
 }
+
+# Recria o mapa sintoma → sistema JÁ com normalização
+sintoma_para_sistema = {
+    normalizar(s): k
+    for k, lista in sistemas_sintomas.items()
+    for s in lista
+}
+
 # Dicionário sintoma → sistema, já normalizado
 sintoma_para_sistema = {
     normalizar(sintoma): sistema
@@ -162,57 +193,62 @@ def classificar_imc(imc):
         return "Normal"
 
 def gerar_sistemas_afetados_por_fatores(idade, imc_class, gravida, condicoes_brutas):
-    refinados = set(condicoes_brutas)
+    # tudo em slug (sem acento/caixa)
+    refinados = {normalizar(x) for x in (condicoes_brutas or [])}
 
     if idade is not None:
         if idade < 5:
-            refinados.update(["Infeccioso", "Respiratório", "Neurológico", "Musculoesquelético", "Otorrino", "Gastrointestinal"])
+            refinados.update(["infeccioso","respiratorio","neurologico","musculoesqueletico","otorrino","gastrointestinal","pediatrico"])
         elif idade > 60:
-            refinados.update(["Cardíaco", "Neurológico", "Musculoesquelético", "Endócrino", "Infeccioso", "Hepático", "Oftalmológico", "Cutâneo", "Urinário"])
+            refinados.update(["cardiaco","neurologico","musculoesqueletico","endocrino","infeccioso","hepatico","oftalmologico","cutaneo","urinario"])
         elif idade < 14 and imc_class == "Desnutrido":
-            refinados.add("Neurológico")
+            refinados.add("neurologico")
 
     if imc_class == "Obeso":
-        refinados.update(["Cardíaco", "Respiratório", "Hematológico", "Psiquiátrico", "Endócrino", "Musculoesquelético"])
+        refinados.update(["cardiaco","respiratorio","hematologico","psiquiatrico","endocrino","musculoesqueletico"])
     elif imc_class == "Desnutrido":
-        refinados.update(["Infeccioso", "Hematológico", "Gastrointestinal", "Musculoesquelético", "Neurológico", "Psiquiátrico"])
+        refinados.update(["infeccioso","hematologico","gastrointestinal","musculoesqueletico","neurologico","psiquiatrico"])
 
-    if gravida == "Sim":
-        refinados.update(["Hematológico", "Endócrino", "Mamário", "Infeccioso", "Otorrino", "Musculoesquelético, Ginecológico"])
-
+    if str(gravida).lower() in ["sim","true","1"]:
+        refinados.update(["hematologico","endocrino","mamario","infeccioso","otorrino","musculoesqueletico","ginecologico","obstetrico"])
         if idade is not None and idade < 16:
-            refinados.update(["Cardíaco", "Neurológico", "Endócrino", "Obstétrico", "Psiquiátrico", "Mamário", "Musculoesquelético, Ginecológico"])
-
+            refinados.update(["cardiaco","neurologico","endocrino","obstetrico","psiquiatrico","mamario","ginecologico"])
 
     return list(refinados)
 
 def sistemas_afetados_secundariamente(grupo_primario):
+    g = normalizar(grupo_primario)
     tabela = {
-        "Cardíaco": ["Respiratório", "Hematológico", "Urinário", "Neurológico"],
-        "Respiratório": ["Cardíaco", "Otorrino", "Neurológico"],
-        "Neurológico": ["Psiquiátrico", "Musculoesquelético", "Urinário", "Gastrointestinal", "Respiratório", "Cardíaco"],
-        "Gastrointestinal": ["Hepático", "Hematológico", "Urinário"],
-        "Urinário": ["Cardíaco", "Endócrino"],
-        "Otorrino": ["Respiratório"],
-        "Hematológico": ["Cardíaco", "Endócrino", "Hepático", "Urinário"],
-        "Psiquiátrico": ["Neurológico"],
-        "Endócrino": ["Cardíaco", "Hepático", "Hematológico"],
-        "Hepático": ["Gastrointestinal", "Hematológico"],
-        "Autoimune": ["Cutâneo", "Hematológico", "Urinário", "Neurológico", "Musculoesquelético", "Hepático", "Psiquiátrico"],
-        "Diabetes": ["Neurológico", "Oftalmológico", "Urinário", "Cardíaco", "Cutâneo", "Hematológico"],
-        "Reprodutor masculino": ["Reprodutor masculino"],
-        "Mamário": ["Mamário"],
-        "Pediátrico": ["Pediátrico"],
-        "Obstétrico": ["Obstétrico"],
-        "Cutâneo": ["Cutâneo"],
-        "Oftalmológico": ["Oftalmológico"],
-        "Ginecológico": ["Ginecológico"]
+        "cardiaco": ["respiratorio", "hematologico", "urinario", "neurologico"],
+        "respiratorio": ["cardiaco", "otorrino", "neurologico"],
+        "neurologico": ["psiquiatrico", "musculoesqueletico", "urinario", "gastrointestinal", "respiratorio", "cardiaco"],
+        "gastrointestinal": ["hepatico", "hematologico", "urinario"],
+        "urinario": ["cardiaco", "endocrino"],
+        "otorrino": ["respiratorio"],
+        "hematologico": ["cardiaco", "endocrino", "hepatico", "urinario"],
+        "psiquiatrico": ["neurologico"],
+        "endocrino": ["cardiaco", "hepatico", "hematologico"],
+        "hepatico": ["gastrointestinal", "hematologico"],
+        "autoimune": ["cutaneo","hematologico","urinario","neurologico","musculoesqueletico","hepatico","psiquiatrico"],
+        "diabetes": ["neurologico","oftalmologico","urinario","cardiaco","cutaneo","hematologico"],
+        "reprodutor_masculino": ["reprodutor_masculino"],
+        "mamario": ["mamario"],
+        "pediatrico": ["pediatrico"],
+        "obstetrico": ["obstetrico"],
+        "cutaneo": ["cutaneo"],
+        "oftalmologico": ["oftalmologico"],
+        "ginecologico": ["ginecologico"],
     }
-    return tabela.get(grupo_primario, [])
+    return tabela.get(g, [])
 
 def verificar_se_deve_subir_cor(sintomas_escolhidos, sistemas_afetados, sintoma_para_sistema):
-    sintomas_norm = [normalizar(s) for s in sintomas_escolhidos]
-    sistemas_norm = [normalizar(s) for s in sistemas_afetados]
+    sistemas_norm = {normalizar(s) for s in (sistemas_afetados or [])}
+    for s in sintomas_escolhidos:
+        sistema = sintoma_para_sistema.get(normalizar(s))
+        if sistema and sistema in sistemas_norm:
+            return True
+    return False
+
 
     for sintoma in sintomas_norm:
         sistema = sintoma_para_sistema.get(sintoma)
@@ -4279,6 +4315,104 @@ mapa_sintomas = {
     }
 mapa_sintomas = dict(sorted(mapa_sintomas.items()))
 
+FLUXOS = {}
+
+# --- Fluxograma: Inchaço dos linfonodos ---
+FLUXOS[normalizar("Inchaço dos linfonodos")] = {
+    "perguntas": [
+        {
+            "id": "febre_peso",
+            "label": "Há febre ou perda de peso recente?",
+            "tipo": "radio",
+            "opcoes": {
+                "Febre alta (≥ 38,5°C) OU perda de peso > 10% em 6 meses": 2.0,
+                "Febre baixa (37,8–38,4°C) OU perda de peso moderada": 1.0,
+                "Sem febre e sem perda de peso": 0.0
+            }
+        },
+        {
+            "id": "dor_inflamacao",
+            "label": "O linfonodo está doloroso ou com sinais de inflamação (vermelho/quente)?",
+            "tipo": "radio",
+            "opcoes": {
+                "Doloroso com vermelhidão/calor": 1.2,
+                "Doloroso, sem vermelhidão": 0.7,
+                "Sem dor/inflamação": 0.0
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo percebe o inchaço?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 4 semanas": 1.5,
+                "Entre 2 e 4 semanas": 0.8,
+                "Menos de 2 semanas": 0.2
+            }
+        },
+        {
+            "id": "localizacao",
+            "label": "Onde estão os linfonodos inchados?",
+            "tipo": "radio",
+            "opcoes": {
+                "Generalizado (em mais de uma região do corpo)": 1.5,
+                "Localizado (apenas uma região)": 0.5
+            }
+        },
+        {
+            "id": "tamanho",
+            "label": "Tamanho aproximado do maior linfonodo:",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 2 cm": 1.5,
+                "1 a 2 cm": 0.7,
+                "< 1 cm": 0.2
+            }
+        },
+        {
+            "id": "consistencia_mobilidade",
+            "label": "Como ele parece ao toque?",
+            "tipo": "radio",
+            "opcoes": {
+                "Duro e fixo (pouco móvel)": 2.0,
+                "Borracha/móvel": 0.5,
+                "Macio": 0.2
+            }
+        },
+        {
+            "id": "sintomas_associados",
+            "label": "Sintomas associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Suor noturno": 1.0,
+                "Coceira no corpo (prurido) sem explicação": 0.5,
+                "Cansaço/fadiga persistente": 0.3
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes fatores de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Infecção ou ferida recente perto do local": 0.5,
+                "Uso crônico de corticoide ou quimioterapia": 0.8,
+                "Imunossupressão/HIV": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"febre_peso": "Febre alta (≥ 38,5°C) OU perda de peso > 10% em 6 meses", "duracao": "Mais de 4 semanas"}, "min_cor": "laranja"},
+        {"se": {"tamanho": "≥ 2 cm", "consistencia_mobilidade": "Duro e fixo (pouco móvel)"}, "min_cor": "laranja"},
+        {"se": {"localizacao": "Generalizado (em mais de uma região do corpo)", "febre_peso": ["Febre alta (≥ 38,5°C) OU perda de peso > 10% em 6 meses", "Febre baixa (37,8–38,4°C) OU perda de peso moderada"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.5, "vermelho"),
+        (3.5, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
@@ -4390,39 +4524,53 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
 
     st.header("3. Detalhe os sintomas escolhidos")
 
-    # Inicializa variáveis
     if "cores_sintomas" not in st.session_state:
         st.session_state["cores_sintomas"] = []
     if "respostas_usuario" not in st.session_state:
         st.session_state["respostas_usuario"] = {}
 
+    # Renderização (motor novo quando existir)
     for sintoma in st.session_state.sintomas_escolhidos:
-        func_opcoes, func_classificacao = mapa_sintomas[sintoma]
-        opcoes = func_opcoes()
-        escolha = st.radio(f"{sintoma}:", opcoes, key=f"opcao_{sintoma}")
-        st.session_state["respostas_usuario"][sintoma] = escolha
+        chave = normalizar(sintoma)
+        st.markdown(f"### {sintoma}")
+        if chave in FLUXOS:
+            # motor novo
+            coletar_respostas_fluxo(sintoma)
+        else:
+            # fallback antigo
+            func_opcoes, _ = mapa_sintomas[sintoma]
+            opcoes = func_opcoes()
+            escolha = st.radio(f"{sintoma}:", opcoes, key=f"opcao_{sintoma}")
+            st.session_state["respostas_usuario"][sintoma] = escolha
 
-    # AQUI COMEÇA O BLOCO DO BOTÃO
     if st.button("Ver resultado", key="ver_resultado"):
-
         st.session_state["cores_sintomas"] = []
         st.markdown("---")
 
-        for sintoma in st.session_state.sintomas_escolhidos:
-            func_opcoes, func_classificacao = mapa_sintomas[sintoma]
-            escolha = st.session_state["respostas_usuario"][sintoma]
-            cor, motivo = func_classificacao(escolha)
-            st.session_state["cores_sintomas"].append(cor)
+        cores_geradas = []
 
+        for sintoma in st.session_state.sintomas_escolhidos:
+            chave = normalizar(sintoma)
+            if chave in FLUXOS:
+                cor, score = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
+                motivo = f"Pontuação composta: {score:.1f} (fluxograma multi-perguntas)."
+            else:
+                _, func_classificacao = mapa_sintomas[sintoma]
+                escolha = st.session_state["respostas_usuario"][sintoma]
+                cor, motivo = func_classificacao(escolha)
+
+            cores_geradas.append(cor)
             st.markdown(f"### {sintoma}")
-            st.markdown(f"**🔍 Motivo:** {motivo}")
+            st.markdown(f"Motivo: {motivo}")
             st.markdown("---")
 
+        # Combinação de cores (mantendo tua lógica atual)
         cor_final = classificar_combinacao(
             sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
-            cores=st.session_state["cores_sintomas"]
+            cores=cores_geradas
         )
 
+        # Ajustes por fatores de risco (corrigidos e normalizados)
         grupos_paciente = st.session_state.get("grupos_risco_refinados", [])
         gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
 
@@ -4439,20 +4587,13 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
 
         sistemas_afetados = set(sistemas_por_fatores + sistemas_secundarios)
 
-        sintoma_para_sistema = {
-            normalizar(sintoma): sistema
-            for sistema, lista in sistemas_sintomas.items()
-            for sintoma in lista
-        }
-
         ajuste = verificar_se_deve_subir_cor(
             sintomas_escolhidos=st.session_state.sintomas_escolhidos,
             sistemas_afetados=sistemas_afetados,
             sintoma_para_sistema=sintoma_para_sistema
         )
 
-
-        if ajuste == True:
+        if ajuste:
             cor_final = aumentar_cor_em_1_nivel(cor_final)
 
         emoji_cor = {
