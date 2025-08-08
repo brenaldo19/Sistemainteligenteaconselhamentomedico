@@ -4265,8 +4265,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 
 # Mapa atualizado de sintomas
 mapa_sintomas = {
-    "Nódulo testicular": (opcoes_nodulo_testicular, classificar_nodulo_testicular),
-    "Nódulo mamário": (opcoes_nodulo_mama, classificar_nodulo_mama),
     "Dor nos testículos": (opcoes_dor_testiculos, classificar_dor_testiculos),
     "Sangue no sêmen": (opcoes_sangue_semen, classificar_sangue_semen),
     "Secreção mamilar(fora da amamentação)": (opcoes_secrecao_mamilar, classificar_secrecao_mamilar),
