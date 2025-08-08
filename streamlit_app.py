@@ -254,19 +254,27 @@ def verificar_se_deve_subir_cor(sintomas_escolhidos, sistemas_afetados, sintoma_
     return False
 
 def classificar_combinacao(sintomas, cores):
-    pesos = {"verde": 0.5, "amarelo": 1.75, "laranja": 5.5, "vermelho": 8}
-    total = sum(pesos.get(cor, 0) for cor in cores)
+    """
+    Combina as cores individuais de até 3 sintomas em uma cor final.
+    Versão conservadora: é mais difícil subir para amarelo/laranja sem evidência forte.
+    """
+    pesos = {"verde": 0.2, "amarelo": 1.0, "laranja": 3.5, "vermelho": 6.5}
+    total = sum(pesos.get(c, 0) for c in cores)
 
-    if any(cor == "vermelho" for cor in cores):
+    # Regra dura: qualquer vermelho individual prevalece
+    if any(c == "vermelho" for c in cores):
         return "vermelho"
-    # Regra especial: único sintoma e ele é laranja
+
+    # Se tiver só um sintoma e ele for laranja, mantém laranja (como já era na sua lógica)
     if len(cores) == 1 and cores[0] == "laranja":
         return "laranja"
-    elif total >= 8:
+
+    # Limiar mais alto para subir de cor
+    if total >= 6.5:
         return "vermelho"
-    elif total >= 5.5:
+    elif total >= 4.0:
         return "laranja"
-    elif total >= 1.75:
+    elif total >= 2.2:
         return "amarelo"
     else:
         return "verde"
@@ -4390,7 +4398,7 @@ def eh_fluxo(label):
 
 FLUXOS = {}
 
-# --- Fluxograma: Inchaço dos linfonodos ---
+# --- Fluxograma: ---
 FLUXOS[normalizar("Inchaço dos linfonodos")] = {
     "label": "Inchaço dos linfonodos",
     "perguntas": [
@@ -4399,8 +4407,8 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
             "label": "Há febre ou perda de peso recente?",
             "tipo": "radio",
             "opcoes": {
-                "Febre alta (≥ 38,5°C) OU perda de peso > 10% em 6 meses": 2.0,
-                "Febre baixa (37,8–38,4°C) OU perda de peso moderada": 1.0,
+                "Febre alta (≥ 38,5°C) OU perda de peso > 10% em 6 meses": 1.8,
+                "Febre baixa (37,8–38,4°C) OU perda de peso moderada": 0.9,
                 "Sem febre e sem perda de peso": 0.0
             }
         },
@@ -4409,8 +4417,8 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
             "label": "O linfonodo está doloroso ou com sinais de inflamação (vermelho/quente)?",
             "tipo": "radio",
             "opcoes": {
-                "Doloroso com vermelhidão/calor": 1.2,
-                "Doloroso, sem vermelhidão": 0.7,
+                "Doloroso com vermelhidão/calor": 1.0,
+                "Doloroso, sem vermelhidão": 0.5,
                 "Sem dor/inflamação": 0.0
             }
         },
@@ -4419,8 +4427,8 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
             "label": "Há quanto tempo percebe o inchaço?",
             "tipo": "radio",
             "opcoes": {
-                "Mais de 4 semanas": 1.5,
-                "Entre 2 e 4 semanas": 0.8,
+                "Mais de 4 semanas": 1.2,
+                "Entre 2 e 4 semanas": 0.6,
                 "Menos de 2 semanas": 0.2
             }
         },
@@ -4429,8 +4437,8 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
             "label": "Onde estão os linfonodos inchados?",
             "tipo": "radio",
             "opcoes": {
-                "Generalizado (em mais de uma região do corpo)": 1.5,
-                "Localizado (apenas uma região)": 0.5
+                "Generalizado (em mais de uma região do corpo)": 1.2,
+                "Localizado (apenas uma região)": 0.4
             }
         },
         {
@@ -4438,8 +4446,8 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
             "label": "Tamanho aproximado do maior linfonodo:",
             "tipo": "radio",
             "opcoes": {
-                "≥ 2 cm": 1.5,
-                "1 a 2 cm": 0.7,
+                "≥ 2 cm": 1.2,
+                "1 a 2 cm": 0.5,
                 "< 1 cm": 0.2
             }
         },
@@ -4448,9 +4456,9 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
             "label": "Como ele parece ao toque?",
             "tipo": "radio",
             "opcoes": {
-                "Duro e fixo (pouco móvel)": 2.0,
-                "Borracha/móvel": 0.5,
-                "Macio": 0.2
+                "Duro e fixo (pouco móvel)": 1.6,
+                "Borracha/móvel": 0.4,
+                "Macio": 0.1
             }
         },
         {
@@ -4458,9 +4466,9 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
             "label": "Sintomas associados (selecione os que tiver):",
             "tipo": "checkbox",
             "opcoes": {
-                "Suor noturno": 1.0,
-                "Coceira no corpo (prurido) sem explicação": 0.5,
-                "Cansaço/fadiga persistente": 0.3
+                "Suor noturno": 0.8,
+                "Coceira no corpo (prurido) sem explicação": 0.4,
+                "Cansaço/fadiga persistente": 0.2
             }
         },
         {
@@ -4468,24 +4476,27 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
             "label": "Algum destes fatores de risco se aplica?",
             "tipo": "multiselect",
             "opcoes": {
-                "Infecção ou ferida recente perto do local": 0.5,
-                "Uso crônico de corticoide ou quimioterapia": 0.8,
-                "Imunossupressão/HIV": 1.0
+                "Infecção ou ferida recente perto do local": 0.4,
+                "Uso crônico de corticoide ou quimioterapia": 0.7,
+                "Imunossupressão/HIV": 0.9
             }
         }
     ],
     "regras_excecao": [
+        # Mantemos as exceções, mas só forçam LARANJA (não vermelho)
         {"se": {"febre_peso": "Febre alta (≥ 38,5°C) OU perda de peso > 10% em 6 meses", "duracao": "Mais de 4 semanas"}, "min_cor": "laranja"},
         {"se": {"tamanho": "≥ 2 cm", "consistencia_mobilidade": "Duro e fixo (pouco móvel)"}, "min_cor": "laranja"},
         {"se": {"localizacao": "Generalizado (em mais de uma região do corpo)", "febre_peso": ["Febre alta (≥ 38,5°C) OU perda de peso > 10% em 6 meses", "Febre baixa (37,8–38,4°C) OU perda de peso moderada"]}, "min_cor": "laranja"}
     ],
+    # Limiar mais alto: fica mais difícil sair de verde
     "mapeamento_cor": [
-        (6.5, "vermelho"),
-        (3.5, "laranja"),
-        (1.5, "amarelo"),
+        (7.5, "vermelho"),
+        (4.5, "laranja"),
+        (2.2, "amarelo"),
         (0.0, "verde")
     ]
 }
+
 
 
 # =============================
