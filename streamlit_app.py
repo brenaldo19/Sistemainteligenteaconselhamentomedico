@@ -4549,6 +4549,132 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
     ]
 }
 
+# Fluxograma: Nódulo na mama (conservador)
+FLUXOS[normalizar("Nódulo na mama")] = {
+    "label": "Nódulo na mama",
+    "perguntas": [
+        {
+            "id": "caracteristica",
+            "label": "Qual a característica principal do nódulo?",
+            "tipo": "radio",
+            "opcoes": {
+                "Nódulo crescente ou com secreção": 1.8,
+                "Nódulo duro, fixo ou irregular": 1.6,
+                "Nódulo doloroso, mas recente": 1.0,
+                "Pequeno nódulo móvel, sem dor": 0.8
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Há quanto tempo você notou o nódulo?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 4 semanas": 1.0,
+                "Entre 2 e 4 semanas": 0.6,
+                "Menos de 2 semanas": 0.3
+            }
+        },
+        {
+            "id": "alteracoes_pele",
+            "label": "Há alterações na pele sobre o nódulo?",
+            "tipo": "radio",
+            "opcoes": {
+                "Retração da pele ou aspecto de casca de laranja": 1.2,
+                "Vermelhidão ou calor local": 0.8,
+                "Sem alterações visíveis": 0.0
+            }
+        },
+        {
+            "id": "secrecao_mamilo",
+            "label": "Há secreção pelo mamilo?",
+            "tipo": "radio",
+            "opcoes": {
+                "Com sangue": 1.5,
+                "Transparente ou leitosa (fora do período de lactação)": 1.0,
+                "Sem secreção": 0.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes fatores de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico familiar de câncer de mama": 1.2,
+                "Uso prolongado de terapia hormonal": 0.6,
+                "Imunossupressão": 0.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"caracteristica": "Nódulo crescente ou com secreção", "tempo": "Mais de 4 semanas"}, "min_cor": "laranja"},
+        {"se": {"caracteristica": "Nódulo duro, fixo ou irregular", "alteracoes_pele": "Retração da pele ou aspecto de casca de laranja"}, "min_cor": "laranja"},
+        {"se": {"secrecao_mamilo": "Com sangue"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.5, "vermelho"),
+        (4.0, "laranja"),
+        (2.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# Fluxograma: Nódulo testicular (conservador)
+FLUXOS[normalizar("Nódulo testicular")] = {
+    "label": "Nódulo testicular",
+    "perguntas": [
+        {
+            "id": "caracteristica",
+            "label": "Qual a característica principal do nódulo?",
+            "tipo": "radio",
+            "opcoes": {
+                "Nódulo firme e indolor, perceptível há dias": 1.8,
+                "Nódulo doloroso ou com inchaço": 1.0,
+                "Mudança recente no tamanho do testículo": 1.0,
+                "Sensação de caroço pequeno e móvel": 0.8
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Há quanto tempo você notou o nódulo?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 4 semanas": 1.0,
+                "Entre 2 e 4 semanas": 0.6,
+                "Menos de 2 semanas": 0.3
+            }
+        },
+        {
+            "id": "sintomas_associados",
+            "label": "Sintomas associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor abdominal ou lombar": 0.8,
+                "Sensação de peso no escroto": 0.4,
+                "Aumento rápido do volume testicular": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes fatores de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico familiar de câncer testicular": 1.2,
+                "Criptorquidia (testículo não descido)": 1.0,
+                "Imunossupressão": 0.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"caracteristica": "Nódulo firme e indolor, perceptível há dias", "tempo": "Mais de 4 semanas"}, "min_cor": "laranja"},
+        {"se": {"sintomas_associados": ["Aumento rápido do volume testicular"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (2.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
 
 
 # =============================
