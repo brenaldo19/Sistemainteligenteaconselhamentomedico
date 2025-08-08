@@ -2600,23 +2600,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_inchaco_linfonodos():
-    return [
-        "Inchaço acompanhado de febre ou perda de peso",
-        "Inchaço doloroso ou inflamado",
-        "Inchaço perceptível, mas sem outros sintomas",
-        "Inchaço pequeno e isolado, sem dor"
-    ]
-
-def classificar_inchaco_linfonodos(resp):
-    if "febre" in resp or "perda de peso" in resp:
-        return "laranja", "Pode indicar infecção sistêmica ou condição mais grave."
-    elif "doloroso" in resp or "inflamado" in resp:
-        return "amarelo", "Dor ou inflamação sugere infecção localizada nos linfonodos."
-    elif "sem outros sintomas" in resp:
-        return "amarelo", "Mesmo sem outros sintomas, o inchaço pode indicar inflamação."
-    else:
-        return "verde", "Pequeno inchaço isolado geralmente não é preocupante."
 
 def opcoes_nodulo_mama():
     return [
@@ -4224,7 +4207,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 mapa_sintomas = {
     "Nódulo testicular": (opcoes_nodulo_testicular, classificar_nodulo_testicular),
     "Nódulo mamário": (opcoes_nodulo_mama, classificar_nodulo_mama),
-    "Inchaço dos linfonodos": (opcoes_inchaco_linfonodos, classificar_inchaco_linfonodos),
     "Dor nos testículos": (opcoes_dor_testiculos, classificar_dor_testiculos),
     "Sangue no sêmen": (opcoes_sangue_semen, classificar_sangue_semen),
     "Secreção mamilar(fora da amamentação)": (opcoes_secrecao_mamilar, classificar_secrecao_mamilar),
