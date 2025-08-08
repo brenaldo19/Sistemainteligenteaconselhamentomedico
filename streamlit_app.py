@@ -1,7 +1,8 @@
 import streamlit as st
 from datetime import datetime
 import pandas as pd
-import unicodedataimport re
+import unicodedata
+import re
 
 def normalizar(texto: str) -> str:
     if not isinstance(texto, str):
