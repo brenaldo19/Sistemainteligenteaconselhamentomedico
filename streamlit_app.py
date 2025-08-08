@@ -4551,6 +4551,7 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
 }
 
 # Fluxograma: Nódulo na mama (conservador)
+# Fluxograma: Nódulo na mama (conservador, com sinais específicos moderados)
 FLUXOS[normalizar("Nódulo na mama")] = {
     "label": "Nódulo na mama",
     "perguntas": [
@@ -4581,7 +4582,7 @@ FLUXOS[normalizar("Nódulo na mama")] = {
             "tipo": "radio",
             "opcoes": {
                 "Retração da pele ou aspecto de casca de laranja": 1.2,
-                "Vermelhidão ou calor local": 0.8,
+                "Vermelhidão ou calor local": 0.7,   # leve redução
                 "Sem alterações visíveis": 0.0
             }
         },
@@ -4591,8 +4592,19 @@ FLUXOS[normalizar("Nódulo na mama")] = {
             "tipo": "radio",
             "opcoes": {
                 "Com sangue": 1.5,
-                "Transparente ou leitosa (fora do período de lactação)": 1.0,
+                "Transparente ou leitosa (fora do período de lactação)": 0.9,  # leve redução
                 "Sem secreção": 0.0
+            }
+        },
+        {
+            "id": "sinais_locais_associados",
+            "label": "Sinais locais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Nódulo em axila do mesmo lado": 0.7,
+                "Alteração recente do mamilo (inversão/ferida)": 0.8,
+                "Aumento de volume/assimetria súbita da mama": 0.6,
+                "Dor não cíclica persistente": 0.4
             }
         },
         {
@@ -4600,8 +4612,8 @@ FLUXOS[normalizar("Nódulo na mama")] = {
             "label": "Algum destes fatores de risco se aplica?",
             "tipo": "multiselect",
             "opcoes": {
-                "Histórico familiar de câncer de mama": 1.2,
-                "Uso prolongado de terapia hormonal": 0.6,
+                "Histórico familiar de câncer de mama": 1.1,   # leve redução
+                "Uso prolongado de terapia hormonal": 0.5,     # leve redução
                 "Imunossupressão": 0.5
             }
         }
@@ -4609,7 +4621,8 @@ FLUXOS[normalizar("Nódulo na mama")] = {
     "regras_excecao": [
         {"se": {"caracteristica": "Nódulo crescente ou com secreção", "tempo": "Mais de 4 semanas"}, "min_cor": "laranja"},
         {"se": {"caracteristica": "Nódulo duro, fixo ou irregular", "alteracoes_pele": "Retração da pele ou aspecto de casca de laranja"}, "min_cor": "laranja"},
-        {"se": {"secrecao_mamilo": "Com sangue"}, "min_cor": "laranja"}
+        {"se": {"secrecao_mamilo": "Com sangue"}, "min_cor": "laranja"},
+        {"se": {"sinais_locais_associados": ["Nódulo em axila do mesmo lado"], "caracteristica": "Nódulo duro, fixo ou irregular"}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
         (6.5, "vermelho"),
@@ -4620,6 +4633,7 @@ FLUXOS[normalizar("Nódulo na mama")] = {
 }
 
 # Fluxograma: Nódulo testicular (conservador)
+# Fluxograma: Nódulo testicular (conservador, com sinais específicos moderados)
 FLUXOS[normalizar("Nódulo testicular")] = {
     "label": "Nódulo testicular",
     "perguntas": [
@@ -4628,10 +4642,10 @@ FLUXOS[normalizar("Nódulo testicular")] = {
             "label": "Qual a característica principal do nódulo?",
             "tipo": "radio",
             "opcoes": {
-                "Nódulo firme e indolor, perceptível há dias": 1.8,
-                "Nódulo doloroso ou com inchaço": 1.0,
-                "Mudança recente no tamanho do testículo": 1.0,
-                "Sensação de caroço pequeno e móvel": 0.8
+                "Nódulo firme e indolor, perceptível há dias": 1.7,  # leve redução
+                "Nódulo doloroso ou com inchaço": 0.9,               # leve redução
+                "Mudança recente no tamanho do testículo": 0.9,      # leve redução
+                "Sensação de caroço pequeno e móvel": 0.7            # leve redução
             }
         },
         {
@@ -4639,19 +4653,21 @@ FLUXOS[normalizar("Nódulo testicular")] = {
             "label": "Há quanto tempo você notou o nódulo?",
             "tipo": "radio",
             "opcoes": {
-                "Mais de 4 semanas": 1.0,
+                "Mais de 4 semanas": 0.9,   # leve redução
                 "Entre 2 e 4 semanas": 0.6,
                 "Menos de 2 semanas": 0.3
             }
         },
         {
-            "id": "sintomas_associados",
-            "label": "Sintomas associados (selecione os que tiver):",
+            "id": "sinais_associados_especificos",
+            "label": "Sinais associados (selecione os que tiver):",
             "tipo": "checkbox",
             "opcoes": {
-                "Dor abdominal ou lombar": 0.8,
-                "Sensação de peso no escroto": 0.4,
-                "Aumento rápido do volume testicular": 1.0
+                "Endurecimento de parte do testículo": 0.8,
+                "Aumento rápido do volume testicular": 0.9,
+                "Sensação de peso no escroto": 0.5,
+                "Dor surda em baixo-ventre/virilha": 0.6,
+                "Aumento de mamas ou sensibilidade mamilar": 0.5
             }
         },
         {
@@ -4659,15 +4675,16 @@ FLUXOS[normalizar("Nódulo testicular")] = {
             "label": "Algum destes fatores de risco se aplica?",
             "tipo": "multiselect",
             "opcoes": {
-                "Histórico familiar de câncer testicular": 1.2,
-                "Criptorquidia (testículo não descido)": 1.0,
+                "Histórico familiar de câncer testicular": 1.1,  # leve redução
+                "Criptorquidia (testículo não descido)": 0.9,    # leve redução
                 "Imunossupressão": 0.5
             }
         }
     ],
     "regras_excecao": [
         {"se": {"caracteristica": "Nódulo firme e indolor, perceptível há dias", "tempo": "Mais de 4 semanas"}, "min_cor": "laranja"},
-        {"se": {"sintomas_associados": ["Aumento rápido do volume testicular"]}, "min_cor": "laranja"}
+        {"se": {"sinais_associados_especificos": ["Aumento rápido do volume testicular"]}, "min_cor": "laranja"},
+        {"se": {"sinais_associados_especificos": ["Endurecimento de parte do testículo"], "tempo": "Mais de 4 semanas"}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
         (6.0, "vermelho"),
@@ -4676,7 +4693,6 @@ FLUXOS[normalizar("Nódulo testicular")] = {
         (0.0, "verde")
     ]
 }
-
 
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
