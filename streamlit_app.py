@@ -20,24 +20,12 @@ def max_cor(*cores):
     return ORDEM_CORES[max(idx)] if idx else "verde"
 
 def score_para_cor(score, tabela):
-    """
-    Aceita a tabela em qualquer ordem.
-    Escolhe a cor do MAIOR limiar que seja <= score.
-    """
-    try:
-        tabela_ord = sorted([(float(l), c) for (l, c) in tabela], key=lambda x: x[0], reverse=True)
-    except Exception:
-        # Fallback: usa como vier
-        tabela_ord = tabela
-
+    # Ordena por limiar, do maior pro menor
+    tabela_ord = sorted(tabela, key=lambda x: x[0], reverse=True)
     for limiar, cor in tabela_ord:
-        try:
-            if score >= float(limiar):
-                return cor
-        except Exception:
-            continue
+        if score >= limiar:
+            return cor
     return "verde"
-
 
 # ===============================
 # MAPEAMENTO DE SINTOMAS E SISTEMAS
