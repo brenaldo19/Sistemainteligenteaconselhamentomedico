@@ -4631,49 +4631,49 @@ for sintoma in st.session_state.sintomas_escolhidos:
     st.markdown("---")
 
         # Combinação de cores (mantendo tua lógica atual)
-        cor_final = classificar_combinacao(
-            sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
-            cores=cores_geradas
+    cor_final = classificar_combinacao(
+        sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
+        cores=cores_geradas
         )
 
         # Ajustes por fatores de risco (corrigidos e normalizados)
-        grupos_paciente = st.session_state.get("grupos_risco_refinados", [])
-        gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
+    grupos_paciente = st.session_state.get("grupos_risco_refinados", [])
+    gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
 
-        sistemas_por_fatores = gerar_sistemas_afetados_por_fatores(
-            idade=st.session_state.get("idade"),
-            imc_class=st.session_state.get("classificacao_imc"),
-            gravida=gravidez,
-            condicoes_brutas=grupos_paciente
+    sistemas_por_fatores = gerar_sistemas_afetados_por_fatores(
+        idade=st.session_state.get("idade"),
+        imc_class=st.session_state.get("classificacao_imc"),
+        gravida=gravidez,
+        condicoes_brutas=grupos_paciente
         )
 
-        sistemas_secundarios = []
-        for grupo in grupos_paciente:
-            sistemas_secundarios += sistemas_afetados_secundariamente(grupo)
+    sistemas_secundarios = []
+    for grupo in grupos_paciente:
+        sistemas_secundarios += sistemas_afetados_secundariamente(grupo)
 
-        sistemas_afetados = set(sistemas_por_fatores + sistemas_secundarios)
+    sistemas_afetados = set(sistemas_por_fatores + sistemas_secundarios)
 
-        ajuste = verificar_se_deve_subir_cor(
-            sintomas_escolhidos=st.session_state.sintomas_escolhidos,
-            sistemas_afetados=sistemas_afetados,
-            sintoma_para_sistema=sintoma_para_sistema
+    ajuste = verificar_se_deve_subir_cor(
+        sintomas_escolhidos=st.session_state.sintomas_escolhidos,
+        sistemas_afetados=sistemas_afetados,
+        sintoma_para_sistema=sintoma_para_sistema
         )
 
-        if ajuste:
-            cor_final = aumentar_cor_em_1_nivel(cor_final)
+    if ajuste:
+        cor_final = aumentar_cor_em_1_nivel(cor_final)
 
-        emoji_cor = {
-            "verde": "🟢",
-            "amarelo": "🟡",
-            "laranja": "🟠",
-            "vermelho": "🔴"
+    emoji_cor = {
+        "verde": "🟢",
+        "amarelo": "🟡",
+        "laranja": "🟠",
+        "vermelho": "🔴"
         }
 
-        st.success(f"🩺 Gravidade estimada: **{cor_final.upper()}**")
+    st.success(f"🩺 Gravidade estimada: **{cor_final.upper()}**")
 
-        st.markdown("---")
-        st.subheader("📘 Legenda de Gravidade")
-        st.markdown("""
+    st.markdown("---")
+    st.subheader("📘 Legenda de Gravidade")
+    st.markdown("""
 - 🔴 **VERMELHO:** Situação crítica. Procure atendimento médico imediatamente.
 - 🟠 **LARANJA:** Caso urgente. Necessita avaliação rápida em unidade de saúde.
 - 🟡 **AMARELO:** Gravidade moderada. Requer atenção, mas pode aguardar avaliação.
