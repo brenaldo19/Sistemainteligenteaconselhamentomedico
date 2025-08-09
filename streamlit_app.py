@@ -926,9 +926,10 @@ def dicionario_sintomas():
     "popular": "Quando a glicose baixa demais, causando tremedeira, fome de repente, suor e até desmaio.",
     "clinico": "Hipoglicemia",
     "termos": {
-        "Sudorese intensa": "Suor exagerado, mesmo sem calor ou esforço.",
-        "Fome súbita": "Sensação repentina de precisar comer urgente.",
-        "Tremores": "Mãos ou corpo tremendo involuntariamente."
+        "Desmaio ou confusão com sudorese intensa": "Pessoa cai ou fica desorientada, suando muito.",
+        "Tontura, tremores e fome súbita": "Sensação repentina de fraqueza com mãos trêmulas e muita fome.",
+        "Jejum prolongado": "Ficou muitas horas sem comer.",
+        "Atividade física intensa sem alimentação": "Exercício pesado sem comer antes."
         }
     },
 
@@ -937,8 +938,9 @@ def dicionario_sintomas():
     "popular": "Quando o açúcar do sangue está alto e a pessoa sente muita sede, enjoo e mal-estar.",
     "clinico": "Hiperglicemia",
     "termos": {
-        "Sede intensa": "Necessidade de beber muita água o tempo todo.",
-        "Mal-estar com enjoo": "Sensação ruim geral acompanhada de vontade de vomitar."
+        "Sede intensa, urina excessiva e cansaço extremo": "Bebe muita água, urina demais e se sente exausto.",
+        "Mal-estar com enjoo e dor abdominal": "Desconforto no estômago com náusea e dor de barriga.",
+        "Excesso de carboidratos": "Comeu muito açúcar ou massas recentemente."
         }
     },
 
@@ -947,9 +949,9 @@ def dicionario_sintomas():
     "popular": "Quando o corpo esfria demais e a pessoa fica com frio, tremendo e com mãos e pés gelados.",
     "clinico": "Hipotermia",
     "termos": {
-        "Extremidades frias": "Mãos e pés muito gelados ao toque.",
-        "Calafrios": "Tremores causados pelo frio intenso.",
-        "Pele fria": "Pele gelada, mesmo em ambiente normal."
+        "Extremidades frias com sonolência ou confusão": "Mãos e pés gelados junto com muito sono ou desorientação.",
+        "Calafrios e pele fria persistente": "Tremores contínuos e pele gelada mesmo agasalhado.",
+        "Pele arroxeada": "Tom roxo nas extremidades pelo frio."
         }
     },
 
@@ -958,7 +960,9 @@ def dicionario_sintomas():
     "popular": "Quando a grávida sente dor no pé da barriga, com ou sem contrações, podendo indicar algo grave.",
     "clinico": "Dor gestacional",
     "termos": {
-        "Perda de líquido": "Quando escorre água pela vagina, como se estivesse vazando urina ou rompendo a bolsa."
+        "Dor intensa com sangramento ou perda de líquido": "Dor forte junto com sangue ou líquido saindo pela vagina.",
+        "Diminuição ou ausência de movimentos do bebê": "Bebê mexendo pouco ou parou de mexer.",
+        "Pressão alta recente": "Medição recente mostrou pressão elevada."
         }
     },
 
@@ -2711,77 +2715,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_hipoglicemia():
-    return [
-        "Desmaio ou confusão com sudorese intensa",
-        "Tontura, tremores e fome súbita",
-        "Leve fraqueza ou irritação",
-        "Sem sintomas associados"
-    ]
-
-def classificar_hipoglicemia(resp):
-    if resp == "Desmaio ou confusão com sudorese intensa":
-        return "vermelho", "Quadro grave de hipoglicemia que pode levar à perda de consciência ou convulsões. Procure socorro médico imediato."
-    elif resp == "Tontura, tremores e fome súbita":
-        return "laranja", "Esses sintomas indicam uma queda importante de glicose no sangue. É necessário agir rápido com ingestão de açúcar e monitoramento."
-    elif resp == "Leve fraqueza ou irritação":
-        return "amarelo", "Podem ser sinais iniciais de hipoglicemia. Faça uma pausa, alimente-se e observe a evolução."
-    else:
-        return "verde", "Sem indícios de hipoglicemia no momento. Mantenha alimentação equilibrada e rotina de cuidados, se for diabético."
-
-def opcoes_hiperglicemia():
-    return [
-        "Sede intensa, urina excessiva e cansaço extremo",
-        "Mal-estar com enjoo e dor abdominal",
-        "Leve fraqueza e sede acima do normal",
-        "Sem sintomas associados"
-    ]
-
-def classificar_hiperglicemia(resp):
-    if resp == "Sede intensa, urina excessiva e cansaço extremo":
-        return "vermelho", "Sintomas graves que podem indicar cetoacidose diabética. Procure atendimento médico com urgência."
-    elif resp == "Mal-estar com enjoo e dor abdominal":
-        return "laranja", "Alterações associadas à hiperglicemia moderada. Requer controle e possível avaliação médica."
-    elif resp == "Leve fraqueza e sede acima do normal":
-        return "amarelo", "Pode ser um sinal de glicemia elevada. Reforce a hidratação e monitore os níveis de glicose."
-    else:
-        return "verde", "Sem sintomas evidentes de glicose elevada. Continue com os cuidados habituais."
-
-def opcoes_temperatura_baixa():
-    return [
-        "Extremidades frias com sonolência ou confusão",
-        "Calafrios e pele fria persistente",
-        "Sensação de frio sem outros sintomas",
-        "Temperatura normal para o ambiente"
-    ]
-
-def classificar_temperatura_baixa(resp):
-    if resp == "Extremidades frias com sonolência ou confusão":
-        return "vermelho", "Risco de hipotermia grave. É necessário buscar aquecimento e atendimento médico imediatamente."
-    elif resp == "Calafrios e pele fria persistente":
-        return "laranja", "Sinais de hipotermia leve a moderada. Mantenha-se aquecido e monitorado."
-    elif resp == "Sensação de frio sem outros sintomas":
-        return "amarelo", "Situação leve, geralmente transitória. Observe se os sintomas evoluem."
-    else:
-        return "verde", "Temperatura adequada ao ambiente. Sem sinais de risco."
-
-def opcoes_dor_durante_gravidez():
-    return [
-        "Dor intensa com sangramento ou perda de líquido",
-        "Dor abdominal moderada e persistente",
-        "Desconforto leve e intermitente",
-        "Dor ocasional esperada para a gestação"
-    ]
-
-def classificar_dor_durante_gravidez(resp):
-    if resp == "Dor intensa com sangramento ou perda de líquido":
-        return "vermelho", "Pode indicar trabalho de parto prematuro ou complicações graves. Procure atendimento médico imediato."
-    elif resp == "Dor abdominal moderada e persistente":
-        return "laranja", "Dor constante pode indicar alguma alteração gestacional. Requer avaliação médica."
-    elif resp == "Desconforto leve e intermitente":
-        return "amarelo", "Sintomas comuns na gestação. Mantenha repouso e acompanhamento."
-    else:
-        return "verde", "Sem sinais preocupantes. Continue o pré-natal normalmente."
 
 def opcoes_movimentos_fetais():
     return [
@@ -5664,6 +5597,197 @@ FLUXOS[normalizar("Hipotensão")] = {
                 "Doença cardíaca conhecida": 1.0,
                 "Gravidez": 1.0,
                 "Insuficiência renal/hepática": 1.0
+            }
+        }
+    ]
+}
+# -----------------------------
+# HIPOglicemia
+# -----------------------------
+FLUXOS[normalizar("Hipoglicemia")] = {
+    "label": "Hipoglicemia",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Desmaio ou confusão com sudorese intensa": 3.5,
+                "Tontura, tremores e fome súbita": 2.0,
+                "Leve fraqueza ou irritação": 1.0,
+                "Sem sintomas associados": 0.0
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início do quadro",
+            "tipo": "radio",
+            "opcoes": {
+                "Início súbito, nos últimos minutos": 1.3,
+                "Instalação mais lenta, em algumas horas": 0.6
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Uso recente de insulina ou remédio para diabetes": 1.2,
+                "Jejum prolongado ou refeição atrasada": 0.8,
+                "Atividade física intensa sem alimentação": 0.8
+            }
+        },
+        {
+            "id": "condicoes_risco",
+            "label": "Condições de risco",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Idade ≤ 4 anos ou ≥ 67 anos": 1.2,
+                "Doença cardíaca conhecida": 1.0
+            }
+        }
+    ]
+}
+
+# -----------------------------
+# HIPERglicemia
+# -----------------------------
+FLUXOS[normalizar("Hiperglicemia")] = {
+    "label": "Hiperglicemia",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sede intensa, urina excessiva e cansaço extremo": 3.5,
+                "Mal-estar com enjoo e dor abdominal": 2.0,
+                "Leve fraqueza e sede acima do normal": 1.0,
+                "Sem sintomas associados": 0.0
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início do quadro",
+            "tipo": "radio",
+            "opcoes": {
+                "Início súbito, em poucas horas": 1.0,
+                "Progressivo, nos últimos dias": 0.6
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Esquecimento ou redução da dose de insulina/remédio": 1.2,
+                "Infecção recente": 1.0,
+                "Excesso de ingestão de carboidratos": 0.6
+            }
+        },
+        {
+            "id": "condicoes_risco",
+            "label": "Condições de risco",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Idade ≤ 4 anos ou ≥ 67 anos": 1.2,
+                "Doença renal ou cardíaca": 1.0
+            }
+        }
+    ]
+}
+
+# -----------------------------
+# TEMPERATURA BAIXA
+# -----------------------------
+FLUXOS[normalizar("Temperatura baixa")] = {
+    "label": "Temperatura baixa",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Extremidades frias com sonolência ou confusão": 3.5,
+                "Calafrios e pele fria persistente": 2.0,
+                "Sensação de frio sem outros sintomas": 1.0,
+                "Temperatura normal para o ambiente": 0.0
+            }
+        },
+        {
+            "id": "exposicao",
+            "label": "Exposição recente",
+            "tipo": "radio",
+            "opcoes": {
+                "Exposição prolongada ao frio": 1.2,
+                "Ambiente frio por pouco tempo": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Tremores intensos": 0.8,
+                "Dificuldade para falar": 1.0,
+                "Pele muito pálida ou arroxeada": 1.2
+            }
+        },
+        {
+            "id": "condicoes_risco",
+            "label": "Condições de risco",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Idade ≤ 4 anos ou ≥ 67 anos": 1.2,
+                "Doença cardíaca ou circulatória": 1.0
+            }
+        }
+    ]
+}
+
+# -----------------------------
+# DOR DURANTE A GRAVIDEZ
+# -----------------------------
+FLUXOS[normalizar("Dor durante a gravidez")] = {
+    "label": "Dor durante a gravidez",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor intensa com sangramento ou perda de líquido": 3.5,
+                "Dor abdominal moderada e persistente": 2.0,
+                "Desconforto leve e intermitente": 1.0,
+                "Dor ocasional esperada para a gestação": 0.0
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início do quadro",
+            "tipo": "radio",
+            "opcoes": {
+                "Início súbito": 1.3,
+                "Início gradual": 0.6
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre": 1.0,
+                "Diminuição ou ausência de movimentos do bebê": 1.3,
+                "Pressão alta recente": 1.2
+            }
+        },
+        {
+            "id": "historico",
+            "label": "Histórico",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Complicações gestacionais anteriores": 1.0,
+                "Gestação de risco": 1.0
             }
         }
     ]
