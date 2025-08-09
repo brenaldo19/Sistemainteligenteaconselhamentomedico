@@ -2771,185 +2771,7 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_nausea():
-    return [
-        "Náusea constante com vômito e mal-estar",
-        "Enjoo forte que impede alimentação",
-        "Enjoo leve e intermitente",
-        "Desconforto passageiro após alimentação"
-    ]
 
-def classificar_nausea(resp):
-    if resp == "Náusea constante com vômito e mal-estar":
-        return "vermelho", "Possível infecção gastrointestinal ou intoxicação. Procure atendimento."
-    elif resp == "Enjoo forte que impede alimentação":
-        return "laranja", "Pode levar à desidratação. Avaliação médica pode ser necessária."
-    elif resp == "Enjoo leve e intermitente":
-        return "amarelo", "Sintomas leves. Mantenha hidratação e dieta leve."
-    else:
-        return "verde", "Sintoma leve e esporádico. Sem risco."
-
-def opcoes_dor_ombro_braco():
-    return [
-        "Dor irradiando do peito ou com formigamento",
-        "Dor intensa com limitação de movimento",
-        "Dor moderada após esforço",
-        "Dor leve que melhora com repouso"
-    ]
-
-def classificar_dor_ombro_braco(resp):
-    if resp == "Dor irradiando do peito ou com formigamento":
-        return "vermelho", "Possível infarto. Atendimento médico imediato recomendado."
-    elif resp == "Dor intensa com limitação de movimento":
-        return "laranja", "Pode ser tendinite ou lesão. Requer avaliação ortopédica."
-    elif resp == "Dor moderada após esforço":
-        return "amarelo", "Situação comum. Repouso e gelo ajudam na recuperação."
-    else:
-        return "verde", "Dor leve e transitória. Sem preocupação."
-
-def opcoes_alergia_cutanea():
-    return [
-        "Lesão com inchaço e coceira intensa",
-        "Mancha vermelha espalhada com descamação",
-        "Irritação leve e localizada",
-        "Lesão pequena e assintomática"
-    ]
-
-def classificar_alergia_cutanea(resp):
-    if resp == "Lesão com inchaço e coceira intensa":
-        return "vermelho", "Reação alérgica intensa. Pode evoluir para quadro sistêmico. Procure ajuda médica."
-    elif resp == "Mancha vermelha espalhada com descamação":
-        return "laranja", "Possível dermatite. Requer hidratação e avaliação médica."
-    elif resp == "Irritação leve e localizada":
-        return "amarelo", "Sintoma leve. Utilize hidratantes e observe evolução."
-    else:
-        return "verde", "Lesão assintomática. Sem necessidade de intervenção."
-
-def opcoes_sangramento_gi():
-    return [
-        "Fezes com sangue vivo ou pretas com mal-estar",
-        "Sangue moderado sem dor intensa",
-        "Pequena presença de sangue isolada",
-        "Observação leve e sem sintomas associados"
-    ]
-
-def classificar_sangramento_gi(resp):
-    if resp == "Fezes com sangue vivo ou pretas com mal-estar":
-        return "vermelho", "Pode indicar hemorragia digestiva. Atendimento imediato é essencial."
-    elif resp == "Sangue moderado sem dor intensa":
-        return "laranja", "Quadro preocupante. Procure avaliação médica."
-    elif resp == "Pequena presença de sangue isolada":
-        return "amarelo", "Pode ser fissura anal ou irritação leve. Observe."
-    else:
-        return "verde", "Sem sinais de alarme. Acompanhe se houver repetição."
-
-def opcoes_corpo_estranho_garganta():
-    return [
-        "Corpo estranho preso com dificuldade para respirar ou engolir",
-        "Desconforto com dor ao engolir",
-        "Sensação de algo preso, mas respira normalmente",
-        "Episódio leve e já resolvido"
-    ]
-
-def classificar_corpo_estranho_garganta(resp):
-    if resp == "Corpo estranho preso com dificuldade para respirar ou engolir":
-        return "vermelho", "Emergência. Risco de obstrução das vias aéreas. Procure socorro imediatamente."
-    elif resp == "Desconforto com dor ao engolir":
-        return "laranja", "Pode ser inflamação ou objeto pequeno. Avaliação médica necessária."
-    elif resp == "Sensação de algo preso, mas respira normalmente":
-        return "amarelo", "Observe. Pode desaparecer sozinho ou exigir remoção simples."
-    else:
-        return "verde", "Situação resolvida. Sem riscos atuais."
-
-def opcoes_ictericia():
-    return [
-        "Icterícia intensa com dor abdominal ou vômito",
-        "Pele amarelada com febre ou cansaço",
-        "Amarelado leve, sem sintomas associados",
-        "Coloração discreta e passageira"
-    ]
-
-def classificar_ictericia(resp):
-    if resp == "Icterícia intensa com dor abdominal ou vômito":
-        return "vermelho", "Possível comprometimento hepático grave. Procure atendimento médico."
-    elif resp == "Pele amarelada com febre ou cansaço":
-        return "laranja", "Icterícia associada a infecção ou disfunção hepática. Necessita avaliação."
-    elif resp == "Amarelado leve, sem sintomas associados":
-        return "amarelo", "Icterícia leve. Monitorar coloração da pele e olhos."
-    else:
-        return "verde", "Sem sinais relevantes. Observe se houver evolução."
-
-def opcoes_dificuldade_engolir():
-    return [
-        "Não consegue engolir líquidos ou saliva",
-        "Dor e dificuldade ao engolir sólidos",
-        "Leve desconforto para engolir",
-        "Sensação passageira ao engolir"
-    ]
-
-def classificar_dificuldade_engolir(resp):
-    if resp == "Não consegue engolir líquidos ou saliva":
-        return "vermelho", "Obstrução ou inflamação grave. Atendimento médico urgente."
-    elif resp == "Dor e dificuldade ao engolir sólidos":
-        return "laranja", "Pode indicar infecção ou irritação. Requer avaliação médica."
-    elif resp == "Leve desconforto para engolir":
-        return "amarelo", "Geralmente leve e transitório. Observe evolução."
-    else:
-        return "verde", "Sem sintomas preocupantes."
-
-def opcoes_tremores():
-    return [
-        "Tremores com perda de consciência ou força",
-        "Movimentos anormais contínuos com dificuldade para parar",
-        "Tremores leves em repouso",
-        "Episódio isolado e breve"
-    ]
-
-def classificar_tremores(resp):
-    if resp == "Tremores com perda de consciência ou força":
-        return "vermelho", "Sinais neurológicos graves. Procure socorro imediatamente."
-    elif resp == "Movimentos anormais contínuos com dificuldade para parar":
-        return "laranja", "Pode indicar crise neurológica ou ansiedade severa. Requer avaliação."
-    elif resp == "Tremores leves em repouso":
-        return "amarelo", "Quadro leve. Monitorar frequência e intensidade."
-    else:
-        return "verde", "Tremores leves e isolados. Sem sinais de risco."
-
-def opcoes_retencao_urinaria():
-    return [
-        "Não urina há muitas horas com dor e distensão abdominal",
-        "Jato fraco com sensação de bexiga cheia",
-        "Urina com dificuldade, mas consegue aliviar",
-        "Pequena alteração, mas sem desconforto"
-    ]
-
-def classificar_retencao_urinaria(resp):
-    if resp == "Não urina há muitas horas com dor e distensão abdominal":
-        return "vermelho", "Retenção urinária grave. Risco de complicações renais. Atendimento imediato necessário."
-    elif resp == "Jato fraco com sensação de bexiga cheia":
-        return "laranja", "Pode ser obstrução parcial. Avaliação urológica recomendada."
-    elif resp == "Urina com dificuldade, mas consegue aliviar":
-        return "amarelo", "Situação leve. Acompanhar se houver piora."
-    else:
-        return "verde", "Sem alterações relevantes."
-            
-def opcoes_infeccao_ferida():
-    return [
-        "Ferida com pus, inchaço, dor e febre",
-        "Vermelhidão intensa e secreção local",
-        "Leve vermelhidão sem dor",
-        "Cicatrização normal com alteração mínima"
-    ]
-
-def classificar_infeccao_ferida(resp):
-    if resp == "Ferida com pus, inchaço, dor e febre":
-        return "vermelho", "Infecção ativa e sistêmica. Atendimento médico urgente."
-    elif resp == "Vermelhidão intensa e secreção local":
-        return "laranja", "Infecção localizada. Necessita cuidados e possível antibiótico."
-    elif resp == "Leve vermelhidão sem dor":
-        return "amarelo", "Irritação leve. Higienização adequada pode resolver."
-    else:
-        return "verde", "Ferida em boa evolução. Sem sinais de infecção."
 
 def calcular_cor_final(cores, sintomas, sistemas_sintomas):
     ordem_cores = ["verde", "amarelo", "laranja", "vermelho"]
@@ -2982,19 +2804,7 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
     return cor_final
 
 # Mapa atualizado de sintomas
-mapa_sintomas = {
-    "Náusea ou enjoo": (opcoes_nausea, classificar_nausea),
-    "Dor no ombro ou braço": (opcoes_dor_ombro_braco, classificar_dor_ombro_braco),
-    "Sangramento gastrointestinal": (opcoes_sangramento_gi, classificar_sangramento_gi),
-    "Corpo estranho na garganta": (opcoes_corpo_estranho_garganta, classificar_corpo_estranho_garganta),
-    "Icterícia (pele ou olhos amarelados)": (opcoes_ictericia, classificar_ictericia),
-    "Dificuldade para engolir": (opcoes_dificuldade_engolir, classificar_dificuldade_engolir),
-    "Tremores ou movimentos involuntários": (opcoes_tremores, classificar_tremores),
-    "Retenção urinária": (opcoes_retencao_urinaria, classificar_retencao_urinaria),
-    "Infecção em ferida": (opcoes_infeccao_ferida, classificar_infeccao_ferida),
-    "Alergia cutânea": (opcoes_alergia_cutanea, classificar_alergia_cutanea),
-    }
-mapa_sintomas = dict(sorted(mapa_sintomas.items()))
+mapa_sintomas = {}
 
 # >>> MOTOR DE FLUXOGRAMAS (DEVE VIR ANTES DA ETAPA 3) <<<
 FLUXOS = {}  # catálogo pode começar vazio
@@ -7597,6 +7407,614 @@ FLUXOS[normalizar("Sangramento nasal")] = {
         (5.8, "vermelho"),
         (3.2, "laranja"),
         (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# ===============================
+# 6) ICTERÍCIA
+# ===============================
+FLUXOS[normalizar("Icterícia")] = {
+    "label": "Icterícia",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a coloração da pele/olhos?",
+            "tipo": "radio",
+            "opcoes": {
+                "Icterícia intensa com dor abdominal ou vômito": 2.0,
+                "Pele amarelada com febre ou cansaço": 1.2,
+                "Amarelado leve, sem sintomas associados": 0.6,
+                "Coloração discreta e passageira": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Há menos de 48 horas": 0.8,
+                "Entre 2 e 7 dias": 0.6,
+                "Há mais de 7 dias": 0.8
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Urina muito escura": 0.8,
+                "Fezes claras (acinzentadas)": 1.2,
+                "Coceira no corpo": 0.6
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Algum destes se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso de álcool/medicamento recente": 0.6,
+                "Hepatite conhecida/contato de risco": 0.8,
+                "Cálculo na vesícula conhecido": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Icterícia intensa com dor abdominal ou vômito"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Fezes claras (acinzentadas)"]}, "min_cor": "vermelho"},
+        {"se": {"inicio": "Há menos de 48 horas", "quadro": "Pele amarelada com febre ou cansaço"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 7) DIFICULDADE PARA ENGOLIR
+# ===============================
+FLUXOS[normalizar("Dificuldade para engolir")] = {
+    "label": "Dificuldade para engolir",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Não consegue engolir líquidos ou saliva": 2.0,
+                "Dor e dificuldade ao engolir sólidos": 1.2,
+                "Leve desconforto para engolir": 0.6,
+                "Sensação passageira ao engolir": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início do problema:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 1.2,
+                "Aos poucos (dias/semana)": 0.4
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Apareceu junto:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Saliva escorrendo/incapaz de engolir": 1.6,
+                "Dor no peito/queimação": 0.8,
+                "Perda de peso recente": 0.8
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Possíveis causas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Engoliu espinha/objeto": 1.2,
+                "Infecção de garganta recente": 0.6,
+                "Sem fator claro": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Não consegue engolir líquidos ou saliva"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Saliva escorrendo/incapaz de engolir"]}, "min_cor": "vermelho"},
+        {"se": {"fatores": "Engoliu espinha/objeto"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.3, "laranja"),
+        (1.7, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 8) TREMores
+# ===============================
+FLUXOS[normalizar("Tremores")] = {
+    "label": "Tremores",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Tremores com perda de consciência ou força": 2.0,
+                "Movimentos anormais contínuos com dificuldade para parar": 1.2,
+                "Tremores leves em repouso": 0.6,
+                "Episódio isolado e breve": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "De repente (minutos/horas)": 1.0,
+                "Aos poucos (dias/meses)": 0.4
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Confusão/sonolência após o episódio": 1.0,
+                "Dor de cabeça forte": 0.8,
+                "Queda/trauma associado": 1.0
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "O que pode ter contribuído?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Álcool/droga/abstinência": 0.8,
+                "Uso/suspensão de remédio (ex.: benzodiazepínico)": 1.0,
+                "Febre/infecção recente": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Tremores com perda de consciência ou força"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Movimentos anormais contínuos com dificuldade para parar"}, "min_cor": "laranja"},
+        {"se": {"sinais": ["Queda/trauma associado"]}, "min_cor": "laranja"},
+        {"se": {"fatores": ["Uso/suspensão de remédio (ex.: benzodiazepínico)"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 9) RETENÇÃO URINÁRIA
+# ===============================
+FLUXOS[normalizar("Retenção urinária")] = {
+    "label": "Retenção urinária",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está para urinar?",
+            "tipo": "radio",
+            "opcoes": {
+                "Não urina há muitas horas com dor e distensão abdominal": 2.0,
+                "Jato fraco com sensação de bexiga cheia": 1.2,
+                "Urina com dificuldade, mas consegue aliviar": 0.6,
+                "Pequena alteração, mas sem desconforto": 0.2
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo está assim?",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 12 horas": 1.0,
+                "6 a 11 horas": 0.6,
+                "< 6 horas": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Tem algo junto?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre": 0.8,
+                "Sangue na urina": 1.0,
+                "Dor lombar (lado dos rins)": 1.0
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Homem ≥ 50 anos (próstata)": 0.8,
+                "Uso de anticolinérgico/opióide": 0.8,
+                "Cirurgia ou cateter recente": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Não urina há muitas horas com dor e distensão abdominal"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Sangue na urina", "Dor lombar (lado dos rins)"]}, "min_cor": "laranja"},
+        {"se": {"riscos": ["Cirurgia ou cateter recente"]}, "min_cor": "laranja"},
+        {"se": {"duracao": "≥ 12 horas"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 10) INFECÇÃO EM FERIDA
+# ===============================
+FLUXOS[normalizar("Infecção em ferida")] = {
+    "label": "Infecção em ferida",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a ferida?",
+            "tipo": "radio",
+            "opcoes": {
+                "Ferida com pus, inchaço, dor e febre": 2.0,
+                "Vermelhidão intensa e secreção local": 1.2,
+                "Leve vermelhidão sem dor": 0.6,
+                "Cicatrização normal com alteração mínima": 0.2
+            }
+        },
+        {
+            "id": "extensao",
+            "label": "Qual a extensão da vermelhidão?",
+            "tipo": "radio",
+            "opcoes": {
+                "Espalha além das bordas da ferida": 1.0,
+                "Restrita às bordas": 0.4
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Mau cheiro/tecido escuro": 1.2,
+                "Febre (≥ 38,5°C)": 0.8,
+                "Listras vermelhas subindo pela pele": 1.2
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Diabetes/uso de corticoide": 0.8,
+                "Mordida animal/humana": 1.2,
+                "Atraso na vacina do tétano": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Ferida com pus, inchaço, dor e febre"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Listras vermelhas subindo pela pele", "Mau cheiro/tecido escuro"]}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Mordida animal/humana"]}, "min_cor": "laranja"},
+        {"se": {"fatores": ["Atraso na vacina do tétano"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.2, "vermelho"),
+        (3.4, "laranja"),
+        (1.7, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# ===============================
+# 6) ICTERÍCIA
+# ===============================
+FLUXOS[normalizar("Icterícia")] = {
+    "label": "Icterícia",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a coloração da pele/olhos?",
+            "tipo": "radio",
+            "opcoes": {
+                "Icterícia intensa com dor abdominal ou vômito": 2.0,
+                "Pele amarelada com febre ou cansaço": 1.2,
+                "Amarelado leve, sem sintomas associados": 0.6,
+                "Coloração discreta e passageira": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Há menos de 48 horas": 0.8,
+                "Entre 2 e 7 dias": 0.6,
+                "Há mais de 7 dias": 0.8
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Urina muito escura": 0.8,
+                "Fezes claras (acinzentadas)": 1.2,
+                "Coceira no corpo": 0.6
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Algum destes se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso de álcool/medicamento recente": 0.6,
+                "Hepatite conhecida/contato de risco": 0.8,
+                "Cálculo na vesícula conhecido": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Icterícia intensa com dor abdominal ou vômito"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Fezes claras (acinzentadas)"]}, "min_cor": "vermelho"},
+        {"se": {"inicio": "Há menos de 48 horas", "quadro": "Pele amarelada com febre ou cansaço"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 7) DIFICULDADE PARA ENGOLIR
+# ===============================
+FLUXOS[normalizar("Dificuldade para engolir")] = {
+    "label": "Dificuldade para engolir",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Não consegue engolir líquidos ou saliva": 2.0,
+                "Dor e dificuldade ao engolir sólidos": 1.2,
+                "Leve desconforto para engolir": 0.6,
+                "Sensação passageira ao engolir": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início do problema:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 1.2,
+                "Aos poucos (dias/semana)": 0.4
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Apareceu junto:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Saliva escorrendo/incapaz de engolir": 1.6,
+                "Dor no peito/queimação": 0.8,
+                "Perda de peso recente": 0.8
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Possíveis causas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Engoliu espinha/objeto": 1.2,
+                "Infecção de garganta recente": 0.6,
+                "Sem fator claro": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Não consegue engolir líquidos ou saliva"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Saliva escorrendo/incapaz de engolir"]}, "min_cor": "vermelho"},
+        {"se": {"fatores": "Engoliu espinha/objeto"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.3, "laranja"),
+        (1.7, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 8) TREMores
+# ===============================
+FLUXOS[normalizar("Tremores")] = {
+    "label": "Tremores",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Tremores com perda de consciência ou força": 2.0,
+                "Movimentos anormais contínuos com dificuldade para parar": 1.2,
+                "Tremores leves em repouso": 0.6,
+                "Episódio isolado e breve": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "De repente (minutos/horas)": 1.0,
+                "Aos poucos (dias/meses)": 0.4
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Confusão/sonolência após o episódio": 1.0,
+                "Dor de cabeça forte": 0.8,
+                "Queda/trauma associado": 1.0
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "O que pode ter contribuído?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Álcool/droga/abstinência": 0.8,
+                "Uso/suspensão de remédio (ex.: benzodiazepínico)": 1.0,
+                "Febre/infecção recente": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Tremores com perda de consciência ou força"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Movimentos anormais contínuos com dificuldade para parar"}, "min_cor": "laranja"},
+        {"se": {"sinais": ["Queda/trauma associado"]}, "min_cor": "laranja"},
+        {"se": {"fatores": ["Uso/suspensão de remédio (ex.: benzodiazepínico)"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 9) RETENÇÃO URINÁRIA
+# ===============================
+FLUXOS[normalizar("Retenção urinária")] = {
+    "label": "Retenção urinária",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está para urinar?",
+            "tipo": "radio",
+            "opcoes": {
+                "Não urina há muitas horas com dor e distensão abdominal": 2.0,
+                "Jato fraco com sensação de bexiga cheia": 1.2,
+                "Urina com dificuldade, mas consegue aliviar": 0.6,
+                "Pequena alteração, mas sem desconforto": 0.2
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo está assim?",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 12 horas": 1.0,
+                "6 a 11 horas": 0.6,
+                "< 6 horas": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Tem algo junto?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre": 0.8,
+                "Sangue na urina": 1.0,
+                "Dor lombar (lado dos rins)": 1.0
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Homem ≥ 50 anos (próstata)": 0.8,
+                "Uso de anticolinérgico/opióide": 0.8,
+                "Cirurgia ou cateter recente": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Não urina há muitas horas com dor e distensão abdominal"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Sangue na urina", "Dor lombar (lado dos rins)"]}, "min_cor": "laranja"},
+        {"se": {"riscos": ["Cirurgia ou cateter recente"]}, "min_cor": "laranja"},
+        {"se": {"duracao": "≥ 12 horas"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 10) INFECÇÃO EM FERIDA
+# ===============================
+FLUXOS[normalizar("Infecção em ferida")] = {
+    "label": "Infecção em ferida",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a ferida?",
+            "tipo": "radio",
+            "opcoes": {
+                "Ferida com pus, inchaço, dor e febre": 2.0,
+                "Vermelhidão intensa e secreção local": 1.2,
+                "Leve vermelhidão sem dor": 0.6,
+                "Cicatrização normal com alteração mínima": 0.2
+            }
+        },
+        {
+            "id": "extensao",
+            "label": "Qual a extensão da vermelhidão?",
+            "tipo": "radio",
+            "opcoes": {
+                "Espalha além das bordas da ferida": 1.0,
+                "Restrita às bordas": 0.4
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Mau cheiro/tecido escuro": 1.2,
+                "Febre (≥ 38,5°C)": 0.8,
+                "Listras vermelhas subindo pela pele": 1.2
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Diabetes/uso de corticoide": 0.8,
+                "Mordida animal/humana": 1.2,
+                "Atraso na vacina do tétano": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Ferida com pus, inchaço, dor e febre"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Listras vermelhas subindo pela pele", "Mau cheiro/tecido escuro"]}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Mordida animal/humana"]}, "min_cor": "laranja"},
+        {"se": {"fatores": ["Atraso na vacina do tétano"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.2, "vermelho"),
+        (3.4, "laranja"),
+        (1.7, "amarelo"),
         (0.0, "verde")
     ]
 }
