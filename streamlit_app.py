@@ -350,10 +350,17 @@ def dicionario_sintomas():
         "popular": "Gânglios inchados, como caroços no pescoço, axila ou virilha, que podem doer e vir com febre.",
         "clinico": "Linfadenopatia",
         "termos": {
-            "Inchaço acompanhado de febre ou perda de peso": "Os gânglios estão grandes e a pessoa tem febre ou emagrece sem explicação.",
-            "Inchaço doloroso ou inflamado": "Dói ao tocar e pode estar vermelho ou quente.",
-            "Inchaço perceptível, mas sem outros sintomas": "Dá pra sentir os caroços, mas a pessoa está bem.",
-            "Inchaço pequeno e isolado, sem dor": "Só um gânglio inchado, sem dor ou outros sintomas."
+        "Linfonodo(gânglio linfático)": "“Carocinho” do sistema de defesa; pode inchar em infecções e, raramente, por outras doenças.",
+        "Generalizado x Localizado": "Generalizado = em várias partes do corpo; localizado = só numa região.",
+        "Consistência (duro, borrachoso, macio)": "Como o nódulo/linfonodo se sente ao toque. Duro/fixo preocupa mais que móvel/borrachoso.",
+        "Fixo x Móvel": "Fixo não “desliza” na pele quando você empurra; móvel se desloca com facilidade.",
+        "Vermelhidão/calor (sinais inflamatórios)": "Pele vermelha e quente sobre a área, típico de inflamação/infecção.",
+        "Febre baixa x alta": "Baixa ~37,8–38,4 °C; alta ≥38,5 °C.",
+        "Perda de peso >10% em 6 meses": "Emagrecer sem querer mais de 10% do peso no período (ex.: de 70 kg para <63 kg).",
+        "Prurido": "Coceira no corpo.",
+        "Imunossupressão": "Sistema de defesa “mais fraco” por doença (ex.: HIV) ou remédios (corticoide, quimioterapia).",
+        "Corticoide/Quimioterapia: Remédios que reduzem a inflamação ou tratam câncer, mas também diminuem a imunidade.",
+            
         }
     },
 
@@ -362,10 +369,12 @@ def dicionario_sintomas():
     "popular": "Caroço no seio que pode doer ou crescer, às vezes sai líquido.",
     "clinico": "Nódulo mamário",
     "termos": {
-        "Nódulo crescente ou com secreção": "O caroço está aumentando ou sai líquido do seio.",
-        "Nódulo duro, fixo ou irregular": "O caroço não se move e tem formato estranho.",
-        "Nódulo doloroso, mas recente": "O caroço dói, mas apareceu há pouco tempo.",
-        "Pequeno nódulo móvel, sem dor": "Tem um caroço pequeno que se move ao tocar e não dói."
+        "Retração da pele / “casca de laranja”": "Afundamento/repuxamento da pele ou porinhos aparentes, lembrando casca de laranja.",
+        "Secreção mamilar": "Saída de líquido pelo mamilo. Com sangue preocupa mais; leitosa fora da amamentação também merece avaliação.",
+        "Alteração do mamilo (inversão/ferida)": "Mamilo “entra” de repente ou apresenta machucado/ferida.",
+        "Nódulo axilar do mesmo lado": "Caroço na axila do lado da mama com nódulo (linfonodo aumentado).",
+        "Assimetria súbita da mama": "Uma única mama aumenta ou muda o formato rapidamente",
+        "Dor não cíclica": "Dor que não acompanha o ciclo menstrual"
         }
     },
 
@@ -374,10 +383,13 @@ def dicionario_sintomas():
     "popular": "Caroço no saco, geralmente sem dor, que pode crescer com o tempo.",
     "clinico": "Massa testicular",
     "termos": {
-        "Nódulo firme e indolor, perceptível há dias": "Caroço que não dói e está lá há alguns dias.",
-        "Nódulo doloroso ou com inchaço": "O testículo dói ou está inchado onde apareceu o caroço.",
-        "Mudança recente no tamanho do testículo": "Um dos testículos aumentou de tamanho de repente.",
-        "Sensação de caroço pequeno e móvel": "Caroço que se move ao tocar e é pequeno."
+        "Escroto": "Bolsa de pele que envolve os testículos",
+        "Endurecimento de parte do testículo": "Área mais rígida ao toque,diferente do resto",
+        "Aumento rápido do volume testicular": "Crescimento perceptível em dias/semanas",
+        "Sensação de peso no escroto": "Peso/desconforto 'puxando' pra baixo",
+        "Dor surda em baixo-ventre/virilha": "Dor incômoda NÃO AGUDA,na parte de baixo da barriga,
+        "Aumento de mamas/sensibilidade mamilar": "Crescimento do tecido mamário do homem ou dor ao toque",
+        "Criptorquidia (Testículo não descido)": "Quando, na infância, o testículo não desceu para o escroto (fator de risco na vida adulta)"
         }
     },
 
@@ -386,10 +398,13 @@ def dicionario_sintomas():
     "popular": "Dor nas bolas, que pode ser leve ou muito forte, às vezes de repente.",
     "clinico": "Orquialgia",
     "termos": {
-        "Dor intensa e súbita em um dos testículos": "A dor começou de repente e é muito forte em um lado.",
-        "Dor moderada com inchaço": "Está doendo e o testículo ficou inchado.",
-        "Desconforto leve ao tocar": "Sente dorzinha leve só quando encosta.",
-        "Dor leve que desapareceu": "Já teve dor, mas ela passou sozinha."
+            "Escroto": "Bolsa de pele que envolve os testículos",
+            "Inchaço visível": "Aumento perceptível de volume em uma área",
+            "Vermelhidão ou calor no escroto": "Pele avermelhada e quente sobre os testículos, sinal de inflamação",
+            "Náusea ou vômito junto da dor": "Sensação de enjoo ou expulsão de conteúdo gástrico associada à dor",
+            "Criptorquidia (Testículo não descido)": "Quando, na infância, o testículo não desceu para o escroto (fator de risco na vida adulta)",
+            "Infecção urinária recente": "Infecção da bexiga ou uretra ocorrida nos últimos dias ou semanas",
+            "Com sangue": "Secreção com presença de sangue visível",
         }
     },
 
@@ -398,11 +413,14 @@ def dicionario_sintomas():
     "popular": "Sai leite ou outro líquido do peito mesmo sem estar grávida ou amamentando.",
     "clinico": "Galactorreia / secreção mamilar anormal",
     "termos": {
-        "Secreção com sangue ou espontânea": "Sai sangue ou sai sozinho, sem apertar.",
-        "Secreção unilateral e persistente": "Só sai de um lado e continua saindo com o tempo.",
-        "Saída de secreção ao apertar o mamilo": "Sai líquido só quando aperta o bico do peito.",
-        "Secreção ocasional, sem outros sintomas": "Saiu líquido uma vez, mas sem dor ou outro sinal."
-        }
+            "Transparente ou leitosa (fora da amamentação)": "Secreção clara ou leitosa que surge quando a pessoa não está amamentando",
+            "Amarelada ou esverdeada": "Secreção com coloração sugestiva de pus ou infecção",
+            "Aquosa clara": "Secreção semelhante à água, sem cor ou cheiro marcante",
+            "Contínua ou espontânea (sem apertar)": "Secreção que sai sozinha, sem necessidade de compressão da mama",
+            "Apenas quando comprimida": "Secreção que aparece somente ao apertar a mama ou o mamilo",
+            "Retração do mamilo": "Quando o mamilo passa a ficar para dentro de forma repentina ou incomum",
+            "Ferida ou crosta no mamilo": "Lesão ou formação de crosta na pele do mamilo",
+            "Nódulo palpável na mama": "Caroço sentido ao toque durante a palpação da mama"
     },
 
 "Sangue no sêmen": {
@@ -2664,42 +2682,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 # Funções já existentes
 
 
-def opcoes_nodulo_mama():
-    return [
-        "Nódulo crescente ou com secreção",
-        "Nódulo duro, fixo ou irregular",
-        "Nódulo doloroso, mas recente",
-        "Pequeno nódulo móvel, sem dor"
-    ]
-
-def classificar_nodulo_mama(resp):
-    if "secreção" in resp or "crescente" in resp:
-        return "laranja", "Nódulo com secreção ou crescimento rápido deve ser avaliado com urgência."
-    elif "duro" in resp or "fixo" in resp or "irregular" in resp:
-        return "laranja", "Nódulos fixos e irregulares podem sugerir lesões suspeitas."
-    elif "doloroso" in resp:
-        return "amarelo", "Nódulo doloroso recente costuma ser benigno, mas merece atenção."
-    else:
-        return "amarelo", "Nódulo móvel e sem dor é geralmente benigno, mas deve ser acompanhado."
-
-def opcoes_nodulo_testicular():
-    return [
-        "Nódulo firme e indolor, perceptível há dias",
-        "Nódulo doloroso ou com inchaço",
-        "Mudança recente no tamanho do testículo",
-        "Sensação de caroço pequeno e móvel"
-    ]
-
-def classificar_nodulo_testicular(resp):
-    if "firme" in resp and "indolor" in resp:
-        return "laranja", "Nódulos firmes e indolores podem ser sinais de alterações mais sérias."
-    elif "doloroso" in resp or "inchaço" in resp:
-        return "amarelo", "Dor e inchaço podem indicar inflamação ou infecção local."
-    elif "tamanho do testículo" in resp:
-        return "amarelo", "Mudanças recentes no tamanho merecem investigação."
-    else:
-        return "amarelo", "Caroços pequenos e móveis costumam ser benignos, mas devem ser avaliados."
-
 def opcoes_dor_testiculos():
     return [
         "Dor intensa e súbita em um dos testículos",
@@ -4693,6 +4675,130 @@ FLUXOS[normalizar("Nódulo testicular")] = {
         (0.0, "verde")
     ]
 }
+# Fluxograma: Dor testicular (conservador)
+FLUXOS[normalizar("Dor testicular")] = {
+    "label": "Dor testicular",
+    "perguntas": [
+        {
+            "id": "inicio",
+            "label": "Quando a dor começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Início súbito, forte, há menos de 6 horas": 1.8,
+                "Início súbito, forte, há mais de 6 horas": 1.5,
+                "Início gradual, moderada": 1.0,
+                "Dor leve e esporádica": 0.5
+            }
+        },
+        {
+            "id": "localizacao",
+            "label": "Onde sente a dor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Apenas em um testículo": 0.6,
+                "Nos dois testículos": 0.8,
+                "Difusa no baixo-ventre/virilha": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Inchaço visível": 0.8,
+                "Vermelhidão ou calor no escroto": 0.8,
+                "Náusea ou vômito junto da dor": 0.9,
+                "Febre": 0.7
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes fatores de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de trauma na região": 0.6,
+                "Criptorquidia (testículo não descido)": 0.9,
+                "Infecção urinária recente": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"inicio": "Início súbito, forte, há menos de 6 horas"}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Náusea ou vômito junto da dor"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (2.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# Fluxograma: Secreção mamilar (conservador)
+FLUXOS[normalizar("Secreção mamilar")] = {
+    "label": "Secreção mamilar",
+    "perguntas": [
+        {
+            "id": "tipo_secrecao",
+            "label": "Qual o tipo da secreção?",
+            "tipo": "radio",
+            "opcoes": {
+                "Com sangue": 1.8,
+                "Transparente ou leitosa (fora da amamentação)": 1.2,
+                "Amarelada ou esverdeada": 0.8,
+                "Aquosa clara": 0.5
+            }
+        },
+        {
+            "id": "quantidade",
+            "label": "A secreção é:",
+            "tipo": "radio",
+            "opcoes": {
+                "Contínua ou espontânea (sem apertar)": 1.0,
+                "Apenas quando comprimida": 0.5
+            }
+        },
+        {
+            "id": "lado",
+            "label": "De qual lado ocorre?",
+            "tipo": "radio",
+            "opcoes": {
+                "Apenas em uma mama": 0.7,
+                "Em ambas as mamas": 0.5
+            }
+        },
+        {
+            "id": "sinais_locais",
+            "label": "Sinais locais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Retração do mamilo": 0.9,
+                "Ferida ou crosta no mamilo": 0.8,
+                "Nódulo palpável na mama": 1.2
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes fatores de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico familiar de câncer de mama": 1.1,
+                "Uso prolongado de terapia hormonal": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"tipo_secrecao": "Com sangue"}, "min_cor": "laranja"},
+        {"se": {"sinais_locais": ["Nódulo palpável na mama"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.5, "vermelho"),
+        (4.0, "laranja"),
+        (2.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
