@@ -9499,22 +9499,26 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
 
         # ===== lista de resultados por sintoma (cards) =====
         import re
-        for sintoma in st.session_state.sintomas_escolhidos:
-            if eh_fluxo(sintoma):
-                chave = normalizar(sintoma)
-                cor, score = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
-                motivo = f"Pontuação composta: {score:.1f} • Itens do fluxograma selecionados."
-            else:
-                _, func_classificacao = mapa_sintomas[sintoma]
-                escolha = st.session_state["respostas_usuario"][sintoma]
-                cor, motivo = func_classificacao(escolha)
+for sintoma in st.session_state.sintomas_escolhidos:
+    score = None  # garante que sempre existe
+    if eh_fluxo(sintoma):
+        chave = normalizar(sintoma)
+        cor, score = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
+        motivo = f"Pontuação composta: {score:.1f} • Itens do fluxograma selecionados."
+    else:
+        _, func_classificacao = mapa_sintomas[sintoma]
+        escolha = st.session_state["respostas_usuario"][sintoma]
+        cor, motivo = func_classificacao(escolha)
 
-            cores_geradas.append(cor)
-            card_inicio(sintoma, cor)
-            bullets_motivo(motivo)
-            if mostrar_pontuacao:
-                st.markdown(f"<div style='margin-top:8px;color:#6c757d'>Pontuação: <b>{locals().get('score','—')}</b></div>", unsafe_allow_html=True)
-            card_fim()
+    cores_geradas.append(cor)
+    card_inicio(sintoma, cor)
+    bullets_motivo(motivo)
+    if mostrar_pontuacao:
+        if score is not None:
+            st.markdown(f"<div style='margin-top:8px;color:#6c757d'>Pontuação: <b>{score:.1f}</b></div>", unsafe_allow_html=True)
+        else:
+            st.markdown("<div style='margin-top:8px;color:#6c757d'>Pontuação: —</div>", unsafe_allow_html=True)
+    card_fim()
 
         st.markdown("---")
 
