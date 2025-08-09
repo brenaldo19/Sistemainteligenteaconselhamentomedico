@@ -5336,6 +5336,9 @@ FLUXOS[normalizar("Sangramento retal")] = {
 # -----------------------------
 # CONFUSÃO MENTAL
 # -----------------------------
+# -----------------------------
+# CONFUSÃO MENTAL
+# -----------------------------
 FLUXOS[normalizar("Confusão mental")] = {
     "label": "Confusão mental",
     "perguntas": [
@@ -5346,7 +5349,7 @@ FLUXOS[normalizar("Confusão mental")] = {
             "opcoes": {
                 "Desorientação completa e fala incoerente": 3.5,
                 "Confusão mental com dificuldade de reconhecer pessoas ou lugares": 2.0,
-                "Leve desatenção ou lapses de memória": 1.0,
+                "Leve desatenção ou lapsos de memória": 1.0,
                 "Ligeira distração sem prejuízo das atividades": 0.0
             }
         },
@@ -5467,7 +5470,7 @@ FLUXOS[normalizar("Perda de consciência")] = {
                 "Doença neurológica prévia": 1.0
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Perda total de consciência recente sem recuperação"}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Trauma craniano durante a queda", "Convulsões (movimentos involuntários, mordedura de língua, incontinência)"]}, "min_cor": "vermelho"},
@@ -5532,7 +5535,7 @@ FLUXOS[normalizar("Hipotensão")] = {
                 "Insuficiência renal/hepática": 1.0
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Pressão muito baixa com tontura e palidez extrema"}, "min_cor": "vermelho"},
         {"se": {"sinais_de_choque": ["Pele fria/pegajosa, sudorese intensa", "Confusão/sonolência", "Pele muito pálida ou arroxeada"]}, "min_cor": "vermelho"},
@@ -5548,7 +5551,7 @@ FLUXOS[normalizar("Hipotensão")] = {
 }
 
 # -----------------------------
-# HIPOglicemia
+# HIPOGLICEMIA
 # -----------------------------
 FLUXOS[normalizar("Hipoglicemia")] = {
     "label": "Hipoglicemia",
@@ -5592,7 +5595,7 @@ FLUXOS[normalizar("Hipoglicemia")] = {
                 "Doença cardíaca conhecida": 1.0
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Desmaio ou confusão com sudorese intensa"}, "min_cor": "vermelho"},
         {"se": {"fatores": ["Uso recente de insulina ou remédio para diabetes"]}, "min_cor": "laranja"},
@@ -5608,7 +5611,7 @@ FLUXOS[normalizar("Hipoglicemia")] = {
 }
 
 # -----------------------------
-# HIPERglicemia
+# HIPERGLICEMIA
 # -----------------------------
 FLUXOS[normalizar("Hiperglicemia")] = {
     "label": "Hiperglicemia",
@@ -5652,7 +5655,7 @@ FLUXOS[normalizar("Hiperglicemia")] = {
                 "Doença renal ou cardíaca": 1.0
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Sede intensa, urina excessiva e cansaço extremo"}, "min_cor": "vermelho"},
         {"se": {"fatores": ["Infecção recente"]}, "min_cor": "laranja"},
@@ -5712,7 +5715,7 @@ FLUXOS[normalizar("Temperatura baixa")] = {
                 "Doença cardíaca ou circulatória": 1.0
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Extremidades frias com sonolência ou confusão"}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Dificuldade para falar", "Pele muito pálida ou arroxeada"]}, "min_cor": "vermelho"},
@@ -5724,7 +5727,7 @@ FLUXOS[normalizar("Temperatura baixa")] = {
         (3.0, "laranja"),
         (1.5, "amarelo"),
         (0.0, "verde")
-    ]    
+    ]
 }
 
 # -----------------------------
@@ -5772,7 +5775,7 @@ FLUXOS[normalizar("Dor durante a gravidez")] = {
                 "Gestação de risco": 1.0
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Dor intensa com sangramento ou perda de líquido"}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Diminuição ou ausência de movimentos do bebê"]}, "min_cor": "laranja"},
@@ -5784,8 +5787,9 @@ FLUXOS[normalizar("Dor durante a gravidez")] = {
         (3.0, "laranja"),
         (1.5, "amarelo"),
         (0.0, "verde")
-    ]    
+    ]
 }
+
 # -----------------------------
 # MOVIMENTOS FETAIS
 # -----------------------------
@@ -5822,7 +5826,7 @@ FLUXOS[normalizar("Movimentos fetais")] = {
                 "Perda de líquido pela vagina": 1.3
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Nenhum movimento fetal percebido nas últimas horas"}, "min_cor": "vermelho"},
         {"se": {"fatores": ["Perda de líquido pela vagina", "Sangramento vaginal"]}, "min_cor": "vermelho"},
@@ -5873,7 +5877,7 @@ FLUXOS[normalizar("Trabalho de parto")] = {
                 "Sangramento intenso": 1.3
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Contrações intensas com sangramento ou bolsa rota"}, "min_cor": "vermelho"},
         {"se": {"fatores": ["Sangramento intenso", "Perda de líquido pela vagina"]}, "min_cor": "vermelho"},
@@ -5923,7 +5927,7 @@ FLUXOS[normalizar("Febre em lactente")] = {
                 "Manchas na pele": 1.3
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Febre alta persistente com prostração ou recusa alimentar"}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Respiração acelerada/dificuldade para respirar", "Manchas na pele"]}, "min_cor": "vermelho"},
@@ -5964,7 +5968,7 @@ FLUXOS[normalizar("Choro persistente")] = {
                 "Vômitos": 1.0
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Choro inconsolável há mais de 2 horas com sinais de dor"}, "min_cor": "vermelho"},
         {"se": {"fatores": ["Febre", "Vômitos"]}, "min_cor": "laranja"},
@@ -6013,7 +6017,7 @@ FLUXOS[normalizar("Icterícia neonatal")] = {
                 "Fezes esbranquiçadas": 1.3
             }
         }
-    ]
+    ],
     "regras_excecao": [
         {"se": {"quadro": "Icterícia intensa em face e corpo com sonolência excessiva"}, "min_cor": "vermelho"},
         {"se": {"inicio": "Primeiras 24 horas de vida"}, "min_cor": "laranja"},
@@ -6026,7 +6030,6 @@ FLUXOS[normalizar("Icterícia neonatal")] = {
         (0.0, "verde")
     ]
 }
-
 
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
