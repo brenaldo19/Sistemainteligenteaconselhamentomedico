@@ -7415,202 +7415,50 @@ FLUXOS[normalizar("Sangramento nasal")] = {
     ]
 }
 # ===============================
-# 6) ICTERÍCIA
+# 1) NÁUSEA
 # ===============================
-FLUXOS[normalizar("Icterícia")] = {
-    "label": "Icterícia",
+FLUXOS[normalizar("Náusea")] = {
+    "label": "Náusea",
     "perguntas": [
         {
             "id": "quadro",
-            "label": "Como está a coloração da pele/olhos?",
+            "label": "Como está o enjoo agora?",
             "tipo": "radio",
             "opcoes": {
-                "Icterícia intensa com dor abdominal ou vômito": 2.0,
-                "Pele amarelada com febre ou cansaço": 1.2,
-                "Amarelado leve, sem sintomas associados": 0.6,
-                "Coloração discreta e passageira": 0.2
+                "Náusea constante com vômito e mal-estar": 2.0,
+                "Enjoo forte que impede alimentação": 1.2,
+                "Enjoo leve e intermitente": 0.6,
+                "Desconforto passageiro após alimentação": 0.2
             }
         },
         {
-            "id": "inicio",
-            "label": "Quando começou?",
+            "id": "frequencia_vomitos",
+            "label": "Vômitos nas últimas 6 horas:",
             "tipo": "radio",
             "opcoes": {
-                "Há menos de 48 horas": 0.8,
-                "Entre 2 e 7 dias": 0.6,
-                "Há mais de 7 dias": 0.8
+                "≥ 4 episódios": 1.2,
+                "2 a 3 episódios": 0.6,
+                "0 a 1 episódio": 0.2
             }
         },
         {
-            "id": "sinais",
-            "label": "Sinais associados:",
+            "id": "sinais_associados",
+            "label": "Há algum destes sinais?",
             "tipo": "checkbox",
             "opcoes": {
-                "Urina muito escura": 0.8,
-                "Fezes claras (acinzentadas)": 1.2,
-                "Coceira no corpo": 0.6
+                "Boca seca/urina escura (desidratação)": 1.2,
+                "Febre (≥ 38,5°C)": 0.8,
+                "Dor abdominal forte": 1.0
             }
         },
         {
             "id": "fatores",
-            "label": "Algum destes se aplica?",
+            "label": "Situações recentes:",
             "tipo": "multiselect",
             "opcoes": {
-                "Uso de álcool/medicamento recente": 0.6,
-                "Hepatite conhecida/contato de risco": 0.8,
-                "Cálculo na vesícula conhecido": 0.6
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Icterícia intensa com dor abdominal ou vômito"}, "min_cor": "vermelho"},
-        {"se": {"sinais": ["Fezes claras (acinzentadas)"]}, "min_cor": "vermelho"},
-        {"se": {"inicio": "Há menos de 48 horas", "quadro": "Pele amarelada com febre ou cansaço"}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (5.8, "vermelho"),
-        (3.2, "laranja"),
-        (1.6, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-
-# ===============================
-# 7) DIFICULDADE PARA ENGOLIR
-# ===============================
-FLUXOS[normalizar("Dificuldade para engolir")] = {
-    "label": "Dificuldade para engolir",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Qual opção descreve melhor?",
-            "tipo": "radio",
-            "opcoes": {
-                "Não consegue engolir líquidos ou saliva": 2.0,
-                "Dor e dificuldade ao engolir sólidos": 1.2,
-                "Leve desconforto para engolir": 0.6,
-                "Sensação passageira ao engolir": 0.2
-            }
-        },
-        {
-            "id": "inicio",
-            "label": "Início do problema:",
-            "tipo": "radio",
-            "opcoes": {
-                "Súbito (minutos/horas)": 1.2,
-                "Aos poucos (dias/semana)": 0.4
-            }
-        },
-        {
-            "id": "sinais",
-            "label": "Apareceu junto:",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Saliva escorrendo/incapaz de engolir": 1.6,
-                "Dor no peito/queimação": 0.8,
-                "Perda de peso recente": 0.8
-            }
-        },
-        {
-            "id": "fatores",
-            "label": "Possíveis causas:",
-            "tipo": "radio",
-            "opcoes": {
-                "Engoliu espinha/objeto": 1.2,
-                "Infecção de garganta recente": 0.6,
-                "Sem fator claro": 0.0
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Não consegue engolir líquidos ou saliva"}, "min_cor": "vermelho"},
-        {"se": {"sinais": ["Saliva escorrendo/incapaz de engolir"]}, "min_cor": "vermelho"},
-        {"se": {"fatores": "Engoliu espinha/objeto"}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.3, "laranja"),
-        (1.7, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-
-# ===============================
-# 8) TREMores
-# ===============================
-FLUXOS[normalizar("Tremores")] = {
-    "label": "Tremores",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Como está agora?",
-            "tipo": "radio",
-            "opcoes": {
-                "Tremores com perda de consciência ou força": 2.0,
-                "Movimentos anormais contínuos com dificuldade para parar": 1.2,
-                "Tremores leves em repouso": 0.6,
-                "Episódio isolado e breve": 0.2
-            }
-        },
-        {
-            "id": "inicio",
-            "label": "Quando começou?",
-            "tipo": "radio",
-            "opcoes": {
-                "De repente (minutos/horas)": 1.0,
-                "Aos poucos (dias/meses)": 0.4
-            }
-        },
-        {
-            "id": "sinais",
-            "label": "Tem algum destes sinais?",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Confusão/sonolência após o episódio": 1.0,
-                "Dor de cabeça forte": 0.8,
-                "Queda/trauma associado": 1.0
-            }
-        },
-        {
-            "id": "fatores",
-            "label": "O que pode ter contribuído?",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Álcool/droga/abstinência": 0.8,
-                "Uso/suspensão de remédio (ex.: benzodiazepínico)": 1.0,
-                "Febre/infecção recente": 0.6
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Tremores com perda de consciência ou força"}, "min_cor": "vermelho"},
-        {"se": {"quadro": "Movimentos anormais contínuos com dificuldade para parar"}, "min_cor": "laranja"},
-        {"se": {"sinais": ["Queda/trauma associado"]}, "min_cor": "laranja"},
-        {"se": {"fatores": ["Uso/suspensão de remédio (ex.: benzodiazepínico)"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (5.8, "vermelho"),
-        (3.2, "laranja"),
-        (1.6, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-
-# ===============================
-# 9) RETENÇÃO URINÁRIA
-# ===============================
-FLUXOS[normalizar("Retenção urinária")] = {
-    "label": "Retenção urinária",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Como está para urinar?",
-            "tipo": "radio",
-            "opcoes": {
-                "Não urina há muitas horas com dor e distensão abdominal": 2.0,
-                "Jato fraco com sensação de bexiga cheia": 1.2,
-                "Urina com dificuldade, mas consegue aliviar": 0.6,
-                "Pequena alteração, mas sem desconforto": 0.2
+                "Alimento suspeito/viagem recente": 0.6,
+                "Uso de remédio novo/álcool": 0.6,
+                "Gravidez": 0.8
             }
         },
         {
@@ -7618,37 +7466,17 @@ FLUXOS[normalizar("Retenção urinária")] = {
             "label": "Há quanto tempo está assim?",
             "tipo": "radio",
             "opcoes": {
-                "≥ 12 horas": 1.0,
-                "6 a 11 horas": 0.6,
-                "< 6 horas": 0.2
-            }
-        },
-        {
-            "id": "sinais",
-            "label": "Tem algo junto?",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Febre": 0.8,
-                "Sangue na urina": 1.0,
-                "Dor lombar (lado dos rins)": 1.0
-            }
-        },
-        {
-            "id": "riscos",
-            "label": "Fatores de risco:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Homem ≥ 50 anos (próstata)": 0.8,
-                "Uso de anticolinérgico/opióide": 0.8,
-                "Cirurgia ou cateter recente": 0.8
+                "Mais de 48 horas": 0.8,
+                "Entre 24 e 48 horas": 0.4,
+                "Menos de 24 horas": 0.2
             }
         }
     ],
     "regras_excecao": [
-        {"se": {"quadro": "Não urina há muitas horas com dor e distensão abdominal"}, "min_cor": "vermelho"},
-        {"se": {"sinais": ["Sangue na urina", "Dor lombar (lado dos rins)"]}, "min_cor": "laranja"},
-        {"se": {"riscos": ["Cirurgia ou cateter recente"]}, "min_cor": "laranja"},
-        {"se": {"duracao": "≥ 12 horas"}, "min_cor": "laranja"}
+        {"se": {"quadro": "Náusea constante com vômito e mal-estar"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Boca seca/urina escura (desidratação)", "Dor abdominal forte"]}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Gravidez"], "frequencia_vomitos": "≥ 4 episódios"}, "min_cor": "laranja"},
+        {"se": {"duracao": "Mais de 48 horas"}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
         (6.0, "vermelho"),
@@ -7659,57 +7487,181 @@ FLUXOS[normalizar("Retenção urinária")] = {
 }
 
 # ===============================
-# 10) INFECÇÃO EM FERIDA
+# 2) DOR NO OMBRO/BRAÇO
 # ===============================
-FLUXOS[normalizar("Infecção em ferida")] = {
-    "label": "Infecção em ferida",
+FLUXOS[normalizar("Dor no ombro/braço")] = {
+    "label": "Dor no ombro/braço",
     "perguntas": [
         {
             "id": "quadro",
-            "label": "Como está a ferida?",
+            "label": "Qual opção descreve melhor?",
             "tipo": "radio",
             "opcoes": {
-                "Ferida com pus, inchaço, dor e febre": 2.0,
-                "Vermelhidão intensa e secreção local": 1.2,
-                "Leve vermelhidão sem dor": 0.6,
-                "Cicatrização normal com alteração mínima": 0.2
+                "Dor irradiando do peito ou com formigamento": 2.0,
+                "Dor intensa com limitação de movimento": 1.2,
+                "Dor moderada após esforço": 0.6,
+                "Dor leve que melhora com repouso": 0.2
             }
         },
         {
-            "id": "extensao",
-            "label": "Qual a extensão da vermelhidão?",
+            "id": "lateralidade",
+            "label": "Onde dói mais?",
             "tipo": "radio",
             "opcoes": {
-                "Espalha além das bordas da ferida": 1.0,
-                "Restrita às bordas": 0.4
+                "Ombro esquerdo/braço esquerdo": 0.8,
+                "Ombro/braço direito": 0.4,
+                "Ambos": 0.6
             }
         },
         {
             "id": "sinais",
-            "label": "Tem algum destes sinais?",
+            "label": "Apareceu junto:",
             "tipo": "checkbox",
             "opcoes": {
-                "Mau cheiro/tecido escuro": 1.2,
-                "Febre (≥ 38,5°C)": 0.8,
-                "Listras vermelhas subindo pela pele": 1.2
+                "Falta de ar ou suor frio": 1.5,
+                "Dor no peito": 1.5,
+                "Inchaço/hematoma após trauma": 0.8,
+                "Dormência/fraqueza no braço": 1.0
             }
         },
         {
-            "id": "fatores",
-            "label": "Fatores de risco:",
+            "id": "fatores_risco",
+            "label": "Condições de risco:",
             "tipo": "multiselect",
             "opcoes": {
-                "Diabetes/uso de corticoide": 0.8,
-                "Mordida animal/humana": 1.2,
-                "Atraso na vacina do tétano": 0.8
+                "Doença cardíaca prévia": 1.2,
+                "Idade ≥ 67 anos": 0.6,
+                "Diabetes/Hipertensão": 0.6
             }
         }
     ],
     "regras_excecao": [
-        {"se": {"quadro": "Ferida com pus, inchaço, dor e febre"}, "min_cor": "vermelho"},
-        {"se": {"sinais": ["Listras vermelhas subindo pela pele", "Mau cheiro/tecido escuro"]}, "min_cor": "vermelho"},
-        {"se": {"fatores": ["Mordida animal/humana"]}, "min_cor": "laranja"},
-        {"se": {"fatores": ["Atraso na vacina do tétano"]}, "min_cor": "laranja"}
+        {"se": {"quadro": "Dor irradiando do peito ou com formigamento"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Falta de ar ou suor frio", "Dor no peito"]}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Inchaço/hematoma após trauma", "Dormência/fraqueza no braço"]}, "min_cor": "laranja"},
+        {"se": {"fatores_risco": ["Doença cardíaca prévia"], "lateralidade": "Ombro esquerdo/braço esquerdo"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.2, "vermelho"),
+        (3.3, "laranja"),
+        (1.7, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 3) ALERGIA CUTÂNEA
+# ===============================
+FLUXOS[normalizar("Alergia cutânea")] = {
+    "label": "Alergia cutânea",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a pele?",
+            "tipo": "radio",
+            "opcoes": {
+                "Lesão com inchaço e coceira intensa": 2.0,
+                "Mancha vermelha espalhada com descamação": 1.2,
+                "Irritação leve e localizada": 0.6,
+                "Lesão pequena e assintomática": 0.2
+            }
+        },
+        {
+            "id": "extensao",
+            "label": "Qual a extensão?",
+            "tipo": "radio",
+            "opcoes": {
+                "Espalhada pelo corpo": 0.8,
+                "Apenas em uma área": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Inchaço de lábios/rosto ou falta de ar": 1.8,
+                "Febre": 0.6,
+                "Dor/ardor importantes": 0.6
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "O que pode ter causado?",
+            "tipo": "radio",
+            "opcoes": {
+                "Alimento/remédio/picada": 0.8,
+                "Produto químico/novo cosmético": 0.6,
+                "Sem fator claro": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Lesão com inchaço e coceira intensa"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Inchaço de lábios/rosto ou falta de ar"]}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Mancha vermelha espalhada com descamação", "extensao": "Espalhada pelo corpo"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# 4) SANGRAMENTO GASTROINTESTINAL
+# ===============================
+FLUXOS[normalizar("Sangramento gastrointestinal")] = {
+    "label": "Sangramento gastrointestinal",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está o sangramento nas fezes?",
+            "tipo": "radio",
+            "opcoes": {
+                "Fezes com sangue vivo ou pretas com mal-estar": 2.0,
+                "Sangue moderado sem dor intensa": 1.2,
+                "Pequena presença de sangue isolada": 0.6,
+                "Observação leve e sem sintomas associados": 0.2
+            }
+        },
+        {
+            "id": "frequencia",
+            "label": "Com que frequência apareceu?",
+            "tipo": "radio",
+            "opcoes": {
+                "Em todas/maioria das evacuações": 1.0,
+                "Em algumas evacuações": 0.6,
+                "Apenas uma vez": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Tontura/fraqueza": 1.0,
+                "Dor abdominal forte": 1.0,
+                "Vômitos com sangue": 1.6
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso de anticoagulante/AAS": 1.0,
+                "Álcool em excesso": 0.6,
+                "Doença hepática conhecida": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Fezes com sangue vivo ou pretas com mal-estar"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Vômitos com sangue"]}, "min_cor": "vermelho"},
+        {"se": {"riscos": ["Uso de anticoagulante/AAS"], "frequencia": "Em todas/maioria das evacuações"}, "min_cor": "laranja"},
+        {"se": {"sinais": ["Tontura/fraqueza"]}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
         (6.2, "vermelho"),
@@ -7718,6 +7670,60 @@ FLUXOS[normalizar("Infecção em ferida")] = {
         (0.0, "verde")
     ]
 }
+
+# ===============================
+# 5) CORPO ESTRANHO NA GARGANTA
+# ===============================
+FLUXOS[normalizar("Corpo estranho na garganta")] = {
+    "label": "Corpo estranho na garganta",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Corpo estranho preso com dificuldade para respirar ou engolir": 2.0,
+                "Desconforto com dor ao engolir": 1.2,
+                "Sensação de algo preso, mas respira normalmente": 0.6,
+                "Episódio leve e já resolvido": 0.2
+            }
+        },
+        {
+            "id": "tipo_objeto",
+            "label": "O que pode ter sido engolido?",
+            "tipo": "radio",
+            "opcoes": {
+                "Bateria/moeda/objeto cortante": 1.8,
+                "Espinha de peixe/fragmento pequeno": 1.0,
+                "Comida comum": 0.4,
+                "Não sabe": 0.6
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Saliva escorrendo/incapaz de engolir": 1.6,
+                "Voz abafada/rouquidão súbita": 1.2,
+                "Dor no peito ao engolir": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Corpo estranho preso com dificuldade para respirar ou engolir"}, "min_cor": "vermelho"},
+        {"se": {"tipo_objeto": "Bateria/moeda/objeto cortante"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Saliva escorrendo/incapaz de engolir"]}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Desconforto com dor ao engolir"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.2, "vermelho"),
+        (3.4, "laranja"),
+        (1.7, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 # ===============================
 # 6) ICTERÍCIA
 # ===============================
