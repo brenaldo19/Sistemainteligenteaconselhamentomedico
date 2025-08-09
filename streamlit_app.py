@@ -345,6 +345,332 @@ st.markdown("---")
 # SIDEBAR – BOTÃO DO DICIONÁRIO
 def dicionario_sintomas():
     d={
+"Mãos ou pés frios e arroxeados": {
+    "definicao": "Alteração de temperatura e cor nas extremidades, geralmente causada por má circulação ou resposta exagerada ao frio.",
+    "popular": "Mãos ou pés ficam frios e com cor arroxeada.",
+    "clinico": "Cianose periférica / Fenômeno de Raynaud",
+    "termos": {
+        "Sempre, mesmo em clima quente": "As extremidades permanecem frias e arroxeadas o tempo todo.",
+        "Principalmente em dias frios": "O problema aparece mais quando a temperatura está baixa.",
+        "Apenas ocasionalmente": "Acontece raramente.",
+        "Mais de 1 mês": "O sintoma persiste há mais de um mês.",
+        "Entre 1–4 semanas": "O sintoma começou há uma a quatro semanas.",
+        "Menos de 1 semana": "O sintoma surgiu nos últimos dias.",
+        "Dormência ou formigamento": "Sensação de formigamento ou dormência nos dedos.",
+        "Dor ao movimentar os dedos": "Dor ao mexer dedos das mãos ou dos pés.",
+        "Mudança de cor ao frio (branco/azul/vermelho)": "Alterações de cor quando exposto ao frio.",
+        "Feridas nas extremidades": "Feridas que surgem nas mãos ou pés."
+    }
+},
+
+"Perda progressiva da visão": {
+    "definicao": "Diminuição gradual da acuidade visual ao longo do tempo, podendo afetar um ou ambos os olhos.",
+    "popular": "Está perdendo a visão aos poucos.",
+    "clinico": "Baixa visual progressiva",
+    "termos": {
+        "Semanas a meses": "A visão foi piorando ao longo de semanas ou meses.",
+        "Mais de 1 ano": "A perda de visão acontece há mais de um ano.",
+        "Poucos dias": "A visão piorou de forma rápida, em poucos dias.",
+        "Um olho": "A alteração visual afeta apenas um olho.",
+        "Ambos os olhos": "A alteração visual afeta os dois olhos.",
+        "Dor ocular": "Desconforto ou dor nos olhos.",
+        "Olho vermelho": "Vermelhidão ocular visível.",
+        "Sensibilidade à luz (fotofobia)": "Incomodo excessivo com luz.",
+        "Halos ao redor de luzes": "Aparição de círculos luminosos ao redor das luzes."
+    }
+},
+
+"Visão embaçada progressiva": {
+    "definicao": "Perda gradual da nitidez da visão, dificultando o foco em objetos e detalhes.",
+    "popular": "A visão está ficando turva aos poucos.",
+    "clinico": "Opacificação visual progressiva",
+    "termos": {
+        "Semanas a meses": "O embaçamento foi se instalando ao longo de semanas ou meses.",
+        "Mais de 1 ano": "O embaçamento está presente há mais de um ano.",
+        "Poucos dias": "O embaçamento surgiu de forma recente, em poucos dias.",
+        "Um olho": "A visão turva afeta apenas um olho.",
+        "Ambos os olhos": "A visão turva afeta os dois olhos.",
+        "Cefaleia": "Dor de cabeça.",
+        "Dificuldade para focar": "Problema em ajustar o foco da visão.",
+        "Piora à noite": "A visão fica pior em ambientes escuros.",
+        "Alterações de cores": "Mudança na percepção das cores."
+    }
+}
+
+    "Ausência de menstruação": {
+    "definicao": "Falta do ciclo menstrual no período esperado, podendo indicar gravidez, alterações hormonais ou outras condições médicas.",
+    "popular": "A menstruação não veio na data esperada.",
+    "clinico": "Amenorreia",
+    "termos": {
+        "Atraso ≥ 4 semanas": "O ciclo menstrual está atrasado um mês ou mais.",
+        "Atraso de 1 a 3 semanas": "O ciclo menstrual está atrasado de uma a três semanas.",
+        "Dor abdominal intensa": "Dor forte na barriga.",
+        "Sangramento vaginal": "Sangramento fora do ciclo normal.",
+        "Tontura/desmaio": "Sensação de perda de equilíbrio ou desmaio.",
+        "Febre": "Temperatura do corpo elevada."
+    }
+},
+
+"Menstruação excessiva": {
+    "definicao": "Sangramento menstrual em grande quantidade ou por tempo prolongado.",
+    "popular": "A menstruação vem muito forte ou dura mais que o normal.",
+    "clinico": "Menorragia",
+    "termos": {
+        "≥ 8 totalmente encharcados": "Uso de oito ou mais absorventes/fraldas cheios por dia.",
+        "5–7 encharcados": "Uso de cinco a sete absorventes/fraldas cheios por dia.",
+        "Tontura/desmaio": "Sensação de perda de equilíbrio ou desmaio.",
+        "Palidez intensa": "Pele muito clara, indicando possível anemia.",
+        "Dor abdominal intensa": "Dor forte na barriga.",
+        "Febre": "Temperatura do corpo elevada."
+    }
+},
+
+"Tosse": {
+    "definicao": "Ato reflexo para limpar as vias aéreas de muco, partículas ou irritantes.",
+    "popular": "Forçar a saída de ar com som, para limpar o peito ou garganta.",
+    "clinico": "Tosse",
+    "termos": {
+        "≥ 3 semanas": "Tosse que dura três semanas ou mais.",
+        "1–2 semanas": "Tosse que dura entre uma e duas semanas.",
+        "Com sangue": "Presença de sangue ao tossir.",
+        "Produtiva (com catarro)": "Tosse que traz muco ou secreção.",
+        "Falta de ar": "Dificuldade para respirar.",
+        "Dor torácica": "Dor no peito.",
+        "Febre": "Temperatura do corpo elevada.",
+        "Perda de peso": "Emagrecimento não intencional.",
+        "Sudorese noturna": "Suor excessivo durante a noite."
+    }
+},
+
+"Hemorragia gengival intensa": {
+    "definicao": "Sangramento abundante nas gengivas, podendo indicar inflamação, trauma ou distúrbios de coagulação.",
+    "popular": "Sangramento forte na gengiva.",
+    "clinico": "Hemorragia gengival",
+    "termos": {
+        "Diária": "O sangramento na gengiva acontece todos os dias.",
+        "≥ 10 minutos": "O sangramento leva dez minutos ou mais para parar.",
+        "Hematomas frequentes": "Aparecimento fácil de manchas roxas na pele.",
+        "Sangramentos em outros locais": "Presença de sangramento no nariz, urina, fezes ou pele.",
+        "Febre": "Temperatura do corpo elevada.",
+        "Cansaço extremo": "Sensação intensa de fadiga e falta de energia."
+    }
+},
+
+"Edema inexplicado": {
+    "definicao": "Acúmulo anormal de líquido nos tecidos, causando inchaço, sem causa aparente imediata.",
+    "popular": "Inchaço no corpo sem motivo claro.",
+    "clinico": "Edema",
+    "termos": {
+        "Um lado apenas": "Inchaço localizado em apenas um membro ou parte do corpo.",
+        "Ambos os lados": "Inchaço simétrico, como nas duas pernas.",
+        "Rosto/pálpebras": "Inchaço visível no rosto ou nos olhos.",
+        "Súbito (minutos/horas)": "Inchaço que aparece rapidamente, em poucas horas ou minutos.",
+        "Falta de ar": "Dificuldade para respirar.",
+        "Dor no peito": "Dor na região torácica.",
+        "Febre": "Temperatura do corpo elevada.",
+        "Vermelhidão/dor local": "Área inchada e dolorida, possivelmente inflamada.",
+        "Aumento súbito de peso": "Ganho de peso rápido, sem explicação."
+    }
+},
+"Perda súbita de coordenação": {
+    "definicao": "Dificuldade repentina para realizar movimentos coordenados, podendo indicar problemas neurológicos graves como AVC.",
+    "popular": "Perdeu de repente a capacidade de se mover de forma coordenada.",
+    "clinico": "Ataxia de início súbito",
+    "termos": {
+        "Início súbito (minutos/horas)": "A dificuldade de coordenação começou de repente, em minutos ou poucas horas.",
+        "Início em até 48h": "A dificuldade se instalou em um ou dois dias.",
+        "Fraqueza em um lado do corpo": "Perda de força em apenas um lado do corpo.",
+        "Alteração na fala": "Fala enrolada ou dificuldade para se expressar.",
+        "Alteração visual súbita": "Perda ou mudança repentina na visão.",
+        "Cefaleia muito intensa/pior da vida": "Dor de cabeça muito forte, descrita como a pior já sentida.",
+        "Perda de sensibilidade/formigamentos": "Dormência ou sensação de formigamento em partes do corpo.",
+        "Trauma craniano recente": "Bateu a cabeça recentemente.",
+        "Uso de anticoagulantes": "Faz uso de medicamentos que afinam o sangue."
+    }
+},
+
+"Calafrios": {
+    "definicao": "Sensação súbita de frio com tremores, geralmente associada a febre e infecção.",
+    "popular": "Sensação de frio intenso com tremedeira, mesmo em ambiente quente.",
+    "clinico": "Calafrios",
+    "termos": {
+        "Febre ≥ 39°C": "Temperatura do corpo de 39°C ou mais.",
+        "Febre 38–38,9°C": "Temperatura entre 38 e 38,9°C.",
+        "Várias vezes ao dia": "Os calafrios se repetem diversas vezes no mesmo dia.",
+        "Confusão/desorientação": "Dificuldade para entender onde está ou o que está acontecendo.",
+        "Pressão baixa/tontura ao levantar": "Sensação de fraqueza e queda de pressão ao levantar-se.",
+        "Dor ao urinar/urina turva": "Desconforto ou ardência para urinar com urina turva.",
+        "Tosse com catarro/dor torácica": "Produção de secreção ao tossir e dor no peito.",
+        "Ferida com vermelhidão/calor/saída de pus": "Sinal de infecção em ferida aberta.",
+        "Calafrios após viagem/área endêmica": "Histórico de viagem para regiões com doenças como malária."
+    }
+},
+
+"Sudorese noturna": {
+    "definicao": "Suor excessivo durante o sono, podendo encharcar roupas ou lençóis.",
+    "popular": "Suor forte à noite, a ponto de molhar roupa e cama.",
+    "clinico": "Hiperidrose noturna",
+    "termos": {
+        "≥ 4 semanas": "Sudorese persistente por um mês ou mais.",
+        "Encharca roupa/lençol": "Suor tão intenso que molha roupas e lençol.",
+        "Febre": "Temperatura do corpo elevada.",
+        "Perda de peso não intencional": "Emagrecimento sem estar tentando.",
+        "Tosse há > 2 semanas": "Tosse persistente por mais de duas semanas.",
+        "Tosse com sangue": "Presença de sangue ao tossir.",
+        "Inchaço dos linfonodos": "Gânglios aumentados no pescoço, axilas ou virilha.",
+        "Palpitações/ansiedade": "Sensação de coração acelerado ou ansiedade intensa."
+    }
+},
+
+"Perda de peso súbita": {
+    "definicao": "Emagrecimento rápido e não intencional em um curto período de tempo.",
+    "popular": "Perdeu muito peso de repente, sem dieta.",
+    "clinico": "Emagrecimento súbito",
+    "termos": {
+        "> 5% em 1 mês": "Perdeu mais de 5% do peso corporal em um mês.",
+        "Muito diminuído": "Apetite bastante reduzido.",
+        "Sede/urinar muito": "Sensação de sede constante e urina frequente.",
+        "Náusea/vômitos persistentes": "Enjoo e vômitos que não passam.",
+        "Diarreia crônica": "Diarreia frequente por semanas.",
+        "Dificuldade para engolir (progressiva)": "A dificuldade para engolir foi piorando com o tempo.",
+        "Fezes pretas (melena) ou sangue nas fezes": "Presença de sangue visível ou fezes muito escuras.",
+        "Febre e/ou sudorese noturna": "Febre persistente ou suor excessivo à noite.",
+        "Tremor/taquicardia/intolerância ao calor": "Mãos trêmulas, batimentos acelerados e desconforto com calor."
+    }
+},
+
+"Dor durante relação sexual": {
+    "definicao": "Desconforto ou dor que ocorre durante o ato sexual, podendo ser superficial ou profunda.",
+    "popular": "Dor ou queimação durante a relação sexual.",
+    "clinico": "Dispareunia",
+    "termos": {
+        "Dor pélvica intensa e súbita": "Dor forte e repentina na pelve.",
+        "Dor profunda recorrente": "Dor que ocorre repetidamente em relações.",
+        "Dor superficial/queimação na entrada": "Desconforto na entrada da vagina ou pênis.",
+        "Sangramento após a relação": "Sangue logo após o ato sexual.",
+        "Febre": "Temperatura do corpo elevada.",
+        "Corrimento com odor/desconforto": "Secreção anormal com mau cheiro.",
+        "Náusea/vômitos": "Enjoo ou vômito após ou durante a relação.",
+        "Atraso menstrual/possível gestação": "Menstruação atrasada ou suspeita de gravidez.",
+        "Dor testicular (em homens)": "Desconforto ou dor nos testículos."
+    }
+},
+
+"Daltonismo": {
+    "definicao": "Alteração na percepção das cores, geralmente hereditária, podendo ser adquirida em casos raros.",
+    "popular": "Dificuldade para diferenciar algumas cores.",
+    "clinico": "Deficiência de percepção cromática",
+    "termos": {
+        "Desde a infância (sempre foi assim)": "A dificuldade para diferenciar cores existe desde pequeno.",
+        "Percebi há meses/anos": "O problema começou a ser notado recentemente.",
+        "Início súbito (dias/semanas)": "A dificuldade surgiu repentinamente.",
+        "Um olho apenas": "A alteração é percebida somente em um olho.",
+        "Ambos os olhos": "A alteração ocorre nos dois olhos.",
+        "Dor ocular": "Desconforto ou dor nos olhos.",
+        "Queda de acuidade visual": "Visão embaçada ou menos nítida.",
+        "Fotofobia": "Sensibilidade excessiva à luz.",
+        "Cefaleia": "Dor de cabeça.",
+        "Olho vermelho": "Olho com vermelhidão visível."
+    }
+},
+"Delírio ou alucinações": {
+    "definicao": "Percepção de coisas irreais ou crenças falsas, podendo estar associada a condições neurológicas, psiquiátricas ou intoxicações.",
+    "popular": "Está vendo ou ouvindo coisas que não existem ou acreditando em coisas que não são reais.",
+    "clinico": "Psicose / Estado confusional agudo",
+    "termos": {
+        "Início súbito nas últimas 24h": "Os sintomas apareceram de repente, em menos de um dia.",
+        "Progressivo há dias/semanas": "Os sintomas foram piorando ao longo de dias ou semanas.",
+        "Agitação intensa/violência": "A pessoa está muito agitada ou agressiva.",
+        "Ansiedade/agitação moderada": "A pessoa está inquieta, mas controlável.",
+        "Calmo/cooperativo": "A pessoa está tranquila e colaborativa.",
+        "Febre alta": "Temperatura corporal muito elevada.",
+        "Rigidez na nuca": "Dificuldade ou dor para flexionar o pescoço.",
+        "Cefaleia intensa": "Dor de cabeça forte.",
+        "Confusão/desorientação": "Não sabe onde está, que dia é ou quem são as pessoas ao redor.",
+        "Uso recente de álcool/drogas ou abstinência": "Início dos sintomas após consumo ou suspensão de álcool ou drogas.",
+        "Idoso (>65 anos) ou criança": "Idade de maior risco para complicações."
+    }
+},
+
+"Perda de memória": {
+    "definicao": "Dificuldade em recordar informações recentes ou passadas, podendo ser súbita ou progressiva.",
+    "popular": "Está esquecendo fatos importantes ou recentes.",
+    "clinico": "Amnésia",
+    "termos": {
+        "Súbita recente (horas/dias)": "Perda de memória que começou de repente, em horas ou dias.",
+        "Progressiva (semanas/meses)": "Perda de memória que vem piorando com o tempo.",
+        "Eventual/esquecimentos leves": "Esquece coisas pequenas ocasionalmente.",
+        "Fraqueza/queda de força em um lado": "Diminuição súbita de força em um lado do corpo.",
+        "Alteração na fala": "Fala enrolada ou dificuldade para se expressar.",
+        "Alteração visual súbita": "Perda ou mudança repentina na visão.",
+        "Cefaleia intensa/pior da vida": "Dor de cabeça muito forte.",
+        "Convulsão": "Episódios de movimentos involuntários e perda de consciência.",
+        "Trauma craniano recente": "Bateu a cabeça recentemente.",
+        "Uso de sedativos/álcool": "Consumo de medicamentos ou substâncias que afetam o sistema nervoso.",
+        "Febre": "Temperatura corporal elevada.",
+        "Idoso (>65 anos)": "Idade avançada, fator de risco para comprometimento cognitivo.",
+        "Doenças prévias (hipotireoidismo, depressão)": "Histórico de doenças que podem afetar a memória."
+    }
+},
+
+"Insônia": {
+    "definicao": "Dificuldade para iniciar ou manter o sono, ou acordar muito cedo, com prejuízo na qualidade de vida.",
+    "popular": "Não consegue dormir direito ou demora muito para pegar no sono.",
+    "clinico": "Insônia",
+    "termos": {
+        "Há menos de 1 semana": "Os problemas de sono começaram há poucos dias.",
+        "Entre 1–4 semanas": "A dificuldade de dormir dura entre uma e quatro semanas.",
+        "Há mais de 1 mês": "A dificuldade de dormir dura há mais de um mês.",
+        "Incapaz de trabalhar/estudar/dirigir": "A insônia está afetando atividades essenciais.",
+        "Prejuízo moderado no dia a dia": "A insônia atrapalha, mas não impede totalmente as atividades.",
+        "Leve/sem grande impacto": "A insônia não interfere muito na rotina.",
+        "Ideação suicida": "Pensamentos sobre se machucar ou tirar a própria vida.",
+        "Humor elevado/energia excessiva (mania)": "Período de muita energia e pouca necessidade de sono.",
+        "Ansiedade intensa/pânico": "Sensação de nervosismo extremo ou ataques de pânico.",
+        "Apneia suspeita (ronco/pausas respiratórias)": "Indícios de interrupções da respiração durante o sono.",
+        "Dor crônica": "Dor persistente por semanas ou meses.",
+        "Uso de estimulantes (cafeína/anfetaminas)": "Consumo de substâncias que atrapalham o sono."
+    }
+},
+
+"Sonolência excessiva": {
+    "definicao": "Necessidade anormal de dormir durante o dia, mesmo após sono noturno adequado.",
+    "popular": "Sente muito sono durante o dia, mesmo dormindo à noite.",
+    "clinico": "Hipersonia",
+    "termos": {
+        "Dorme durante conversas/dirigindo": "Adormece em situações ativas ou perigosas.",
+        "Adormece em atividades passivas": "Pega no sono em momentos de inatividade.",
+        "Apenas cansaço ao longo do dia": "Sente-se cansado, mas sem dormir involuntariamente.",
+        "Súbito nas últimas 24–48h": "O sono excessivo começou de repente nos últimos dois dias.",
+        "Progressivo (semanas/meses)": "A sonolência vem aumentando ao longo do tempo.",
+        "Confusão/desorientação": "Fica desorientado ou confuso junto com o sono excessivo.",
+        "Cefaleia matinal": "Acorda com dor de cabeça.",
+        "Ronco alto/pausas respiratórias (apneia)": "Indícios de apneia do sono.",
+        "Uso de sedativos/álcool": "Consumo de substâncias que causam sonolência.",
+        "Febre": "Temperatura corporal elevada.",
+        "Fraqueza/déficit focal": "Perda de força ou função em parte do corpo."
+    }
+},
+
+"Aumento súbito de sede ou fome": {
+    "definicao": "Sensação repentina e persistente de sede intensa ou fome excessiva, podendo indicar alterações metabólicas.",
+    "popular": "De repente começou a sentir muita sede ou muita fome.",
+    "clinico": "Polidipsia / Polifagia de início súbito",
+    "termos": {
+        "Urina em excesso (poliúria) e à noite": "Urina em grande quantidade, inclusive durante a madrugada.",
+        "Leve aumento da frequência": "Vai ao banheiro um pouco mais que o normal.",
+        "Sem mudanças": "Frequência urinária normal.",
+        "Perda >5% em 1 mês": "Perdeu muito peso em pouco tempo.",
+        "Perda leve (<5%)": "Emagreceu um pouco.",
+        "Náusea/vômitos": "Enjoo ou vômito.",
+        "Respiração rápida/cheiro de frutas (suspeita de cetoacidose)": "Respiração acelerada com hálito adocicado.",
+        "Visão turva": "Enxergando de forma embaçada.",
+        "Tremor/sudorese/confusão (hipoglicemia)": "Tremores, suor frio e confusão mental.",
+        "Infecção recente (febre/infecção urinária/pele)": "Doença ou infecção recente."
+    }
+},
+        
+
     "Inchaço dos linfonodos": {
         "definicao": "Aumento anormal dos gânglios linfáticos, geralmente como resposta a infecções ou inflamações.",
         "popular": "Gânglios inchados, como caroços no pescoço, axila ou virilha, que podem doer e vir com febre.",
@@ -2124,10 +2450,10 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Campo Vis
             st.success("✅ Campo visual periférico normal.")
         elif campo == "Apenas com um olho":
             st.warning("⚠️ Diferença entre os olhos. Pode ser bom investigar.")
-            st.markdown("🔎 Possíveis sintomas relacionados: **(Não temos sintomas para condições visuais progressivas,procure um médico oftalmologista para melhor orientação)**")
+            st.markdown("🔎 Possíveis sintomas relacionados: **(Visão embaçada progressiva,perda progressiva de visão)**")
         else:
             st.error("🚨 Campo visual comprometido. Procure avaliação oftalmológica.")
-            st.markdown("🔎 Possíveis sintomas relacionados: **(Não temos sintomas para condições visuais progressivas,procure um médico o quanto antes)**")
+            st.markdown("🔎 Possíveis sintomas relacionados: **(Visão embaçada progressiva,perda progressiva de visão)**")
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Percepção de Cores":
     st.subheader("🌈 Teste de Percepção de Cores")
 
@@ -2161,10 +2487,10 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Percepç�
             st.info("✅ Percepção de cores aparentemente normal.")
         elif len(acertos) >= 3:
             st.warning("⚠️ Pode haver dificuldade com tons específicos.")
-            st.markdown("🔎 Possíveis sintomas relacionados: **Não temos sintomas para condições visuais possivelmente daltônicas,procure um médico oftalmologista para melhor orientação)**")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Suspeita de daltonismo)**")
         else:
             st.error("🚨 Dificuldade significativa em distinguir cores. Pode ser bom investigar daltonismo.")
-            st.markdown("🔎 Possíveis sintomas relacionados: **(Não temos sintomas para condições visuais possivelmente daltônicas,procure um médico oftalmologista o quanto antes)**")
+            st.markdown("🔎 Possíveis sintomas relacionados: **(Suspeita de daltonismo)**")
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Recuperação Cardíaca":
     st.subheader("❤️ Teste de Recuperação da Frequência Cardíaca")
 
@@ -2358,10 +2684,10 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Enchiment
             st.success("✅ Circulação periférica normal.")
         elif tempo <= 3:
             st.warning("⚠️ Enchimento capilar levemente prolongado. Pode ser normal, mas merece atenção.")
-            st.markdown("🔎 Possíveis sintomas relacionados: **(Não possuímos sintomas específicos sobre circulação,é ideal procurar um médico)**")
+            st.markdown("🔎 Possíveis sintomas relacionados: **(Mãos e pés frios e arroxeados)**")
         else:
             st.error("🚨 Circulação lenta. Pode indicar desidratação, vasoconstrição ou problema circulatório.")
-            st.markdown("🔎 Possíveis sintomas relacionados: **(Não possuímos sintomas específicos sobre circulação,mas o seu caso pode ser grave,consulte um médico o quanto antes)**")
+            st.markdown("🔎 Possíveis sintomas relacionados: **(Mãos e pés frios e arroxeados)**")
 
         if st.button("Refazer teste capilar"):
             st.rerun()
@@ -8071,6 +8397,925 @@ FLUXOS[normalizar("Febre")] = {
         (0.0, "verde")
     ]
 }
+FLUXOS[normalizar("Delírio ou alucinações")] = {
+    "label": "Delírio ou alucinações",
+    "perguntas": [
+        {
+            "id": "inicio",
+            "label": "Quando começaram os sintomas?",
+            "tipo": "radio",
+            "opcoes": {
+                "Início súbito nas últimas 24h": 2.0,
+                "Progressivo há dias/semanas": 0.9,
+                "Intermitente há meses": 0.4
+            }
+        },
+        {
+            "id": "comportamento",
+            "label": "Como está o comportamento?",
+            "tipo": "radio",
+            "opcoes": {
+                "Agitação intensa/violência": 1.8,
+                "Ansiedade/agitação moderada": 0.9,
+                "Calmo/cooperativo": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre alta": 1.2,
+                "Rigidez na nuca": 1.8,
+                "Cefaleia intensa": 1.0,
+                "Confusão/desorientação": 1.6,
+                "Uso recente de álcool/drogas ou abstinência": 1.2,
+                "Idoso (>65 anos) ou criança": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"sinais_associados": ["Rigidez na nuca"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Confusão/desorientação"]}, "min_cor": "laranja"},
+        {"se": {"comportamento": "Agitação intensa/violência"}, "min_cor": "laranja"},
+        {"se": {"inicio": "Início súbito nas últimas 24h", "sinais_associados": ["Febre alta"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Perda de memória")] = {
+    "label": "Perda de memória",
+    "perguntas": [
+        {
+            "id": "tipo_memoria",
+            "label": "Qual tipo de perda de memória?",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbita recente (horas/dias)": 2.0,
+                "Progressiva (semanas/meses)": 0.9,
+                "Eventual/esquecimentos leves": 0.3
+            }
+        },
+        {
+            "id": "deficits",
+            "label": "Há outros déficits neurológicos?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Fraqueza/queda de força em um lado": 2.0,
+                "Alteração na fala": 1.8,
+                "Alteração visual súbita": 1.6,
+                "Cefaleia intensa/pior da vida": 1.5,
+                "Convulsão": 2.0
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Trauma craniano recente": 1.6,
+                "Uso de sedativos/álcool": 0.8,
+                "Febre": 0.8,
+                "Idoso (>65 anos)": 0.6,
+                "Doenças prévias (hipotireoidismo, depressão)": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"tipo_memoria": "Súbita recente (horas/dias)", "deficits": ["Fraqueza/queda de força em um lado", "Alteração na fala", "Alteração visual súbita"]}, "min_cor": "vermelho"},
+        {"se": {"deficits": ["Convulsão"]}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Trauma craniano recente"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Insônia")] = {
+    "label": "Insônia",
+    "perguntas": [
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo está com insônia?",
+            "tipo": "radio",
+            "opcoes": {
+                "Há menos de 1 semana": 0.3,
+                "Entre 1–4 semanas": 0.6,
+                "Há mais de 1 mês": 0.9
+            }
+        },
+        {
+            "id": "impacto",
+            "label": "Qual o impacto funcional?",
+            "tipo": "radio",
+            "opcoes": {
+                "Incapaz de trabalhar/estudar/dirigir": 1.2,
+                "Prejuízo moderado no dia a dia": 0.7,
+                "Leve/sem grande impacto": 0.2
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Ideação suicida": 2.0,
+                "Humor elevado/energia excessiva (mania)": 1.5,
+                "Ansiedade intensa/pânico": 0.9,
+                "Apneia suspeita (ronco/pausas respiratórias)": 1.2,
+                "Dor crônica": 0.6,
+                "Uso de estimulantes (cafeína/anfetaminas)": 0.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"associados": ["Ideação suicida"]}, "min_cor": "vermelho"},
+        {"se": {"associados": ["Humor elevado/energia excessiva (mania)"]}, "min_cor": "laranja"},
+        {"se": {"associados": ["Apneia suspeita (ronco/pausas respiratórias)"]}, "min_cor": "amarelo"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Sonolência excessiva")] = {
+    "label": "Sonolência excessiva",
+    "perguntas": [
+        {
+            "id": "gravidade",
+            "label": "Quão intensa é a sonolência?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dorme durante conversas/dirigindo": 1.8,
+                "Adormece em atividades passivas": 1.0,
+                "Apenas cansaço ao longo do dia": 0.4
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início dos sintomas",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito nas últimas 24–48h": 1.2,
+                "Progressivo (semanas/meses)": 0.6
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Confusão/desorientação": 1.6,
+                "Cefaleia matinal": 0.8,
+                "Ronco alto/pausas respiratórias (apneia)": 1.2,
+                "Uso de sedativos/álcool": 0.8,
+                "Febre": 0.7,
+                "Fraqueza/déficit focal": 1.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"associados": ["Confusão/desorientação", "Fraqueza/déficit focal"]}, "min_cor": "vermelho"},
+        {"se": {"gravidade": "Dorme durante conversas/dirigindo"}, "min_cor": "laranja"},
+        {"se": {"associados": ["Ronco alto/pausas respiratórias (apneia)"]}, "min_cor": "amarelo"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Aumento súbito de sede ou fome")] = {
+    "label": "Aumento súbito de sede ou fome",
+    "perguntas": [
+        {
+            "id": "poliuria",
+            "label": "Como está a urina?",
+            "tipo": "radio",
+            "opcoes": {
+                "Urina em excesso (poliúria) e à noite": 1.5,
+                "Leve aumento da frequência": 0.6,
+                "Sem mudanças": 0.1
+            }
+        },
+        {
+            "id": "perda_peso",
+            "label": "Houve perda de peso recente?",
+            "tipo": "radio",
+            "opcoes": {
+                "Perda >5% em 1 mês": 1.2,
+                "Perda leve (<5%)": 0.6,
+                "Sem perda": 0.1
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Náusea/vômitos": 1.0,
+                "Respiração rápida/cheiro de frutas (suspeita de cetoacidose)": 2.0,
+                "Visão turva": 0.8,
+                "Tremor/sudorese/confusão (hipoglicemia)": 1.8,
+                "Infecção recente (febre/infecção urinária/pele)": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"sinais_associados": ["Respiração rápida/cheiro de frutas (suspeita de cetoacidose)"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Tremor/sudorese/confusão (hipoglicemia)"]}, "min_cor": "laranja"},
+        {"se": {"poliuria": "Urina em excesso (poliúria) e à noite", "perda_peso": "Perda >5% em 1 mês"}, "min_cor": "amarelo"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+FLUXOS[normalizar("Perda súbita de coordenação")] = {
+    "label": "Perda súbita de coordenação",
+    "perguntas": [
+        {
+            "id": "inicio",
+            "label": "Quando começou a perda de coordenação?",
+            "tipo": "radio",
+            "opcoes": {
+                "Início súbito (minutos/horas)": 2.0,
+                "Início em até 48h": 1.2,
+                "Instalação lenta (dias/semanas)": 0.6
+            }
+        },
+        {
+            "id": "deficits_associados",
+            "label": "Há outros déficits neurológicos?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Fraqueza em um lado do corpo": 2.0,
+                "Alteração na fala": 1.8,
+                "Alteração visual súbita": 1.6,
+                "Cefaleia muito intensa/pior da vida": 1.5,
+                "Perda de sensibilidade/formigamentos": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Fatores e contexto",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Trauma craniano recente": 1.6,
+                "Uso de anticoagulantes": 1.4,
+                "Pressão muito alta medida em casa": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"inicio": "Início súbito (minutos/horas)", "deficits_associados": ["Fraqueza em um lado do corpo", "Alteração na fala", "Alteração visual súbita"]}, "min_cor": "vermelho"},
+        {"se": {"deficits_associados": ["Cefaleia muito intensa/pior da vida"]}, "min_cor": "vermelho"},
+        {"se": {"fatores_risco": ["Trauma craniano recente", "Uso de anticoagulantes"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Calafrios")] = {
+    "label": "Calafrios",
+    "perguntas": [
+        {
+            "id": "febre",
+            "label": "Há febre associada?",
+            "tipo": "radio",
+            "opcoes": {
+                "Febre ≥ 39°C": 1.6,
+                "Febre 38–38,9°C": 1.0,
+                "Sem febre": 0.2
+            }
+        },
+        {
+            "id": "frequencia",
+            "label": "Frequência dos calafrios",
+            "tipo": "radio",
+            "opcoes": {
+                "Várias vezes ao dia": 0.8,
+                "Diários": 0.6,
+                "Eventuais": 0.2
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Confusão/desorientação": 1.6,
+                "Pressão baixa/tontura ao levantar": 1.4,
+                "Dor ao urinar/urina turva": 0.9,
+                "Tosse com catarro/dor torácica": 1.0,
+                "Ferida com vermelhidão/calor/saída de pus": 1.0,
+                "Calafrios após viagem/área endêmica": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"associados": ["Confusão/desorientação", "Pressão baixa/tontura ao levantar"]}, "min_cor": "vermelho"},
+        {"se": {"febre": "Febre ≥ 39°C", "associados": ["Tosse com catarro/dor torácica", "Dor ao urinar/urina turva"]}, "min_cor": "laranja"},
+        {"se": {"associados": ["Ferida com vermelhidão/calor/saída de pus"]}, "min_cor": "amarelo"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Sudorese noturna")] = {
+    "label": "Sudorese noturna",
+    "perguntas": [
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo ocorre?",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 4 semanas": 1.0,
+                "1–3 semanas": 0.6,
+                "< 1 semana": 0.3
+            }
+        },
+        {
+            "id": "quantidade",
+            "label": "Intensidade",
+            "tipo": "radio",
+            "opcoes": {
+                "Encharca roupa/lençol": 1.0,
+                "Moderada (troca de roupa)": 0.6,
+                "Leve": 0.2
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre": 0.8,
+                "Perda de peso não intencional": 1.2,
+                "Tosse há > 2 semanas": 1.0,
+                "Tosse com sangue": 1.6,
+                "Inchaço dos linfonodos": 1.2,
+                "Palpitações/ansiedade": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"associados": ["Tosse com sangue"]}, "min_cor": "laranja"},
+        {"se": {"associados": ["Perda de peso não intencional", "Inchaço dos linfonodos"]}, "min_cor": "amarelo"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Perda de peso súbita")] = {
+    "label": "Perda de peso súbita",
+    "perguntas": [
+        {
+            "id": "magnitude",
+            "label": "Quanto perdeu de peso?",
+            "tipo": "radio",
+            "opcoes": {
+                "> 5% em 1 mês": 1.4,
+                "3–5% em 1 mês": 1.0,
+                "< 3% em 1 mês": 0.4
+            }
+        },
+        {
+            "id": "apetite",
+            "label": "Como está o apetite?",
+            "tipo": "radio",
+            "opcoes": {
+                "Muito diminuído": 0.8,
+                "Normal": 0.3,
+                "Aumentado (muita fome)": 0.6
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Sede/urinar muito": 1.0,
+                "Náusea/vômitos persistentes": 1.0,
+                "Diarreia crônica": 0.8,
+                "Dificuldade para engolir (progressiva)": 1.4,
+                "Fezes pretas (melena) ou sangue nas fezes": 1.6,
+                "Febre e/ou sudorese noturna": 1.0,
+                "Tremor/taquicardia/intolerância ao calor": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"associados": ["Fezes pretas (melena) ou sangue nas fezes"]}, "min_cor": "laranja"},
+        {"se": {"associados": ["Dificuldade para engolir (progressiva)"]}, "min_cor": "laranja"},
+        {"se": {"associados": ["Náusea/vômitos persistentes"]}, "min_cor": "amarelo"},
+        {"se": {"apetite": "Aumentado (muita fome)", "associados": ["Sede/urinar muito"]}, "min_cor": "amarelo"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Dor durante relação sexual")] = {
+    "label": "Dor durante relação sexual",
+    "perguntas": [
+        {
+            "id": "tipo_dor",
+            "label": "Como é a dor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor pélvica intensa e súbita": 1.6,
+                "Dor profunda recorrente": 1.0,
+                "Dor superficial/queimação na entrada": 0.6
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Sangramento após a relação": 1.2,
+                "Febre": 1.0,
+                "Corrimento com odor/desconforto": 0.8,
+                "Náusea/vômitos": 0.6,
+                "Atraso menstrual/possível gestação": 1.2,
+                "Dor testicular (em homens)": 1.2
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo ocorre?",
+            "tipo": "radio",
+            "opcoes": {
+                "Início súbito recente": 1.0,
+                "Semanas a meses": 0.6,
+                "Há anos": 0.3
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"tipo_dor": "Dor pélvica intensa e súbita", "associados": ["Atraso menstrual/possível gestação"]}, "min_cor": "vermelho"},
+        {"se": {"associados": ["Febre", "Corrimento com odor/desconforto"]}, "min_cor": "laranja"},
+        {"se": {"associados": ["Sangramento após a relação"]}, "min_cor": "amarelo"},
+        {"se": {"associados": ["Dor testicular (em homens)"]}, "min_cor": "amarelo"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Suspeita de daltonismo")] = {
+    "label": "Suspeita de daltonismo",
+    "perguntas": [
+        {
+            "id": "inicio",
+            "label": "Quando percebeu a alteração de cores?",
+            "tipo": "radio",
+            "opcoes": {
+                "Desde a infância (sempre foi assim)": 0.1,
+                "Percebi há meses/anos": 0.3,
+                "Início súbito (dias/semanas)": 1.4
+            }
+        },
+        {
+            "id": "lateralidade",
+            "label": "A alteração é em um ou nos dois olhos?",
+            "tipo": "radio",
+            "opcoes": {
+                "Um olho apenas": 1.0,
+                "Ambos os olhos": 0.4,
+                "Não consigo dizer": 0.3
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor ocular": 1.6,
+                "Queda de acuidade visual": 1.6,
+                "Fotofobia": 0.8,
+                "Cefaleia": 0.6,
+                "Olho vermelho": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"inicio": "Início súbito (dias/semanas)", "associados": ["Dor ocular", "Queda de acuidade visual"]}, "min_cor": "vermelho"},
+        {"se": {"lateralidade": "Um olho apenas", "associados": ["Olho vermelho", "Dor ocular"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+FLUXOS[normalizar("Ausência de menstruação")] = {
+    "label": "Ausência de menstruação",
+    "perguntas": [
+        {
+            "id": "tempo",
+            "label": "Há quanto tempo está sem menstruar?",
+            "tipo": "radio",
+            "opcoes": {
+                "Atraso ≥ 4 semanas": 1.2,
+                "Atraso de 1 a 3 semanas": 0.6,
+                "Alguns dias": 0.2
+            }
+        },
+        {
+            "id": "possivel_gravidez",
+            "label": "Há possibilidade de gravidez?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sim": 1.0,
+                "Não": 0.0
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor abdominal intensa": 1.4,
+                "Sangramento vaginal": 1.6,
+                "Tontura/desmaio": 1.4,
+                "Febre": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"possivel_gravidez": "Sim", "sinais_associados": ["Sangramento vaginal"]}, "min_cor": "vermelho"},
+        {"se": {"possivel_gravidez": "Sim", "sinais_associados": ["Dor abdominal intensa"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Menstruação excessiva")] = {
+    "label": "Menstruação excessiva",
+    "perguntas": [
+        {
+            "id": "quantidade",
+            "label": "Quantos absorventes/fraldas são usados por dia?",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 8 totalmente encharcados": 1.8,
+                "5–7 encharcados": 1.2,
+                "Menos de 5": 0.5
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Duração do sangramento",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 8 dias": 1.2,
+                "5–7 dias": 0.8,
+                "Menos de 5 dias": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Tontura/desmaio": 1.4,
+                "Palidez intensa": 1.2,
+                "Dor abdominal intensa": 0.8,
+                "Febre": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quantidade": "≥ 8 totalmente encharcados", "sinais_associados": ["Tontura/desmaio"]}, "min_cor": "vermelho"},
+        {"se": {"quantidade": "≥ 8 totalmente encharcados", "sinais_associados": ["Palidez intensa"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Tosse")] = {
+    "label": "Tosse",
+    "perguntas": [
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo está com tosse?",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 3 semanas": 1.2,
+                "1–2 semanas": 0.8,
+                "< 1 semana": 0.4
+            }
+        },
+        {
+            "id": "caracteristica",
+            "label": "Tipo de tosse",
+            "tipo": "radio",
+            "opcoes": {
+                "Com sangue": 1.8,
+                "Produtiva (com catarro)": 0.8,
+                "Seca": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Falta de ar": 1.4,
+                "Dor torácica": 1.4,
+                "Febre": 1.0,
+                "Perda de peso": 1.0,
+                "Sudorese noturna": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"caracteristica": "Com sangue"}, "min_cor": "laranja"},
+        {"se": {"caracteristica": "Com sangue", "associados": ["Falta de ar", "Dor torácica"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Hemorragia gengival intensa")] = {
+    "label": "Hemorragia gengival intensa",
+    "perguntas": [
+        {
+            "id": "frequencia",
+            "label": "Com que frequência ocorre?",
+            "tipo": "radio",
+            "opcoes": {
+                "Diária": 1.0,
+                "Semanal": 0.6,
+                "Eventual": 0.3
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Duração do sangramento",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 10 minutos": 1.2,
+                "5–9 minutos": 0.8,
+                "< 5 minutos": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Hematomas frequentes": 1.2,
+                "Sangramentos em outros locais": 1.4,
+                "Febre": 0.6,
+                "Cansaço extremo": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"associados": ["Sangramentos em outros locais"]}, "min_cor": "laranja"},
+        {"se": {"associados": ["Hematomas frequentes", "Cansaço extremo"]}, "min_cor": "amarelo"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Edema inexplicado")] = {
+    "label": "Edema inexplicado",
+    "perguntas": [
+        {
+            "id": "localizacao",
+            "label": "Onde está o inchaço?",
+            "tipo": "radio",
+            "opcoes": {
+                "Um lado do corpo apenas": 1.4,
+                "Ambos os lados": 0.6,
+                "Rosto/pálpebras": 1.0
+            }
+        },
+        {
+            "id": "velocidade",
+            "label": "Velocidade de aparecimento",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 1.6,
+                "Em poucos dias": 1.0,
+                "Progressivo em semanas": 0.6
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Falta de ar": 1.6,
+                "Dor no peito": 1.6,
+                "Febre": 0.8,
+                "Vermelhidão/dor local": 1.2,
+                "Aumento súbito de peso": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"velocidade": "Súbito (minutos/horas)", "associados": ["Falta de ar", "Dor no peito"]}, "min_cor": "vermelho"},
+        {"se": {"localizacao": "Um lado apenas", "associados": ["Vermelhidão/dor local"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Mãos ou pés frios e arroxeados")] = {
+    "label": "Mãos ou pés frios e arroxeados",
+    "perguntas": [
+        {
+            "id": "frequencia",
+            "label": "Com que frequência ocorre?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sempre, mesmo em clima quente": 1.6,
+                "Principalmente em dias frios": 1.0,
+                "Apenas ocasionalmente": 0.4
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo percebe isso?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 1 mês": 1.2,
+                "Entre 1–4 semanas": 0.8,
+                "Menos de 1 semana": 0.3
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dormência ou formigamento": 1.0,
+                "Dor ao movimentar os dedos": 1.2,
+                "Mudança de cor ao frio (branco/azul/vermelho)": 1.0,
+                "Feridas nas extremidades": 1.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"sinais_associados": ["Feridas nas extremidades"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Perda progressiva da visão")] = {
+    "label": "Perda progressiva da visão",
+    "perguntas": [
+        {
+            "id": "velocidade",
+            "label": "Em quanto tempo piorou a visão?",
+            "tipo": "radio",
+            "opcoes": {
+                "Semanas a meses": 1.0,
+                "Mais de 1 ano": 0.6,
+                "Poucos dias": 1.4
+            }
+        },
+        {
+            "id": "olhos_afetados",
+            "label": "Quantos olhos foram afetados?",
+            "tipo": "radio",
+            "opcoes": {
+                "Um olho": 1.2,
+                "Ambos os olhos": 0.8
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor ocular": 1.4,
+                "Olho vermelho": 1.0,
+                "Sensibilidade à luz (fotofobia)": 0.8,
+                "Halos ao redor de luzes": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"velocidade": "Poucos dias", "sinais_associados": ["Dor ocular"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+FLUXOS[normalizar("Visão embaçada progressiva")] = {
+    "label": "Visão embaçada progressiva",
+    "perguntas": [
+        {
+            "id": "tempo",
+            "label": "Há quanto tempo está embaçada?",
+            "tipo": "radio",
+            "opcoes": {
+                "Semanas a meses": 0.8,
+                "Mais de 1 ano": 0.5,
+                "Poucos dias": 1.0
+            }
+        },
+        {
+            "id": "olhos_afetados",
+            "label": "Quantos olhos foram afetados?",
+            "tipo": "radio",
+            "opcoes": {
+                "Um olho": 1.0,
+                "Ambos os olhos": 0.6
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Cefaleia": 0.8,
+                "Dificuldade para focar": 0.6,
+                "Piora à noite": 0.6,
+                "Alterações de cores": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"tempo": "Poucos dias", "sinais_associados": ["Cefaleia"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (3.5, "vermelho"),
+        (2.0, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
 # =============================
