@@ -387,7 +387,7 @@ def dicionario_sintomas():
         "Endurecimento de parte do testículo": "Área mais rígida ao toque,diferente do resto",
         "Aumento rápido do volume testicular": "Crescimento perceptível em dias/semanas",
         "Sensação de peso no escroto": "Peso/desconforto 'puxando' pra baixo",
-        "Dor surda em baixo-ventre/virilha": "Dor incômoda NÃO AGUDA,na parte de baixo da barriga,
+        "Dor surda em baixo-ventre/virilha": "Dor incômoda NÃO AGUDA,na parte de baixo da barriga",
         "Aumento de mamas/sensibilidade mamilar": "Crescimento do tecido mamário do homem ou dor ao toque",
         "Criptorquidia (Testículo não descido)": "Quando, na infância, o testículo não desceu para o escroto (fator de risco na vida adulta)"
         }
