@@ -609,8 +609,11 @@ def dicionario_sintomas():
     "popular": "Quando vai ao banheiro muitas vezes ou simplesmente não consegue fazer xixi, mesmo com vontade.",
     "clinico": "Disúria, poliúria ou retenção",
     "termos": {
-        "Incapacidade de urinar": "Não consegue fazer xixi, mesmo forçando.",
-        "Aumento de frequência": "Sente vontade de urinar toda hora, com pouco volume."
+        "Urina com sangue": "Urina avermelhada/rosada ou com coágulos visíveis.",
+        "Incapacidade de urinar": "Vontade de urinar, mas nada sai.",
+        "Urina turva e com odor forte": "Urina “espessa”, amarelada e com cheiro forte.",
+        "Cateter vesical": "Tubo usado para drenar a urina.",
+        "Dor nas costas (lado dos rins)": "Dor na parte de trás, na altura da cintura, de um lado."
         }
     },
 
@@ -879,9 +882,9 @@ def dicionario_sintomas():
     "popular": "Quando aparecem manchas vermelhas, roxas ou feridas na pele que coçam, ardem ou mudam de cor. Pode ser por alergia, infecção ou até problema de circulação.",
     "clinico": "Lesões cutâneas",
     "termos": {
-        "Púrpuras": "Manchas roxas que não desaparecem quando apertadas.",
-        "Erupções": "Pequenas bolinhas ou manchas que surgem repentinamente.",
-        "Irritações de contato": "Manchas vermelhas que coçam e aparecem após tocar algo, como produto ou tecido."
+        "Púrpuras": "Manchas roxas/vermelhas que não somem quando aperta.",
+        "Urticária (placas)": "Carocinhos/placas altas e vermelhas que coçam.",
+        "Inchaço de lábios/rosto": "Aumento rápido dessas regiões (alerta para alergia grave)."
         }
     },
 
@@ -890,10 +893,9 @@ def dicionario_sintomas():
     "popular": "Quando o olho está vermelho, dói, arde ou fica sensível à luz. Pode estar seco ou soltando secreção.",
     "clinico": "Conjuntivite ou inflamação ocular",
     "termos": {
-        "Secreção": "Líquido que escorre do olho, podendo ser claro ou amarelado.",
-        "Sensibilidade à luz": "Dificuldade de manter os olhos abertos em lugares claros.",
-        "Ardência": "Sensação de queimação no olho.",
-        "Olhos secos": "Falta de lágrima ou desconforto como se houvesse areia no olho."
+        "Trauma químico": "Produto químico entrou no olho (ex.: água sanitária).",
+        "Halos ao redor da luz": "Anéis ao redor das luzes, visão embaçada.",
+        "Lentes de contato": "Lentes sobre os olhos para corrigir visão/estética."
         }
     },
 
@@ -902,8 +904,9 @@ def dicionario_sintomas():
     "popular": "Quando desce sangue fora da menstruação normal ou vem em grande quantidade, podendo assustar.",
     "clinico": "Sangramento uterino anormal",
     "termos": {
-        "Abundante": "Fluxo forte, que encharca o absorvente rapidamente.",
-        "Fora do ciclo": "Sangramento inesperado, sem estar no período menstrual."
+        "Coágulos grandes": "Pedaços de sangue espesso saindo junto do fluxo.",
+        "Tontura ou desmaio": "Sensação de apagar/escurecer a visão.",
+        "Fora do ciclo": "Sangramento em dias que não eram esperados."
         }
     },
 
@@ -922,9 +925,10 @@ def dicionario_sintomas():
     "popular": "Quando alguma parte do corpo incha de repente, incha tudo ao mesmo tempo ou parece só um leve acúmulo de água. Pode ter várias causas.",
     "clinico": "Edema",
     "termos": {
-        "Inchaço súbito": "Aparece de uma hora pra outra, geralmente em uma região.",
-        "Inchaço generalizado": "Corpo inteiro parece mais 'cheio', inclusive rosto e barriga.",
-        "Leve retenção": "A pele marca com o dedo ou a roupa aperta mais que o normal."
+        "Panturrilha/perna única": "Inchaço em uma perna, principalmente na batata da perna.",
+        "Ganho rápido de peso": "Aumento de vários quilos em poucos dias por retenção.",
+        "Pílula/terapia hormonal": "Uso de anticoncepcionais ou reposição hormonal.",
+        "Imobilização": "Ficar muito tempo sem mexer a perna (gesso, viagem longa)."
         }
     },
 
@@ -1288,8 +1292,10 @@ def dicionario_sintomas():
     "popular": "Pode parecer que a mão ou perna está dormente ou sem força. Se for de repente, é mais preocupante.",
     "clinico": "Parestesia ou déficit motor",
     "termos": {
-        "Fala arrastada": "Quando a pessoa fala devagar ou parece enrolada.",
-        "Lado do corpo": "Refere-se a um dos lados, tipo só o braço e perna direitos ou esquerdos."
+        "Face caída de um lado": "Um lado do rosto fica ‘torto’ ou sem força.",
+        "Fala arrastada": "Palavras saem enroladas/difíceis de entender.",
+        "Súbito": "Começou de repente, sem aviso.",
+        "AVC/AIT": "Derrame ou ‘mini-derrame’ com sintomas que podem passar."
         }
     },
 "Vômito": {
@@ -2739,114 +2745,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_alteracoes_urinarias():
-    return [
-        "Urina com sangue ou incapacidade de urinar",
-        "Dor intensa ao urinar com febre",
-        "Ardência leve ou aumento de frequência",
-        "Urina normal com pequeno desconforto"
-    ]
-
-def classificar_alteracoes_urinarias(resp):
-    if resp == "Urina com sangue ou incapacidade de urinar":
-        return "vermelho", "Alterações graves no trato urinário. Procure atendimento imediatamente."
-    elif resp == "Dor intensa ao urinar com febre":
-        return "laranja", "Sugere infecção urinária avançada. Avaliação médica necessária."
-    elif resp == "Ardência leve ou aumento de frequência":
-        return "amarelo", "Sintomas leves, mas que podem evoluir. Hidratação e atenção são importantes."
-    else:
-        return "verde", "Sem sinais de alerta. Situação tranquila."
-
-def opcoes_formigamento_perda_forca():
-    return [
-        "Perda súbita de força ou fala arrastada",
-        "Formigamento em um lado do corpo",
-        "Leve dormência nas mãos ou pés",
-        "Sensação leve e passageira"
-    ]
-
-def classificar_formigamento_perda_forca(resp):
-    if resp == "Perda súbita de força ou fala arrastada":
-        return "vermelho", "Sinais clássicos de AVC. Atendimento imediato é essencial."
-    elif resp == "Formigamento em um lado do corpo":
-        return "laranja", "Pode indicar início de comprometimento neurológico. Necessita avaliação."
-    elif resp == "Leve dormência nas mãos ou pés":
-        return "amarelo", "Alteração sensitiva leve. Observe evolução."
-    else:
-        return "verde", "Sensação transitória e sem risco."
-
-def opcoes_inchaco():
-    return [
-        "Inchaço súbito em uma perna com dor intensa",
-        "Inchaço generalizado com falta de ar",
-        "Inchaço leve no final do dia",
-        "Leve retenção sem desconforto"
-    ]
-
-def classificar_inchaco(resp):
-    if resp == "Inchaço súbito em uma perna com dor intensa":
-        return "vermelho", "Risco de trombose venosa profunda. Procure emergência."
-    elif resp == "Inchaço generalizado com falta de ar":
-        return "laranja", "Pode estar associado a insuficiência cardíaca ou renal. Avaliação médica é necessária."
-    elif resp == "Inchaço leve no final do dia":
-        return "amarelo", "Retenção de líquidos leve. Elevação das pernas e hidratação ajudam."
-    else:
-        return "verde", "Sem alterações relevantes. Situação sob controle."
-
-def opcoes_sangramento_vaginal():
-    return [
-        "Durante gravidez, com dor ou sangramento intenso",
-        "Abundante fora do ciclo com dor abdominal",
-        "Moderado e inesperado",
-        "Leve e esperado"
-    ]
-
-def classificar_sangramento_vaginal(resp):
-    if resp == "Durante gravidez, com dor ou sangramento intenso":
-        return "vermelho", "Pode indicar risco à gestação. Procure ajuda médica imediatamente."
-    elif resp == "Abundante fora do ciclo com dor abdominal":
-        return "laranja", "Pode ser distúrbio hormonal ou patológico. Avaliação necessária."
-    elif resp == "Moderado e inesperado":
-        return "amarelo", "Merece atenção, mesmo sem outros sintomas."
-    else:
-        return "verde", "Dentro do esperado. Acompanhe evolução."
-
-def opcoes_lesoes_na_pele():
-    return [
-        "Púrpuras, vermelhas escuras ou com febre alta",
-        "Erupções espalhadas com coceira intensa",
-        "Manchas leves e pequenas",
-        "Pequenas irritações de contato"
-    ]
-
-def classificar_lesoes_na_pele(resp):
-    if resp == "Púrpuras, vermelhas escuras ou com febre alta":
-        return "vermelho", "Podem indicar infecção grave ou reação sistêmica. Procure emergência."
-    elif resp == "Erupções espalhadas com coceira intensa":
-        return "laranja", "Alergia importante ou virose. Requer observação."
-    elif resp == "Manchas leves e pequenas":
-        return "amarelo", "Alteração cutânea leve. Cuidados simples são suficientes."
-    else:
-        return "verde", "Irritação leve e sem risco."
-
-def opcoes_dor_ou_olho_vermelho():
-    return [
-        "Dor ocular intensa ou perda súbita da visão",
-        "Olhos vermelhos com secreção e sensibilidade à luz",
-        "Irritação leve com ardência",
-        "Olhos secos ou cansados"
-    ]
-
-def classificar_dor_ou_olho_vermelho(resp):
-    if resp == "Dor ocular intensa ou perda súbita da visão":
-        return "vermelho", "Possível emergência oftalmológica. Atendimento urgente necessário."
-    elif resp == "Olhos vermelhos com secreção e sensibilidade à luz":
-        return "laranja", "Pode ser conjuntivite ou inflamação ocular. Requer atenção."
-    elif resp == "Irritação leve com ardência":
-        return "amarelo", "Situação leve. Observe e higienize a área."
-    else:
-        return "verde", "Sem sinais de gravidade ocular."
-
 def opcoes_dor_perna_caminhar():
     return[
         "Dor súbita com inchaço, vermelhidão ou dificuldade de mover a perna",
@@ -3445,7 +3343,6 @@ mapa_sintomas = {
     "Engasgo ou obstrução das vias aéreas": (opcoes_engasgo, classificar_engasgo),
     "Ferimentos ou cortes com objetos": (opcoes_ferimentos_cortes, classificar_ferimentos_cortes),
     "Corpo estranho nos olhos, ouvidos ou nariz": (opcoes_corpo_estranho_sentidos, classificar_corpo_estranho_sentidos),
-    "Alterações urinárias": (opcoes_alteracoes_urinarias, classificar_alteracoes_urinarias),
     "Ansiedade ou agitação intensa": (opcoes_ansiedade_agitacao, classificar_ansiedade_agitacao),
     "Diarreia": (opcoes_diarreia, classificar_diarreia),
     "Sensação de desmaio": (opcoes_sensacao_desmaio, classificar_sensacao_desmaio),
@@ -3467,12 +3364,7 @@ mapa_sintomas = {
     "Tremores ou movimentos involuntários": (opcoes_tremores, classificar_tremores),
     "Retenção urinária": (opcoes_retencao_urinaria, classificar_retencao_urinaria),
     "Infecção em ferida": (opcoes_infeccao_ferida, classificar_infeccao_ferida),
-    "Lesões na pele": (opcoes_lesoes_na_pele, classificar_lesoes_na_pele),
-    "Dor ou olho vermelho": (opcoes_dor_ou_olho_vermelho, classificar_dor_ou_olho_vermelho),
-    "Formigamento ou perda de força": (opcoes_formigamento_perda_forca, classificar_formigamento_perda_forca),
-    "Sangramento vaginal": (opcoes_sangramento_vaginal, classificar_sangramento_vaginal),
     "Dor ou dificulade ao urinar": (opcoes_dor_ao_urinar, classificar_dor_ao_urinar),
-    "Inchaço incomum": (opcoes_inchaco, classificar_inchaco),
     "Alergia cutânea": (opcoes_alergia_cutanea, classificar_alergia_cutanea),
     }
 mapa_sintomas = dict(sorted(mapa_sintomas.items()))
@@ -6587,6 +6479,364 @@ FLUXOS[normalizar("Convulsões")] = {
         (5.5, "vermelho"),
         (3.8, "laranja"),
         (1.9, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# ALTERAÇÕES URINÁRIAS
+# ===============================
+FLUXOS[normalizar("Alterações urinárias")] = {
+    "label": "Alterações urinárias",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Urina com sangue ou incapacidade de urinar": 2.0,
+                "Dor intensa ao urinar com febre": 1.4,
+                "Ardência leve ou aumento de frequência": 0.6,
+                "Urina normal com pequeno desconforto": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Há algum desses sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor nas costas (lado dos rins)": 1.2,
+                "Calafrios ou mal-estar intenso": 0.8,
+                "Urina turva e com odor forte": 0.4
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Gravidez": 1.0,
+                "Homem ≥ 50 anos (próstata)": 0.8,
+                "Cateter vesical recente": 0.8,
+                "Cálculo renal prévio": 0.6,
+                "Diabetes": 0.6
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo começaram os sintomas?",
+            "tipo": "radio",
+            "opcoes": {
+                "Menos de 24 horas": 0.8,
+                "2 a 7 dias": 0.4,
+                "Mais de 7 dias": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Urina com sangue ou incapacidade de urinar"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Dor intensa ao urinar com febre", "sinais_associados": ["Dor nas costas (lado dos rins)"]}, "min_cor": "vermelho"},
+        {"se": {"fatores_risco": ["Gravidez"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# FORMIGAMENTO / PERDA DE FORÇA
+# ===============================
+FLUXOS[normalizar("Formigamento/Perda de força")] = {
+    "label": "Formigamento/Perda de força",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "O que está acontecendo?",
+            "tipo": "radio",
+            "opcoes": {
+                "Perda súbita de força ou fala arrastada": 2.0,
+                "Formigamento em um lado do corpo": 1.4,
+                "Leve dormência nas mãos ou pés": 0.6,
+                "Sensação leve e passageira": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 1.3,
+                "Gradual (dias)": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Face caída de um lado": 1.6,
+                "Dor de cabeça muito forte": 1.0,
+                "Convulsão recente": 1.4
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Condições de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso de anticoagulante": 1.0,
+                "AVC ou AIT prévios": 0.8,
+                "Hipertensão/Diabetes": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Perda súbita de força ou fala arrastada"}, "min_cor": "vermelho"},
+        {"se": {"inicio": "Súbito (minutos/horas)", "sinais_associados": ["Face caída de um lado"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Convulsão recente"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# INCHAÇO
+# ===============================
+FLUXOS[normalizar("Inchaço")] = {
+    "label": "Inchaço",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está o inchaço?",
+            "tipo": "radio",
+            "opcoes": {
+                "Inchaço súbito em uma perna com dor intensa": 2.0,
+                "Inchaço generalizado com falta de ar": 1.6,
+                "Inchaço leve no final do dia": 0.6,
+                "Leve retenção sem desconforto": 0.2
+            }
+        },
+        {
+            "id": "local",
+            "label": "Onde é mais evidente?",
+            "tipo": "radio",
+            "opcoes": {
+                "Panturrilha/perna única": 1.2,
+                "Ambas as pernas": 0.6,
+                "Rosto/pálpebras/manhã": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Tem algo junto?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor na panturrilha/área quente e vermelha": 1.2,
+                "Falta de ar": 1.5,
+                "Ganho rápido de peso (dias)": 0.8
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator presente?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Cirurgia ou imobilização recente": 1.0,
+                "Pílula/terapia hormonal": 0.8,
+                "Câncer ativo": 0.8,
+                "Insuficiência cardíaca/renal": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Inchaço súbito em uma perna com dor intensa"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Inchaço generalizado com falta de ar"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Falta de ar"]}, "min_cor": "vermelho"},
+        {"se": {"fatores_risco": ["Cirurgia ou imobilização recente", "Pílula/terapia hormonal", "Câncer ativo"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# SANGRAMENTO VAGINAL
+# ===============================
+FLUXOS[normalizar("Sangramento vaginal")] = {
+    "label": "Sangramento vaginal",
+    "perguntas": [
+        {
+            "id": "gravidez",
+            "label": "Está grávida?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sim": 1.6,
+                "Não": 0.0,
+                "Não sei": 0.6
+            }
+        },
+        {
+            "id": "intensidade",
+            "label": "Como está o sangramento?",
+            "tipo": "radio",
+            "opcoes": {
+                "Durante gravidez, com dor ou sangramento intenso": 2.0,
+                "Abundante fora do ciclo com dor abdominal": 1.4,
+                "Moderado e inesperado": 0.8,
+                "Leve e esperado": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Apareceu algum destes?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Tontura ou desmaio": 1.5,
+                "Coágulos grandes": 0.8,
+                "Febre": 0.6
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo está sangrando?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 7 dias": 0.8,
+                "2 a 7 dias": 0.4,
+                "Menos de 2 dias": 0.2
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"intensidade": "Durante gravidez, com dor ou sangramento intenso"}, "min_cor": "vermelho"},
+        {"se": {"intensidade": "Abundante fora do ciclo com dor abdominal"}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Tontura ou desmaio"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# LESÕES NA PELE
+# ===============================
+FLUXOS[normalizar("Lesões na pele")] = {
+    "label": "Lesões na pele",
+    "perguntas": [
+        {
+            "id": "aspecto",
+            "label": "Como são as lesões?",
+            "tipo": "radio",
+            "opcoes": {
+                "Púrpuras, vermelhas escuras ou com febre alta": 2.0,
+                "Erupções espalhadas com coceira intensa": 1.2,
+                "Manchas leves e pequenas": 0.6,
+                "Pequenas irritações de contato": 0.2
+            }
+        },
+        {
+            "id": "extensao",
+            "label": "Qual a extensão?",
+            "tipo": "radio",
+            "opcoes": {
+                "Corpo todo ou grandes áreas": 1.0,
+                "Limitadas a uma região": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre alta (≥ 38,5°C)": 1.0,
+                "Inchaço de lábios/rosto ou falta de ar": 1.8,
+                "Dor intensa na pele": 0.8
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Fatores atuais:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso de remédio novo": 0.8,
+                "Infecção recente": 0.6,
+                "Imunossupressão": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"aspecto": "Púrpuras, vermelhas escuras ou com febre alta"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Inchaço de lábios/rosto ou falta de ar"]}, "min_cor": "vermelho"},
+        {"se": {"fatores_risco": ["Uso de remédio novo"], "extensao": "Corpo todo ou grandes áreas"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# DOR OU OLHO VERMELHO
+# ===============================
+FLUXOS[normalizar("Dor ou olho vermelho")] = {
+    "label": "Dor ou olho vermelho",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é a situação principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor ocular intensa ou perda súbita da visão": 2.0,
+                "Olhos vermelhos com secreção e sensibilidade à luz": 1.2,
+                "Irritação leve com ardência": 0.6,
+                "Olhos secos ou cansados": 0.2
+            }
+        },
+        {
+            "id": "fatores_agressores",
+            "label": "Teve algo que possa ter causado?",
+            "tipo": "radio",
+            "opcoes": {
+                "Trauma químico/poeira/impacto": 1.4,
+                "Uso de lentes de contato": 0.8,
+                "Sem fator conhecido": 0.0
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Visão embaçada ou halos ao redor da luz": 1.0,
+                "Inchaço nas pálpebras": 0.6,
+                "Dor de cabeça e náusea": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor ocular intensa ou perda súbita da visão"}, "min_cor": "vermelho"},
+        {"se": {"fatores_agressores": "Trauma químico/poeira/impacto"}, "min_cor": "vermelho"},
+        {"se": {"fatores_agressores": "Uso de lentes de contato", "quadro": "Olhos vermelhos com secreção e sensibilidade à luz"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
         (0.0, "verde")
     ]
 }
