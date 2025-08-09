@@ -56,14 +56,14 @@ sistemas_sintomas = {
         "trauma ou queda", "dor no ombro ou braço"
     ],
     "cutaneo": [
-        "alergia cutânea", "reação alérgica", "lesões na pele", "manchas na pele", "coceira na pele", "inchaço incomum"
+        "alergia cutânea", "reação alérgica", "lesões na pele", "Manchas anormais na pele", "coceira na pele", "inchaço incomum"
     ],
     "oftalmologico": [
         "alterações visuais súbitas", "dor ou olho vermelho", "inchaço nos olhos ou face",
         "corpo estranho nos olhos, ouvidos ou nariz"
     ],
     "otorrino": [
-        "dor no ouvido", "coriza e espirros", "sangramento nasal", "alteração auditiva", "dificuldade pra engolir", "corpo estranho na garganta"
+        "dor no ouvido", "coriza e espirros", "sangramento nasal", "Alteração na audição", "dificuldade pra engolir", "corpo estranho na garganta"
     ],
     "obstetrico": [
         "dor durante a gravidez", "trabalho de parto", "redução dos movimentos fetais", "sangramento vaginal"
@@ -401,7 +401,7 @@ def dicionario_sintomas():
             "Início súbito, forte, há menos de 6 horas": "Dor que começou de repente e muito forte nas últimas horas (sugere torção).",
             "Inchaço visível": "Aumento do volume visível do testículo ou escroto.",
             "Vermelhidão ou calor no escroto": "Pele avermelhada e quente sobre os testículos, sinal de inflamação.",
-            "Náusea ou vômito junto da dor": "Enjoo ou vômitos ocorrendo junto com a dor testicular.",
+            "Náusea ou vômito junto da dor": "Enjoo ou vômitos ocorrendo junto com a Dor nos testículos.",
             "Criptorquidia (testículo não descido)": "Testículo que não desceu para o escroto na infância, aumenta riscos.",
             "Infecção urinária recente": "Infecção de urina nos últimos dias/semanas que pode inflamar estruturas próximas."
         }
@@ -2521,7 +2521,7 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Pele e Co
         elif "Lesões que não cicatrizam" in alteracoes:
             st.error("🚨 Lesões persistentes precisam ser avaliadas por um dermatologista.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Lesões na pele,infecção em ferida**")
-            st.markdown("🔎 Possíveis sintomas relacionados: **Manchas na pele, Infecção em ferida,lesões na pele, alergia cutânea**")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Manchas anormais na pele, Infecção em ferida,lesões na pele, alergia cutânea**")
         elif len(alteracoes) >= 2:
             st.warning("⚠️ Múltiplos sinais de alteração cutânea. Fique atento e monitore a evolução.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Coceira, Infecção em ferida,lesões na pele,alergia cutânea**")
@@ -2695,8 +2695,8 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Audição
     resposta = st.radio("Você conseguiu ouvir o som com clareza?", ["Sim", "Não", "Somente em um dos ouvidos"])
     if resposta != "":
         if resposta == "Não" or resposta == "Somente em um dos ouvidos":
-            st.warning("⚠️ Sinal de alteração auditiva.")
-            st.markdown("🔎 Possíveis sintomas relacionados: **Alteração auditiva**")
+            st.warning("⚠️ Sinal de Alteração na audição.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Alteração na audição**")
         else:
             st.success("✅ Tudo certo com sua audição.")
 
@@ -3144,9 +3144,9 @@ FLUXOS[normalizar("Nódulo testicular")] = {
         (0.0, "verde")
     ]
 }
-# Fluxograma: Dor testicular (conservador)
-FLUXOS[normalizar("Dor testicular")] = {
-    "label": "Dor testicular",
+# Fluxograma: Dor nos testículos (conservador)
+FLUXOS[normalizar("Dor nos testículos")] = {
+    "label": "Dor nos testículos",
     "perguntas": [
         {
             "id": "inicio",
@@ -3267,9 +3267,9 @@ FLUXOS[normalizar("Secreção mamilar")] = {
         (0.0, "verde")
     ]
 }
-# Fluxograma: Dor testicular (conservador)
-FLUXOS[normalizar("Dor testicular")] = {
-    "label": "Dor testicular",
+# Fluxograma: Dor nos testículos (conservador)
+FLUXOS[normalizar("Dor nos testículos")] = {
+    "label": "Dor nos testículos",
     "perguntas": [
         {
             "id": "inicio",
@@ -3327,8 +3327,8 @@ FLUXOS[normalizar("Dor testicular")] = {
 }
 
 # Fluxograma: Secreção mamilar (conservador)
-FLUXOS[normalizar("Secreção mamilar")] = {
-    "label": "Secreção mamilar",
+FLUXOS[normalizar("Secreção mamilar (Fora da amamentação)")] = {
+    "label": "Secreção mamilar (Fora da amamentação)",
     "perguntas": [
         {
             "id": "tipo_secrecao",
@@ -3420,7 +3420,7 @@ FLUXOS[normalizar("Sangue no sêmen")] = {
             "tipo": "checkbox",
             "opcoes": {
                 "Dor ao ejacular": 0.8,
-                "Dor ao urinar (ardor)": 0.7,
+                "Dor ou dificuldade ao urinar (ardor)": 0.7,
                 "Febre": 0.7,
                 "Sangue na urina": 1.0
             }
@@ -3449,8 +3449,8 @@ FLUXOS[normalizar("Sangue no sêmen")] = {
     ]
 }
 # Fluxograma: Trauma craniano
-FLUXOS[normalizar("Trauma craniano")] = {
-    "label": "Trauma craniano",
+FLUXOS[normalizar("Trauma na cabeça")] = {
+    "label": "Trauma na cabeça",
     "perguntas": [
         {
             "id": "gravidade",
@@ -3497,9 +3497,9 @@ FLUXOS[normalizar("Trauma craniano")] = {
     ]
 }
 
-# Fluxograma: Manchas na pele
-FLUXOS[normalizar("Manchas na pele")] = {
-    "label": "Manchas na pele",
+# Fluxograma: Manchas anormais na pele
+FLUXOS[normalizar("Manchas anormais na pele")] = {
+    "label": "Manchas anormais na pele",
     "perguntas": [
         {
             "id": "aspecto",
@@ -3948,9 +3948,9 @@ FLUXOS[normalizar("Dor de garganta")] = {
         (0.0, "verde")
     ]
 }
-# Fluxograma: Dor odontológica
-FLUXOS[normalizar("Dor odontológica")] = {
-    "label": "Dor odontológica",
+# Fluxograma: Dor de dente
+FLUXOS[normalizar("Dor de dente")] = {
+    "label": "Dor de dente",
     "perguntas": [
         {
             "id": "quadro",
@@ -4007,9 +4007,9 @@ FLUXOS[normalizar("Dor odontológica")] = {
         (0.0, "verde")
     ]
 }
-# Fluxograma: Alteração auditiva
-FLUXOS[normalizar("Alteração auditiva")] = {
-    "label": "Alteração auditiva",
+# Fluxograma: Alteração na audição
+FLUXOS[normalizar("Alteração na audição")] = {
+    "label": "Alteração na audição",
     "perguntas": [
         {
             "id": "quadro",
@@ -4040,7 +4040,7 @@ FLUXOS[normalizar("Alteração auditiva")] = {
                 "Vertigem intensa (rodação)": 1.2,
                 "Secreção purulenta": 1.0,
                 "Febre": 0.7,
-                "Dor de ouvido importante": 0.8
+                "Dor no ouvido importante": 0.8
             }
         },
         {
@@ -4809,8 +4809,8 @@ FLUXOS[normalizar("Dor durante a gravidez")] = {
 # -----------------------------
 # MOVIMENTOS FETAIS
 # -----------------------------
-FLUXOS[normalizar("Movimentos fetais")] = {
-    "label": "Movimentos fetais",
+FLUXOS[normalizar("Redução dos movimentos fetais")] = {
+    "label": "Redução dos movimentos fetais",
     "perguntas": [
         {
             "id": "quadro",
@@ -4940,13 +4940,13 @@ FLUXOS[normalizar("Febre em lactente")] = {
             "opcoes": {
                 "Vômitos persistentes": 1.0,
                 "Respiração acelerada/dificuldade para respirar": 1.3,
-                "Manchas na pele": 1.3
+                "Manchas anormais na pele": 1.3
             }
         }
     ],
     "regras_excecao": [
         {"se": {"quadro": "Febre alta persistente com prostração ou recusa alimentar"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Respiração acelerada/dificuldade para respirar", "Manchas na pele"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Respiração acelerada/dificuldade para respirar", "Manchas anormais na pele"]}, "min_cor": "vermelho"},
         {"se": {"duracao": "Mais de 48 horas"}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
@@ -5595,8 +5595,8 @@ FLUXOS[normalizar("Sangramento ativo")] = {
 # ===============================
 # DESMAIO / TONTURA
 # ===============================
-FLUXOS[normalizar("Desmaio/Tontura")] = {
-    "label": "Desmaio/Tontura",
+FLUXOS[normalizar("Desmaio ou tontura")] = {
+    "label": "Desmaio ou tontura",
     "perguntas": [
         {
             "id": "quadro",
@@ -5656,8 +5656,8 @@ FLUXOS[normalizar("Desmaio/Tontura")] = {
 # ===============================
 # COMPORTAMENTO ESTRANHO
 # ===============================
-FLUXOS[normalizar("Comportamento estranho")] = {
-    "label": "Comportamento estranho",
+FLUXOS[normalizar("Comportamento estranho à normalidade")] = {
+    "label": "Comportamento estranho à normalidade",
     "perguntas": [
         {
             "id": "quadro",
@@ -5874,8 +5874,8 @@ FLUXOS[normalizar("Reação alérgica")] = {
 # ===============================
 # CONVULSÕES
 # ===============================
-FLUXOS[normalizar("Convulsões")] = {
-    "label": "Convulsões",
+FLUXOS[normalizar("Convulsão")] = {
+    "label": "Convulsão",
     "perguntas": [
         {
             "id": "quadro",
@@ -5990,8 +5990,8 @@ FLUXOS[normalizar("Alterações urinárias")] = {
 # ===============================
 # FORMIGAMENTO / PERDA DE FORÇA
 # ===============================
-FLUXOS[normalizar("Formigamento/Perda de força")] = {
-    "label": "Formigamento/Perda de força",
+FLUXOS[normalizar("Formigamento ou perda de força")] = {
+    "label": "Formigamento ou perda de força",
     "perguntas": [
         {
             "id": "quadro",
@@ -6050,8 +6050,8 @@ FLUXOS[normalizar("Formigamento/Perda de força")] = {
 # ===============================
 # INCHAÇO
 # ===============================
-FLUXOS[normalizar("Inchaço")] = {
-    "label": "Inchaço",
+FLUXOS[normalizar("Inchaço incomum")] = {
+    "label": "Inchaço incomum",
     "perguntas": [
         {
             "id": "quadro",
@@ -6282,10 +6282,10 @@ FLUXOS[normalizar("Dor ou olho vermelho")] = {
     ]
 }
 # ===============================
-# DOR NA PERNA AO CAMINHAR
+# Dor na perna e dificuldade pra caminhar
 # ===============================
-FLUXOS[normalizar("Dor na perna ao caminhar")] = {
-    "label": "Dor na perna ao caminhar",
+FLUXOS[normalizar("Dor na perna e dificuldade pra caminhar")] = {
+    "label": "Dor na perna e dificuldade pra caminhar",
     "perguntas": [
         {
             "id": "quadro",
@@ -6337,8 +6337,8 @@ FLUXOS[normalizar("Dor na perna ao caminhar")] = {
 # ===============================
 # INTOXICAÇÃO
 # ===============================
-FLUXOS[normalizar("Intoxicação")] = {
-    "label": "Intoxicação",
+FLUXOS[normalizar("Sinais de intoxicação ou envenenamento")] = {
+    "label": "Sinais de intoxicação ou envenenamento",
     "perguntas": [
         {
             "id": "quadro",
@@ -6398,10 +6398,10 @@ FLUXOS[normalizar("Intoxicação")] = {
 }
 
 # ===============================
-# DOR NO PESCOÇO
+# Dor no pescoço ou rigidez na nuca
 # ===============================
-FLUXOS[normalizar("Dor no pescoço")] = {
-    "label": "Dor no pescoço",
+FLUXOS[normalizar("Dor no pescoço ou rigidez na nuca")] = {
+    "label": "Dor no pescoço ou rigidez na nuca",
     "perguntas": [
         {
             "id": "quadro",
@@ -6440,10 +6440,10 @@ FLUXOS[normalizar("Dor no pescoço")] = {
 }
 
 # ===============================
-# ALTERAÇÃO DE VISÃO
+# Alterações visuais súbitas
 # ===============================
-FLUXOS[normalizar("Alteração de visão")] = {
-    "label": "Alteração de visão",
+FLUXOS[normalizar("Alterações visuais súbitas")] = {
+    "label": "Alterações visuais súbitas",
     "perguntas": [
         {
             "id": "quadro",
@@ -6503,8 +6503,8 @@ FLUXOS[normalizar("Alteração de visão")] = {
 # ===============================
 # ENGASGO
 # ===============================
-FLUXOS[normalizar("Engasgo")] = {
-    "label": "Engasgo",
+FLUXOS[normalizar("Engasgo ou obstrução das vias aéreas")] = {
+    "label": "Engasgo ou obstrução das vias aéreas",
     "perguntas": [
         {
             "id": "quadro",
@@ -6553,10 +6553,10 @@ FLUXOS[normalizar("Engasgo")] = {
 }
 
 # ===============================
-# FERIMENTOS E CORTES
+# ferimentos ou cortes com objetos
 # ===============================
-FLUXOS[normalizar("Ferimentos e cortes")] = {
-    "label": "Ferimentos e cortes",
+FLUXOS[normalizar("ferimentos ou cortes com objetos")] = {
+    "label": "ferimentos ou cortes com objetos",
     "perguntas": [
         {
             "id": "quadro",
@@ -6615,10 +6615,10 @@ FLUXOS[normalizar("Ferimentos e cortes")] = {
 }
 
 # ===============================
-# CORPO ESTRANHO EM SENTIDOS
+# Corpo estranho nos olhos,ouvidos ou nariz
 # ===============================
-FLUXOS[normalizar("Corpo estranho em sentidos")] = {
-    "label": "Corpo estranho em sentidos",
+FLUXOS[normalizar("Corpo estranho nos olhos,ouvidos ou nariz")] = {
+    "label": "Corpo estranho nos olhos,ouvidos ou nariz",
     "perguntas": [
         {
             "id": "local",
@@ -6667,10 +6667,10 @@ FLUXOS[normalizar("Corpo estranho em sentidos")] = {
     ]
 }
 # ===============================
-# DOR AO URINAR
+# Dor ou dificuldade ao urinar
 # ===============================
-FLUXOS[normalizar("Dor ao urinar")] = {
-    "label": "Dor ao urinar",
+FLUXOS[normalizar("Dor ou dificuldade ao urinar")] = {
+    "label": "Dor ou dificuldade ao urinar",
     "perguntas": [
         {
             "id": "quadro",
@@ -6732,8 +6732,8 @@ FLUXOS[normalizar("Dor ao urinar")] = {
 # ===============================
 # ANSIEDADE / AGITAÇÃO
 # ===============================
-FLUXOS[normalizar("Ansiedade/Agitação")] = {
-    "label": "Ansiedade/Agitação",
+FLUXOS[normalizar("Ansiedade ou agitação intensas")] = {
+    "label": "Ansiedade ou agitação intensas",
     "perguntas": [
         {
             "id": "quadro",
@@ -6960,10 +6960,10 @@ FLUXOS[normalizar("Palpitações")] = {
     ]
 }
 # ===============================
-# DOR EM ARTICULAÇÕES
+# Dor nas articulações
 # ===============================
-FLUXOS[normalizar("Dor em articulações")] = {
-    "label": "Dor em articulações",
+FLUXOS[normalizar("Dor nas articulações")] = {
+    "label": "Dor nas articulações",
     "perguntas": [
         {
             "id": "quadro",
@@ -7023,8 +7023,8 @@ FLUXOS[normalizar("Dor em articulações")] = {
 # ===============================
 # COCEIRA (PRURIDO)
 # ===============================
-FLUXOS[normalizar("Coceira")] = {
-    "label": "Coceira",
+FLUXOS[normalizar("Coceira na pele")] = {
+    "label": "Coceira na pele",
     "perguntas": [
         {
             "id": "quadro",
@@ -7141,10 +7141,10 @@ FLUXOS[normalizar("Queimação no peito")] = {
 }
 
 # ===============================
-# ALTERAÇÃO DA FALA
+# Alteração na fala
 # ===============================
-FLUXOS[normalizar("Alteração da fala")] = {
-    "label": "Alteração da fala",
+FLUXOS[normalizar("Alteração na fala")] = {
+    "label": "Alteração na fala",
     "perguntas": [
         {
             "id": "quadro",
@@ -7201,10 +7201,10 @@ FLUXOS[normalizar("Alteração da fala")] = {
 }
 
 # ===============================
-# DOR DE OUVIDO
+# Dor no ouvido
 # ===============================
-FLUXOS[normalizar("Dor de ouvido")] = {
-    "label": "Dor de ouvido",
+FLUXOS[normalizar("Dor no ouvido")] = {
+    "label": "Dor no ouvido",
     "perguntas": [
         {
             "id": "quadro",
@@ -7254,8 +7254,8 @@ FLUXOS[normalizar("Dor de ouvido")] = {
 # ===============================
 # SENSIBILIDADE À LUZ/SOM
 # ===============================
-FLUXOS[normalizar("Sensibilidade à luz/som")] = {
-    "label": "Sensibilidade à luz/som",
+FLUXOS[normalizar("Sensibilidade à luz ou som")] = {
+    "label": "Sensibilidade à luz ou som",
     "perguntas": [
         {
             "id": "quadro",
@@ -7315,8 +7315,8 @@ FLUXOS[normalizar("Sensibilidade à luz/som")] = {
 # ===============================
 # INCHAÇO EM OLHOS/FACE
 # ===============================
-FLUXOS[normalizar("Inchaço em olhos/face")] = {
-    "label": "Inchaço em olhos/face",
+FLUXOS[normalizar("Inchaço nos olhos ou face")] = {
+    "label": "Inchaço nos olhos ou face",
     "perguntas": [
         {
             "id": "quadro",
@@ -7417,8 +7417,8 @@ FLUXOS[normalizar("Sangramento nasal")] = {
 # ===============================
 # 1) NÁUSEA
 # ===============================
-FLUXOS[normalizar("Náusea")] = {
-    "label": "Náusea",
+FLUXOS[normalizar("Náusea ou enjoo")] = {
+    "label": "Náusea ou enjoo",
     "perguntas": [
         {
             "id": "quadro",
@@ -7487,10 +7487,10 @@ FLUXOS[normalizar("Náusea")] = {
 }
 
 # ===============================
-# 2) DOR NO OMBRO/BRAÇO
+# 2) Dor no ombro ou braço
 # ===============================
-FLUXOS[normalizar("Dor no ombro/braço")] = {
-    "label": "Dor no ombro/braço",
+FLUXOS[normalizar("Dor no ombro ou braço")] = {
+    "label": "Dor no ombro ou braço",
     "perguntas": [
         {
             "id": "quadro",
@@ -7848,8 +7848,8 @@ FLUXOS[normalizar("Dificuldade para engolir")] = {
 # ===============================
 # 8) TREMores
 # ===============================
-FLUXOS[normalizar("Tremores")] = {
-    "label": "Tremores",
+FLUXOS[normalizar("Tremores ou movimentos invouluntários")] = {
+    "label": "Tremores ou movimentos invouluntários",
     "perguntas": [
         {
             "id": "quadro",
@@ -8028,7 +8028,51 @@ FLUXOS[normalizar("Infecção em ferida")] = {
         (0.0, "verde")
     ]
 }
-
+FLUXOS[normalizar("Febre")] = {
+    "label": "Febre",
+    "perguntas": [
+        {
+            "id": "temperatura",
+            "label": "Qual é a temperatura medida?",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 40°C": 2.0,
+                "38,5°C a 39,9°C": 1.0,
+                "37,8°C a 38,4°C": 0.4
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo está com febre?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 7 dias": 1.5,
+                "3 a 7 dias": 0.8,
+                "Menos de 3 dias": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Confusão mental": 1.8,
+                "Rigidez na nuca": 1.5,
+                "Falta de ar intensa": 1.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"temperatura": "≥ 40°C", "sinais_associados": ["Confusão mental"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Rigidez na nuca", "Falta de ar intensa"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
 # =============================
