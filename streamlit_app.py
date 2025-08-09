@@ -9446,8 +9446,7 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
 
         enviado = st.form_submit_button("Ver resultado")
 
-    # Só processa e exibe resultados SE o botão foi clicado
-    # Só processa e exibe resultados SE o botão foi clicado
+
 # Só processa e exibe resultados SE o botão foi clicado
 if enviado:
     st.markdown("---")
@@ -9585,10 +9584,11 @@ if enviado:
         st.markdown(f"{tag_cor('LARANJA')} &nbsp; Urgente", unsafe_allow_html=True)
         st.markdown(f"{tag_cor('VERMELHO')} &nbsp; Emergência", unsafe_allow_html=True)
 # Só processa e exibe resultados SE o botão foi clicado
+# Só processa e exibe resultados SE o botão foi clicado
 if enviado:
     st.markdown("---")
 
-    # ===== helpers visuais =====
+    # ===== helpers visuais (estética) =====
     def tag_cor(cor_txt: str) -> str:
         cores = {
             "vermelho":  "#d9342b",
@@ -9621,45 +9621,67 @@ if enviado:
     def card_fim():
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # ===== resumo conectado ao fluxograma =====
-    def gerar_resumo_fluxo(sintoma: str, respostas_fluxo: dict) -> list:
-        """
-        Constrói bullets a partir das respostas dadas no fluxograma:
-        usa o label da pergunta + o texto da opção escolhida.
-        """
+    # ===== util: extrair "motivos" a partir do próprio fluxograma =====
+    def motivos_do_fluxo(nome_sintoma: str, respostas_fluxo: dict) -> list[str]:
+        """Gera 2–4 bullets legíveis a partir das respostas e regras de exceção acionadas."""
+        chave = normalizar(nome_sintoma)
+        fluxo = FLUXOS[chave]
         bullets = []
-        chave = normalizar(sintoma)
-        fluxo = FLUXOS.get(chave, {})
-        perguntas = fluxo.get("perguntas", [])
 
-        # indexa perguntas por id para lookup rápido
-        idx = {p.get("id"): p for p in perguntas}
+        # 1) regras de exceção acionadas (se existirem)
+        try:
+            regras = fluxo.get("regras_excecao", [])
+            for regra in regras:
+                cond = regra.get("se", {})
+                disparou = True
+                partes_legiveis = []
+                for k, v in cond.items():
+                    resp_user = respostas_fluxo.get(k)
+                    if isinstance(v, list):  # checkbox precisa conter todos
+                        if not isinstance(resp_user, list) or not all(x in (resp_user or []) for x in v):
+                            disparou = False
+                            break
+                        partes_legiveis.extend(v)
+                    else:  # radio/string
+                        if resp_user != v:
+                            disparou = False
+                            break
+                        partes_legiveis.append(v)
+                if disparou and partes_legiveis:
+                    bullets.append("Regra de exceção: " + "; ".join(partes_legiveis))
+        except Exception:
+            pass  # nunca quebre a UI por causa de motivo
 
-        for pid, valor in (respostas_fluxo or {}).items():
-            p = idx.get(pid)
-            if not p:
-                continue
+        # 2) até completar 4 itens, inclua escolhas relevantes do usuário
+        try:
+            for pergunta in fluxo.get("perguntas", []):
+                pid = pergunta.get("id")
+                plabel = pergunta.get("label", "").strip()
+                resp = respostas_fluxo.get(pid)
+                if resp is None:
+                    continue
+                if isinstance(resp, list):
+                    if resp:
+                        bullets.append(f"{plabel}: " + ", ".join(resp))
+                else:
+                    bullets.append(f"{plabel}: {resp}")
+                if len(bullets) >= 4:
+                    break
+        except Exception:
+            pass
 
-            plabel = p.get("label", pid)
+        # fallback
+        if not bullets:
+            bullets = ["Resultado baseado nas respostas do fluxograma."]
+        return bullets[:4]
 
-            if p.get("tipo") == "radio":
-                # valor vem como string da opção
-                bullets.append(f"{plabel}: {valor}")
-            elif p.get("tipo") == "checkbox":
-                # valor é lista de opções marcadas
-                marcadas = valor if isinstance(valor, list) else []
-                if marcadas:
-                    bullets.append(f"{plabel}: " + ", ".join(marcadas))
-
-        return bullets[:6]  # limita a 6 itens para não poluir a UI
-
-    # ===== resultados por sintoma =====
+    # ===== processamento =====
     cores_geradas = []
 
     for sintoma in st.session_state.sintomas_escolhidos:
         if eh_fluxo(sintoma):
             chave = normalizar(sintoma)
-            # garante dicionário
+            # garante dicionário de respostas
             if "fluxo_respostas" not in st.session_state:
                 st.session_state["fluxo_respostas"] = {}
             if chave not in st.session_state["fluxo_respostas"]:
@@ -9669,34 +9691,30 @@ if enviado:
             cores_geradas.append(cor)
 
             card_inicio(sintoma, cor)
-            bullets = gerar_resumo_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
-            if bullets:
-                st.markdown("**Respostas que influenciaram:**")
-                for b in bullets:
-                    st.markdown(f"- {b}")
-            else:
-                st.markdown("<span style='color:#6c757d'>Sem detalhamento selecionado.</span>", unsafe_allow_html=True)
+            for b in motivos_do_fluxo(sintoma, st.session_state["fluxo_respostas"][chave]):
+                st.markdown(f"- {b}")
             card_fim()
+
         else:
-            # Caso futuro: sintomas sem fluxo (sem usar mapa_sintomas)
-            cor = "verde"
+            # Se existir algum sintoma não‑fluxo, apenas exiba a cor sem score/justificativa
+            # Você pode adaptar aqui se tiver uma função de classificação simples.
+            cor = "amarelo"  # fallback seguro (ajuste conforme sua lógica)
             cores_geradas.append(cor)
             card_inicio(sintoma, cor)
-            st.markdown("<span style='color:#6c757d'>Sintoma sem fluxograma associado.</span>", unsafe_allow_html=True)
+            st.markdown("- Resultado baseado na seleção do sintoma.")
             card_fim()
 
     st.markdown("---")
 
-    # ===== cor final combinada (mantém sua lógica) =====
+    # ===== cor final combinada (sua lógica permanece) =====
     cor_final = classificar_combinacao(
         sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
         cores=cores_geradas
     )
 
-    # --- ajuste conservador por fatores (mesma lógica) ---
+    # --- ajuste conservador (idade/gravidez etc.) ---
     gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
     idade_paciente = st.session_state.get("idade")
-
     ajuste_niveis = calcular_ajuste_por_fatores_conservador(
         sintomas_escolhidos=st.session_state.sintomas_escolhidos,
         cores_individuais=cores_geradas,
@@ -9704,7 +9722,6 @@ if enviado:
         idade=idade_paciente,
         gravida=gravidez
     )
-
     if ajuste_niveis >= 1:
         cor_final = aumentar_cor_em_1_nivel(cor_final)
 
@@ -9713,13 +9730,13 @@ if enviado:
     card_inicio("Gravidade estimada", cor_final)
     st.markdown("**O que fazer agora**")
     if cor_final == "vermelho":
-        st.markdown("- Procure atendimento **imediato**.")
+        st.markdown("- Procure atendimento imediato.")
     elif cor_final == "laranja":
-        st.markdown("- Procure avaliação **rápida** em unidade de saúde.")
+        st.markdown("- Procure avaliação rápida em unidade de saúde.")
     elif cor_final == "amarelo":
-        st.markdown("- Requer atenção, mas pode aguardar avaliação **não imediata**.")
+        st.markdown("- Requer atenção, mas pode aguardar avaliação não imediata.")
     else:
-        st.markdown("- **Observação** dos sintomas e medidas simples em casa.")
+        st.markdown("- Observação dos sintomas e medidas simples em casa.")
     card_fim()
 
     st.markdown("---")
