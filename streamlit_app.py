@@ -6044,7 +6044,22 @@ FLUXOS[normalizar("Diarreia em criança")] = {
             "opcoes": {
                 "Febre alta": 1.0,
                 "Letargia/confusão": 1.5,
-                "Boca seca ou olhos fundos
+                "Boca seca ou olhos fundos": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"aspecto": "Com sangue ou pretas"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Letargia/confusão"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 # ===============================
 # FALTA DE AR
 # ===============================
