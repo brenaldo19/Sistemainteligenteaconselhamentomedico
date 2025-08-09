@@ -3551,22 +3551,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 # Mapa atualizado de sintomas
 mapa_sintomas = {
     "Dor na perna e dificuladade para caminhar": (opcoes_dor_perna_caminhar, classificar_dor_perna_caminhar),
-    "Dor no peito": (opcoes_dor_no_peito, classificar_dor_no_peito),
-    "Confusão mental": (opcoes_confusao_mental, classificar_confusao_mental),
-    "Perda de consciência": (opcoes_perda_consciencia, classificar_perda_consciencia),
-    "Hipotensão ou colapso": (opcoes_hipotensao, classificar_hipotensao),
-    "Hipoglicemia": (opcoes_hipoglicemia, classificar_hipoglicemia),
-    "Hiperglicemia": (opcoes_hiperglicemia, classificar_hiperglicemia),
-    "Temperatura muito baixa": (opcoes_temperatura_baixa, classificar_temperatura_baixa),
-    "Dor durante a gravidez": (opcoes_dor_durante_gravidez, classificar_dor_durante_gravidez),
-    "Redução dos movimentos fetais": (opcoes_movimentos_fetais, classificar_movimentos_fetais),
-    "Trabalho de parto": (opcoes_trabalho_parto, classificar_trabalho_parto),
-    "Febre em lactente": (opcoes_febre_lactente, classificar_febre_lactente),
-    "Choro persistente em bebê": (opcoes_choro_persistente, classificar_choro_persistente),
-    "Icterícia neonatal": (opcoes_ictericia_neonatal, classificar_ictericia_neonatal),
-    "Queda em criança": (opcoes_queda_crianca, classificar_queda_crianca),
-    "Vômito em criança": (opcoes_vomito_crianca, classificar_vomito_crianca),
-    "Diarreia em criança": (opcoes_diarreia_crianca, classificar_diarreia_crianca),
     "Sinais de intoxicação ou envenenamento": (opcoes_intoxicacao, classificar_intoxicacao),
     "Dores no pescoço ou rigidez na nuca": (opcoes_dor_pescoco, classificar_dor_pescoco),
     "Alterações visuais súbitas": (opcoes_alteracao_visao, classificar_alteracao_visao),
@@ -3597,14 +3581,8 @@ mapa_sintomas = {
     "Retenção urinária": (opcoes_retencao_urinaria, classificar_retencao_urinaria),
     "Infecção em ferida": (opcoes_infeccao_ferida, classificar_infeccao_ferida),
     "Desmaio ou tontura": (opcoes_desmaio_tontura, classificar_desmaio_tontura),
-    "Convulsão": (opcoes_convulsoes, classificar_convulsoes),
-    "Trauma ou queda": (opcoes_trauma_ou_queda, classificar_trauma_ou_queda),
     "Dor nas costas": (opcoes_dor_nas_costas, classificar_dor_nas_costas),
-    "Dor abdominal": (opcoes_dor_abdominal, classificar_dor_abdominal),
-    "Febre": (opcoes_febre, classificar_febre),
-    "Vômito": (opcoes_vomito, classificar_vomito),
     "Dificuldade respiratória": (opcoes_dificuldade_respiratoria, classificar_dificuldade_respiratoria),
-    "Dor de cabeça": (opcoes_dor_de_cabeca, classificar_dor_de_cabeca),
     "Lesões na pele": (opcoes_lesoes_na_pele, classificar_lesoes_na_pele),
     "Dor ou olho vermelho": (opcoes_dor_ou_olho_vermelho, classificar_dor_ou_olho_vermelho),
     "Formigamento ou perda de força": (opcoes_formigamento_perda_forca, classificar_formigamento_perda_forca),
@@ -3614,7 +3592,6 @@ mapa_sintomas = {
     "Comportamento estranho à normalidade": (opcoes_comportamento_estranho, classificar_comportamento_estranho),
     "Sangramento ativo": (opcoes_sangramento_ativo, classificar_sangramento_ativo),
     "Alergia cutânea": (opcoes_alergia_cutanea, classificar_alergia_cutanea),
-    "Falta de ar": (opcoes_falta_de_ar, classificar_falta_de_ar)
     }
 mapa_sintomas = dict(sorted(mapa_sintomas.items()))
 
