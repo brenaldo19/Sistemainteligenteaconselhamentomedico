@@ -398,13 +398,12 @@ def dicionario_sintomas():
     "popular": "Dor nas bolas, que pode ser leve ou muito forte, às vezes de repente.",
     "clinico": "Orquialgia",
     "termos": {
-            "Escroto": "Bolsa de pele que envolve os testículos",
-            "Inchaço visível": "Aumento perceptível de volume em uma área",
-            "Vermelhidão ou calor no escroto": "Pele avermelhada e quente sobre os testículos, sinal de inflamação",
-            "Náusea ou vômito junto da dor": "Sensação de enjoo ou expulsão de conteúdo gástrico associada à dor",
-            "Criptorquidia (Testículo não descido)": "Quando, na infância, o testículo não desceu para o escroto (fator de risco na vida adulta)",
-            "Infecção urinária recente": "Infecção da bexiga ou uretra ocorrida nos últimos dias ou semanas",
-            "Com sangue": "Secreção com presença de sangue visível",
+            "Início súbito, forte, há menos de 6 horas": "Dor que começou de repente e muito forte nas últimas horas (sugere torção).",
+            "Inchaço visível": "Aumento do volume visível do testículo ou escroto.",
+            "Vermelhidão ou calor no escroto": "Pele avermelhada e quente sobre os testículos, sinal de inflamação.",
+            "Náusea ou vômito junto da dor": "Enjoo ou vômitos ocorrendo junto com a dor testicular.",
+            "Criptorquidia (testículo não descido)": "Testículo que não desceu para o escroto na infância, aumenta riscos.",
+            "Infecção urinária recente": "Infecção de urina nos últimos dias/semanas que pode inflamar estruturas próximas."
         }
     },
 
@@ -429,10 +428,10 @@ def dicionario_sintomas():
     "popular": "Esperma sai com sangue, cor rosa ou marrom.",
     "clinico": "Hemospermia",
     "termos": {
-        "Presença frequente de sangue no sêmen": "Aparece sangue quase sempre na hora de ejacular.",
-        "Sangue apareceu após dor ou trauma": "Teve pancada ou dor e depois saiu sangue no sêmen.",
-        "Pequena quantidade única, sem dor": "Saiu um pouco de sangue uma vez, sem sentir dor.",
-        "Aparência alterada, mas sem sangue visível": "O esperma parece estranho, mas não tem sangue aparente."
+            "Em vários episódios recentes": "Apareceu sangue no sêmen repetidas vezes em pouco tempo.",
+            "Após trauma ou procedimento urológico recente": "Depois de pancada, biópsia, vasectomia ou manipulação urológica.",
+            "Dor ao ejacular": "Dor que aparece durante a ejaculação.",
+            "Sangue na urina": "Urina com sangue visível (vermelha ou escura)."
             }
         },
 
@@ -2684,60 +2683,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 # Funções já existentes
 
 
-def opcoes_dor_testiculos():
-    return [
-        "Dor intensa e súbita em um dos testículos",
-        "Dor moderada com inchaço",
-        "Desconforto leve ao tocar",
-        "Dor leve que desapareceu"
-    ]
-
-def classificar_dor_testiculos(resp):
-    if "intensa" in resp and "súbita" in resp:
-        return "vermelho", "Dor súbita e intensa pode indicar torção testicular, uma emergência médica."
-    elif "moderada" in resp or "inchaço" in resp:
-        return "laranja", "Dor com inchaço pode estar relacionada a infecção ou inflamação."
-    elif "leve ao tocar" in resp:
-        return "amarelo", "Desconforto leve pode ser transitório, mas deve ser observado."
-    else:
-        return "verde", "Dor leve que já desapareceu geralmente não é preocupante."
-
-def opcoes_secrecao_mamilar():
-    return [
-        "Secreção com sangue ou espontânea",
-        "Secreção unilateral e persistente",
-        "Saída de secreção ao apertar o mamilo",
-        "Secreção ocasional, sem outros sintomas"
-    ]
-
-def classificar_secrecao_mamilar(resp):
-    if "sangue" in resp or "espontânea" in resp:
-        return "laranja", "Secreção com sangue ou espontânea pode estar relacionada a alterações mamárias significativas."
-    elif "unilateral" in resp or "persistente" in resp:
-        return "amarelo", "Secreções persistentes ou de um lado só merecem investigação médica."
-    elif "ao apertar" in resp:
-        return "amarelo", "Pode ser fisiológica, mas deve ser observada."
-    else:
-        return "verde", "Secreção leve e ocasional normalmente não representa risco."
-
-def opcoes_sangue_semen():
-    return [
-        "Presença frequente de sangue no sêmen",
-        "Sangue apareceu após dor ou trauma",
-        "Pequena quantidade única, sem dor",
-        "Aparência alterada, mas sem sangue visível"
-    ]
-
-def classificar_sangue_semen(resp):
-    if "frequente" in resp:
-        return "laranja", "Sangue frequente no sêmen pode ter causas graves e deve ser investigado."
-    elif "dor" in resp or "trauma" in resp:
-        return "laranja", "Presença de sangue após dor ou trauma pode indicar lesão local."
-    elif "única" in resp and "sem dor" in resp:
-        return "amarelo", "Um episódio isolado pode não ser grave, mas merece atenção se repetir."
-    else:
-        return "verde", "Aparência alterada sem sangue não indica risco imediato."
-
 def opcoes_trauma_craniano():
     return [
         "Batida forte com perda de consciência, vômito ou amnésia",
@@ -4616,7 +4561,6 @@ FLUXOS[normalizar("Nódulo na mama")] = {
     ]
 }
 
-# Fluxograma: Nódulo testicular (conservador)
 # Fluxograma: Nódulo testicular (conservador, com sinais específicos moderados)
 FLUXOS[normalizar("Nódulo testicular")] = {
     "label": "Nódulo testicular",
@@ -4796,6 +4740,187 @@ FLUXOS[normalizar("Secreção mamilar")] = {
     "mapeamento_cor": [
         (6.5, "vermelho"),
         (4.0, "laranja"),
+        (2.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Dor testicular (conservador)
+FLUXOS[normalizar("Dor testicular")] = {
+    "label": "Dor testicular",
+    "perguntas": [
+        {
+            "id": "inicio",
+            "label": "Quando a dor começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Início súbito, forte, há menos de 6 horas": 1.8,
+                "Início súbito, forte, há mais de 6 horas": 1.5,
+                "Início gradual, moderada": 1.0,
+                "Dor leve e esporádica": 0.5
+            }
+        },
+        {
+            "id": "localizacao",
+            "label": "Onde sente a dor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Apenas em um testículo": 0.6,
+                "Nos dois testículos": 0.8,
+                "Difusa no baixo-ventre/virilha": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Inchaço visível": 0.8,
+                "Vermelhidão ou calor no escroto": 0.8,
+                "Náusea ou vômito junto da dor": 0.9,
+                "Febre": 0.7
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes fatores de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de trauma na região": 0.6,
+                "Criptorquidia (testículo não descido)": 0.9,
+                "Infecção urinária recente": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"inicio": "Início súbito, forte, há menos de 6 horas"}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Náusea ou vômito junto da dor"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (2.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# Fluxograma: Secreção mamilar (conservador)
+FLUXOS[normalizar("Secreção mamilar")] = {
+    "label": "Secreção mamilar",
+    "perguntas": [
+        {
+            "id": "tipo_secrecao",
+            "label": "Qual o tipo da secreção?",
+            "tipo": "radio",
+            "opcoes": {
+                "Com sangue": 1.8,
+                "Transparente ou leitosa (fora da amamentação)": 1.2,
+                "Amarelada ou esverdeada": 0.8,
+                "Aquosa clara": 0.5
+            }
+        },
+        {
+            "id": "quantidade",
+            "label": "A secreção é:",
+            "tipo": "radio",
+            "opcoes": {
+                "Contínua ou espontânea (sem apertar)": 1.0,
+                "Apenas quando comprimida": 0.5
+            }
+        },
+        {
+            "id": "lado",
+            "label": "De qual lado ocorre?",
+            "tipo": "radio",
+            "opcoes": {
+                "Apenas em uma mama": 0.7,
+                "Em ambas as mamas": 0.5
+            }
+        },
+        {
+            "id": "sinais_locais",
+            "label": "Sinais locais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Retração do mamilo": 0.9,
+                "Ferida ou crosta no mamilo": 0.8,
+                "Nódulo palpável na mama": 1.2
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes fatores de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico familiar de câncer de mama": 1.1,
+                "Uso prolongado de terapia hormonal": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"tipo_secrecao": "Com sangue"}, "min_cor": "laranja"},
+        {"se": {"sinais_locais": ["Nódulo palpável na mama"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.5, "vermelho"),
+        (4.0, "laranja"),
+        (2.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# Fluxograma: Sangue no sêmen (hemospermia) — conservador
+FLUXOS[normalizar("Sangue no sêmen")] = {
+    "label": "Sangue no sêmen",
+    "perguntas": [
+        {
+            "id": "frequencia",
+            "label": "Com que frequência você notou sangue no sêmen?",
+            "tipo": "radio",
+            "opcoes": {
+                "Em vários episódios recentes": 1.6,
+                "Em 2–3 episódios": 1.2,
+                "Apenas uma vez": 0.6
+            }
+        },
+        {
+            "id": "contexto",
+            "label": "Houve algum evento relacionado?",
+            "tipo": "radio",
+            "opcoes": {
+                "Após trauma ou procedimento urológico recente": 0.9,
+                "Sem relação aparente": 0.6
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sintomas associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor ao ejacular": 0.8,
+                "Dor ao urinar (ardor)": 0.7,
+                "Febre": 0.7,
+                "Sangue na urina": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes fatores se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "IST recente ou parceiro com IST": 0.9,
+                "Idade acima de 40 anos": 0.6,
+                "Histórico de prostatite": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"frequencia": "Em vários episódios recentes", "sinais_associados": ["Febre"]}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Sangue na urina"]}, "min_cor": "laranja"},
+        {"se": {"contexto": "Após trauma ou procedimento urológico recente", "sinais_associados": ["Dor ao ejacular"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
         (2.0, "amarelo"),
         (0.0, "verde")
     ]
