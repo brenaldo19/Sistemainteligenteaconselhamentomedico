@@ -6556,7 +6556,7 @@ FLUXOS[normalizar("Engasgo ou obstrução das vias aéreas")] = {
 # ferimentos ou cortes com objetos
 # ===============================
 FLUXOS[normalizar("ferimentos ou cortes com objetos")] = {
-    "label": "ferimentos ou cortes com objetos",
+    "label": "Ferimentos ou cortes com objetos",
     "perguntas": [
         {
             "id": "quadro",
