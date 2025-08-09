@@ -1049,7 +1049,7 @@ def dicionario_sintomas():
     "definicao": "Quando a pessoa deixa de responder, desmaia ou apaga, mesmo que por pouco tempo.",
     "popular": "Quando a pessoa cai ou apaga e não responde. Pode voltar sozinha depois ou precisar de ajuda.",
     "clinico": "Perda de consciência",
-    "termos": {}
+    "termos": {
         }
     },
 
