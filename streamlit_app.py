@@ -1298,6 +1298,7 @@ def dicionario_sintomas():
         "Sinais de desidratação": "Boca seca, pouca urina, olhos fundos, fraqueza."
         }
     }
+}
     return dict(sorted(d.items()))
 
 dic = dicionario_sintomas()
