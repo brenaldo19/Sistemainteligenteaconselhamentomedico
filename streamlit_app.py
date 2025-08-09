@@ -916,8 +916,8 @@ def dicionario_sintomas():
     "popular": "Quando a pressão está baixa e a pessoa fica fraca, pálida ou com sensação de desmaio.",
     "clinico": "Hipotensão arterial",
     "termos": {
-        "Palidez extrema": "Pele muito branca, parecendo sem sangue.",
-        "Pressão baixa": "Medição da pressão abaixo de 90/60 mmHg."
+        "Hipoperfusão": "Sensação de corpo fraco, pele fria e pálida, como se a energia estivesse acabando.",
+        "Anafilaxia": "Reação alérgica grave com inchaço, falta de ar e vermelhidão espalhada pelo corpo."
         }
     },
 
@@ -1048,8 +1048,15 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa começa a falar coisas sem sentido, não reconhece as pessoas, esquece onde está ou age de forma estranha.",
     "clinico": "Alteração do estado mental ou delirium",
     "termos": {
-        "Desorientação": "Quando não sabe onde está, que dia é ou quem é quem.",
-        "Lapsos de memória": "Esquecimentos rápidos, confunde fatos recentes ou nomes."
+    "Desorientação completa e fala incoerente": "Pessoa não sabe onde está, que dia é ou quem são as pessoas, falando frases sem sentido.",
+    "Confusão mental com dificuldade de reconhecer pessoas ou lugares": "Pessoa não reconhece familiares ou o próprio local onde está.",
+        "Início súbito (minutos a horas)": "Sintomas apareceram de repente, de uma hora para outra.",
+        "Instalação gradual (dias a semanas)": "Sintomas foram surgindo aos poucos, piorando com o tempo.",
+        "Rigidez na nuca": "Pescoço duro e dolorido, com dificuldade para encostar o queixo no peito.",
+        "Sinais focais neurológicos": "Um lado do corpo fraco, caído ou com fala enrolada.",
+        "Convulsão": "Movimentos involuntários do corpo, como tremores fortes, ou rigidez com perda de consciência.",
+        "Hipoglicemiantes": "Remédios para baixar açúcar no sangue, usados por pessoas com diabetes.",
+        "Imunossupressão": "Defesas do corpo enfraquecidas, deixando a pessoa mais vulnerável a infecções."
         }
     },
 
@@ -1058,6 +1065,10 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa cai ou apaga e não responde. Pode voltar sozinha depois ou precisar de ajuda.",
     "clinico": "Perda de consciência",
     "termos": {
+            "Pré-síncope": "Sensação de que vai desmaiar, com visão escurecendo ou ouvido abafando, mas sem cair.",
+            "Hipotensão ortostática": "Tontura ou visão turva ao se levantar rápido.",
+            "Arritmia": "Sensação de coração batendo muito rápido, devagar ou fora de ritmo.",
+            "Anticoagulante": "Remédio que afina o sangue, aumentando risco de sangramento."
         }
     },
 
@@ -2699,61 +2710,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
     st.markdown(mensagem_avaliacao)
 
 # Funções já existentes
-
-
-def opcoes_confusao_mental():
-    return [
-        "Desorientação completa e fala incoerente",
-        "Confusão mental com dificuldade de reconhecer pessoas ou lugares",
-        "Leve desatenção ou lapsos de memória",
-        "Ligeira distração sem prejuízo das atividades"
-    ]
-
-def classificar_confusao_mental(resp):
-    if resp == "Desorientação completa e fala incoerente":
-        return "vermelho", "A desorientação completa e a fala incoerente indicam um quadro grave, que pode estar relacionado a alterações neurológicas ou metabólicas. Procure atendimento médico urgente."
-    elif resp == "Confusão mental com dificuldade de reconhecer pessoas ou lugares":
-        return "laranja", "Esse grau de confusão pode indicar um problema em evolução, como infecção, efeito colateral de medicamentos ou distúrbios cognitivos. Avaliação médica é recomendada."
-    elif resp == "Leve desatenção ou lapsos de memória":
-        return "amarelo", "Pode ser um sinal inicial de cansaço, estresse ou alteração cognitiva leve. Acompanhe com atenção."
-    else:
-        return "verde", "Aparentemente estável, sem sinais de alarme. Continue observando."
-
-def opcoes_perda_consciencia():
-    return [
-        "Perda total de consciência recente sem recuperação",
-        "Desmaio com recuperação, mas com tontura persistente",
-        "Sensação de quase desmaio, mas sem queda",
-        "Nenhum episódio de perda de consciência"
-    ]
-
-def classificar_perda_consciencia(resp):
-    if resp == "Perda total de consciência recente sem recuperação":
-        return "vermelho", "A perda total de consciência sem recuperação imediata é um sinal de gravidade e pode indicar condições neurológicas, cardíacas ou metabólicas sérias. Procure atendimento médico urgente."
-    elif resp == "Desmaio com recuperação, mas com tontura persistente":
-        return "laranja", "Apesar da recuperação, a tontura persistente pode indicar um problema subjacente que merece investigação médica em breve."
-    elif resp == "Sensação de quase desmaio, mas sem queda":
-        return "amarelo", "É importante observar se há outros sintomas associados. Pode ser causado por desidratação, ansiedade ou queda de pressão."
-    else:
-        return "verde", "Sem sinais de alerta importantes no momento. Continue acompanhando e procure ajuda se o quadro piorar."
-
-def opcoes_hipotensao():
-    return [
-        "Pressão muito baixa com tontura e palidez extrema",
-        "Tontura ao levantar e fraqueza acentuada",
-        "Sensação de pressão baixa leve",
-        "Sem sintomas de pressão baixa"
-    ]
-
-def classificar_hipotensao(resp):
-    if resp == "Pressão muito baixa com tontura e palidez extrema":
-        return "vermelho", "Queda acentuada da pressão arterial com sintomas intensos pode indicar um quadro de emergência, como choque circulatório. Procure atendimento médico imediatamente."
-    elif resp == "Tontura ao levantar e fraqueza acentuada":
-        return "laranja", "Esses sinais sugerem hipotensão ortostática ou desidratação. É necessário monitorar e, se persistirem, buscar avaliação médica."
-    elif resp == "Sensação de pressão baixa leve":
-        return "amarelo", "Pode ser transitório, especialmente em dias quentes ou com jejum prolongado. Mantenha hidratação e observe evolução."
-    else:
-        return "verde", "Sem sintomas relevantes no momento. Mantenha hábitos saudáveis e continue observando possíveis alterações."
 
 def opcoes_hipoglicemia():
     return [
@@ -5536,7 +5492,182 @@ FLUXOS[normalizar("Sangramento retal")] = {
         (0.0, "verde")
     ]
 }
+# -----------------------------
+# CONFUSÃO MENTAL
+# -----------------------------
+FLUXOS[normalizar("Confusão mental")] = {
+    "label": "Confusão mental",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Desorientação completa e fala incoerente": 3.5,
+                "Confusão mental com dificuldade de reconhecer pessoas ou lugares": 2.0,
+                "Leve desatenção ou lapses de memória": 1.0,
+                "Ligeira distração sem prejuízo das atividades": 0.0
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início do quadro",
+            "tipo": "radio",
+            "opcoes": {
+                "Início súbito (minutos a horas)": 1.3,
+                "Instalação gradual (dias a semanas)": 0.6
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre ou infecção recente": 1.0,
+                "Dor de cabeça intensa ou rigidez na nuca": 1.3,
+                "Fraqueza em um lado do corpo ou fala arrastada": 1.3,
+                "Convulsão recente": 1.3,
+                "Vômitos persistentes ou desidratação": 0.8
+            }
+        },
+        {
+            "id": "uso_substancias",
+            "label": "Uso de substâncias/medicações",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Álcool/drogas recentemente": 0.8,
+                "Início/ajuste de psicotrópicos (benzodiazepínicos/antidepressivos/antipsicóticos)": 0.8,
+                "Hipoglicemiantes/insulina": 1.0
+            }
+        },
+        {
+            "id": "condicoes_risco",
+            "label": "Condições de risco",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Idade ≤ 4 anos ou ≥ 67 anos": 1.2,
+                "Diabetes ou doença metabólica conhecida": 1.0,
+                "Doença neurológica prévia (ex.: demência, AVC)": 1.0,
+                "Imunossupressão": 1.0
+            }
+        }
+    ]
+}
 
+# -----------------------------
+# PERDA DE CONSCIÊNCIA
+# -----------------------------
+FLUXOS[normalizar("Perda de consciência")] = {
+    "label": "Perda de consciência",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Perda total de consciência recente sem recuperação": 3.5,
+                "Desmaio com recuperação, mas com tontura persistente": 2.0,
+                "Sensação de quase desmaio, mas sem queda": 1.0,
+                "Nenhum episódio de perda de consciência": 0.0
+            }
+        },
+        {
+            "id": "mecanismo",
+            "label": "Como aconteceu?",
+            "tipo": "radio",
+            "opcoes": {
+                "Após dor torácica/palpitação/dispneia": 1.3,
+                "Após esforço/calor/desidratação/ficar em pé por muito tempo": 0.8,
+                "Durante mudança brusca de posição": 0.6
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Trauma craniano durante a queda": 1.2,
+                "Convulsões (movimentos involuntários, mordedura de língua, incontinência)": 1.3,
+                "Palidez extrema, sudorese fria": 1.0,
+                "Dor de cabeça intensa ao acordar do episódio": 1.0
+            }
+        },
+        {
+            "id": "historico",
+            "label": "Histórico",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Episódios repetidos nos últimos 7 dias": 1.0,
+                "Arritmia/Doença cardíaca conhecida": 1.3,
+                "Uso de anticoagulante": 1.0
+            }
+        },
+        {
+            "id": "condicoes_risco",
+            "label": "Condições de risco",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Idade ≤ 4 anos ou ≥ 67 anos": 1.2,
+                "Gravidez": 1.0,
+                "Diabetes/Insulina ou hipoglicemiantes": 1.0,
+                "Doença neurológica prévia": 1.0
+            }
+        }
+    ]
+}
+
+# -----------------------------
+# HIPOTENSÃO
+# -----------------------------
+FLUXOS[normalizar("Hipotensão")] = {
+    "label": "Hipotensão",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Pressão muito baixa com tontura e palidez extrema": 3.5,
+                "Tontura ao levantar e fraqueza acentuada": 2.0,
+                "Sensação de pressão baixa leve": 1.0,
+                "Sem sintomas de pressão baixa": 0.0
+            }
+        },
+        {
+            "id": "sinais_de_choque",
+            "label": "Sinais de choque/gravidade",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Pele fria/pegajosa, sudorese intensa": 1.2,
+                "Batimento cardíaco muito acelerado": 1.0,
+                "Confusão/sonolência": 1.2,
+                "Redução do volume urinário": 0.8
+            }
+        },
+        {
+            "id": "possiveis_causas",
+            "label": "Possíveis causas recentes",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Vômitos/diarreia/febre (perda de líquidos)": 1.0,
+                "Sangramento aparente ou suspeito": 1.3,
+                "Uso de anti-hipertensivos/diuréticos": 0.8,
+                "Reação alérgica com inchaço/urticária/chiado": 1.3
+            }
+        },
+        {
+            "id": "condicoes_risco",
+            "label": "Condições de risco",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Idade ≤ 4 anos ou ≥ 67 anos": 1.2,
+                "Doença cardíaca conhecida": 1.0,
+                "Gravidez": 1.0,
+                "Insuficiência renal/hepática": 1.0
+            }
+        }
+    ]
+}
 
 
 # =============================
