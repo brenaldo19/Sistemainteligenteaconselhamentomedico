@@ -1147,16 +1147,17 @@ def dicionario_sintomas():
         }
     },
 
-"Politrauma": {
+"Trauma grave": {
     "definicao": "Lesão corporal severa que coloca a vida em risco, como batidas fortes, atropelamentos ou quedas de altura.",
     "popular": "Quando a pessoa se machuca seriamente, com muito sangue, fratura exposta, dificuldade pra respirar ou inconsciência.",
     "clinico": "Trauma de alta energia",
     "termos": {
-        "Fratura exposta": "Osso quebrado que aparece pra fora da pele.",
-        "Hemorragia": "Perda grande de sangue.",
-        "Comprometimento neurológico": "Perda de movimento, fala ou consciência.",
-        "Dor localizada": "É quando a dor fica em um lugar só",
-        "Fratura": "É quando um osso quebra"
+        "Fratura exposta": "Quebra de osso com ferida aberta, deixando o osso em contato com o exterior.",
+        "Sangramento grave": "Perda de sangue em grande volume ou de forma contínua, difícil de estancar.",
+        "Hematoma": "Mancha roxa sob a pele causada por acúmulo de sangue após trauma.",
+        "Incapacidade de apoiar o peso": "Impossibilidade de sustentar o corpo sobre a perna por dor ou fraqueza.",
+        "Anticoagulante": "Remédio que afina o sangue e aumenta o risco de sangramentos.",
+        "Politrauma": "Trauma que atinge várias partes do corpo ao mesmo tempo."
         }
     },
     
@@ -1165,9 +1166,9 @@ def dicionario_sintomas():
     "popular": "Quando o dente começa a doer forte, latejar ou doer ao morder. Pode vir com inchaço, febre ou dor irradiada pra cabeça.",
     "clinico": "Odontalgia",
     "termos": {
-        "Abcesso dentário": "Inchaço com pus perto do dente.",
-        "Irradiação": "Quando a dor vai pra orelha, pescoço ou cabeça.",
-        "Sensibilidade": "Dor ao comer doce, gelado ou quente."
+        "Secreção purulenta": "Líquido amarelado/esverdeado espesso, típico de infecção.",
+        "Trismo": "Dificuldade para abrir a boca por dor ou rigidez dos músculos.",
+        "Irradiação da dor": "Quando a dor se espalha para outra região (ex.: face ou orelha)."
         }
     },
 
@@ -1176,10 +1177,11 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa começa a escutar menos, sentir o ouvido tapado, ouvir zumbido ou ter dor no ouvido.",
     "clinico": "Hipoacusia ou zumbido",
     "termos": {
-        "Zumbido": "Som no ouvido como chiado, apito ou buzina.",
-        "Perda súbita ": "Quando para de ouvir de repente.",
-        "Otite": "Inflamação do ouvido que causa dor e secreção.",
-        "Zumbido": "Comoo um chiado que fica toda hor presente"
+        "Perda súbita da audição": "Queda rápida da audição em horas/dias, geralmente em um ouvido.",
+        "Zumbido": "Som percebido no ouvido (apito/chiado) sem fonte externa.",
+        "Ouvido tampado": "Sensação de pressão/entupimento no ouvido.",
+        "Vertigem": "Sensação de que tudo está girando (rodação).",
+        "Barotrauma": "Lesão por mudança brusca de pressão (voo/mergulho)."
         }
     },
 
@@ -1188,9 +1190,9 @@ def dicionario_sintomas():
     "popular": "Aquela dor pra engolir, que às vezes vem com pus, placas brancas ou febre. Pode arder, queimar ou deixar a voz rouca.",
     "clinico": "Faringite ou amigdalite",
     "termos": {
-        "Placas": "Manchas esbranquiçadas ou amareladas nas amígdalas, indicando infecção.",
-        "Pus visível": "Material branco que sai da garganta ou fica grudado.",
-        "Irritação": "Sensação de garganta arranhando ou pegando fogo."
+        "Placas/pus nas amígdalas": "Material esbranquiçado nas amígdalas, comum em infecções.",
+        "Dificuldade para engolir saliva (baba)": "Saliva escorrendo porque engolir está muito doloroso/difícil.",
+        "Voz abafada ('batata quente')": "Fala alterada com som abafado, sugerindo inflamação importante na garganta."
         }
     },
 
@@ -2689,78 +2691,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_trauma_grave():
-    return [
-        "Acidente com perda de consciência, fratura exposta ou sangramento grave",
-        "Queda ou impacto com dor intensa e possível fratura",
-        "Batida com dor localizada e hematoma",
-        "Pequeno impacto sem dor ou limitação"
-    ]
-
-def classificar_trauma_grave(resp):
-    if resp == "Acidente com perda de consciência, fratura exposta ou sangramento grave":
-        return "vermelho", "Emergência grave. Procure o pronto-socorro imediatamente."
-    elif resp == "Queda ou impacto com dor intensa e possível fratura":
-        return "laranja", "Alerta de possível fratura. Vá à emergência ou pronto atendimento."
-    elif resp == "Batida com dor localizada e hematoma":
-        return "amarelo", "Lesão leve. Acompanhe os sintomas e procure atendimento se piorar."
-    else:
-        return "verde", "Sem sinais de urgência, apenas observe."
-
-def opcoes_dor_odontologica():
-    return [
-        "Dor forte com inchaço no rosto ou febre",
-        "Dor intensa ao mastigar ou à noite",
-        "Dor leve com sensibilidade ao frio/quente",
-        "Leve incômodo eventual"
-    ]
-
-def classificar_dor_odontologica(resp):
-    if "inchaço no rosto" in resp or "febre" in resp:
-        return "vermelho", "Emergência odontológica. Pode indicar infecção grave."
-    elif "mastigar" in resp or "à noite" in resp:
-        return "laranja", "Dor moderada. Agende atendimento com dentista rapidamente."
-    elif "sensibilidade" in resp:
-        return "amarelo", "Acompanhe os sintomas. Pode indicar problema dentário inicial."
-    else:
-        return "verde", "Sintoma leve. Siga com higiene bucal e monitoramento."
-
-def opcoes_alteracao_auditiva():
-    return [
-        "Perda súbita da audição com zumbido ou dor",
-        "Diminuição importante da audição com secreção",
-        "Sensação de ouvido tampado leve",
-        "Alteração momentânea após barulho ou pressão"
-    ]
-
-def classificar_alteracao_auditiva(resp):
-    if "Perda súbita" in resp:
-        return "vermelho", "Procure atendimento médico urgente. Pode indicar problema auditivo grave."
-    elif "secreção" in resp:
-        return "laranja", "Alerta para infecção. Busque avaliação médica."
-    elif "ouvido tampado" in resp:
-        return "amarelo", "Sintoma leve. Se persistir, procure um otorrino."
-    else:
-        return "verde", "Sem sinais de gravidade. Observe os sintomas."
-            
-def opcoes_dor_garganta():
-    return [
-        "Dor forte com dificuldade de engolir e febre alta",
-        "Dor moderada com placas ou pus visível",
-        "Irritação leve e dificuldade discreta",
-        "Leve desconforto ao falar ou engolir"
-    ]
-
-def classificar_dor_garganta(resp):
-    if "febre alta" in resp:
-        return "vermelho", "Procure pronto atendimento. Pode ser infecção grave."
-    elif "placas" in resp or "pus" in resp:
-        return "laranja", "Atenção! Pode ser amigdalite ou infecção. Busque orientação médica."
-    elif "Irritação leve" in resp:
-        return "amarelo", "Monitorar evolução dos sintomas."
-    else:
-        return "verde", "Sem sinais de urgência. Mantenha hidratação."
-
 def opcoes_mordedura():
     return [
         "Mordida profunda com sangramento e suspeita de raiva",
@@ -4078,10 +4008,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 mapa_sintomas = {
     "Dor na perna e dificuladade para caminhar": (opcoes_dor_perna_caminhar, classificar_dor_perna_caminhar),
     "Dor no peito": (opcoes_dor_no_peito, classificar_dor_no_peito),
-    "Politrauma": (opcoes_trauma_grave, classificar_trauma_grave),
-    "Dor de dente": (opcoes_dor_odontologica, classificar_dor_odontologica),
-    "Alteração na audição": (opcoes_alteracao_auditiva, classificar_alteracao_auditiva),
-    "Dor de garganta": (opcoes_dor_garganta, classificar_dor_garganta),
     "Mordedura": (opcoes_mordedura, classificar_mordedura),
     "Queimadura": (opcoes_queimaduras, classificar_queimaduras),
     "Ferida não-traumática": (opcoes_ferida_nao_traumatica, classificar_ferida_nao_traumatica),
@@ -5168,6 +5094,243 @@ FLUXOS[normalizar("Delírio em idosos")] = {
         {"se": {"quadro": "Desorientação súbita com agitação ou alucinações"}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Fala enrolada", "Sonolência excessiva"]}, "min_cor": "laranja"},
         {"se": {"sinais_associados": ["Febre"], "fatores": ["Infecção conhecida (urina/pulmão)"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Trauma grave
+FLUXOS[normalizar("Trauma grave")] = {
+    "label": "Trauma grave",
+    "perguntas": [
+        {
+            "id": "gravidade",
+            "label": "Qual foi a situação principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Acidente com perda de consciência, fratura exposta ou sangramento grave": 3.5,
+                "Queda ou impacto com dor intensa e possível fratura": 2.0,
+                "Batida com dor localizada e hematoma": 1.0,
+                "Pequeno impacto sem dor ou limitação": 0.0
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Quando ocorreu o trauma?",
+            "tipo": "radio",
+            "opcoes": {
+                "Menos de 24h": 1.0,
+                "Entre 1 e 7 dias": 0.5,
+                "Mais de 7 dias": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Deformidade evidente no membro": 1.2,
+                "Incapacidade de apoiar o peso": 1.2,
+                "Sangramento ativo": 1.5,
+                "Ferida profunda/laceração extensa": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso de anticoagulante": 1.0,
+                "Idade ≥ 65 anos": 0.6,
+                "Trauma em múltiplas regiões (politrauma)": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"gravidade": "Acidente com perda de consciência, fratura exposta ou sangramento grave"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Sangramento ativo"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Deformidade evidente no membro", "Incapacidade de apoiar o peso"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Dor de garganta
+FLUXOS[normalizar("Dor de garganta")] = {
+    "label": "Dor de garganta",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor forte com dificuldade de engolir e febre alta": 3.2,
+                "Dor moderada com placas ou pus visível": 2.0,
+                "Irritação leve e dificuldade discreta": 1.0,
+                "Leve desconforto ao falar ou engolir": 0.2
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 4 dias": 0.9,
+                "Entre 2 e 4 dias": 0.5,
+                "Menos de 2 dias": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Placas/pus nas amígdalas": 1.0,
+                "Dificuldade para engolir saliva (baba)": 1.2,
+                "Voz abafada ('batata quente')": 1.2,
+                "Falta de ar": 1.2
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Algum fator se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Contato estreito com pessoa doente": 0.4,
+                "Imunossupressão": 0.8,
+                "Ausência de tosse": 0.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor forte com dificuldade de engolir e febre alta"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Dificuldade para engolir saliva (baba)", "Voz abafada ('batata quente')", "Falta de ar"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Placas/pus nas amígdalas"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Dor odontológica
+FLUXOS[normalizar("Dor odontológica")] = {
+    "label": "Dor odontológica",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor forte com inchaço no rosto ou febre": 3.2,
+                "Dor intensa ao mastigar ou à noite": 2.0,
+                "Dor leve com sensibilidade ao frio/quente": 1.0,
+                "Leve incômodo eventual": 0.0
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo sente essa dor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 7 dias": 0.9,
+                "Entre 2 e 7 dias": 0.5,
+                "Menos de 2 dias": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Secreção purulenta na gengiva": 1.0,
+                "Trismo (dificuldade para abrir a boca)": 1.0,
+                "Irradiação da dor para face/orelha": 0.6,
+                "Gengiva muito inchada e dolorida": 0.7
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Diabetes descompensado": 0.8,
+                "Imunossupressão": 0.8,
+                "Extração/dente manipulado recente": 0.7
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor forte com inchaço no rosto ou febre"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Trismo (dificuldade para abrir a boca)"]}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Secreção purulenta na gengiva"], "duracao": "Mais de 7 dias"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Alteração auditiva
+FLUXOS[normalizar("Alteração auditiva")] = {
+    "label": "Alteração auditiva",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Perda súbita da audição com zumbido ou dor": 3.5,
+                "Diminuição importante da audição com secreção": 2.0,
+                "Sensação de ouvido tampado leve": 1.0,
+                "Alteração momentânea após barulho ou pressão": 0.2
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo percebeu a alteração?",
+            "tipo": "radio",
+            "opcoes": {
+                "Menos de 48h": 1.0,
+                "Entre 2 e 7 dias": 0.6,
+                "Mais de 7 dias": 0.3
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Vertigem intensa (rodação)": 1.2,
+                "Secreção purulenta": 1.0,
+                "Febre": 0.7,
+                "Dor de ouvido importante": 0.8
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Exposição recente a barulho muito alto": 0.8,
+                "Mudança de pressão (voo/mergulho)": 0.8,
+                "Infecção respiratória recente": 0.6,
+                "Entrada de água/trauma no ouvido": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Perda súbita da audição com zumbido ou dor"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Vertigem intensa (rodação)"]}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Secreção purulenta", "Febre"]}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
         (6.0, "vermelho"),
