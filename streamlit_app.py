@@ -514,8 +514,10 @@ def dicionario_sintomas():
     "popular": "Quando a luz ou o som começa a incomodar mais do que o normal — dá dor de cabeça, irritação ou mal-estar.",
     "clinico": "Fotofobia ou fonofobia",
     "termos": {
-        "Sensibilidade intensa": "Luz ou som causam dor ou mal-estar forte.",
-        "Incômodo moderado": "Incomoda, mas ainda é tolerável."
+        "Sensibilidade intensa com dor de cabeça e náusea": "Luz ou barulho incomodam muito, junto com dor de cabeça e enjoo.",
+        "Incômodo moderado que piora em ambientes claros ou barulhentos": "Luz ou barulho incomodam de forma moderada.",
+        "Leve desconforto ao sair no sol ou ouvir sons agudos": "Luz ou som incomodam só um pouco.",
+        "Sensação leve e eventual": "Luz ou som incomodam raramente e de leve."
         }
     },
 
@@ -524,9 +526,10 @@ def dicionario_sintomas():
     "popular": "Quando o ouvido dói, sai alguma coisa de dentro, faz barulho estranho ou não melhora com remédio.",
     "clinico": "Otalgia",
     "termos": {
-        "Secreção purulenta": "Sai líquido grosso e amarelo ou esverdeado do ouvido.",
-        "Sem melhora com analgésico": "A dor continua mesmo após tomar remédio comum.",
-        "Zumbido": "Barulho constante no ouvido, como apito ou chiado."
+        "Dor intensa com febre ou secreção purulenta": "Ouvido dói muito e tem febre ou sai pus.",
+        "Dor forte e contínua, sem melhora com analgésico": "Ouvido dói bastante e não melhora com remédio.",
+        "Dor leve com coceira ou zumbido": "Ouvido incomoda um pouco, coça ou apita.",
+        "Desconforto discreto que vai e volta": "Incomoda de leve e só de vez em quando."
         }
     },
 
@@ -535,8 +538,10 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa começa a falar estranho, enrolado ou muito devagar, como se tivesse bêbada ou confusa.",
     "clinico": "Disartria ou afasia",
     "termos": {
-        "Fala arrastada": "As palavras saem devagar e desconexas.",
-        "Fala lenta ou confusa": "Parece esquecer as palavras ou trocar por outras."
+        "Perda súbita da fala ou fala arrastada": "De repente não consegue falar direito ou fala enrolado.",
+        "Dificuldade de encontrar palavras ou formar frases": "Quer falar, mas não consegue achar as palavras.",
+        "Fala lenta ou confusa, mas consegue se expressar": "Fala mais devagar ou meio confuso, mas ainda dá pra entender.",
+        "Leve hesitação, mas sem prejuízo da comunicação": "Às vezes trava um pouco para falar, mas nada grave."
         }
     },
 
@@ -557,9 +562,10 @@ def dicionario_sintomas():
     "popular": "Aquela sensação de fogo no meio do peito, que piora depois de comer ou deitar.",
     "clinico": "Refluxo gastroesofágico ou dispepsia",
     "termos": {
-        "Suor frio": "Começa a suar mesmo estando frio, geralmente com mal-estar.",
-        "Após comer alimentos pesados": "Sente a queimação logo depois de uma refeição gordurosa.",
-        "Piora ao deitar": "Deitado, o sintoma se intensifica ou sobe até a garganta."
+        "Queimação forte com náusea ou suor frio": "Ardência muito forte no peito, junto de enjoo ou suor frio.",
+        "Desconforto moderado que piora ao deitar": "Ardência média no peito que piora quando deita.",
+        "Ardência leve após comer alimentos pesados": "Ardência leve depois de comer muito ou comida pesada.",
+        "Sensação leve, ocasional, sem outros sintomas": "Ardência fraca que aparece de vez em quando."
         }
     },
 
@@ -568,9 +574,10 @@ def dicionario_sintomas():
     "popular": "Quando a pele começa a coçar muito, com ou sem manchas vermelhas. Às vezes não passa nem com creme ou banho.",
     "clinico": "Prurido cutâneo",
     "termos": {
-        "Placas vermelhas": "Manchas grandes e avermelhadas que coçam.",
-        "Não alivia": "A coceira não melhora com nada.",
-        "Localizada": "Apenas em uma parte do corpo."
+        "Coceira intensa com placas vermelhas e inchaço": "Coça muito e a pele fica vermelha e inchada.",
+        "Coceira forte que não alivia, atrapalha o sono": "Coça tanto que não consegue dormir.",
+        "Coceira moderada e localizada": "Coça um pouco e só em um lugar.",
+        "Coceira leve, passageira": "Coça levemente e passa rápido."
         }
     },
 
@@ -1261,10 +1268,10 @@ def dicionario_sintomas():
     "popular": "É quando dói o joelho, ombro ou outra articulação, principalmente ao se mexer ou depois de uma batida. Pode inchar e ficar quente.",
     "clinico": "Artralgia",
     "termos": {
-        "Inflamação visível": "Quando a articulação está inchada, vermelha ou quente.",
-        "Mobilidade limitada": "Dificuldade pra mexer o local normalmente.",
-        "Edema": "É o nome técnico para inchaço.",
-        "Trauma": "É um impacto no local que está doendo,como uma batida"
+        "Dor súbita com inchaço e dificuldade de movimentar": "Apareceu de repente, está inchado e difícil de mexer.",
+        "Dor intensa após trauma ou inflamação visível": "Dói muito depois de bater ou quando está visivelmente inchado/vermelho.",
+        "Dor moderada que piora com o uso": "Dói um pouco e piora quando mexe ou anda.",
+        "Dor leve que melhora com repouso": "Dói pouco e melhora quando descansa."
         }
     },
 
@@ -2764,132 +2771,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_dor_articulacoes():
-    return [
-        "Dor súbita com inchaço e dificuldade de movimentar",
-        "Dor intensa após trauma ou inflamação visível",
-        "Dor moderada que piora com o uso",
-        "Dor leve que melhora com repouso"
-    ]
-
-def classificar_dor_articulacoes(opcao):
-    if opcao == "Dor súbita com inchaço e dificuldade de movimentar":
-        return "vermelho", "Suspeita de lesão articular grave. Avaliação ortopédica urgente."
-    elif opcao == "Dor intensa após trauma ou inflamação visível":
-        return "laranja", "Inflamação ou lesão moderada. Pode necessitar de cuidados médicos."
-    elif opcao == "Dor moderada que piora com o uso":
-        return "amarelo", "Provavelmente sobrecarga. Repouso e gelo podem aliviar."
-    else:
-        return "verde", "Dor leve e tolerável. Sem sinais de risco."
-
-def opcoes_tosse():
-    return [
-        "Tosse com sangue ou falta de ar severa",
-        "Tosse persistente com febre alta",
-        "Tosse seca ou com catarro moderado",
-        "Tosse ocasional sem outros sintomas"
-    ]
-
-def classificar_tosse(resp):
-    if resp == "Tosse com sangue ou falta de ar severa":
-        return "vermelho", "Tosse com sinais de gravidade respiratória. Procure pronto atendimento."
-    elif resp == "Tosse persistente com febre alta":
-        return "laranja", "Pode indicar infecção como pneumonia. Requer avaliação médica."
-    elif resp == "Tosse seca ou com catarro moderado":
-        return "amarelo", "Quadro viral ou alérgico leve. Monitorar e hidratar."
-    else:
-        return "verde", "Sem sinais de alarme. Tosse ocasional e leve."
-
-def opcoes_coceira():
-    return [
-        "Coceira intensa com placas vermelhas e inchaço",
-        "Coceira forte que não alivia, atrapalha o sono",
-        "Coceira moderada e localizada",
-        "Coceira leve, passageira"
-    ]
-
-def classificar_coceira(opcao):
-    if opcao == "Coceira intensa com placas vermelhas e inchaço":
-        return "vermelho", "Reação alérgica intensa ou dermatite grave. Procure atendimento médico urgente."
-    elif opcao == "Coceira forte que não alivia, atrapalha o sono":
-        return "laranja", "Quadro incômodo e persistente. Avaliação médica é recomendada."
-    elif opcao == "Coceira moderada e localizada":
-        return "amarelo", "Situação leve a moderada. Hidratantes ou antialérgicos podem ajudar."
-    else:
-        return "verde", "Coceira leve e passageira. Sem sinais de alerta."
-
-def opcoes_queimacao_peito():
-    return [
-        "Queimação forte com náusea ou suor frio",
-        "Desconforto moderado que piora ao deitar",
-        "Ardência leve após comer alimentos pesados",
-        "Sensação leve, ocasional, sem outros sintomas"
-    ]
-
-def classificar_queimacao_peito(opcao):
-    if opcao == "Queimação forte com náusea ou suor frio":
-        return "vermelho", "Pode indicar problema cardíaco. Atendimento médico imediato necessário."
-    elif opcao == "Desconforto moderado que piora ao deitar":
-        return "laranja", "Possível refluxo gástrico. Requer atenção e mudança de hábitos."
-    elif opcao == "Ardência leve após comer alimentos pesados":
-        return "amarelo", "Refluxo leve. Evite alimentos gordurosos e observe evolução."
-    else:
-        return "verde", "Sintoma leve e esporádico. Sem risco aparente."
-
-def opcoes_alteracao_fala():
-    return [
-        "Perda súbita da fala ou fala arrastada",
-        "Dificuldade de encontrar palavras ou formar frases",
-        "Fala lenta ou confusa, mas consegue se expressar",
-        "Leve hesitação, mas sem prejuízo da comunicação"
-    ]
-
-def classificar_alteracao_fala(opcao):
-    if opcao == "Perda súbita da fala ou fala arrastada":
-        return "vermelho", "Sinal de possível AVC. Procure socorro imediato."
-    elif opcao == "Dificuldade de encontrar palavras ou formar frases":
-        return "laranja", "Alterações neurológicas devem ser investigadas."
-    elif opcao == "Fala lenta ou confusa, mas consegue se expressar":
-        return "amarelo", "Quadro leve. Monitorar e evitar esforço mental excessivo."
-    else:
-        return "verde", "Sem alterações importantes da fala."
-
-def opcoes_dor_ouvido():
-    return [
-        "Dor intensa com febre ou secreção purulenta",
-        "Dor forte e contínua, sem melhora com analgésico",
-        "Dor leve com coceira ou zumbido",
-        "Desconforto discreto que vai e volta"
-    ]
-
-def classificar_dor_ouvido(opcao):
-    if opcao == "Dor intensa com febre ou secreção purulenta":
-        return "vermelho", "Indício de infecção grave. Atendimento médico necessário."
-    elif opcao == "Dor forte e contínua, sem melhora com analgésico":
-        return "laranja", "Dor persistente pode evoluir. Consulte um profissional."
-    elif opcao == "Dor leve com coceira ou zumbido":
-        return "amarelo", "Quadro leve, possivelmente alérgico ou infeccioso inicial."
-    else:
-        return "verde", "Desconforto leve e transitório. Observe evolução."
-
-def opcoes_sensibilidade_luz_som():
-    return [
-        "Sensibilidade intensa com dor de cabeça e náusea",
-        "Incômodo moderado que piora em ambientes claros ou barulhentos",
-        "Leve desconforto ao sair no sol ou ouvir sons agudos",
-        "Sensação leve e eventual"
-    ]
-
-def classificar_sensibilidade_luz_som(resp):
-    if resp == "Sensibilidade intensa com dor de cabeça e náusea":
-        return "vermelho", "Pode indicar enxaqueca grave ou condição neurológica. Procure avaliação."
-    elif resp == "Incômodo moderado que piora em ambientes claros ou barulhentos":
-        return "laranja", "Sintomas moderados podem interferir na rotina. Requer observação."
-    elif resp == "Leve desconforto ao sair no sol ou ouvir sons agudos":
-        return "amarelo", "Reação leve. Use óculos escuros ou evite ambientes ruidosos."
-    else:
-        return "verde", "Sensibilidade leve. Sem sinais preocupantes."
-
 def opcoes_nausea():
     return [
         "Náusea constante com vômito e mal-estar",
@@ -3102,12 +2983,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 
 # Mapa atualizado de sintomas
 mapa_sintomas = {
-    "Dor nas articulações": (opcoes_dor_articulacoes, classificar_dor_articulacoes),
-    "Coceira na pele": (opcoes_coceira, classificar_coceira),
-    "Queimação no peito": (opcoes_queimacao_peito, classificar_queimacao_peito),
-    "Alterações na fala": (opcoes_alteracao_fala, classificar_alteracao_fala),
-    "Dor no ouvido": (opcoes_dor_ouvido, classificar_dor_ouvido),
-    "Sensibilidade à luz ou som": (opcoes_sensibilidade_luz_som, classificar_sensibilidade_luz_som),
     "Náusea ou enjoo": (opcoes_nausea, classificar_nausea),
     "Dor no ombro ou braço": (opcoes_dor_ombro_braco, classificar_dor_ombro_braco),
     "Sangramento gastrointestinal": (opcoes_sangramento_gi, classificar_sangramento_gi),
@@ -7270,6 +7145,358 @@ FLUXOS[normalizar("Palpitações")] = {
         (0.0, "verde")
     ]
 }
+# ===============================
+# DOR EM ARTICULAÇÕES
+# ===============================
+FLUXOS[normalizar("Dor em articulações")] = {
+    "label": "Dor em articulações",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor súbita com inchaço e dificuldade de movimentar": 2.0,
+                "Dor intensa após trauma ou inflamação visível": 1.4,
+                "Dor moderada que piora com o uso": 0.6,
+                "Dor leve que melhora com repouso": 0.2
+            }
+        },
+        {
+            "id": "local",
+            "label": "Quantas articulações estão afetadas?",
+            "tipo": "radio",
+            "opcoes": {
+                "Várias articulações": 0.8,
+                "Apenas uma": 0.3
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Vermelhidão intensa e calor local": 1.0,
+                "Febre (≥ 38,5°C)": 1.0,
+                "Deformidade visível": 1.2
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Trauma recente": 0.8,
+                "Prótese articular": 1.0,
+                "Doença reumática conhecida": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor súbita com inchaço e dificuldade de movimentar"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Deformidade visível"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Febre (≥ 38,5°C)"], "local": "Apenas uma"}, "min_cor": "laranja"},
+        {"se": {"fatores_risco": ["Prótese articular"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# COCEIRA (PRURIDO)
+# ===============================
+FLUXOS[normalizar("Coceira")] = {
+    "label": "Coceira",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Coceira intensa com placas vermelhas e inchaço": 2.0,
+                "Coceira forte que não alivia, atrapalha o sono": 1.2,
+                "Coceira moderada e localizada": 0.6,
+                "Coceira leve, passageira": 0.2
+            }
+        },
+        {
+            "id": "extensao",
+            "label": "Qual a extensão das lesões?",
+            "tipo": "radio",
+            "opcoes": {
+                "Espalhadas pelo corpo": 0.8,
+                "Apenas em uma área": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Há algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Inchaço de lábios/rosto ou falta de ar": 1.8,
+                "Feridas por coçar demais": 0.6,
+                "Febre": 0.6
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Possível causa recente:",
+            "tipo": "radio",
+            "opcoes": {
+                "Alimento/remédio/picada": 0.8,
+                "Produto químico/pele muito seca": 0.4,
+                "Sem causa clara": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Coceira intensa com placas vermelhas e inchaço"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Inchaço de lábios/rosto ou falta de ar"]}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Coceira forte que não alivia, atrapalha o sono", "extensao": "Espalhadas pelo corpo"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# QUEIMAÇÃO NO PEITO
+# ===============================
+FLUXOS[normalizar("Queimação no peito")] = {
+    "label": "Queimação no peito",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual cenário se encaixa melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Queimação forte com náusea ou suor frio": 2.0,
+                "Desconforto moderado que piora ao deitar": 1.2,
+                "Ardência leve após comer alimentos pesados": 0.6,
+                "Sensação leve, ocasional, sem outros sintomas": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "De repente (minutos/horas)": 1.3,
+                "Após refeições/à noite": 0.6
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Apareceu junto:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor que irradia para braço/mandíbula": 1.5,
+                "Falta de ar": 1.2,
+                "Azia/retorno de ácido à garganta": 0.6
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Condições de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Doença cardíaca prévia": 1.2,
+                "Idade ≥ 67 anos": 0.6,
+                "Obesidade/refluxo conhecido": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Queimação forte com náusea ou suor frio"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Dor que irradia para braço/mandíbula", "Falta de ar"]}, "min_cor": "vermelho"},
+        {"se": {"inicio": "De repente (minutos/horas)", "fatores_risco": ["Doença cardíaca prévia"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.2, "vermelho"),
+        (3.4, "laranja"),
+        (1.7, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# ALTERAÇÃO DA FALA
+# ===============================
+FLUXOS[normalizar("Alteração da fala")] = {
+    "label": "Alteração da fala",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "O que está acontecendo?",
+            "tipo": "radio",
+            "opcoes": {
+                "Perda súbita da fala ou fala arrastada": 2.0,
+                "Dificuldade de encontrar palavras ou formar frases": 1.4,
+                "Fala lenta ou confusa, mas consegue se expressar": 0.6,
+                "Leve hesitação, mas sem prejuízo da comunicação": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início dos sintomas",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 1.3,
+                "Gradual (dias/semana)": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Fraqueza em um lado do corpo": 1.6,
+                "Boca/face caída de um lado": 1.6,
+                "Dor de cabeça muito forte": 1.0,
+                "Convulsão": 1.6
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Condições de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Arritmia/doença cardíaca": 1.0,
+                "Hipertensão/Diabetes": 0.6,
+                "AVC/AIT prévios": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Perda súbita da fala ou fala arrastada"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Fraqueza em um lado do corpo", "Boca/face caída de um lado", "Convulsão"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.2, "vermelho"),
+        (3.4, "laranja"),
+        (1.7, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# DOR DE OUVIDO
+# ===============================
+FLUXOS[normalizar("Dor de ouvido")] = {
+    "label": "Dor de ouvido",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a dor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor intensa com febre ou secreção purulenta": 2.0,
+                "Dor forte e contínua, sem melhora com analgésico": 1.2,
+                "Dor leve com coceira ou zumbido": 0.6,
+                "Desconforto discreto que vai e volta": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Ocorreu também:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Saída de líquido amarelado/esverdeado": 1.0,
+                "Dor ao mastigar/abrir a boca": 0.6,
+                "Perda de audição": 1.0
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Possível causa:",
+            "tipo": "radio",
+            "opcoes": {
+                "Resfriado recente/mergulho/voo": 0.6,
+                "Objeto no ouvido/trauma": 1.2,
+                "Sem fator conhecido": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor intensa com febre ou secreção purulenta"}, "min_cor": "vermelho"},
+        {"se": {"fatores": "Objeto no ouvido/trauma"}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Perda de audição"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.6, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# SENSIBILIDADE À LUZ/SOM
+# ===============================
+FLUXOS[normalizar("Sensibilidade à luz/som")] = {
+    "label": "Sensibilidade à luz/som",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Quão forte está a sensibilidade?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sensibilidade intensa com dor de cabeça e náusea": 2.0,
+                "Incômodo moderado que piora em ambientes claros ou barulhentos": 1.2,
+                "Leve desconforto ao sol ou com sons agudos": 0.6,
+                "Sensação leve e eventual": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 1.2,
+                "Aos poucos (dias)": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Rigidez na nuca": 1.5,
+                "Febre (≥ 38,5°C)": 1.0,
+                "Distúrbios visuais (pontos/auras)": 0.8
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores relacionados:",
+            "tipo": "radio",
+            "opcoes": {
+                "Enxaqueca conhecida": 0.8,
+                "Uso recente de remédio novo": 0.6,
+                "Sem fator conhecido": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Sensibilidade intensa com dor de cabeça e náusea"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Rigidez na nuca"]}, "min_cor": "vermelho"},
+        {"se": {"inicio": "Súbito (minutos/horas)", "sinais_associados": ["Febre (≥ 38,5°C)"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.3, "laranja"),
+        (1.7, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 
 # ===============================
 # INCHAÇO EM OLHOS/FACE
