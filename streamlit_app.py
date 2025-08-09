@@ -589,8 +589,10 @@ def dicionario_sintomas():
     "popular": "Quando o rosto incha, principalmente os olhos, por alergia, pancada ou infecção.",
     "clinico": "Edema facial ou periorbitário",
     "termos": {
-        "Fechamento dos olhos": "A pálpebra incha tanto que o olho quase não abre.",
-        "Alergia ou trauma": "Começou após coçar muito ou depois de uma batida."
+        "Inchaço com dor intensa, febre ou fechamento dos olhos": "Inchaço forte ao redor dos olhos, com dor intensa, febre ou fechamento das pálpebras.",
+        "Inchaço moderado com vermelhidão e coceira": "Inchaço médio no rosto ou olhos, com vermelhidão e coceira.",
+        "Inchaço leve sem dor, após alergia ou trauma": "Leve inchaço sem dor, causado por alergia ou pancada.",
+        "Inchaço pequeno e passageiro": "Pequeno inchaço que some rapidamente."
         }
     },
 
@@ -599,9 +601,10 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa fica muito agitada, com o coração disparado, falta de ar, tremores ou até ideias confusas.",
     "clinico": "Crise de ansiedade ou agitação psicomotora",
     "termos": {
-        "Agitação extrema com risco de autoagressão ou agressividade": "Perde o controle, pode se machucar ou agredir outros.",
-        "Crise intensa com falta de ar, tremores ou choro incontrolável": "Mistura de sintomas físicos e emocionais, como se fosse desmaiar.",
-        "Pensamentos acelerados": "Mente não para, com muitos pensamentos ao mesmo tempo."
+        "Agitação extrema com risco de autoagressão ou agressividade": "Comportamento muito agitado e perigoso, com risco de machucar a si mesmo ou outros.",
+        "Crise intensa com falta de ar, tremores ou choro incontrolável": "Crise de ansiedade forte, com sintomas físicos como falta de ar, tremores ou choro que não para.",
+        "Ansiedade moderada com pensamentos acelerados": "Estado de ansiedade com pensamentos rápidos e dificuldade para relaxar.",
+        "Sensação leve de nervosismo ou tensão": "Pequeno nervosismo que não impede as atividades do dia a dia."
         }
     },
 
@@ -925,8 +928,10 @@ def dicionario_sintomas():
     "popular": "Quando arde ao fazer xixi, a urina sai fraca ou vem acompanhada de dor na barriga. Pode dar vontade toda hora e sair pouco.",
     "clinico": "Disúria ou infecção urinária",
     "termos": {
-        "Ardência": "Queimação na hora de urinar.",
-        "Desconforto abdominal": "Dor no pé da barriga que acompanha a vontade de urinar."
+        "Dor intensa com sangue na urina ou febre": "Urina com forte dor acompanhada de sangue ou febre alta.",
+        "Ardência moderada com urgência e desconforto abdominal": "Sensação de queimação ao urinar, com vontade frequente e desconforto na barriga.",
+        "Ardência leve ou aumento de frequência urinária": "Leve queimação ao urinar ou vontade de urinar mais vezes que o normal.",
+        "Leve desconforto, sem outros sintomas": "Sensação incômoda ao urinar, mas sem dor forte ou outros sinais associados."
         }
     },
 
@@ -1071,10 +1076,10 @@ def dicionario_sintomas():
     "popular": "Quando sai sangue pelo ânus ao evacuar. Pode ser pouco ou muito, e o sangue geralmente é vermelho vivo.",
     "clinico": "Rectorragia",
     "termos": {
-        "Sangue vermelho vivo em grande quantidade": "Saída de sangue vermelho brilhante em volume elevado pelo reto.",
-        "Sangue moderado com dor abdominal": "Sangramento perceptível acompanhado de dor na região abdominal.",
-        "Poucas gotas de sangue no papel higiênico": "Sangue em pequena quantidade visível apenas no papel após evacuar.",
-        "Sangramento leve e isolado": "Pequeno sangramento que ocorre uma única vez."
+        "Sangramento intenso que não para com pressão direta": "Nariz sangrando muito e sem parar mesmo com pressão.",
+        "Sangramento moderado que reaparece durante o dia": "Nariz sangra um pouco, mas volta a sangrar mais tarde no mesmo dia.",
+        "Sangramento leve após esforço ou espirro": "Nariz sangra levemente depois de esforço ou espirrar.",
+        "Sangramento isolado e já controlado": "Nariz sangrou uma vez e já parou."
         }
     },
 
@@ -1291,10 +1296,10 @@ def dicionario_sintomas():
     "popular": "É quando parece que tudo gira ou que vai cair. Pode dar visão escura, fraqueza e suor frio.",
     "clinico": "Pré-síncope ou vertigem",
     "termos": {
-        "Instabilidade": "Sensação de desequilíbrio, como se o chão balançasse.",
-        "Suor frio": "Suor que aparece com mal-estar, mesmo sem estar calor.",
-        "Sensação de queda iminente": "É quando tem-se a sensação que no próximo momentovocê vai cair com certeza,mesmo que isso não aconteça",
-        "Fraqueza súbita": "É a sensação de fraqueza que vem do nada"
+        "Fraqueza súbita com visão turva e suor frio": "Sensação repentina de fraqueza, visão embaçada e suor frio.",
+        "Tontura persistente com sensação de queda iminente": "Tontura que continua e dá a impressão de que vai cair.",
+        "Sensação leve de cabeça vazia ou instabilidade": "Leve sensação de cabeça leve ou falta de firmeza ao andar.",
+        "Episódio pontual que já passou": "Sensação de desmaio que aconteceu mas já cessou."
         }
     },
 "Formigamento ou perda de força": {
@@ -1357,8 +1362,10 @@ def dicionario_sintomas():
     "popular": "Quando o coração dispara ou bate fora do normal, mesmo em repouso.",
     "clinico": "Taquicardia ou arritmia",
     "termos": {
-        "Batimentos acelerados": "Quando o coração parece estar correndo.",
-        "Falta de ar": "Dificuldade para respirar junto com os batimentos."
+        "Batimentos acelerados com dor no peito ou falta de ar": "Coração disparado acompanhado de dor no peito ou dificuldade para respirar.",
+        "Palpitações intensas e persistentes, sem outros sintomas": "Coração acelerado por um período longo, mas sem outros sinais.",
+        "Batimentos rápidos ocasionais, mas sem desconforto": "Coração bate rápido de vez em quando, sem causar incômodo.",
+        "Sensação leve que passa rapidamente": "Coração bateu rápido por pouco tempo e depois voltou ao normal."
         }
     },
 "Diarreia": {
@@ -1366,8 +1373,10 @@ def dicionario_sintomas():
     "popular": "Quando vai ao banheiro várias vezes com fezes moles ou líquidas, podendo vir com dor de barriga.",
     "clinico": "Diarreia",
     "termos": {
-        "Evacuações": "Fazer cocô.",
-        "Sinais de desidratação": "Boca seca, pouca urina, olhos fundos, fraqueza."
+        "Diarreia intensa com sangue ou sinais de desidratação": "Fezes muito líquidas e frequentes, com sangue ou sinais de desidratação.",
+        "Várias evacuações líquidas com febre ou dor abdominal": "Evacuações frequentes e líquidas acompanhadas de febre ou dor de barriga.",
+        "Episódio isolado de diarreia sem outros sintomas": "Um único episódio de fezes líquidas sem outros problemas.",
+        "Fezes amolecidas por curto período": "Fezes mais moles do que o normal, por pouco tempo."
         }
     }
 }
@@ -2755,133 +2764,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_dor_ao_urinar():
-    return [
-        "Dor intensa com sangue na urina ou febre",
-        "Ardência moderada com urgência e desconforto abdominal",
-        "Ardência leve ou aumento de frequência urinária",
-        "Leve desconforto, sem outros sintomas"
-    ]
-
-def classificar_dor_ao_urinar(opcao):
-    if opcao == "Dor intensa com sangue na urina ou febre":
-        return "vermelho", "Indício de infecção urinária grave ou cálculo renal. Atendimento médico necessário."
-    elif opcao == "Ardência moderada com urgência e desconforto abdominal":
-        return "laranja", "Sinais de infecção em estágio inicial. Procure avaliação médica."
-    elif opcao == "Ardência leve ou aumento de frequência urinária":
-        return "amarelo", "Provável infecção leve. Monitorar e aumentar hidratação."
-    else:
-        return "verde", "Sem sinais relevantes no momento."
-
-def opcoes_ansiedade_agitacao():
-    return [
-        "Agitação extrema com risco de autoagressão ou agressividade",
-        "Crise intensa com falta de ar, tremores ou choro incontrolável",
-        "Ansiedade moderada com pensamentos acelerados",
-        "Sensação leve de nervosismo ou tensão"
-    ]
-
-def classificar_ansiedade_agitacao(opcao):
-    if opcao == "Agitação extrema com risco de autoagressão ou agressividade":
-        return "vermelho", "Crise severa. É necessário socorro imediato ou suporte especializado."
-    elif opcao == "Crise intensa com falta de ar, tremores ou choro incontrolável":
-        return "laranja", "Crise significativa de ansiedade. Requer acolhimento e possível intervenção profissional."
-    elif opcao == "Ansiedade moderada com pensamentos acelerados":
-        return "amarelo", "Quadro leve a moderado. Técnicas de respiração e apoio emocional podem ajudar."
-    else:
-        return "verde", "Estado emocional estável. Sem sinais de alerta."
-
-def opcoes_diarreia():
-    return [
-        "Diarreia intensa com sangue ou sinais de desidratação",
-        "Várias evacuações líquidas com febre ou dor abdominal",
-        "Episódio isolado de diarreia sem outros sintomas",
-        "Fezes amolecidas por curto período"
-    ]
-
-def classificar_diarreia(opcao):
-    if opcao == "Diarreia intensa com sangue ou sinais de desidratação":
-        return "vermelho", "Quadro grave de diarreia com risco de desidratação severa. Procure atendimento."
-    elif opcao == "Várias evacuações líquidas com febre ou dor abdominal":
-        return "laranja", "Pode indicar infecção intestinal. Requer hidratação e avaliação médica."
-    elif opcao == "Episódio isolado de diarreia sem outros sintomas":
-        return "amarelo", "Monitorar evolução. Mantenha dieta leve e hidratação."
-    else:
-        return "verde", "Alteração leve e autolimitada."
-
-def opcoes_sensacao_desmaio():
-    return [
-        "Fraqueza súbita com visão turva e suor frio",
-        "Tontura persistente com sensação de queda iminente",
-        "Sensação leve de cabeça vazia ou instabilidade",
-        "Episódio pontual que já passou"
-    ]
-
-def classificar_sensacao_desmaio(opcao):
-    if opcao == "Fraqueza súbita com visão turva e suor frio":
-        return "vermelho", "Pode indicar queda de pressão ou outra emergência clínica. Requer avaliação imediata."
-    elif opcao == "Tontura persistente com sensação de queda iminente":
-        return "laranja", "Situação moderada. Atenção à hidratação e possíveis gatilhos."
-    elif opcao == "Sensação leve de cabeça vazia ou instabilidade":
-        return "amarelo", "Leve desconforto. Observe se há repetição dos sintomas."
-    else:
-        return "verde", "Sintomas resolvidos. Situação estável."
-
-def opcoes_palpitacoes():
-    return [
-        "Batimentos acelerados com dor no peito ou falta de ar",
-        "Palpitações intensas e persistentes, sem outros sintomas",
-        "Batimentos rápidos ocasionais, mas sem desconforto",
-        "Sensação leve que passa rapidamente"
-    ]
-
-def classificar_palpitacoes(opcao):
-    if opcao == "Batimentos acelerados com dor no peito ou falta de ar":
-        return "vermelho", "Pode ser arritmia cardíaca ou emergência cardiovascular. Procure atendimento imediato."
-    elif opcao == "Palpitações intensas e persistentes, sem outros sintomas":
-        return "laranja", "Requer avaliação para descartar causas cardíacas."
-    elif opcao == "Batimentos rápidos ocasionais, mas sem desconforto":
-        return "amarelo", "Normalmente benigno. Reduza cafeína e estresse."
-    else:
-        return "verde", "Sem sinais relevantes."
-
-def opcoes_inchaco_olhos_face():
-    return [
-        "Inchaço com dor intensa, febre ou fechamento dos olhos",
-        "Inchaço moderado com vermelhidão e coceira",
-        "Inchaço leve sem dor, após alergia ou trauma",
-        "Inchaço pequeno e passageiro"
-    ]
-
-
-def classificar_inchaco_olhos_face(opcao):
-    if opcao == "Inchaço com dor intensa, febre ou fechamento dos olhos":
-        return "vermelho", "Risco de infecção ou reação alérgica grave. Atendimento imediato recomendado."
-    elif opcao == "Inchaço moderado com vermelhidão e coceira":
-        return "laranja", "Pode ser conjuntivite ou alergia. Requer observação e cuidados básicos."
-    elif opcao == "Inchaço leve sem dor, após alergia ou trauma":
-        return "amarelo", "Situação leve e autolimitada. Mantenha compressas frias e observação."
-    else:
-        return "verde", "Sem alterações relevantes."
-
-def opcoes_sangramento_nasal():
-    return [
-        "Sangramento intenso que não para com pressão direta",
-        "Sangramento moderado que reaparece durante o dia",
-        "Sangramento leve após esforço ou espirro",
-        "Sangramento isolado e já controlado"
-    ]
-
-def classificar_sangramento_nasal(opcao):
-    if opcao == "Sangramento intenso que não para com pressão direta":
-        return "vermelho", "Necessita avaliação médica para controle do sangramento."
-    elif opcao == "Sangramento moderado que reaparece durante o dia":
-        return "laranja", "Pode indicar fragilidade capilar ou irritação nasal. Requer acompanhamento."
-    elif opcao == "Sangramento leve após esforço ou espirro":
-        return "amarelo", "Geralmente benigno. Use soro fisiológico e evite coçar o nariz."
-    else:
-        return "verde", "Episódio resolvido sem necessidade de intervenção."
-
 def opcoes_dor_articulacoes():
     return [
         "Dor súbita com inchaço e dificuldade de movimentar",
@@ -3220,12 +3102,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 
 # Mapa atualizado de sintomas
 mapa_sintomas = {
-    "Ansiedade ou agitação intensa": (opcoes_ansiedade_agitacao, classificar_ansiedade_agitacao),
-    "Diarreia": (opcoes_diarreia, classificar_diarreia),
-    "Sensação de desmaio": (opcoes_sensacao_desmaio, classificar_sensacao_desmaio),
-    "Palpitações ou batimentos cardíacos acelerados": (opcoes_palpitacoes, classificar_palpitacoes),
-    "Inchaço nos olhos ou face": (opcoes_inchaco_olhos_face, classificar_inchaco_olhos_face),
-    "Sangramento nasal": (opcoes_sangramento_nasal, classificar_sangramento_nasal),
     "Dor nas articulações": (opcoes_dor_articulacoes, classificar_dor_articulacoes),
     "Coceira na pele": (opcoes_coceira, classificar_coceira),
     "Queimação no peito": (opcoes_queimacao_peito, classificar_queimacao_peito),
@@ -3241,7 +3117,6 @@ mapa_sintomas = {
     "Tremores ou movimentos involuntários": (opcoes_tremores, classificar_tremores),
     "Retenção urinária": (opcoes_retencao_urinaria, classificar_retencao_urinaria),
     "Infecção em ferida": (opcoes_infeccao_ferida, classificar_infeccao_ferida),
-    "Dor ou dificulade ao urinar": (opcoes_dor_ao_urinar, classificar_dor_ao_urinar),
     "Alergia cutânea": (opcoes_alergia_cutanea, classificar_alergia_cutanea),
     }
 mapa_sintomas = dict(sorted(mapa_sintomas.items()))
@@ -7099,6 +6974,402 @@ FLUXOS[normalizar("Corpo estranho em sentidos")] = {
         (6.0, "vermelho"),
         (3.5, "laranja"),
         (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# ===============================
+# DOR AO URINAR
+# ===============================
+FLUXOS[normalizar("Dor ao urinar")] = {
+    "label": "Dor ao urinar",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor intensa com sangue na urina ou febre": 2.0,
+                "Ardência moderada com urgência e desconforto abdominal": 1.2,
+                "Ardência leve ou aumento de frequência urinária": 0.6,
+                "Leve desconforto, sem outros sintomas": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Tem algum desses sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor nas costas (lado dos rins)": 1.2,
+                "Náusea ou vômito": 0.6,
+                "Urina turva e com odor forte": 0.4
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Gravidez": 1.0,
+                "Homem ≥ 50 anos (próstata)": 0.8,
+                "Cateter vesical recente": 0.8,
+                "Cálculo renal prévio": 0.6,
+                "Diabetes": 0.6
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo começaram os sintomas?",
+            "tipo": "radio",
+            "opcoes": {
+                "Menos de 24 horas": 0.6,
+                "2 a 7 dias": 0.4,
+                "Mais de 7 dias": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor intensa com sangue na urina ou febre"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Ardência moderada com urgência e desconforto abdominal", "sinais_associados": ["Dor nas costas (lado dos rins)"]}, "min_cor": "vermelho"},
+        {"se": {"fatores_risco": ["Gravidez"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# ANSIEDADE / AGITAÇÃO
+# ===============================
+FLUXOS[normalizar("Ansiedade/Agitação")] = {
+    "label": "Ansiedade/Agitação",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a crise agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Agitação extrema com risco de autoagressão ou agressividade": 2.0,
+                "Crise intensa com falta de ar, tremores ou choro incontrolável": 1.2,
+                "Ansiedade moderada com pensamentos acelerados": 0.6,
+                "Sensação leve de nervosismo ou tensão": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Aparecem juntos:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor no peito ou palpitações": 1.0,
+                "Tontura ou sensação de desmaio": 0.8,
+                "Insônia prolongada (≥ 3 noites)": 0.4
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Há algum destes?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de transtorno de ansiedade/pânico": 0.6,
+                "Uso recente de álcool/drogas/estimulantes": 0.8,
+                "Suspensão recente de benzodiazepínico": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Agitação extrema com risco de autoagressão ou agressividade"}, "min_cor": "vermelho"},
+        {"se": {"fatores_risco": ["Suspensão recente de benzodiazepínico"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# DIARREIA (GERAL)
+# ===============================
+FLUXOS[normalizar("Diarreia")] = {
+    "label": "Diarreia",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual cenário se encaixa melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Diarreia intensa com sangue ou sinais de desidratação": 2.0,
+                "Várias evacuações líquidas com febre ou dor abdominal": 1.2,
+                "Episódio isolado de diarreia sem outros sintomas": 0.6,
+                "Fezes amolecidas por curto período": 0.2
+            }
+        },
+        {
+            "id": "frequencia",
+            "label": "Quantas evacuações nas últimas 6 horas?",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 6": 1.0,
+                "3 a 5": 0.6,
+                "1 a 2": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Vômitos repetidos": 1.0,
+                "Febre alta (≥ 38,5°C)": 0.8,
+                "Boca seca/olhos fundos (desidratação)": 1.2
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Condições de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≥ 67 anos": 0.6,
+                "Imunossupressão": 0.8,
+                "Viagem recente/água/ alimento suspeito": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Diarreia intensa com sangue ou sinais de desidratação"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Boca seca/olhos fundos (desidratação)"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# SENSAÇÃO DE DESMAIO
+# ===============================
+FLUXOS[normalizar("Sensação de desmaio")] = {
+    "label": "Sensação de desmaio",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "O que você está sentindo?",
+            "tipo": "radio",
+            "opcoes": {
+                "Fraqueza súbita com visão turva e suor frio": 2.0,
+                "Tontura persistente com sensação de queda iminente": 1.2,
+                "Sensação leve de cabeça vazia ou instabilidade": 0.6,
+                "Episódio pontual que já passou": 0.2
+            }
+        },
+        {
+            "id": "gatilho",
+            "label": "O que desencadeou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor no peito/palpitação/falta de ar": 1.5,
+                "Calor, ficar muito tempo em pé ou levantar rápido": 0.6,
+                "Sem gatilho claro": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Apareceu junto:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Palidez e suor frio": 0.8,
+                "Trauma na queda (bateu a cabeça)": 1.2
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Histórico/condições:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Arritmia/doença cardíaca": 1.2,
+                "Diabetes (insulina/hipoglicemiante)": 0.8,
+                "Uso de anticoagulante": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Fraqueza súbita com visão turva e suor frio"}, "min_cor": "vermelho"},
+        {"se": {"gatilho": "Dor no peito/palpitação/falta de ar"}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Trauma na queda (bateu a cabeça)"]}, "min_cor": "vermelho"},
+        {"se": {"fatores_risco": ["Arritmia/doença cardíaca"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# PALPITAÇÕES
+# ===============================
+FLUXOS[normalizar("Palpitações")] = {
+    "label": "Palpitações",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como estão os batimentos?",
+            "tipo": "radio",
+            "opcoes": {
+                "Batimentos acelerados com dor no peito ou falta de ar": 2.0,
+                "Palpitações intensas e persistentes, sem outros sintomas": 1.2,
+                "Batimentos rápidos ocasionais, mas sem desconforto": 0.6,
+                "Sensação leve que passa rapidamente": 0.2
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Duração do episódio atual:",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 20 minutos": 1.0,
+                "5 a 20 minutos": 0.6,
+                "Menos de 5 minutos": 0.2
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Possíveis fatores associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Desmaio ou quase desmaio": 1.5,
+                "Dor torácica": 1.0,
+                "Uso de estimulantes (cafeína/energético)": 0.4
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Condições de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Doença cardíaca/Arritmia prévia": 1.2,
+                "Tireóide desregulada": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Batimentos acelerados com dor no peito ou falta de ar"}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Desmaio ou quase desmaio"]}, "min_cor": "vermelho"},
+        {"se": {"riscos": ["Doença cardíaca/Arritmia prévia"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# INCHAÇO EM OLHOS/FACE
+# ===============================
+FLUXOS[normalizar("Inchaço em olhos/face")] = {
+    "label": "Inchaço em olhos/face",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual situação descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Inchaço com dor intensa, febre ou fechamento dos olhos": 2.0,
+                "Inchaço moderado com vermelhidão e coceira": 1.2,
+                "Inchaço leve sem dor, após alergia ou trauma": 0.6,
+                "Inchaço pequeno e passageiro": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Tem algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Visão embaçada": 0.8,
+                "Secreção ocular amarela/esverdeada": 0.8,
+                "Falta de ar ou lábios/rosto ficando roxos": 1.8
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "O que pode ter causado?",
+            "tipo": "radio",
+            "opcoes": {
+                "Alergia (alimento/remédio/picada)": 0.8,
+                "Trauma local": 0.6,
+                "Sem fator conhecido": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Inchaço com dor intensa, febre ou fechamento dos olhos"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Falta de ar ou lábios/rosto ficando roxos"]}, "min_cor": "vermelho"},
+        {"se": {"fatores": "Alergia (alimento/remédio/picada)", "quadro": "Inchaço moderado com vermelhidão e coceira"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# SANGRAMENTO NASAL
+# ===============================
+FLUXOS[normalizar("Sangramento nasal")] = {
+    "label": "Sangramento nasal",
+    "perguntas": [
+        {
+            "id": "intensidade",
+            "label": "Como está o sangramento?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sangramento intenso que não para com pressão direta": 2.0,
+                "Sangramento moderado que reaparece durante o dia": 1.2,
+                "Sangramento leve após esforço ou espirro": 0.6,
+                "Sangramento isolado e já controlado": 0.2
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Algum desses fatores presentes?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Uso de anticoagulante": 1.0,
+                "Trauma nasal recente": 0.8,
+                "Pressão alta descontrolada": 0.8,
+                "Ar muito seco/resfriado": 0.2
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Agora e não para há > 15 min": 1.2,
+                "Hoje, com episódios intermitentes": 0.6,
+                "Episódio único ontem ou antes": 0.2
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"intensidade": "Sangramento intenso que não para com pressão direta"}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Uso de anticoagulante"]}, "min_cor": "laranja"},
+        {"se": {"duracao": "Agora e não para há > 15 min"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.8, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
         (0.0, "verde")
     ]
 }
