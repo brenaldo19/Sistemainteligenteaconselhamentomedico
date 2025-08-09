@@ -1094,10 +1094,16 @@ def dicionario_sintomas():
     "popular": "Nariz escorrendo sem parar, espirrando o tempo todo, com ou sem febre. Pode ser gripe, resfriado ou alergia.",
     "clinico": "Rinorreia e espirros",
     "termos": {
-        "Secreção clara": "Catarro transparente, típico de alergia ou vírus.",
-        "Secreção purulenta": "Catarro amarelo ou verde, indicando infecção.",
-        "Crise alérgica": "Quando os espirros e o nariz escorrendo não param.",
-        "Irritação nasal":"É quando o nariz arde,dando uma sensação de queimação"
+        "Coriza": "Corrimento nasal, geralmente por resfriado ou alergia.",
+        "Espirros": "Expulsões rápidas de ar pelo nariz e boca por irritação nasal.",
+        "Nariz entupido": "Sensação de bloqueio das narinas, com dificuldade de passagem de ar.",
+        "Febre alta": "Temperatura geralmente ≥ 38,5°C.",
+        "Falta de ar": "Sensação de ar insuficiente ao respirar.",
+        "Chiado no peito": "Som agudo ao respirar, típico de asma/broncoespasmo.",
+        "Secreção amarela/verde": "Catarro espesso, sugerindo infecção bacteriana.",
+        "Lábios roxos": "Coloração arroxeada por baixa oxigenação.",
+        "Asma": "Doença respiratória com broncoespasmo recorrente.",
+        "DPOC": "Doença pulmonar obstrutiva crônica (bronquite/enfisema)."
         }
     },
 
@@ -1106,13 +1112,12 @@ def dicionario_sintomas():
     "popular": "O idoso começa a fazer xixi sem perceber ou não consegue chegar ao banheiro a tempo. Pode acontecer à noite ou durante o dia, com ou sem aviso.",
     "clinico": "Incontinência urinária senil",
     "termos": {
-        "Incontinência de urgência": "Quando escapa porque não dá tempo de chegar.",
-        "Incontinência por transbordamento": "A bexiga enche tanto que começa a vazar.",
-        "Noctúria": "Acordar à noite para urinar com muita frequência.",
-        "Perda total do controle urinário": "Quando se perde completamente a capacidade de decidir a hora em que se faz xixi",
-        "Incontinência frequente": "Quando se tem a capacidade de segurar o xixi às vezes,mas na maioria das vezes não",
-        "Gotejamente": "Quando somente algumas gotas escapam de vez em quando",
-        "Leves escapes ocasionais": "Quando uma pequena quantidade de urina escapa involuntariamente,mas somente em poucas situações"
+        "Incontinência": "Perda involuntária de urina.",
+        "Dor/ardência ao urinar": "Queimação durante a micção (disúria).",
+        "Cateter vesical": "Tubo colocado na bexiga para drenar urina.",
+        "Imobilidade": "Dificuldade de se mover ou ficar de pé.",
+        "Diurético": "Remédio que aumenta a produção de urina.",
+        "Sedativo": "Medicamento que reduz ansiedade e dá sono."
         }
     },
 
@@ -1121,11 +1126,11 @@ def dicionario_sintomas():
     "popular": "Quando o idoso cai sozinho, tropeça, escorrega ou perde a força. Pode bater a cabeça, quebrar ossos ou ficar muito assustado.",
     "clinico": "Queda de altura do próprio corpo",
     "termos": {
-        "Perda de estabilidade": "Quando o idoso se desequilibra com facilidade.",
-        "Fratura": "Quebra de osso após a queda.",
-        "Síncope": "Desmaio que leva à queda.",
-        "Perda de consciência": "Quando a pessoa desmaia ou apaga depois da pancada.",
-        "Tombos esporádicos": "Quando o idoso cai levemente em raras ocasiões,mas sem consequências graves"
+        "Fratura": "Quebra de osso.",
+        "Incapacidade de apoiar o peso": "Não conseguir sustentar o corpo sobre a perna.",
+        "Anticoagulante": "Medicamento que afina o sangue e aumenta risco de sangramento.",
+        "Laceração": "Corte profundo na pele."
+
         }
     },
 
@@ -1134,11 +1139,11 @@ def dicionario_sintomas():
     "popular": "Quando o idoso começa a falar coisa sem sentido, se perde no tempo e espaço ou vê coisas que não existem. Pode surgir de repente e piorar à noite.",
     "clinico": "Delirium",
     "termos": {
-        "Desorientação": "Quando não sabe onde está, que dia é ou quem são as pessoas.",
-        "Alucinação": "Ver ou ouvir coisas que não existem.",
-        "Flutuação de consciência": "Às vezes tá bem, outras vezes não entende nada.",
-        "Confusão mental": "Dificuldade de pensar normalmente",
-        "Alteração de comportamento": "É quando o idoso passa a tomar decisões  que não são coerente com o que ele pensava antes"
+        "Desorientação": "Perda da noção de tempo, lugar ou pessoa.",
+        "Alucinações": "Ver/ouvir coisas que não existem.",
+        "Flutuação de consciência": "Oscilações entre momentos de lucidez e confusão.",
+        "Fala enrolada": "Dificuldade para articular palavras.",
+        "Desidratação": "Falta de líquidos no corpo (boca seca, pouca urina)."
         }
     },
 
