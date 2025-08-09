@@ -9584,3 +9584,150 @@ if enviado:
     with col2:
         st.markdown(f"{tag_cor('LARANJA')} &nbsp; Urgente", unsafe_allow_html=True)
         st.markdown(f"{tag_cor('VERMELHO')} &nbsp; Emergência", unsafe_allow_html=True)
+# Só processa e exibe resultados SE o botão foi clicado
+if enviado:
+    st.markdown("---")
+
+    # ===== helpers visuais =====
+    def tag_cor(cor_txt: str) -> str:
+        cores = {
+            "vermelho":  "#d9342b",
+            "laranja":   "#f08c00",
+            "amarelo":   "#e0c200",
+            "verde":     "#2f9e44",
+        }
+        hexa = cores.get(str(cor_txt).lower(), "#6c757d")
+        return f"""
+        <span style="
+            display:inline-block;padding:.2rem .6rem;border-radius:999px;
+            background:{hexa}1A;color:{hexa};font-weight:600;
+            border:1px solid {hexa}40;font-size:.9rem">
+            {cor_txt.upper()}
+        </span>
+        """
+
+    def card_inicio(titulo: str, cor_txt: str):
+        st.markdown(
+            f"""
+            <div style="border:1px solid #e9ecef;border-radius:12px;padding:14px;margin:8px 0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <h4 style="margin:0;font-weight:700">{titulo}</h4>
+                {tag_cor(cor_txt)}
+              </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    def card_fim():
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # ===== resumo conectado ao fluxograma =====
+    def gerar_resumo_fluxo(sintoma: str, respostas_fluxo: dict) -> list:
+        """
+        Constrói bullets a partir das respostas dadas no fluxograma:
+        usa o label da pergunta + o texto da opção escolhida.
+        """
+        bullets = []
+        chave = normalizar(sintoma)
+        fluxo = FLUXOS.get(chave, {})
+        perguntas = fluxo.get("perguntas", [])
+
+        # indexa perguntas por id para lookup rápido
+        idx = {p.get("id"): p for p in perguntas}
+
+        for pid, valor in (respostas_fluxo or {}).items():
+            p = idx.get(pid)
+            if not p:
+                continue
+
+            plabel = p.get("label", pid)
+
+            if p.get("tipo") == "radio":
+                # valor vem como string da opção
+                bullets.append(f"{plabel}: {valor}")
+            elif p.get("tipo") == "checkbox":
+                # valor é lista de opções marcadas
+                marcadas = valor if isinstance(valor, list) else []
+                if marcadas:
+                    bullets.append(f"{plabel}: " + ", ".join(marcadas))
+
+        return bullets[:6]  # limita a 6 itens para não poluir a UI
+
+    # ===== resultados por sintoma =====
+    cores_geradas = []
+
+    for sintoma in st.session_state.sintomas_escolhidos:
+        if eh_fluxo(sintoma):
+            chave = normalizar(sintoma)
+            # garante dicionário
+            if "fluxo_respostas" not in st.session_state:
+                st.session_state["fluxo_respostas"] = {}
+            if chave not in st.session_state["fluxo_respostas"]:
+                st.session_state["fluxo_respostas"][chave] = {}
+
+            cor, _ = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
+            cores_geradas.append(cor)
+
+            card_inicio(sintoma, cor)
+            bullets = gerar_resumo_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
+            if bullets:
+                st.markdown("**Respostas que influenciaram:**")
+                for b in bullets:
+                    st.markdown(f"- {b}")
+            else:
+                st.markdown("<span style='color:#6c757d'>Sem detalhamento selecionado.</span>", unsafe_allow_html=True)
+            card_fim()
+        else:
+            # Caso futuro: sintomas sem fluxo (sem usar mapa_sintomas)
+            cor = "verde"
+            cores_geradas.append(cor)
+            card_inicio(sintoma, cor)
+            st.markdown("<span style='color:#6c757d'>Sintoma sem fluxograma associado.</span>", unsafe_allow_html=True)
+            card_fim()
+
+    st.markdown("---")
+
+    # ===== cor final combinada (mantém sua lógica) =====
+    cor_final = classificar_combinacao(
+        sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
+        cores=cores_geradas
+    )
+
+    # --- ajuste conservador por fatores (mesma lógica) ---
+    gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
+    idade_paciente = st.session_state.get("idade")
+
+    ajuste_niveis = calcular_ajuste_por_fatores_conservador(
+        sintomas_escolhidos=st.session_state.sintomas_escolhidos,
+        cores_individuais=cores_geradas,
+        sintoma_para_sistema=sintoma_para_sistema,
+        idade=idade_paciente,
+        gravida=gravidez
+    )
+
+    if ajuste_niveis >= 1:
+        cor_final = aumentar_cor_em_1_nivel(cor_final)
+
+    # ===== card final =====
+    st.markdown("## Resultado preliminar")
+    card_inicio("Gravidade estimada", cor_final)
+    st.markdown("**O que fazer agora**")
+    if cor_final == "vermelho":
+        st.markdown("- Procure atendimento **imediato**.")
+    elif cor_final == "laranja":
+        st.markdown("- Procure avaliação **rápida** em unidade de saúde.")
+    elif cor_final == "amarelo":
+        st.markdown("- Requer atenção, mas pode aguardar avaliação **não imediata**.")
+    else:
+        st.markdown("- **Observação** dos sintomas e medidas simples em casa.")
+    card_fim()
+
+    st.markdown("---")
+    st.subheader("Legenda de Gravidade")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown(f"{tag_cor('VERDE')} &nbsp; Baixa gravidade", unsafe_allow_html=True)
+        st.markdown(f"{tag_cor('AMARELO')} &nbsp; Moderada, atenção", unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"{tag_cor('LARANJA')} &nbsp; Urgente", unsafe_allow_html=True)
+        st.markdown(f"{tag_cor('VERMELHO')} &nbsp; Emergência", unsafe_allow_html=True)
