@@ -9520,47 +9520,47 @@ for sintoma in st.session_state.sintomas_escolhidos:
             st.markdown("<div style='margin-top:8px;color:#6c757d'>Pontuação: —</div>", unsafe_allow_html=True)
     card_fim()
 
-        st.markdown("---")
+    st.markdown("---")
 
         # ===== cor final combinada (mantém sua lógica) =====
-        cor_final = classificar_combinacao(
-            sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
-            cores=cores_geradas
+    cor_final = classificar_combinacao(
+        sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
+        cores=cores_geradas
         )
 
         # --- AJUSTE CONSERVADOR POR FATORES (sem alteração funcional) ---
-        gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
-        idade_paciente = st.session_state.get("idade")
-        ajuste_niveis = calcular_ajuste_por_fatores_conservador(
-            sintomas_escolhidos=st.session_state.sintomas_escolhidos,
-            cores_individuais=cores_geradas,
-            sintoma_para_sistema=sintoma_para_sistema,
-            idade=idade_paciente,
-            gravida=gravidez
+    gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
+    idade_paciente = st.session_state.get("idade")
+    ajuste_niveis = calcular_ajuste_por_fatores_conservador(
+        sintomas_escolhidos=st.session_state.sintomas_escolhidos,
+        cores_individuais=cores_geradas,
+        sintoma_para_sistema=sintoma_para_sistema,
+        idade=idade_paciente,
+        gravida=gravidez
         )
-        if ajuste_niveis >= 1:
-            cor_final = aumentar_cor_em_1_nivel(cor_final)
+    if ajuste_niveis >= 1:
+        cor_final = aumentar_cor_em_1_nivel(cor_final)
 
         # ===== card final =====
-        st.markdown("## Resultado preliminar")
-        card_inicio("Gravidade estimada", cor_final)
-        st.markdown("**O que fazer agora**")
-        if cor_final == "vermelho":
-            st.markdown("- Procure atendimento **imediato**.")
-        elif cor_final == "laranja":
-            st.markdown("- Procure avaliação **rápida** em unidade de saúde.")
-        elif cor_final == "amarelo":
-            st.markdown("- Requer atenção, mas pode aguardar avaliação **não imediata**.")
-        else:
-            st.markdown("- **Observação** dos sintomas e medidas simples em casa.")
-        card_fim()
+    st.markdown("## Resultado preliminar")
+    card_inicio("Gravidade estimada", cor_final)
+    st.markdown("**O que fazer agora**")
+    if cor_final == "vermelho":
+        st.markdown("- Procure atendimento **imediato**.")
+    elif cor_final == "laranja":
+        st.markdown("- Procure avaliação **rápida** em unidade de saúde.")
+    elif cor_final == "amarelo":
+        st.markdown("- Requer atenção, mas pode aguardar avaliação **não imediata**.")
+    else:
+        st.markdown("- **Observação** dos sintomas e medidas simples em casa.")
+    card_fim()
 
-        st.markdown("---")
-        st.subheader("Legenda de Gravidade")
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown(f"{tag_cor('VERDE')} &nbsp; Baixa gravidade", unsafe_allow_html=True)
-            st.markdown(f"{tag_cor('AMARELO')} &nbsp; Moderada, atenção", unsafe_allow_html=True)
-        with col2:
-            st.markdown(f"{tag_cor('LARANJA')} &nbsp; Urgente", unsafe_allow_html=True)
-            st.markdown(f"{tag_cor('VERMELHO')} &nbsp; Emergência", unsafe_allow_html=True)
+    st.markdown("---")
+    st.subheader("Legenda de Gravidade")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown(f"{tag_cor('VERDE')} &nbsp; Baixa gravidade", unsafe_allow_html=True)
+        st.markdown(f"{tag_cor('AMARELO')} &nbsp; Moderada, atenção", unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"{tag_cor('LARANJA')} &nbsp; Urgente", unsafe_allow_html=True)
+        st.markdown(f"{tag_cor('VERMELHO')} &nbsp; Emergência", unsafe_allow_html=True)
