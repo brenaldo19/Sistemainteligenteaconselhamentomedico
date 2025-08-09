@@ -421,7 +421,8 @@ def dicionario_sintomas():
             "Retração do mamilo": "Quando o mamilo passa a ficar para dentro de forma repentina ou incomum",
             "Ferida ou crosta no mamilo": "Lesão ou formação de crosta na pele do mamilo",
             "Nódulo palpável na mama": "Caroço sentido ao toque durante a palpação da mama"
-    },
+            }
+        },
 
 "Sangue no sêmen": {
     "definicao": "Presença de sangue visível no esperma, podendo ter várias causas.",
@@ -432,8 +433,8 @@ def dicionario_sintomas():
         "Sangue apareceu após dor ou trauma": "Teve pancada ou dor e depois saiu sangue no sêmen.",
         "Pequena quantidade única, sem dor": "Saiu um pouco de sangue uma vez, sem sentir dor.",
         "Aparência alterada, mas sem sangue visível": "O esperma parece estranho, mas não tem sangue aparente."
-        }
-    },
+            }
+        },
 
 "Febre em lactente": {
     "definicao": "Temperatura corporal elevada em bebês pequenos, que pode indicar infecção séria.",
@@ -443,8 +444,8 @@ def dicionario_sintomas():
         "Febre alta persistente com prostração ou recusa alimentar": "Febre que não baixa e o bebê fica fraco ou não quer mamar.",
         "Responde a estímulos": "Mesmo doente, reage ao toque ou à voz.",
         "Comportamento preservado": "Mesmo com febre, o bebê age como de costume, sorri ou interage."
-    }
-},
+        }
+    },
 
 "Choro persistente": {
     "definicao": "Choro prolongado e fora do padrão habitual da criança, sem causa clara.",
@@ -453,8 +454,8 @@ def dicionario_sintomas():
     "termos": {
         "Choro inconsolável": "Nada faz o choro parar — nem colo, comida, carinho.",
         "Diferente do habitual": "O jeito de chorar está estranho, mais alto, irritado ou com pausas diferentes."
-    }
-},
+        }
+    },
 
 "Icterícia neonatal": {
     "definicao": "Coloração amarelada da pele em recém-nascidos, geralmente nos primeiros dias de vida.",
@@ -464,8 +465,8 @@ def dicionario_sintomas():
         "Sonolência excessiva": "O bebê dorme demais, mais do que o normal.",
         "Amarelado moderado até o abdome": "A cor amarelada desce do rosto até a barriga.",
         "Melhora espontânea": "O amarelado melhora sozinho, sem tratamento."
-    }
-},
+        }
+    },
 
 "Queda em criança": {
     "definicao": "Acidente com impacto físico, como tombos, que pode causar machucados leves ou preocupantes.",
@@ -474,8 +475,8 @@ def dicionario_sintomas():
     "termos": {
         "Alteração de comportamento": "A criança ficou quieta demais ou agitada demais depois da queda.",
         "Hematoma leve": "Roxinho ou galo pequeno, que aparece depois da batida."
-    }
-},
+        }
+    },
 
 "Vômito em criança": {
     "definicao": "Expulsão do conteúdo do estômago pela boca, podendo ocorrer em jato e várias vezes.",
@@ -483,8 +484,8 @@ def dicionario_sintomas():
     "clinico": "Vômitos persistentes em pediatria",
     "termos": {
         "Vômito em jato frequente com sinais de desidratação": "Vômito forte que sai com pressão, junto com boca seca, moleza ou choro sem lágrima."
-    }
-},
+        }
+    },
 
 "Diarreia em criança": {
     "definicao": "Evacuações frequentes e líquidas, que podem causar desidratação.",
@@ -492,8 +493,8 @@ def dicionario_sintomas():
     "clinico": "Diarreia aguda pediátrica",
     "termos": {
         "Sinais de desidratação": "Choro sem lágrima, boca seca, moleza, fralda seca por muito tempo."
-    }
-},
+        }
+    },
 
 "Sensibilidade à luz ou som": {
     "definicao": "Maior incômodo causado por barulhos ou luz, mesmo que não sejam intensos.",
@@ -502,8 +503,8 @@ def dicionario_sintomas():
     "termos": {
         "Sensibilidade intensa": "Luz ou som causam dor ou mal-estar forte.",
         "Incômodo moderado": "Incomoda, mas ainda é tolerável."
-    }
-},
+        }
+    },
 
 "Dor no ouvido": {
     "definicao": "Dor localizada dentro do ouvido, podendo estar acompanhada de secreção ou zumbido.",
@@ -513,8 +514,8 @@ def dicionario_sintomas():
         "Secreção purulenta": "Sai líquido grosso e amarelo ou esverdeado do ouvido.",
         "Sem melhora com analgésico": "A dor continua mesmo após tomar remédio comum.",
         "Zumbido": "Barulho constante no ouvido, como apito ou chiado."
-    }
-},
+        }
+    },
 
 "Alterações na fala": {
     "definicao": "Mudança na forma de falar, que pode ficar lenta, confusa ou arrastada.",
@@ -523,8 +524,8 @@ def dicionario_sintomas():
     "termos": {
         "Fala arrastada": "As palavras saem devagar e desconexas.",
         "Fala lenta ou confusa": "Parece esquecer as palavras ou trocar por outras."
-    }
-},
+        }
+    },
 
 "Alterações visuais súbitas": {
     "definicao": "Mudança repentina na forma de enxergar, com visão turva, dupla ou embaçada.",
@@ -534,8 +535,8 @@ def dicionario_sintomas():
         "Visão muito turva": "Tudo fica embaçado como se estivesse com catarata.",
         "Visão dupla ou embaçada": "Vê dois objetos ou tudo com contorno borrado.",
         "Dificuldade temporária pra focar": "Fica difícil ler ou olhar para um ponto específico por um tempo."
-    }
-},
+        }
+    },
 
 "Queimação no peito": {
     "definicao": "Sensação de ardência ou calor no peito, geralmente após alimentação.",
@@ -545,8 +546,8 @@ def dicionario_sintomas():
         "Suor frio": "Começa a suar mesmo estando frio, geralmente com mal-estar.",
         "Após comer alimentos pesados": "Sente a queimação logo depois de uma refeição gordurosa.",
         "Piora ao deitar": "Deitado, o sintoma se intensifica ou sobe até a garganta."
-    }
-},
+        }
+    },
 
 "Coceira na pele": {
     "definicao": "Sensação que provoca vontade de coçar, podendo estar associada a lesões.",
@@ -556,8 +557,8 @@ def dicionario_sintomas():
         "Placas vermelhas": "Manchas grandes e avermelhadas que coçam.",
         "Não alivia": "A coceira não melhora com nada.",
         "Localizada": "Apenas em uma parte do corpo."
-    }
-},
+        }
+    },
 
 "Sangramento nasal": {
     "definicao": "Saída de sangue pelas narinas, geralmente por rompimento de pequenos vasos.",
@@ -566,8 +567,8 @@ def dicionario_sintomas():
     "termos": {
         "Pressão direta": "Usa os dedos ou pano pra estancar o sangue.",
         "Após esforço ou espirro": "O sangramento começou depois de fazer força ou espirrar."
-    }
-},
+        }
+    },
 
 "Inchaço nos olhos ou face": {
     "definicao": "Aumento de volume em regiões da face, especialmente ao redor dos olhos.",
@@ -576,8 +577,8 @@ def dicionario_sintomas():
     "termos": {
         "Fechamento dos olhos": "A pálpebra incha tanto que o olho quase não abre.",
         "Alergia ou trauma": "Começou após coçar muito ou depois de uma batida."
-    }
-},
+        }
+    },
 
 "Ansiedade ou agitação intensas": {
     "definicao": "Estado de excitação ou preocupação extrema, com sintomas físicos ou comportamentais.",
@@ -587,8 +588,8 @@ def dicionario_sintomas():
         "Agitação extrema com risco de autoagressão ou agressividade": "Perde o controle, pode se machucar ou agredir outros.",
         "Crise intensa com falta de ar, tremores ou choro incontrolável": "Mistura de sintomas físicos e emocionais, como se fosse desmaiar.",
         "Pensamentos acelerados": "Mente não para, com muitos pensamentos ao mesmo tempo."
-    }
-},
+        }
+    },
 
 "Alterações urinárias": {
     "definicao": "Mudança na frequência, volume ou capacidade de urinar.",
@@ -597,8 +598,8 @@ def dicionario_sintomas():
     "termos": {
         "Incapacidade de urinar": "Não consegue fazer xixi, mesmo forçando.",
         "Aumento de frequência": "Sente vontade de urinar toda hora, com pouco volume."
-    }
-},
+        }
+    },
 
 "Corpo estranho nos olhos, ouvidos ou nariz": {
     "definicao": "Entrada de objeto ou substância em cavidades sensoriais, com ou sem sintomas.",
@@ -607,8 +608,8 @@ def dicionario_sintomas():
     "termos": {
         "Secreção com febre": "Sai líquido e tem febre junto, sinal de infecção.",
         "Presença confirmada, mas sem sintomas": "O objeto está lá, mas não está doendo nem incomodando."
-    }
-},
+        }
+    },
 
 "Ferimentos ou cortes com objetos": {
     "definicao": "Lesão na pele causada por faca, vidro, objetos pontiagudos ou cortantes.",
@@ -619,8 +620,8 @@ def dicionario_sintomas():
         "Exposição de tecidos": "Dá pra ver carne ou gordura por baixo do corte.",
         "Sinais de infecção (pus, vermelhidão)": "Mostra que o corte inflamou ou infeccionou.",
         "Corte leve, limpo e controlado": "Pequeno, sem sangramento forte e fácil de limpar."
-    }
-},
+        }
+    },
 
 "Engasgo ou obstrução das vias aéreas": {
     "definicao": "Dificuldade de respirar causada por algo bloqueando a passagem do ar.",
@@ -629,8 +630,8 @@ def dicionario_sintomas():
     "termos": {
         "Engasgo com tosse ineficaz": "Tenta tossir, mas o ar não sai e a tosse é fraca.",
         "Respiração ofegante": "Respira com esforço e dificuldade."
-    }
-},
+        }
+    },
 
 "Sinais de intoxicação ou envenenamento": {
     "definicao": "Efeitos provocados por substâncias tóxicas ingeridas, inaladas ou em contato com a pele.",
@@ -639,8 +640,8 @@ def dicionario_sintomas():
     "termos": {
         "Substância tóxica": "Produto que pode causar dano ao corpo, como álcool em gel, remédio ou veneno.",
         "Ingestão suspeita": "Acredita-se que a pessoa pode ter consumido algo perigoso, mesmo sem certeza."
-    }
-},
+        }
+    },
 
     "Retenção urinária": {
     "definicao": "Dificuldade ou incapacidade de urinar completamente, mesmo com sensação de bexiga cheia.",
@@ -649,8 +650,8 @@ def dicionario_sintomas():
     "termos": {
         "Distensão abdominal": "Barriga inchada ou dura por causa da bexiga cheia.",
         "Jato fraco com sensação de bexiga cheia": "Sai pouco xixi e continua a vontade, como se não tivesse aliviado."
-    }
-},
+        }
+    },
 
 "Tremores ou movimentos involuntários": {
     "definicao": "Movimentos que o corpo faz sozinho, sem controle consciente, podendo ser leves ou fortes.",
@@ -660,8 +661,8 @@ def dicionario_sintomas():
         "Movimentos anormais": "Movimentos inesperados, como sacudidas ou repuxos.",
         "Dificuldade pra parar": "Mesmo tentando, não consegue controlar o tremor.",
         "Tremores leves": "Pequenas vibrações no corpo, geralmente nas mãos ou queixo."
-    }
-},
+        }
+    },
 
 "Dificuldade pra engolir": {
     "definicao": "Sensação de que a comida ou líquido não desce corretamente pela garganta.",
@@ -671,8 +672,8 @@ def dicionario_sintomas():
         "Engolir líquidos": "Tem dificuldade até com água, leite ou suco.",
         "Engolir sólidos": "Só sente problema com alimentos mais consistentes.",
         "Leve desconforto": "Sensação de 'arranhando' ou dificuldade pequena ao engolir."
-    }
-},
+        }
+    },
 
 "Icterícia": {
     "definicao": "Cor amarelada na pele e nos olhos, geralmente causada por problemas no fígado.",
@@ -681,8 +682,8 @@ def dicionario_sintomas():
     "termos": {
         "Amarelado leve": "Tom amarelado visível de perto, mas não forte.",
         "Coloração discreta": "Amarelo quase imperceptível, mais visível na luz."
-    }
-},
+        }
+    },
 
 "Corpo estranho na garganta": {
     "definicao": "Sensação ou presença real de algo preso na garganta.",
@@ -692,8 +693,8 @@ def dicionario_sintomas():
         "Corpo estranho preso": "Algo realmente ficou preso ou está incomodando na garganta.",
         "Dor ao engolir": "Ato de engolir dói mais que o normal.",
         "Sensação de algo preso": "Mesmo sem ter nada visível, parece que algo ficou ali."
-    }
-},
+        }
+    },
 
 "Sangramento gastrointestinal": {
     "definicao": "Presença de sangue na evacuação ou vômito, geralmente indicando sangramento interno.",
@@ -701,8 +702,8 @@ def dicionario_sintomas():
     "clinico": "Hemorragia digestiva",
     "termos": {
         "Sangue vivo": "Sangue vermelho claro, que não passou muito tempo no intestino ou estômago."
-    }
-},
+        }
+    },
 
 "Dor no ombro ou braço": {
     "definicao": "Dor localizada ou que se espalha entre o ombro e o braço, podendo indicar lesão ou outro problema.",
@@ -712,8 +713,8 @@ def dicionario_sintomas():
         "Dor irradiando": "A dor começa em um ponto e se espalha.",
         "Formigamento": "Sensação de 'agulhadas' ou dormência.",
         "Limitação de movimento": "Não consegue levantar ou mexer o braço direito por causa da dor."
-    }
-},
+        }
+    },
 
 "Náusea ou enjoo": {
     "definicao": "Sensação de mal-estar no estômago, com ou sem vontade de vomitar.",
@@ -723,8 +724,8 @@ def dicionario_sintomas():
         "Mal-estar": "Sensação geral ruim, sem motivo claro.",
         "Desconforto passageiro": "Enjoo leve que melhora com o tempo.",
         "Enjoo": "Sensação clara de que vai vomitar, mesmo que não vomite."
-    }
-},
+        }
+    },
 
 "Dor na perna e dificuldade pra caminhar": {
     "definicao": "Dor nas pernas associada à limitação nos movimentos ou dificuldade ao andar.",
@@ -733,8 +734,8 @@ def dicionario_sintomas():
     "termos": {
         "Dificuldade de mover a perna": "A perna parece pesada, fraca ou trava.",
         "Queda": "A dor causou desequilíbrio ou a pessoa realmente caiu."
-    }
-},
+        }
+    },
 
 "Dores no pescoço ou rigidez da nuca": {
     "definicao": "Dor localizada na região cervical ou dificuldade de movimentar o pescoço normalmente.",
@@ -744,8 +745,8 @@ def dicionario_sintomas():
         "Rigidez importante": "O pescoço mal se mexe de tanta dor.",
         "Posição ruim": "Ficou numa posição desconfortável por muito tempo.",
         "Dor localizada": "A dor é em um ponto específico do pescoço."
-    }
-},
+        }
+    },
 
     "Comportamento estranho à normalidade": {
     "definicao": "Mudanças repentinas no modo como a pessoa age, pensa ou se comunica.",
@@ -756,8 +757,8 @@ def dicionario_sintomas():
         "Alucinação": "Ver, ouvir ou sentir coisas que não estão lá.",
         "Lucidez parcial": "Está consciente, mas confusa ou com falas sem sentido.",
         "Comportamento excêntrico": "Atitudes muito fora do padrão da pessoa, sem motivo aparente."
-    }
-},
+        }
+    },
 
 "Sangramento ativo": {
     "definicao": "Perda visível de sangue que ainda está acontecendo, por corte, lesão ou outra causa.",
@@ -767,8 +768,8 @@ def dicionario_sintomas():
         "Palidez": "Pessoa muito branca, sinal de perda de sangue.",
         "Sangramento controlado": "Parou ou está quase parando, mas ainda tem um pouco.",
         "Volume considerável": "Sangue suficiente pra encharcar pano ou roupa, ou que não para com pressão leve."
-    }
-},
+        }
+    },
 
 "Alergia cutânea": {
     "definicao": "Reação alérgica que afeta a pele, causando coceira, vermelhidão ou descamação.",
@@ -778,8 +779,8 @@ def dicionario_sintomas():
         "Coceira intensa": "Vontade forte de coçar, difícil de segurar.",
         "Descamação": "Quando a pele começa a soltar pequenas peles finas.",
         "Assintomática": "A pele muda, mas não dói nem coça."
-    }
-},
+        }
+    },
 
 "Reação alérgica": {
     "definicao": "Resposta do corpo a uma substância estranha, podendo causar sintomas leves ou graves.",
@@ -789,8 +790,8 @@ def dicionario_sintomas():
         "Erupções leves": "Manchinhas ou bolinhas que aparecem na pele e somem rápido.",
         "Placas vermelhas": "Manchas maiores, elevadas e vermelhas.",
         "Sintomas sistêmicos": "Reação que afeta além da pele — como falta de ar, inchaço ou tontura."
-    }
-},
+        }
+    },
 
 "Trauma ou queda": {
     "definicao": "Impacto causado por batida, pancada, acidente ou queda de altura.",
@@ -800,8 +801,8 @@ def dicionario_sintomas():
         "Trauma grave": "Batida forte, com risco de lesão interna ou fratura.",
         "Inconsciência": "A pessoa desmaiou ou não responde.",
         "Dor local": "Dor só no lugar onde bateu, mas sem outros sintomas."
-    }
-},
+        }
+    },
 
 "Infecção em ferida": {
     "definicao": "Contaminação de um machucado, com sinais de inflamação e proliferação de bactérias.",
@@ -811,8 +812,8 @@ def dicionario_sintomas():
         "Pus": "Líquido amarelado ou esverdeado que sai da ferida.",
         "Secreção local": "Qualquer líquido saindo do machucado.",
         "Vermelhidão": "Área ao redor da ferida está bem vermelha."
-    }
-},
+        }
+    },
 
 "Convulsão": {
     "definicao": "Atividade elétrica anormal no cérebro que causa tremores, rigidez ou perda de consciência.",
@@ -822,8 +823,8 @@ def dicionario_sintomas():
         "Convulsão ativa": "A crise está acontecendo naquele momento.",
         "Tremores leves": "Movimentos involuntários menores, sem queda ou rigidez.",
         "Epilepsia": "Doença que causa convulsões repetidas com histórico médico."
-    }
-},
+        }
+    },
 
 "Desmaio ou tontura": {
     "definicao": "Sensação de perda de equilíbrio ou apagão súbito, com ou sem perda de consciência.",
@@ -833,8 +834,8 @@ def dicionario_sintomas():
         "Perda de consciência prolongada": "Desmaiou e demorou pra acordar.",
         "Palidez": "Ficou muito branca antes ou depois do desmaio.",
         "Tontura ao levantar": "Fica tonto quando se levanta rápido, como se fosse desmaiar."
-    }
-},
+        }
+    },
 
 "Dificuldade respiratória": {
     "definicao": "Problema mecânico para puxar ou soltar o ar, com esforço visível para respirar.",
@@ -844,8 +845,8 @@ def dicionario_sintomas():
         "Chiado grave": "Barulho alto no peito, como se estivesse assobiando ao respirar.",
         "Contínua": "Não melhora mesmo depois de descansar ou sentar.",
         "Desconforto extremo": "Sensação intensa de não conseguir respirar, causando pânico ou cansaço."
-    }
-},
+        }
+    },
 
 "Falta de ar": {
     "definicao": "Sensação subjetiva de que o ar não está entrando o suficiente, mesmo sem esforço visível.",
@@ -854,8 +855,8 @@ def dicionario_sintomas():
     "termos": {
         "Grave": "A sensação é tão forte que a pessoa mal consegue falar ou se mover.",
         "Lábios roxos": "Sinal de pouco oxigênio, mostrando que o problema é sério."
-    }
-},
+        }
+    },
 
 "Lesões na pele": {
     "definicao": "Alterações visíveis na pele como manchas, bolhas, descamações ou feridas.",
@@ -865,8 +866,8 @@ def dicionario_sintomas():
         "Púrpuras": "Manchas roxas que não desaparecem quando apertadas.",
         "Erupções": "Pequenas bolinhas ou manchas que surgem repentinamente.",
         "Irritações de contato": "Manchas vermelhas que coçam e aparecem após tocar algo, como produto ou tecido."
-    }
-},
+        }
+    },
 
 "Dor ou olho vermelho": {
     "definicao": "Desconforto ocular associado a vermelhidão, ardência ou sensibilidade à luz.",
@@ -877,8 +878,8 @@ def dicionario_sintomas():
         "Sensibilidade à luz": "Dificuldade de manter os olhos abertos em lugares claros.",
         "Ardência": "Sensação de queimação no olho.",
         "Olhos secos": "Falta de lágrima ou desconforto como se houvesse areia no olho."
-    }
-},
+        }
+    },
 
 "Sangramento vaginal": {
     "definicao": "Perda de sangue pela vagina fora do ciclo menstrual esperado ou em volume incomum.",
@@ -887,8 +888,8 @@ def dicionario_sintomas():
     "termos": {
         "Abundante": "Fluxo forte, que encharca o absorvente rapidamente.",
         "Fora do ciclo": "Sangramento inesperado, sem estar no período menstrual."
-    }
-},
+        }
+    },
 
 "Dor ou dificuldade ao urinar": {
     "definicao": "Sensação de dor, queimação ou esforço para urinar, geralmente por infecção.",
@@ -897,8 +898,8 @@ def dicionario_sintomas():
     "termos": {
         "Ardência": "Queimação na hora de urinar.",
         "Desconforto abdominal": "Dor no pé da barriga que acompanha a vontade de urinar."
-    }
-},
+        }
+    },
 
 "Inchaço incomum": {
     "definicao": "Acúmulo de líquido em partes do corpo, especialmente mãos, pernas, rosto ou barriga.",
@@ -908,8 +909,8 @@ def dicionario_sintomas():
         "Inchaço súbito": "Aparece de uma hora pra outra, geralmente em uma região.",
         "Inchaço generalizado": "Corpo inteiro parece mais 'cheio', inclusive rosto e barriga.",
         "Leve retenção": "A pele marca com o dedo ou a roupa aperta mais que o normal."
-    }
-},
+        }
+    },
 
 "Hipotensão": {
     "definicao": "Pressão arterial abaixo dos níveis normais, podendo causar tontura, fraqueza ou desmaio.",
@@ -918,8 +919,8 @@ def dicionario_sintomas():
     "termos": {
         "Palidez extrema": "Pele muito branca, parecendo sem sangue.",
         "Pressão baixa": "Medição da pressão abaixo de 90/60 mmHg."
-    }
-},
+        }
+    },
 
 "Hipoglicemia": {
     "definicao": "Queda dos níveis de açúcar no sangue, podendo causar sintomas neurológicos e físicos.",
@@ -929,8 +930,8 @@ def dicionario_sintomas():
         "Sudorese intensa": "Suor exagerado, mesmo sem calor ou esforço.",
         "Fome súbita": "Sensação repentina de precisar comer urgente.",
         "Tremores": "Mãos ou corpo tremendo involuntariamente."
-    }
-},
+        }
+    },
 
 "Hiperglicemia": {
     "definicao": "Excesso de glicose no sangue, comum em pessoas com diabetes descompensado.",
@@ -939,8 +940,8 @@ def dicionario_sintomas():
     "termos": {
         "Sede intensa": "Necessidade de beber muita água o tempo todo.",
         "Mal-estar com enjoo": "Sensação ruim geral acompanhada de vontade de vomitar."
-    }
-},
+        }
+    },
 
 "Temperatura baixa": {
     "definicao": "Redução anormal da temperatura corporal, conhecida como hipotermia.",
@@ -950,8 +951,8 @@ def dicionario_sintomas():
         "Extremidades frias": "Mãos e pés muito gelados ao toque.",
         "Calafrios": "Tremores causados pelo frio intenso.",
         "Pele fria": "Pele gelada, mesmo em ambiente normal."
-    }
-},
+        }
+    },
 
 "Dor durante a gravidez": {
     "definicao": "Desconforto abdominal ou pélvico em gestantes, que pode ou não indicar complicações.",
@@ -959,8 +960,8 @@ def dicionario_sintomas():
     "clinico": "Dor gestacional",
     "termos": {
         "Perda de líquido": "Quando escorre água pela vagina, como se estivesse vazando urina ou rompendo a bolsa."
-    }
-},
+        }
+    },
 
 "Redução dos movimentos fetais": {
     "definicao": "Diminuição ou ausência percebida dos chutes e movimentos do bebê na barriga.",
@@ -970,8 +971,8 @@ def dicionario_sintomas():
         "Nenhum movimento fetal": "A grávida não sente o bebê mexer por um longo período.",
         "Redução clara": "Os movimentos diminuíram bastante em comparação aos dias anteriores.",
         "Menos ativos": "O bebê se mexe, mas de forma mais fraca ou mais rara."
-    }
-},
+        }
+    },
 
 "Trabalho de parto": {
     "definicao": "Período em que começam as contrações uterinas regulares e há dilatação para nascimento do bebê.",
@@ -980,8 +981,8 @@ def dicionario_sintomas():
     "termos": {
         "Contrações": "Dores regulares e fortes que fazem a barriga endurecer e relaxar.",
         "Pressão pélvica": "Sensação de peso ou pressão na parte íntima, como se algo estivesse empurrando."
-    }
-},
+        }
+    },
 
     "Mordedura": {
     "definicao": "Ferimento causado por mordida de animal ou ser humano, podendo gerar infecção ou risco de doenças.",
@@ -991,8 +992,8 @@ def dicionario_sintomas():
         "Mordida profunda": "Ferida que atravessa todas as camadas da pele.",
         "Suspeita de raiva": "Quando a mordida é de animal desconhecido ou não vacinado.",
         "Mordida superficial": "Arranhão ou machucado leve, só na parte de cima da pele."
-    }
-},
+        }
+    },
 
 "Queimadura": {
     "definicao": "Lesão na pele ou tecidos por calor, produtos químicos, eletricidade ou radiação.",
@@ -1001,8 +1002,8 @@ def dicionario_sintomas():
     "termos": {
         "Queimadura extensa": "Quando pega uma área grande do corpo.",
         "Bolhas": "Quando a pele levanta com líquido dentro, sinal de queimadura mais profunda."
-    }
-},
+        }
+    },
 
 "Ferida não-traumática": {
     "definicao": "Ferida que surge sem pancada ou corte, geralmente por infecção, circulação ruim ou doenças de pele.",
@@ -1011,8 +1012,8 @@ def dicionario_sintomas():
     "termos": {
         "Secreção": "Líquido ou pus que sai da ferida.",
         "Mal cheiro": "Cheiro forte vindo da ferida, sinal de infecção."
-    }
-},
+        }
+    },
 
 "Gases": {
     "definicao": "Acúmulo de ar no intestino, provocando distensão e desconforto.",
@@ -1022,8 +1023,8 @@ def dicionario_sintomas():
         "Flatulência": "Pum em excesso.",
         "Barulho intestinal alto": "Ruídos fortes na barriga.",
         "Sem alívio": "Mesmo soltando gases, a dor ou desconforto continua."
-    }
-},
+        }
+    },
 
 "Sangramento retal": {
     "definicao": "Presença de sangue saindo pelo ânus, geralmente visível nas fezes ou no papel higiênico.",
@@ -1031,8 +1032,8 @@ def dicionario_sintomas():
     "clinico": "Rectorragia",
     "termos": {
         "Vermelho vivo": "Cor do sangue quando o sangramento vem do final do intestino ou do ânus."
-    }
-},
+        }
+    },
 
 "Confusão mental": {
     "definicao": "Alteração da clareza de pensamento, com dificuldade para entender, lembrar ou se orientar.",
@@ -1041,15 +1042,16 @@ def dicionario_sintomas():
     "termos": {
         "Desorientação": "Quando não sabe onde está, que dia é ou quem é quem.",
         "Lapsos de memória": "Esquecimentos rápidos, confunde fatos recentes ou nomes."
-    }
-},
+        }
+    },
 
 "Perda de consciência": {
     "definicao": "Quando a pessoa deixa de responder, desmaia ou apaga, mesmo que por pouco tempo.",
     "popular": "Quando a pessoa cai ou apaga e não responde. Pode voltar sozinha depois ou precisar de ajuda.",
     "clinico": "Perda de consciência",
     "termos": {}
-},
+        }
+    },
 
 "Trauma na cabeça": {
     "definicao": "Lesão na cabeça provocada por batida, queda ou impacto direto.",
@@ -1059,8 +1061,8 @@ def dicionario_sintomas():
         "Perda de consciência": "Quando a pessoa desmaia ou apaga depois da pancada.",
         "Amnésia": "Quando não lembra do que aconteceu antes ou depois da batida.",
         "Vômito em jato": "Quando vomita com força, sem esforço, após o trauma."
-    }
-},
+        }
+    },
 
 "Manchas anormais na pele": {
     "definicao": "Alterações na coloração da pele, como manchas vermelhas, roxas, escuras ou esbranquiçadas.",
@@ -1072,8 +1074,8 @@ def dicionario_sintomas():
         "Lesão disseminada": "Quando as manchas se espalham pelo corpo todo.",
         "Bordas elevadas": "É quando a parte de divisão entre mancha e pele está mais pra cima que a mancha em si",
         "Descamação": "É quando parece que a pele está se soltando do corpo,em forma mais fina"
-    }
-},
+        }
+    },
 
 "Incontinência urinária": {
     "definicao": "Incapacidade de segurar a urina, com perdas involuntárias.",
@@ -1083,8 +1085,8 @@ def dicionario_sintomas():
         "Urgência urinária": "Quando dá vontade súbita e forte de urinar.",
         "Perda involuntária": "Quando escapa xixi sem conseguir controlar.",
         "Pequenos escapes": "Quando uma pequena quantidade de urina escapa involuntariamente "
-    }
-},
+        }
+    },
 
 "Coriza e espirros": {
     "definicao": "Coriza é o nariz escorrendo, e espirros são expulsões rápidas de ar pelo nariz e boca, geralmente por irritação.",
@@ -1095,8 +1097,8 @@ def dicionario_sintomas():
         "Secreção purulenta": "Catarro amarelo ou verde, indicando infecção.",
         "Crise alérgica": "Quando os espirros e o nariz escorrendo não param.",
         "Irritação nasal":"É quando o nariz arde,dando uma sensação de queimação"
-    }
-},
+        }
+    },
 
 "Incontinência urinária em idosos": {
     "definicao": "Perda involuntária de urina, comum na população idosa por fatores musculares, neurológicos ou medicamentos.",
@@ -1110,8 +1112,8 @@ def dicionario_sintomas():
         "Incontinência frequente": "Quando se tem a capacidade de segurar o xixi às vezes,mas na maioria das vezes não",
         "Gotejamente": "Quando somente algumas gotas escapam de vez em quando",
         "Leves escapes ocasionais": "Quando uma pequena quantidade de urina escapa involuntariamente,mas somente em poucas situações"
-    }
-},
+        }
+    },
 
 "Queda em idosos": {
     "definicao": "Perda de equilíbrio ou escorregão que leva ao chão, com ou sem lesão.",
@@ -1123,8 +1125,8 @@ def dicionario_sintomas():
         "Síncope": "Desmaio que leva à queda.",
         "Perda de consciência": "Quando a pessoa desmaia ou apaga depois da pancada.",
         "Tombos esporádicos": "Quando o idoso cai levemente em raras ocasiões,mas sem consequências graves"
-    }
-},
+        }
+    },
 
 "Delírio em idosos": {
     "definicao": "Confusão mental repentina, com alteração na atenção, memória e comportamento.",
@@ -1136,8 +1138,8 @@ def dicionario_sintomas():
         "Flutuação de consciência": "Às vezes tá bem, outras vezes não entende nada.",
         "Confusão mental": "Dificuldade de pensar normalmente",
         "Alteração de comportamento": "É quando o idoso passa a tomar decisões  que não são coerente com o que ele pensava antes"
-    }
-},
+        }
+    },
 
 "Politrauma": {
     "definicao": "Lesão corporal severa que coloca a vida em risco, como batidas fortes, atropelamentos ou quedas de altura.",
@@ -1149,8 +1151,8 @@ def dicionario_sintomas():
         "Comprometimento neurológico": "Perda de movimento, fala ou consciência.",
         "Dor localizada": "É quando a dor fica em um lugar só",
         "Fratura": "É quando um osso quebra"
-    }
-},
+        }
+    },
     
 "Dor de dente": {
     "definicao": "Dor localizada nos dentes, podendo ser constante ou pulsante.",
@@ -1160,8 +1162,8 @@ def dicionario_sintomas():
         "Abcesso dentário": "Inchaço com pus perto do dente.",
         "Irradiação": "Quando a dor vai pra orelha, pescoço ou cabeça.",
         "Sensibilidade": "Dor ao comer doce, gelado ou quente."
-    }
-},
+        }
+    },
 
 "Alteração na audição": {
     "definicao": "Redução da audição ou percepção de sons anormais.",
@@ -1172,8 +1174,8 @@ def dicionario_sintomas():
         "Perda súbita ": "Quando para de ouvir de repente.",
         "Otite": "Inflamação do ouvido que causa dor e secreção.",
         "Zumbido": "Comoo um chiado que fica toda hor presente"
-    }
-},
+        }
+    },
 
 "Dor de garganta": {
     "definicao": "Dor ou irritação na garganta, que pode dificultar engolir ou falar.",
@@ -1183,8 +1185,8 @@ def dicionario_sintomas():
         "Placas": "Manchas esbranquiçadas ou amareladas nas amígdalas, indicando infecção.",
         "Pus visível": "Material branco que sai da garganta ou fica grudado.",
         "Irritação": "Sensação de garganta arranhando ou pegando fogo."
-    }
-},
+        }
+    },
 
 "Dor nas articulações": {
     "definicao": "Dor ou desconforto nas juntas (joelho, ombro, cotovelo, etc.).",
@@ -1195,8 +1197,8 @@ def dicionario_sintomas():
         "Mobilidade limitada": "Dificuldade pra mexer o local normalmente.",
         "Edema": "É o nome técnico para inchaço.",
         "Trauma": "É um impacto no local que está doendo,como uma batida"
-    }
-},
+        }
+    },
 
 "Dor no peito": {
     "definicao": "Dor ou pressão no peito, que pode vir do coração, dos pulmões ou da musculatura.",
