@@ -681,8 +681,9 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa sente vontade de fazer xixi, mas não consegue ou sai só um pouco, mesmo com a bexiga cheia.",
     "clinico": "Retenção urinária aguda ou crônica",
     "termos": {
-        "Distensão abdominal": "Barriga inchada ou dura por causa da bexiga cheia.",
-        "Jato fraco com sensação de bexiga cheia": "Sai pouco xixi e continua a vontade, como se não tivesse aliviado."
+        "Retenção urinária": "Quando sente vontade de urinar mas não consegue.",
+        "Jato fraco": "Quando o xixi sai com pouca força.",
+        "Distensão abdominal": "Barriga estufada por acúmulo de urina."
         }
     },
 
@@ -691,9 +692,9 @@ def dicionario_sintomas():
     "popular": "Quando a mão ou o corpo começa a tremer sem motivo ou faz movimentos esquisitos sozinho, sem conseguir parar.",
     "clinico": "Movimentos involuntários ou tremores",
     "termos": {
-        "Movimentos anormais": "Movimentos inesperados, como sacudidas ou repuxos.",
-        "Dificuldade pra parar": "Mesmo tentando, não consegue controlar o tremor.",
-        "Tremores leves": "Pequenas vibrações no corpo, geralmente nas mãos ou queixo."
+        "Tremores": "Movimentos involuntários do corpo, geralmente nas mãos.",
+        "Espasmos": "Contrações rápidas e fora de controle dos músculos.",
+        "Rigidez muscular": "Quando o músculo fica duro e difícil de mexer."
         }
     },
 
@@ -702,9 +703,9 @@ def dicionario_sintomas():
     "popular": "Quando engolir água ou comida parece difícil ou incômodo, como se algo estivesse travando na garganta.",
     "clinico": "Disfagia",
     "termos": {
-        "Engolir líquidos": "Tem dificuldade até com água, leite ou suco.",
-        "Engolir sólidos": "Só sente problema com alimentos mais consistentes.",
-        "Leve desconforto": "Sensação de 'arranhando' ou dificuldade pequena ao engolir."
+        "Disfagia": "Quando é difícil engolir comida ou bebida.",
+        "Sensação de entalo": "Sensação de que o alimento está preso na garganta.",
+        "Dor ao engolir": "Ardência ou dor durante a deglutição."
         }
     },
 
@@ -713,8 +714,9 @@ def dicionario_sintomas():
     "popular": "Quando a pele ou os olhos da pessoa ficam amarelos, mesmo que levemente. É comum em recém-nascidos ou problemas no fígado.",
     "clinico": "Icterícia",
     "termos": {
-        "Amarelado leve": "Tom amarelado visível de perto, mas não forte.",
-        "Coloração discreta": "Amarelo quase imperceptível, mais visível na luz."
+        "Icterícia": "Pele e olhos com tom amarelado.",
+        "Bilirrubina": "Substância do sangue que, quando acumulada, deixa a pele amarela.",
+        "Colestase": "Bloqueio no caminho da bile, líquido que ajuda na digestão."
         }
     },
 
@@ -723,9 +725,9 @@ def dicionario_sintomas():
     "popular": "Quando parece que tem algo entalado na garganta — um pedaço de comida, espinha de peixe ou qualquer coisa — e a pessoa sente incômodo ao engolir.",
     "clinico": "Obstrução faríngea leve",
     "termos": {
-        "Corpo estranho preso": "Algo realmente ficou preso ou está incomodando na garganta.",
-        "Dor ao engolir": "Ato de engolir dói mais que o normal.",
-        "Sensação de algo preso": "Mesmo sem ter nada visível, parece que algo ficou ali."
+        "Obstrução": "Algo bloqueando a passagem de ar ou comida.",
+        "Engasgo": "Quando algo entra no caminho errado e atrapalha a respiração.",
+        "Aspiração": "Quando um objeto ou alimento vai para os pulmões por engano."
         }
     },
 
@@ -734,7 +736,9 @@ def dicionario_sintomas():
     "popular": "Quando sai sangue pelo vômito ou pelas fezes, o que pode assustar e indicar problema no estômago ou intestino.",
     "clinico": "Hemorragia digestiva",
     "termos": {
-        "Sangue vivo": "Sangue vermelho claro, que não passou muito tempo no intestino ou estômago."
+        "Fezes escuras": "Fezes pretas ou com cor de piche, indicando sangue digerido.",
+        "Vômito com sangue": "Quando o vômito sai com sangue vermelho vivo ou escuro.",
+        "Hematêmese": "Nome técnico para vômito com sangue."
         }
     },
 
@@ -743,9 +747,9 @@ def dicionario_sintomas():
     "popular": "Quando o ombro ou o braço doem, formigam ou não se mexem direito, com dor que pode ir do pescoço até os dedos.",
     "clinico": "Dor irradiada ou lesão músculo-esquelética",
     "termos": {
-        "Dor irradiando": "A dor começa em um ponto e se espalha.",
-        "Formigamento": "Sensação de 'agulhadas' ou dormência.",
-        "Limitação de movimento": "Não consegue levantar ou mexer o braço direito por causa da dor."
+        "Irradiação": "Quando a dor começa em um lugar e se espalha para outro.",
+        "Dormência": "Sensação de formigamento ou falta de sensibilidade.",
+        "Fraqueza muscular": "Quando o braço ou ombro perdem força para segurar ou levantar objetos."
         }
     },
 
@@ -754,9 +758,9 @@ def dicionario_sintomas():
     "popular": "Quando bate aquele enjoo, como se fosse vomitar ou estivesse com o estômago revirado.",
     "clinico": "Náusea",
     "termos": {
-        "Mal-estar": "Sensação geral ruim, sem motivo claro.",
-        "Desconforto passageiro": "Enjoo leve que melhora com o tempo.",
-        "Enjoo": "Sensação clara de que vai vomitar, mesmo que não vomite."
+        "Náusea": "Sensação de que vai vomitar, mesmo sem chegar a vomitar.",
+        "Enjoo": "Desconforto no estômago, como se estivesse 'embrulhado'.",
+        "Vômito persistente": "Quando vomita várias vezes e não consegue segurar líquidos ou comida."
         }
     },
 
@@ -811,9 +815,9 @@ def dicionario_sintomas():
     "popular": "Quando a pele fica irritada, coçando, com manchas vermelhas ou até sem sintomas, mas com aspecto diferente.",
     "clinico": "Dermatite alérgica",
     "termos": {
-        "Coceira intensa": "Vontade forte de coçar, difícil de segurar.",
-        "Descamação": "Quando a pele começa a soltar pequenas peles finas.",
-        "Assintomática": "A pele muda, mas não dói nem coça."
+        "Urticária": "Placas vermelhas na pele que coçam muito.",
+        "Erupção": "Aparecimento repentino de manchas ou bolinhas na pele.",
+        "Edema": "Inchaço em alguma parte do corpo."
         }
     },
 
@@ -845,9 +849,9 @@ def dicionario_sintomas():
     "popular": "Quando o machucado piora com pus, vermelhidão, inchaço ou cheiro ruim. Pode começar a doer mais do que antes.",
     "clinico": "Ferida infeccionada",
     "termos": {
-        "Pus": "Líquido amarelado ou esverdeado que sai da ferida.",
-        "Secreção local": "Qualquer líquido saindo do machucado.",
-        "Vermelhidão": "Área ao redor da ferida está bem vermelha."
+        "Supuração": "Saída de pus do machucado.",
+        "Inflamação": "Vermelhidão, calor e inchaço ao redor da ferida.",
+        "Cicatrização": "Processo natural de fechamento do machucado."
         }
     },
 
