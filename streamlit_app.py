@@ -359,7 +359,7 @@ def dicionario_sintomas():
         "Perda de peso >10% em 6 meses": "Emagrecer sem querer mais de 10% do peso no período (ex.: de 70 kg para <63 kg).",
         "Prurido": "Coceira no corpo.",
         "Imunossupressão": "Sistema de defesa “mais fraco” por doença (ex.: HIV) ou remédios (corticoide, quimioterapia).",
-        "Corticoide/Quimioterapia: Remédios que reduzem a inflamação ou tratam câncer, mas também diminuem a imunidade.",
+        "Corticoide/Quimioterapia": "Remédios que reduzem a inflamação ou tratam câncer, mas também diminuem a imunidade.",
             
         }
     },
