@@ -811,9 +811,10 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa bate alguma parte do corpo, cai ou sofre algum acidente e sente dor ou fica inconsciente.",
     "clinico": "Traumatismo",
     "termos": {
-        "Trauma grave": "Batida forte, com risco de lesão interna ou fratura.",
-        "Inconsciência": "A pessoa desmaiou ou não responde.",
-        "Dor local": "Dor só no lugar onde bateu, mas sem outros sintomas."
+        "Alto impacto": "Acidente de trânsito ou queda de altura.",
+        "Sangramento importante que não para": "Sangue escorrendo contínuo, encharca curativo.",
+        "Deformidade aparente": "Membro torto, encurtado ou com inchaço grande.",
+        "Perda de consciência": "Desmaiou na hora do trauma."
         }
     },
 
@@ -833,9 +834,10 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa começa a tremer forte, perde os sentidos ou tem uma crise de epilepsia.",
     "clinico": "Crise convulsiva",
     "termos": {
-        "Convulsão ativa": "A crise está acontecendo naquele momento.",
-        "Tremores leves": "Movimentos involuntários menores, sem queda ou rigidez.",
-        "Epilepsia": "Doença que causa convulsões repetidas com histórico médico."
+        "Convulsão > 5 min": "Crise longa, não para sozinha.",
+        "Trauma na cabeça durante a crise": "Bateu a cabeça enquanto convulsionava.",
+        "Uso de anticoagulante": "Remédios que “afinam” o sangue.",
+        "Recuperação parcial com confusão": "Após a crise, a pessoa acorda confusa e lenta."
         }
     },
 
@@ -866,8 +868,10 @@ def dicionario_sintomas():
     "popular": "Diferente da dificuldade respiratória, aqui a pessoa diz que não consegue puxar o ar direito, mesmo se a respiração parecer normal de fora. Pode ocorrer em crises de ansiedade ou pulmão cheio.",
     "clinico": "Dispneia subjetiva",
     "termos": {
-        "Grave": "A sensação é tão forte que a pessoa mal consegue falar ou se mover.",
-        "Lábios roxos": "Sinal de pouco oxigênio, mostrando que o problema é sério."
+        "Lábios ou ponta dos dedos roxos": "Cor arroxeada indicando pouco oxigênio.",
+        "Chiado no peito": "Som de apito ao respirar.",
+        "De repente (minutos/horas)": "Começou muito rápido, sem aviso.",
+        "Asma/bronquite/DPOC": "Doenças que dificultam a passagem de ar."
         }
     },
 
@@ -1263,11 +1267,10 @@ def dicionario_sintomas():
     "popular": "É quando a cabeça começa a doer forte, média ou fraca, podendo vir com enjoo, luz incomodando ou vista embaçada.",
     "clinico": "Cefaleia",
     "termos": {
-        "Visão turva": "Quando a vista fica embaçada ou difícil de enxergar.",
-        "Sensibilidade à luz": "Quando a claridade incomoda muito os olhos.",
-        "Náusea": "Aquela sensação de enjoo ou vontade de vomitar.",
-        "Intermitente": "É qunado ocorre de vez em quando,passa,mas depos volta,de novo",
-        "Rotineira": "É algo constante,ou seja,já se tornou parte da sua vida,de tanto que ocorre"
+        "Muito forte e súbita": "Dor que “explode” de uma vez.",
+        "Rigidez na nuca": "Pescoço duro, difícil encostar o queixo no peito.",
+        "Fraqueza de um lado/fala enrolada": "Um lado do corpo fica fraco ou fala sai arrastada.",
+        "Sensibilidade à luz": "Luz incomoda e piora a dor."
         }
     },
 "Sensação de desmaio": {
@@ -1295,8 +1298,10 @@ def dicionario_sintomas():
     "popular": "Quando o estômago coloca pra fora o que comeu. Pode acontecer uma vez ou várias.",
     "clinico": "Emese",
     "termos": {
-        "Desidratação": "Quando o corpo perde muito líquido, a pessoa fica fraca e com boca seca.",
-        "Vômito em jato": "Vômito que sai com muita força, como uma mangueira."
+        "Não consegue manter líquidos": "Vomita logo após beber água/soro e não hidrata.",
+        "Mais de 5 vezes": "Muitas vezes em pouco tempo.",
+        "Vômitos com sangue": "Vômito vermelho/escuro; pode parecer borra de café.",
+        "Sinais de desidratação": "Boca seca, pouca urina, tontura."
         }
     },
 "Dor abdominal": {
@@ -1304,8 +1309,10 @@ def dicionario_sintomas():
     "popular": "É dor na barriga, que pode ser leve ou forte, de repente ou aos poucos, e pode vir com febre ou vômito.",
     "clinico": "Dor abdominal",
     "termos": {
-        "Rigidez abdominal": "Barriga dura e dolorida ao apertar.",
-        "Localizada": "Quando a dor está só em um ponto da barriga."
+        "Barriga muito dura": "Abdome rígido ao toque.",
+        "Sem eliminar gases/fezes": "Intestino parado, sem evacuar ou soltar gases.",
+        "Lado direito inferior": "Região da apendicite (parte baixa do lado direito).",
+        "Parte de cima do lado direito": "Região do fígado/vesícula."
         }
     },
 "Dor nas costas": {
@@ -2733,114 +2740,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
     st.markdown(mensagem_avaliacao)
 
 # Funções já existentes
-
-def opcoes_falta_de_ar():
-    return [
-        "Grave, com lábios roxos ou confusão",
-        "Moderada e constante",
-        "Leve, apenas aos esforços",
-        "Sem desconforto relevante"
-    ]
-
-def classificar_falta_de_ar(resp):
-    if resp == "Grave, com lábios roxos ou confusão":
-        return "vermelho", "Insuficiência respiratória grave. Procure socorro imediatamente."
-    elif resp == "Moderada e constante":
-        return "laranja", "Pode indicar infecção ou crise respiratória. Requer avaliação."
-    elif resp == "Leve, apenas aos esforços":
-        return "amarelo", "Fique atento à progressão. Situação controlada no momento."
-    else:
-        return "verde", "Respiração normal, sem desconfortos importantes."
-
-def opcoes_vomito():
-    return [
-        "Vômitos com sangue ou sinais de desidratação",
-        "Vômitos persistentes sem melhora",
-        "Ocasional, com outros sintomas leves",
-        "Vômito único e controlado"
-    ]
-
-def classificar_vomito(resp):
-    if resp == "Vômitos com sangue ou sinais de desidratação":
-        return "vermelho", "Urgência médica por risco de hemorragia ou desidratação grave."
-    elif resp == "Vômitos persistentes sem melhora":
-        return "laranja", "Situação preocupante. Pode indicar gastroenterite ou intolerância alimentar."
-    elif resp == "Ocasional, com outros sintomas leves":
-        return "amarelo", "Quadro leve. Mantenha hidratação e dieta leve."
-    else:
-        return "verde", "Vômito isolado sem sinais de risco. Sem necessidade de ação imediata."
-
-def opcoes_trauma_ou_queda():
-    return [
-        "Trauma grave com sangramento ou inconsciência",
-        "Trauma moderado com dor intensa",
-        "Queda leve com dor local",
-        "Sem dor ou lesão aparente"
-    ]
-
-def classificar_trauma_ou_queda(resp):
-    if resp == "Trauma grave com sangramento ou inconsciência":
-        return "vermelho", "Trauma com sinais neurológicos ou hemorragia requer atendimento urgente."
-    elif resp == "Trauma moderado com dor intensa":
-        return "laranja", "Lesão pode envolver fratura ou contusão importante. Avaliação médica recomendada."
-    elif resp == "Queda leve com dor local":
-        return "amarelo", "Possivelmente leve, mas merece observação contínua."
-    else:
-        return "verde", "Sem indícios de lesão relevante. Mantenha observação."
-
-def opcoes_dor_de_cabeca():
-    return [
-        "Muito forte, súbita ou com visão turva",
-        "Moderada com náusea ou sensibilidade à luz",
-        "Leve e intermitente",
-        "Rotineira, sem sintomas associados"
-    ]
-
-def classificar_dor_de_cabeca(resp):
-    if resp == "Muito forte, súbita ou com visão turva":
-        return "vermelho", "Pode indicar hemorragia, enxaqueca grave ou crise hipertensiva. Procure atendimento imediato."
-    elif resp == "Moderada com náusea ou sensibilidade à luz":
-        return "laranja", "Dor pode ser de origem tensional ou migranosa. Consulte um médico se persistir."
-    elif resp == "Leve e intermitente":
-        return "amarelo", "Dor leve e sem progressão. Observe e evite gatilhos como estresse e sono irregular."
-    else:
-        return "verde", "Cefaleia rotineira sem sintomas adicionais. Situação tranquila."
-
-def opcoes_dor_abdominal():
-    return [
-        "Dor intensa e súbita com rigidez na barriga ou vômitos",
-        "Dor moderada com febre ou vômito persistente",
-        "Dor intermitente ou localizada, sem sinais associados",
-        "Dor leve que melhora com repouso"
-    ]
-
-def classificar_dor_abdominal(resp):
-    if resp == "Dor intensa e súbita com rigidez na barriga ou vômitos":
-        return "vermelho", "Pode indicar apendicite, obstrução intestinal ou outra emergência abdominal. Procure hospital."
-    elif resp == "Dor moderada com febre ou vômito persistente":
-        return "laranja", "Quadro infeccioso ou inflamatório. Precisa de avaliação médica."
-    elif resp == "Dor intermitente ou localizada, sem sinais associados":
-        return "amarelo", "Provavelmente leve ou funcional. Acompanhe evolução dos sintomas."
-    else:
-        return "verde", "Dor leve e autolimitada. Sem sinais de preocupação."
-
-def opcoes_convulsoes():
-    return [
-        "Convulsão ativa ou recente sem recuperação da consciência",
-        "Convulsão recente com recuperação parcial, mas com confusão",
-        "Histórico de epilepsia com crise controlada",
-        "Tremores leves e conscientes, sem perda de consciência"
-    ]
-
-def classificar_convulsoes(resp):
-    if resp == "Convulsão ativa ou recente sem recuperação da consciência":
-        return "vermelho", "Emergência neurológica. Chame socorro imediatamente."
-    elif resp == "Convulsão recente com recuperação parcial, mas com confusão":
-        return "laranja", "Situação ainda instável. Procure pronto atendimento."
-    elif resp == "Histórico de epilepsia com crise controlada":
-        return "amarelo", "Situação conhecida. Mantenha rotina de cuidados e medicação."
-    else:
-        return "verde", "Sem sinais preocupantes. Monitoramento normal."
 
 def opcoes_sangramento_ativo():
     return [
@@ -6149,7 +6048,347 @@ FLUXOS[normalizar("Diarreia em criança")] = {
                 "Febre alta": 1.0,
                 "Letargia/confusão": 1.5,
                 "Boca seca ou olhos fundos
+# ===============================
+# FALTA DE AR
+# ===============================
+FLUXOS[normalizar("Falta de ar")] = {
+    "label": "Falta de ar",
+    "perguntas": [
+        {
+            "id": "gravidade",
+            "label": "Quão intensa está a falta de ar agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Grave, com lábios roxos ou confusão": 2.0,
+                "Moderada e constante": 1.2,
+                "Leve, apenas aos esforços": 0.4,
+                "Sem desconforto relevante": 0.0
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "De repente (minutos/horas)": 1.3,
+                "Foi piorando aos poucos (dias)": 0.5
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Algum desses sinais está junto?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Lábios ou ponta dos dedos roxos": 1.8,
+                "Dor no peito": 1.5,
+                "Chiado no peito": 0.6,
+                "Febre": 0.6
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Condições que você tem (selecione se houver):",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Asma/bronquite/DPOC": 0.8,
+                "Doença cardíaca": 0.8,
+                "Gravidez": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"gravidade": "Grave, com lábios roxos ou confusão"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Lábios ou ponta dos dedos roxos"]}, "min_cor": "vermelho"},
+        {"se": {"inicio": "De repente (minutos/horas)", "sinais_associados": ["Dor no peito"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
 
+# ===============================
+# VÔMITO (GERAL)
+# ===============================
+FLUXOS[normalizar("Vômito")] = {
+    "label": "Vômito",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Vômitos com sangue ou sinais de desidratação": 2.0,
+                "Vômitos persistentes sem melhora": 1.2,
+                "Ocasional, com outros sintomas leves": 0.6,
+                "Vômito único e controlado": 0.0
+            }
+        },
+        {
+            "id": "frequencia",
+            "label": "Com que frequência ocorreu nas últimas 6 horas?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 5 vezes": 1.2,
+                "3 a 5 vezes": 0.6,
+                "Menos de 3 vezes": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Há algum desses sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor abdominal forte e contínua": 1.0,
+                "Febre alta (≥ 38,5°C)": 0.8,
+                "Não consegue manter líquidos": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Fatores de risco presentes?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≥ 67 anos": 0.8,
+                "Gravidez": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Vômitos com sangue ou sinais de desidratação"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Não consegue manter líquidos"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# TRAUMA OU QUEDA
+# ===============================
+FLUXOS[normalizar("Trauma ou queda")] = {
+    "label": "Trauma ou queda",
+    "perguntas": [
+        {
+            "id": "mecanismo",
+            "label": "Como foi o trauma?",
+            "tipo": "radio",
+            "opcoes": {
+                "Alto impacto (trânsito, queda >1,5 m)": 1.8,
+                "Moderado (queda da própria altura com batida forte)": 1.0,
+                "Leve (batida/escoriação sem impacto relevante)": 0.4
+            }
+        },
+        {
+            "id": "sintomas",
+            "label": "O que está acontecendo agora?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Sangramento importante que não para": 1.8,
+                "Perda de consciência na hora do trauma": 2.0,
+                "Dor intensa e localizada": 1.0,
+                "Deformidade aparente (osso torto/inchadão)": 1.5
+            }
+        },
+        {
+            "id": "area",
+            "label": "Qual região foi mais atingida?",
+            "tipo": "radio",
+            "opcoes": {
+                "Cabeça/peito/barriga": 1.2,
+                "Braços/pernas": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"sintomas": ["Perda de consciência na hora do trauma"]}, "min_cor": "vermelho"},
+        {"se": {"sintomas": ["Sangramento importante que não para"]}, "min_cor": "vermelho"},
+        {"se": {"sintomas": ["Deformidade aparente (osso torto/inchadão)", "Dor intensa e localizada"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# DOR DE CABEÇA (CEFALÉIA)
+# ===============================
+FLUXOS[normalizar("Dor de cabeça")] = {
+    "label": "Dor de cabeça",
+    "perguntas": [
+        {
+            "id": "caracteristica",
+            "label": "Como é a dor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Muito forte, súbita ou com visão turva": 2.0,
+                "Moderada, com náusea ou sensibilidade à luz": 1.2,
+                "Leve e intermitente": 0.4,
+                "Rotineira, sem sintomas associados": 0.0
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Como começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "De repente (em segundos/minutos)": 1.3,
+                "Foi surgindo aos poucos": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Há algum desses sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Rigidez na nuca": 1.5,
+                "Febre alta (≥ 38,5°C)": 1.0,
+                "Fraqueza em um lado do corpo ou fala enrolada": 1.6
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Condições associadas (se houver):",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Gravidez": 0.8,
+                "Hipertensão": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"caracteristica": "Muito forte, súbita ou com visão turva"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Rigidez na nuca"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Fraqueza em um lado do corpo ou fala enrolada"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# DOR ABDOMINAL
+# ===============================
+FLUXOS[normalizar("Dor abdominal")] = {
+    "label": "Dor abdominal",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a dor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor intensa e súbita com rigidez na barriga ou vômitos": 2.0,
+                "Dor moderada com febre ou vômito persistente": 1.2,
+                "Dor intermitente/localizada, sem sinais associados": 0.6,
+                "Dor leve que melhora com repouso": 0.2
+            }
+        },
+        {
+            "id": "local",
+            "label": "Onde dói mais?",
+            "tipo": "radio",
+            "opcoes": {
+                "Lado direito inferior": 1.0,
+                "Parte de cima do lado direito": 0.8,
+                "Dor difusa (barriga toda)": 0.6
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Há algum desses sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Sangue nas fezes ou no vômito": 1.5,
+                "Barriga muito dura": 1.3,
+                "Sem eliminar gases/fezes": 1.2
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Gravidez": 0.8,
+                "Idade ≥ 67 anos": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor intensa e súbita com rigidez na barriga ou vômitos"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Sangue nas fezes ou no vômito", "Barriga muito dura"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Sem eliminar gases/fezes"], "quadro": "Dor moderada com febre ou vômito persistente"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# CONVULSÕES
+# ===============================
+FLUXOS[normalizar("Convulsões")] = {
+    "label": "Convulsões",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Convulsão ativa ou recente sem recuperação da consciência": 2.0,
+                "Convulsão recente com recuperação parcial, mas com confusão": 1.6,
+                "Histórico de epilepsia com crise controlada": 0.8,
+                "Tremores leves e consciente, sem perda de consciência": 0.2
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Quanto tempo durou a crise?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 5 minutos": 1.5,
+                "Entre 2 e 5 minutos": 0.8,
+                "Menos de 2 minutos": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Apareceu algum desses sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Trauma na cabeça durante a crise": 1.5,
+                "Febre alta (≥ 38,5°C)": 1.0,
+                "Gravidez": 0.8,
+                "Uso de anticoagulante": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Convulsão ativa ou recente sem recuperação da consciência"}, "min_cor": "vermelho"},
+        {"se": {"duracao": "Mais de 5 minutos"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Trauma na cabeça durante a crise"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Febre alta (≥ 38,5°C)"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.8, "laranja"),
+        (1.9, "amarelo"),
+        (0.0, "verde")
+    ]
+}
 
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
