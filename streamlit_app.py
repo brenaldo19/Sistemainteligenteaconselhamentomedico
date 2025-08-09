@@ -1057,9 +1057,11 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa bate a cabeça com força, em queda ou pancada. Pode ficar tonta, vomitar, esquecer o que aconteceu ou até desmaiar.",
     "clinico": "Traumatismo cranioencefálico (TCE)",
     "termos": {
-        "Perda de consciência": "Quando a pessoa desmaia ou apaga depois da pancada.",
-        "Amnésia": "Quando não lembra do que aconteceu antes ou depois da batida.",
-        "Vômito em jato": "Quando vomita com força, sem esforço, após o trauma."
+        "Amnésia": "Perda parcial ou total da memória após um evento.",
+        "Confusão mental": "Estado de pensamento desorganizado ou dificuldade de concentração.",
+        "Alteração visual": "Mudança súbita na visão, como visão turva ou dupla.",
+        "Fraqueza em braço/perna": "Diminuição da força muscular em um ou mais membros.",
+        "Sonolência excessiva": "Sensação anormal de muito sono e dificuldade de manter-se acordado."
         }
     },
 
@@ -1068,11 +1070,10 @@ def dicionario_sintomas():
     "popular": "Manchas que surgem na pele do nada ou após remédio, febre ou pancada. Pode coçar, doer, espalhar ou mudar de cor com o tempo.",
     "clinico": "Exantema, petéquias ou equimoses (dependendo do tipo)",
     "termos": {
-        "Petéquias": "Manchinhas vermelhas pequenas que não somem quando aperta.",
-        "Equimose": "Mancha roxa, tipo hematoma.",
-        "Lesão disseminada": "Quando as manchas se espalham pelo corpo todo.",
-        "Bordas elevadas": "É quando a parte de divisão entre mancha e pele está mais pra cima que a mancha em si",
-        "Descamação": "É quando parece que a pele está se soltando do corpo,em forma mais fina"
+        "Descamação": "Quando a pele começa a soltar pequenas placas ou pedaços.",
+        "Bordas elevadas": "Margem da lesão mais alta que o nível da pele ao redor.",
+        "Ferida que não cicatriza": "Lesão aberta que não fecha ou melhora após semanas.",
+        "Aspecto de casca de laranja": "Textura irregular da pele, semelhante à casca de uma laranja."
         }
     },
 
@@ -1081,9 +1082,10 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa faz xixi sem querer, seja aos poucos ou tudo de uma vez, mesmo tentando segurar.",
     "clinico": "Incontinência urinária",
     "termos": {
-        "Urgência urinária": "Quando dá vontade súbita e forte de urinar.",
-        "Perda involuntária": "Quando escapa xixi sem conseguir controlar.",
-        "Pequenos escapes": "Quando uma pequena quantidade de urina escapa involuntariamente "
+        "Trato urinário": "Sistema formado por rins, ureteres, bexiga e uretra, responsável pela produção e eliminação da urina.",
+        "Cirurgia pélvica": "Procedimento cirúrgico realizado na região inferior do abdômen.",
+        "Parto vaginal múltiplo": "Dois ou mais partos realizados pela via natural.",
+        "Doença neurológica": "Condição que afeta o sistema nervoso, como Parkinson ou esclerose múltipla."
         }
     },
 
@@ -2683,60 +2685,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 # Funções já existentes
 
 
-def opcoes_trauma_craniano():
-    return [
-        "Batida forte com perda de consciência, vômito ou amnésia",
-        "Batida com dor de cabeça intensa e tontura",
-        "Batida leve com dor local",
-        "Topada leve, sem sintomas associados"
-    ]
-
-def classificar_trauma_craniano(resp):
-    if resp == "Batida forte com perda de consciência, vômito ou amnésia":
-        return "vermelho", "Sinais neurológicos após trauma indicam risco elevado."
-    elif resp == "Batida com dor de cabeça intensa e tontura":
-        return "laranja", "Dor intensa e tontura após pancada pode indicar concussão."
-    elif resp == "Batida leve com dor local":
-        return "amarelo", "Dor local leve é comum, mas deve ser monitorada."
-    else:
-        return "verde", "Topadas leves sem sintomas geralmente não causam preocupação."
-
-def opcoes_manchas_pele():
-    return [
-        "Mancha escura irregular com crescimento rápido",
-        "Ferida que não cicatriza com bordas elevadas",
-        "Mancha vermelha com descamação e coceira",
-        "Mancha clara e estável, sem outros sintomas"
-    ]
-
-def classificar_manchas_pele(resp):
-    if resp == "Mancha escura irregular com crescimento rápido":
-        return "vermelho", "Pode ser sinal de melanoma, um tipo grave de câncer de pele."
-    elif resp == "Ferida que não cicatriza com bordas elevadas":
-        return "laranja", "Feridas persistentes podem indicar lesão maligna."
-    elif resp == "Mancha vermelha com descamação e coceira":
-        return "amarelo", "Pode indicar condição dermatológica inflamatória."
-    else:
-        return "verde", "Manchas estáveis e sem sintomas são geralmente benignas."
-
-
-def opcoes_incontinencia_urinaria():
-    return [
-        "Perda total de controle com dor ou febre",
-        "Urina escapando frequentemente sem aviso",
-        "Perda leve ao tossir ou se mexer",
-        "Pequenos escapes ocasionais sem desconforto"
-    ]
-
-def classificar_incontinencia_urinaria(resp):
-    if resp == "Perda total de controle com dor ou febre":
-        return "vermelho", "Incontinência com dor ou febre pode indicar infecção urinária grave."
-    elif resp == "Urina escapando frequentemente sem aviso":
-        return "laranja", "Pode indicar alteração neurológica ou do trato urinário."
-    elif resp == "Perda leve ao tossir ou se mexer":
-        return "amarelo", "Incontinência leve pode ser comum, mas merece atenção."
-    else:
-        return "verde", "Escapes leves e raros são comuns e geralmente não preocupam."
 
 def opcoes_coriza_espirros():
     return [
@@ -4199,9 +4147,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 mapa_sintomas = {
     "Dor na perna e dificuladade para caminhar": (opcoes_dor_perna_caminhar, classificar_dor_perna_caminhar),
     "Dor no peito": (opcoes_dor_no_peito, classificar_dor_no_peito),
-    "Trauma na cabeça": (opcoes_trauma_craniano, classificar_trauma_craniano),
-    "Manchas anormais na pele": (opcoes_manchas_pele, classificar_manchas_pele),
-    "Incontinência urinária": (opcoes_incontinencia_urinaria, classificar_incontinencia_urinaria),
     "Coriza e espirros": (opcoes_coriza_espirros, classificar_coriza_espirros),
     "Incontinência urinária em idosos": (opcoes_incontinencia_idoso,classificar_incontinencia_idoso),
     "Queda em idosos": (opcoes_queda_idoso, classificar_queda_idoso),
@@ -4919,6 +4864,151 @@ FLUXOS[normalizar("Sangue no sêmen")] = {
         (6.0, "vermelho"),
         (3.5, "laranja"),
         (2.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Trauma craniano
+FLUXOS[normalizar("Trauma craniano")] = {
+    "label": "Trauma craniano",
+    "perguntas": [
+        {
+            "id": "gravidade",
+            "label": "Qual foi a gravidade percebida do trauma?",
+            "tipo": "radio",
+            "opcoes": {
+                "Batida forte com perda de consciência, vômito ou amnésia": 3.5,
+                "Batida com dor de cabeça intensa e tontura": 2.0,
+                "Batida leve com dor local": 1.0,
+                "Topada leve, sem sintomas associados": 0.0
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Quando ocorreu a pancada?",
+            "tipo": "radio",
+            "opcoes": {
+                "Menos de 24h": 1.0,
+                "Entre 1 e 7 dias": 0.5,
+                "Mais de 7 dias": 0.2
+            }
+        },
+        {
+            "id": "sintomas_associados",
+            "label": "Sintomas associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Confusão mental ou fala enrolada": 1.5,
+                "Alteração visual": 1.2,
+                "Fraqueza em braço/perna": 1.5,
+                "Sonolência excessiva": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"gravidade": "Batida forte com perda de consciência, vômito ou amnésia"}, "min_cor": "vermelho"},
+        {"se": {"gravidade": "Batida com dor de cabeça intensa e tontura"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# Fluxograma: Manchas na pele
+FLUXOS[normalizar("Manchas na pele")] = {
+    "label": "Manchas na pele",
+    "perguntas": [
+        {
+            "id": "aspecto",
+            "label": "Qual é o aspecto da mancha?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mancha escura irregular com crescimento rápido": 3.5,
+                "Ferida que não cicatriza com bordas elevadas": 2.5,
+                "Mancha vermelha com descamação e coceira": 1.5,
+                "Mancha clara e estável, sem outros sintomas": 0.0
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo está presente?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 4 semanas": 1.0,
+                "Entre 2 e 4 semanas": 0.5,
+                "Menos de 2 semanas": 0.2
+            }
+        },
+        {
+            "id": "alteracoes",
+            "label": "Houve mudanças recentes na aparência?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mudou cor e tamanho rapidamente": 1.5,
+                "Mudou lentamente": 0.7,
+                "Sem mudanças perceptíveis": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"aspecto": "Mancha escura irregular com crescimento rápido"}, "min_cor": "vermelho"},
+        {"se": {"aspecto": "Ferida que não cicatriza com bordas elevadas"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# Fluxograma: Incontinência urinária
+FLUXOS[normalizar("Incontinência urinária")] = {
+    "label": "Incontinência urinária",
+    "perguntas": [
+        {
+            "id": "gravidade",
+            "label": "Qual é a gravidade do sintoma?",
+            "tipo": "radio",
+            "opcoes": {
+                "Perda total de controle com dor ou febre": 3.5,
+                "Urina escapando frequentemente sem aviso": 2.0,
+                "Perda leve ao tossir ou se mexer": 1.0,
+                "Pequenos escapes ocasionais sem desconforto": 0.0
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo apresenta o sintoma?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 4 semanas": 1.0,
+                "Entre 2 e 4 semanas": 0.5,
+                "Menos de 2 semanas": 0.2
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Infecção urinária recente": 0.8,
+                "Cirurgia pélvica prévia": 0.7,
+                "Parto vaginal múltiplo": 0.6,
+                "Doença neurológica diagnosticada": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"gravidade": "Perda total de controle com dor ou febre"}, "min_cor": "vermelho"},
+        {"se": {"gravidade": "Urina escapando frequentemente sem aviso"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
         (0.0, "verde")
     ]
 }
