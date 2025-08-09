@@ -2684,80 +2684,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-
-
-def opcoes_coriza_espirros():
-    return [
-        "Coriza intensa com dificuldade para respirar e febre alta",
-        "Espirros constantes e nariz muito entupido",
-        "Coriza leve com espirros ocasionais",
-        "Leve irritação nasal sem outros sintomas"
-    ]
-
-def classificar_coriza_espirros(resp):
-    if resp == "Coriza intensa com dificuldade para respirar e febre alta":
-        return "vermelho", "Procure atendimento médico imediato. Pode indicar uma infecção respiratória grave."
-    elif resp == "Espirros constantes e nariz muito entupido":
-        return "laranja", "É aconselhável procurar atendimento. Pode ser sinal de infecção ou crise alérgica importante."
-    elif resp == "Coriza leve com espirros ocasionais":
-        return "amarelo", "Observe a evolução dos sintomas. Pode ser apenas um resfriado leve."
-    else:
-        return "verde", "Sem sinais de alerta. Mantenha repouso e hidratação."
-
-def opcoes_incontinencia_idoso():
-    return [
-        "Perda total do controle urinário com febre ou confusão",
-        "Incontinência frequente e súbita, com ardência",
-        "Gotejamento ou perda leve ao se movimentar",
-        "Leves escapes ocasionais sem outros sintomas"
-    ]
-
-def classificar_incontinencia_idoso(resp):
-    if resp == "Perda total do controle urinário com febre ou confusão":
-        return "vermelho", "Procure atendimento imediato. Pode indicar infecção grave ou distúrbio neurológico."
-    elif resp == "Incontinência frequente e súbita, com ardência":
-        return "laranja", "Procure orientação médica. Pode ser infecção urinária ou inflamação."
-    elif resp == "Gotejamento ou perda leve ao se movimentar":
-        return "amarelo", "Acompanhe os sintomas. É importante discutir com um médico em breve."
-    else:
-        return "verde", "Sem sinais de urgência. Pode ser manejado com orientação médica regular."
-
-def opcoes_queda_idoso():
-    return [
-        "Queda com perda de consciência ou fratura",
-        "Queda com dor intensa ou dificuldade para se levantar",
-        "Queda leve com dor local e hematoma",
-        "Tombos esporádicos sem dor ou lesão"
-    ]
-
-def classificar_queda_idoso(resp):
-    if resp == "Queda com perda de consciência ou fratura":
-        return "vermelho", "Emergência! Vá ao pronto-socorro imediatamente."
-    elif resp == "Queda com dor intensa ou dificuldade para se levantar":
-        return "laranja", "Recomenda-se avaliação médica urgente para descartar lesões."
-    elif resp == "Queda leve com dor local e hematoma":
-        return "amarelo", "Observe a evolução. Pode ser necessário exame se piorar."
-    else:
-        return "verde", "Sem sinais de alarme imediato, mas fique atento a alterações."
-
-def opcoes_delirio_idoso():
-    return [
-        "Desorientação súbita com agitação ou alucinações",
-        "Confusão mental com alteração de comportamento e/ou flutuação de consciência ",
-        "Esquecimento leve e dificuldade para responder",
-        "Ligeira confusão passageira, mas estável"
-    ]
-
-def classificar_delirio_idoso(resp):
-    if "Desorientação súbita" in resp:
-        return "vermelho", "Procure ajuda médica imediatamente. Pode ser uma emergência neurológica ou infecciosa."
-    elif "alteração de comportamento" in resp:
-        return "laranja", "Sinais de alerta. Agende uma consulta médica o quanto antes."
-    elif "dificuldade para responder" in resp:
-        return "amarelo", "É importante acompanhar e relatar esses sintomas ao médico."
-    else:
-        return "verde", "Sem sinais urgentes, mas siga observando o comportamento."
-
 def opcoes_trauma_grave():
     return [
         "Acidente com perda de consciência, fratura exposta ou sangramento grave",
@@ -4147,10 +4073,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 mapa_sintomas = {
     "Dor na perna e dificuladade para caminhar": (opcoes_dor_perna_caminhar, classificar_dor_perna_caminhar),
     "Dor no peito": (opcoes_dor_no_peito, classificar_dor_no_peito),
-    "Coriza e espirros": (opcoes_coriza_espirros, classificar_coriza_espirros),
-    "Incontinência urinária em idosos": (opcoes_incontinencia_idoso,classificar_incontinencia_idoso),
-    "Queda em idosos": (opcoes_queda_idoso, classificar_queda_idoso),
-    "Delírio em idosos": (opcoes_delirio_idoso, classificar_delirio_idoso),
     "Politrauma": (opcoes_trauma_grave, classificar_trauma_grave),
     "Dor de dente": (opcoes_dor_odontologica, classificar_dor_odontologica),
     "Alteração na audição": (opcoes_alteracao_auditiva, classificar_alteracao_auditiva),
@@ -4957,7 +4879,7 @@ FLUXOS[normalizar("Manchas na pele")] = {
         {"se": {"aspecto": "Ferida que não cicatriza com bordas elevadas"}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
-        (5.0, "vermelho"),
+        (6.0, "vermelho"),
         (3.0, "laranja"),
         (1.5, "amarelo"),
         (0.0, "verde")
@@ -5006,12 +4928,250 @@ FLUXOS[normalizar("Incontinência urinária")] = {
         {"se": {"gravidade": "Urina escapando frequentemente sem aviso"}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
-        (5.0, "vermelho"),
+        (6.0, "vermelho"),
         (3.0, "laranja"),
         (1.5, "amarelo"),
         (0.0, "verde")
     ]
 }
+# Fluxograma: Coriza e espirros
+FLUXOS[normalizar("Coriza e espirros")] = {
+    "label": "Coriza e espirros",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Coriza intensa com dificuldade para respirar e febre alta": 3.5,
+                "Espirros constantes e nariz muito entupido": 2.0,
+                "Coriza leve com espirros ocasionais": 1.0,
+                "Leve irritação nasal sem outros sintomas": 0.0
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo os sintomas começaram?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 7 dias": 1.0,
+                "Entre 2 e 7 dias": 0.5,
+                "Menos de 2 dias": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Falta de ar ao falar ou andar": 1.2,
+                "Chiado no peito": 1.0,
+                "Dor facial ou secreção amarela/verde": 0.9,
+                "Lábios roxos": 1.5
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Asma ou DPOC": 1.0,
+                "Alergia respiratória conhecida": 0.4,
+                "Contato recente com pessoa doente": 0.3
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Coriza intensa com dificuldade para respirar e febre alta"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Lábios roxos", "Falta de ar ao falar ou andar"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Chiado no peito"], "fatores_risco": ["Asma ou DPOC"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Incontinência urinária em idosos
+FLUXOS[normalizar("Incontinência urinária em idosos")] = {
+    "label": "Incontinência urinária em idosos",
+    "perguntas": [
+        {
+            "id": "gravidade",
+            "label": "Qual é a situação principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Perda total do controle urinário com febre ou confusão": 3.5,
+                "Incontinência frequente e súbita, com ardência": 2.0,
+                "Gotejamento ou perda leve ao se movimentar": 1.0,
+                "Leves escapes ocasionais sem outros sintomas": 0.0
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo isso ocorre?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 4 semanas": 1.0,
+                "Entre 2 e 4 semanas": 0.5,
+                "Menos de 2 semanas": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre": 0.8,
+                "Dor/ardência ao urinar": 0.8,
+                "Dor no baixo-ventre": 0.5,
+                "Confusão ou sonolência": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Cateter vesical recente": 0.8,
+                "Imobilidade ou queda recente": 0.5,
+                "Início/ajuste de medicamento (diurético/sedativo)": 0.6,
+                "Histórico de incontinência prévia": 0.3
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"gravidade": "Perda total do controle urinário com febre ou confusão"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Febre", "Dor/ardência ao urinar"]}, "min_cor": "laranja"},
+        {"se": {"fatores_risco": ["Cateter vesical recente"], "sinais_associados": ["Febre"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Queda em idosos
+FLUXOS[normalizar("Queda em idosos")] = {
+    "label": "Queda em idosos",
+    "perguntas": [
+        {
+            "id": "gravidade_queda",
+            "label": "Como foi a queda?",
+            "tipo": "radio",
+            "opcoes": {
+                "Queda com perda de consciência ou fratura": 3.5,
+                "Queda com dor intensa ou dificuldade para se levantar": 2.0,
+                "Queda leve com dor local e hematoma": 1.0,
+                "Tombos esporádicos sem dor ou lesão": 0.0
+            }
+        },
+        {
+            "id": "cabeca",
+            "label": "Houve batida na cabeça?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sim, bateu a cabeça": 1.2,
+                "Não bateu a cabeça": 0.0
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor em quadril ou incapacidade de apoiar o peso": 1.2,
+                "Uso de anticoagulante": 1.0,
+                "Tontura persistente": 0.8,
+                "Corte/laceração com sangramento": 0.6
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Quando ocorreu?",
+            "tipo": "radio",
+            "opcoes": {
+                "Menos de 24h": 1.0,
+                "Entre 1 e 7 dias": 0.5,
+                "Mais de 7 dias": 0.2
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"gravidade_queda": "Queda com perda de consciência ou fratura"}, "min_cor": "vermelho"},
+        {"se": {"cabeca": "Sim, bateu a cabeça", "sinais_associados": ["Uso de anticoagulante"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Dor em quadril ou incapacidade de apoiar o peso"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Delírio em idosos
+FLUXOS[normalizar("Delírio em idosos")] = {
+    "label": "Delírio em idosos",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual situação descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Desorientação súbita com agitação ou alucinações": 3.5,
+                "Confusão mental com alteração de comportamento e/ou flutuação de consciência": 2.0,
+                "Esquecimento leve e dificuldade para responder": 1.0,
+                "Ligeira confusão passageira, mas estável": 0.0
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Quando começaram as alterações?",
+            "tipo": "radio",
+            "opcoes": {
+                "Nas últimas 24h": 1.0,
+                "Há 2–7 dias": 0.6,
+                "Há mais de 7 dias": 0.3
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre": 0.8,
+                "Urina com ardor/cheiro forte": 0.7,
+                "Sonolência excessiva": 1.0,
+                "Fala enrolada": 1.0,
+                "Queda recente": 0.6
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Algum fator desencadeante se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso recente de sedativos/antialérgicos": 0.7,
+                "Desidratação (boca seca, pouca urina)": 0.8,
+                "Infecção conhecida (urina/pulmão)": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Desorientação súbita com agitação ou alucinações"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Fala enrolada", "Sonolência excessiva"]}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Febre"], "fatores": ["Infecção conhecida (urina/pulmão)"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 
 
 # =============================
