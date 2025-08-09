@@ -472,8 +472,11 @@ def dicionario_sintomas():
     "popular": "Quando a criança cai, bate a cabeça ou o corpo, e depois age diferente ou fica com hematoma.",
     "clinico": "Trauma leve ou moderado em pediatria",
     "termos": {
-        "Alteração de comportamento": "A criança ficou quieta demais ou agitada demais depois da queda.",
-        "Hematoma leve": "Roxinho ou galo pequeno, que aparece depois da batida."
+        "Perda de consciência": "A criança desmaiou ou ficou desacordada por alguns segundos.",
+        "Convulsão": "Movimentos involuntários do corpo ou rigidez, com olhar parado ou perda de consciência.",
+        "Vômitos repetidos": "Vomitou várias vezes seguidas após a queda.",
+        "Sangue/fluido saindo do ouvido ou nariz": "Saída de sangue ou líquido claro depois da batida.",
+        "Muito sonolenta/confusa": "Dorme demais, está lenta ou diferente do habitual."
         }
     },
 
@@ -482,7 +485,13 @@ def dicionario_sintomas():
     "popular": "Quando a criança vomita com força, várias vezes, e parece estar desidratando.",
     "clinico": "Vômitos persistentes em pediatria",
     "termos": {
-        "Vômito em jato frequente com sinais de desidratação": "Vômito forte que sai com pressão, junto com boca seca, moleza ou choro sem lágrima."
+        "Mais de 5 vezes em 6h": "Vomitou muitas vezes num curto período.",
+        "Com sangue ou verde-escuro": "Vômito vermelho/escuro (sangue) ou verde (bile).",
+        "Com muco ou restos alimentares": "Vômito com catarro/ranho ou pedaços de comida.",
+        "Apenas líquido claro": "Vômito transparente, parecido com água.",
+        "Febre alta": "Temperatura geralmente acima de 38,5°C.",
+        "Letargia/confusão": "Muito mole/sonolenta ou sem reagir direito.",
+        "Dificuldade para beber líquidos": "Recusa água/soro ou vomita logo após tentar beber."
         }
     },
 
@@ -491,7 +500,12 @@ def dicionario_sintomas():
     "popular": "Quando a criança faz cocô mole várias vezes ao dia e começa a mostrar sinais de que está desidratada.",
     "clinico": "Diarreia aguda pediátrica",
     "termos": {
-        "Sinais de desidratação": "Choro sem lágrima, boca seca, moleza, fralda seca por muito tempo."
+        "Mais de 5 dias": "Diarreia que não melhora depois de vários dias.",
+        "Com sangue ou pretas": "Fezes com sangue visível ou muito escuras (tipo borra de café).",
+        "Muito aquosas": "Fezes líquidas, como água.",
+        "Febre alta": "Temperatura geralmente acima de 38,5°C.",
+        "Letargia/confusão": "Muito mole/sonolenta ou sem reagir direito.",
+        "Boca seca ou olhos fundos": "Sinais de desidratação: sem saliva, poucas lágrimas, olhos afundados."
         }
     },
 
@@ -1237,9 +1251,11 @@ def dicionario_sintomas():
     "popular": "É aquela dor no peito que acontece do nada ou depois de exercícios físicos, ela pode ser estável (permanece igual com o tempo) ou ficar cada vez pior.",
     "clinico": "Dor torácica",
     "termos": {
-        "Palidez": "É quando a pessoa tá mais branca que o normal.",
-        "Irradiar": "É quando a dor do peito se espalha pelo braço ou mandíbula.",
-              "Mandíbula": "É o osso da parte de baixo da cabeça; o queixo e os dentes de baixo estão inclusos nela."
+        "Aperto/queimação intensa": "Dor forte no peito como se estivesse sendo apertado ou queimando.",
+        "Irradiação para braço, mandíbula ou costas": "A dor do peito se espalha para braço, mandíbula ou costas.",
+        "Suor frio": "Suor excessivo com sensação de frio e palidez.",
+        "Desmaio/confusão": "Perdeu a consciência ou ficou desorientado junto com a dor.",
+        "Piora progressiva": "A dor vai aumentando com o tempo."
         }
     },
 "Dor de cabeça": {
@@ -1308,8 +1324,11 @@ def dicionario_sintomas():
     "popular": "Quando o corpo fica quente, pode vir com tremores, mal-estar e cansaço.",
     "clinico": "Hipertermia",
     "termos": {
-        "Calafrios": "Tremores de frio mesmo com febre.",
-        "Persistente": "Febre que não melhora mesmo com remédio."
+        "≥ 40°C": "Febre muito alta no termômetro.",
+        "3 a 7 dias": "Febre que não cede por vários dias seguidos.",
+        "Confusão mental": "Pessoa desorientada, falando coisas sem sentido.",
+        "Rigidez na nuca": "Pescoço duro, difícil de encostar o queixo no peito.",
+        "Falta de ar intensa": "Respiração muito difícil, sensação de ar faltando."
         }
     },
 "Palpitações": {
@@ -2715,97 +2734,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_queda_crianca():
-    return [
-        "Queda com perda de consciência ou vômito",
-        "Batida na cabeça com alteração de comportamento",
-        "Hematoma leve e sem sintomas",
-        "Queda leve e criança está bem"
-    ]
-
-def classificar_queda_crianca(resp):
-    if "perda de consciência" in resp:
-        return "vermelho", "Sinais neurológicos após queda são graves. Leve a criança para avaliação médica imediatamente."
-    elif "alteração de comportamento" in resp:
-        return "laranja", "Mudança no comportamento pode indicar concussão leve. Observe com atenção e consulte o pediatra."
-    elif "Hematoma leve" in resp:
-        return "amarelo", "Provavelmente sem gravidade, mas continue observando evolução e sintomas."
-    else:
-        return "verde", "Sem sinais de alarme. A criança está bem após a queda."
-
-def opcoes_vomito_crianca():
-    return [
-        "Vômito em jato frequente com sinais de desidratação",
-        "Vômito constante após refeições",
-        "Vômito isolado sem outros sintomas",
-        "Vômito leve e passageiro"
-    ]
-
-def classificar_vomito_crianca(resp):
-    if "jato" in resp or "desidratação" in resp:
-        return "vermelho", "Vômito em jato ou sinais de desidratação exigem atendimento médico imediato."
-    elif "constante após refeições" in resp:
-        return "laranja", "Pode indicar intolerância alimentar ou infecção. Avaliação médica recomendada."
-    elif "isolado" in resp:
-        return "amarelo", "Quadro leve e isolado. Continue observando hidratação e evolução."
-    else:
-        return "verde", "Sem sinais de alarme. Situação tranquila."
-            
-def opcoes_diarreia_crianca():
-    return [
-        "Diarreia com sangue ou sinais de desidratação",
-        "Diarreia frequente com febre",
-        "Diarreia moderada e sem sinais de alerta",
-        "Evacuações levemente amolecidas"
-    ]
-
-def classificar_diarreia_crianca(resp):
-    if "sangue" in resp or "desidratação" in resp:
-        return "vermelho", "Diarreia com sinais graves pode indicar infecção intestinal séria. Procure atendimento urgente."
-    elif "febre" in resp:
-        return "laranja", "Quadro possivelmente infeccioso. Requer atenção e hidratação adequada."
-    elif "moderada" in resp:
-        return "amarelo", "Sem sinais graves. Mantenha hidratação e alimentação leve."
-    else:
-        return "verde", "Evacuação levemente alterada, mas sem riscos aparentes."
-
-def opcoes_dor_no_peito():
-    return [
-        "Dor com desmaio, palidez ou confusão",
-        "Dor muito forte e piorando",
-        "Dor que irradia pro braço ou mandíbula",
-        "Dor moderada com suor ou enjoo",
-        "Dor leve, estável e sem outros sintomas"
-    ]
-
-def classificar_dor_no_peito(resp):
-    if resp == "Dor com desmaio, palidez ou confusão":
-        return "vermelho", "Sinais sugestivos de infarto ou grave alteração circulatória. Procure emergência imediatamente."
-    elif resp == "Dor muito forte e piorando":
-        return "laranja", "Dor torácica progressiva exige avaliação médica o quanto antes."
-    elif resp in ["Dor que irradia pro braço ou mandíbula", "Dor moderada com suor ou enjoo"]:
-        return "amarelo", "Possível origem cardíaca. Fique atento a evolução e procure um pronto atendimento se piorar."
-    else:
-        return "verde", "Dor leve e estável. Continue monitorando."
-
-def opcoes_febre():
-    return [
-        "Acima de 39°C com calafrios e mal-estar intenso",
-        "Persistente entre 38°C e 39°C",
-        "Leve, com sintomas gripais",
-        "Febre isolada sem outros sintomas"
-    ]
-
-def classificar_febre(resp):
-    if resp == "Acima de 39°C com calafrios e mal-estar intenso":
-        return "vermelho", "Febre alta com sinais sistêmicos pode indicar infecção grave. Procure ajuda médica."
-    elif resp == "Persistente entre 38°C e 39°C":
-        return "laranja", "Febre persistente requer atenção, principalmente se durar mais de 48 horas."
-    elif resp == "Leve, com sintomas gripais":
-        return "amarelo", "Geralmente infecciosa e autolimitada. Repouso e hidratação ajudam na recuperação."
-    else:
-        return "verde", "Febre isolada, sem sinais de alarme. Continue monitorando."
-
 def opcoes_falta_de_ar():
     return [
         "Grave, com lábios roxos ou confusão",
@@ -3979,8 +3907,8 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
     ],
     # Limiar mais alto: fica mais difícil sair de verde
     "mapeamento_cor": [
-        (7.5, "vermelho"),
-        (4.5, "laranja"),
+        (6.0, "vermelho"),
+        (4.0, "laranja"),
         (2.2, "amarelo"),
         (0.0, "verde")
     ]
@@ -6030,6 +5958,198 @@ FLUXOS[normalizar("Icterícia neonatal")] = {
         (0.0, "verde")
     ]
 }
+
+FLUXOS[normalizar("Dor no peito")] = {
+    "label": "Dor no peito",
+    "perguntas": [
+        {
+            "id": "inicio_associado",
+            "label": "A dor começou junto com algum desses sintomas?",
+            "tipo": "radio",
+            "opcoes": {
+                "Desmaio, confusão ou fraqueza súbita": 2.0,
+                "Falta de ar intensa ou suor frio": 1.5,
+                "Nenhum desses": 0.0
+            }
+        },
+        {
+            "id": "caracteristica",
+            "label": "Como você descreveria a dor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Muito forte, aperto ou queimação intensa": 1.8,
+                "Moderada e constante": 0.9,
+                "Leve e intermitente": 0.2
+            }
+        },
+        {
+            "id": "irradia",
+            "label": "A dor se espalha para outro local?",
+            "tipo": "radio",
+            "opcoes": {
+                "Braço, mandíbula ou costas": 1.2,
+                "Apenas no peito": 0.0
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Quanto tempo dura o episódio de dor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 20 minutos": 1.0,
+                "Entre 5 e 20 minutos": 0.5,
+                "Menos de 5 minutos": 0.2
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum destes fatores de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de infarto ou angina": 0.8,
+                "Pressão alta, diabetes ou colesterol alto": 0.6,
+                "Tabagismo": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"inicio_associado": "Desmaio, confusão ou fraqueza súbita"}, "min_cor": "vermelho"},
+        {"se": {"inicio_associado": "Falta de ar intensa ou suor frio", "caracteristica": "Muito forte, aperto ou queimação intensa"}, "min_cor": "vermelho"},
+        {"se": {"irradia": "Braço, mandíbula ou costas", "caracteristica": "Muito forte, aperto ou queimação intensa"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.5, "vermelho"),
+        (4.0, "laranja"),
+        (2.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# --- QUEDA EM CRIANÇA ---
+FLUXOS[normalizar("Queda em criança")] = {
+    "label": "Queda em criança",
+    "perguntas": [
+        {
+            "id": "local_bateu",
+            "label": "Onde a criança bateu?",
+            "tipo": "radio",
+            "opcoes": {
+                "Cabeça": 1.8,
+                "Outro local": 0.4
+            }
+        },
+        {
+            "id": "sinais_graves",
+            "label": "A criança apresentou algum destes sinais logo após a queda?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Perda de consciência": 2.0,
+                "Convulsão": 1.8,
+                "Vômitos repetidos": 1.2,
+                "Sangue/fluido saindo do ouvido ou nariz": 1.8
+            }
+        },
+        {
+            "id": "comportamento",
+            "label": "Como está o comportamento da criança?",
+            "tipo": "radio",
+            "opcoes": {
+                "Muito sonolenta/confusa": 1.2,
+                "Normal": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"local_bateu": "Cabeça", "sinais_graves": ["Perda de consciência", "Convulsão"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_graves": ["Sangue/fluido saindo do ouvido ou nariz"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# --- VÔMITO EM CRIANÇA ---
+FLUXOS[normalizar("Vômito em criança")] = {
+    "label": "Vômito em criança",
+    "perguntas": [
+        {
+            "id": "frequencia",
+            "label": "Com que frequência está vomitando?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 5 vezes em 6h": 1.5,
+                "De 3 a 5 vezes em 6h": 0.9,
+                "Menos de 3 vezes": 0.3
+            }
+        },
+        {
+            "id": "aspecto",
+            "label": "Como é o vômito?",
+            "tipo": "radio",
+            "opcoes": {
+                "Com sangue ou verde-escuro": 2.0,
+                "Com muco ou restos alimentares": 0.5,
+                "Apenas líquido claro": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre alta": 1.0,
+                "Letargia/confusão": 1.5,
+                "Dificuldade para beber líquidos": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"aspecto": "Com sangue ou verde-escuro"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Letargia/confusão"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# --- DIARREIA EM CRIANÇA ---
+FLUXOS[normalizar("Diarreia em criança")] = {
+    "label": "Diarreia em criança",
+    "perguntas": [
+        {
+            "id": "duracao",
+            "label": "Há quanto tempo está com diarreia?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 5 dias": 1.2,
+                "3 a 5 dias": 0.6,
+                "Menos de 3 dias": 0.2
+            }
+        },
+        {
+            "id": "aspecto",
+            "label": "Como está a aparência das fezes?",
+            "tipo": "radio",
+            "opcoes": {
+                "Com sangue ou pretas": 2.0,
+                "Muito aquosas": 1.0,
+                "Normais para diarreia": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre alta": 1.0,
+                "Letargia/confusão": 1.5,
+                "Boca seca ou olhos fundos
+
 
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
