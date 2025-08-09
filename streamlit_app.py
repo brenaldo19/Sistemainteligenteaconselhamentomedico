@@ -9447,35 +9447,86 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
         enviado = st.form_submit_button("Ver resultado")
 
     # Só processa e exibe resultados SE o botão foi clicado
+    # Só processa e exibe resultados SE o botão foi clicado
     if enviado:
         st.markdown("---")
+
+        # ===== helpers puramente visuais =====
+        def tag_cor(cor_txt: str) -> str:
+            cores = {
+                "vermelho":  "#d9342b",
+                "laranja":   "#f08c00",
+                "amarelo":   "#e0c200",
+                "verde":     "#2f9e44",
+            }
+            hexa = cores.get(str(cor_txt).lower(), "#6c757d")
+            return f"""
+            <span style="
+                display:inline-block;padding:.2rem .6rem;border-radius:999px;
+                background:{hexa}1A;color:{hexa};font-weight:600;
+                border:1px solid {hexa}40;font-size:.9rem">
+                {cor_txt.upper()}
+            </span>
+            """
+
+        def card_inicio(titulo: str, cor_txt: str):
+            st.markdown(
+                f"""
+                <div style="border:1px solid #e9ecef;border-radius:12px;padding:14px;margin:8px 0;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <h4 style="margin:0;font-weight:700">{titulo}</h4>
+                    {tag_cor(cor_txt)}
+                  </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        def card_fim():
+            st.markdown("</div>", unsafe_allow_html=True)
+
+        def bullets_motivo(texto: str):
+            # Mostra o "motivo" em bullets simples (quebra por ; ou • se houver)
+            itens = [i.strip() for i in re.split(r"[;•\n]", str(texto)) if i.strip()]
+            if itens:
+                st.markdown("**Por que chegou a esta cor:**")
+                for i in itens[:4]:
+                    st.markdown(f"- {i}")
+
+        # ===== toggle para revelar pontuação (apenas estética) =====
+        mostrar_pontuacao = st.toggle("Mostrar pontuação numérica (avançado)", value=False)
+
         cores_geradas = []
 
+        # ===== lista de resultados por sintoma (cards) =====
+        import re
         for sintoma in st.session_state.sintomas_escolhidos:
             if eh_fluxo(sintoma):
                 chave = normalizar(sintoma)
                 cor, score = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
-                motivo = f"Pontuação composta: {score:.1f} (fluxograma multi-perguntas)."
+                motivo = f"Pontuação composta: {score:.1f} • Itens do fluxograma selecionados."
             else:
                 _, func_classificacao = mapa_sintomas[sintoma]
                 escolha = st.session_state["respostas_usuario"][sintoma]
                 cor, motivo = func_classificacao(escolha)
 
             cores_geradas.append(cor)
-            st.markdown(f"### {sintoma}")
-            st.markdown(f"Motivo: {motivo}")
-            st.markdown("---")
+            card_inicio(sintoma, cor)
+            bullets_motivo(motivo)
+            if mostrar_pontuacao:
+                st.markdown(f"<div style='margin-top:8px;color:#6c757d'>Pontuação: <b>{locals().get('score','—')}</b></div>", unsafe_allow_html=True)
+            card_fim()
 
-        # Combinação de cores (tua lógica)
+        st.markdown("---")
+
+        # ===== cor final combinada (mantém sua lógica) =====
         cor_final = classificar_combinacao(
             sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
             cores=cores_geradas
         )
 
-        # --- AJUSTE CONSERVADOR POR FATORES (idade/gravidez e duplicidade de sistema) ---
+        # --- AJUSTE CONSERVADOR POR FATORES (sem alteração funcional) ---
         gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
         idade_paciente = st.session_state.get("idade")
-
         ajuste_niveis = calcular_ajuste_por_fatores_conservador(
             sintomas_escolhidos=st.session_state.sintomas_escolhidos,
             cores_individuais=cores_geradas,
@@ -9483,19 +9534,29 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
             idade=idade_paciente,
             gravida=gravidez
         )
-
-        # Aplica, no máximo, +1 nível
         if ajuste_niveis >= 1:
             cor_final = aumentar_cor_em_1_nivel(cor_final)
 
-        st.success(f"Gravidade estimada: {cor_final.upper()}")
+        # ===== card final =====
+        st.markdown("## Resultado preliminar")
+        card_inicio("Gravidade estimada", cor_final)
+        st.markdown("**O que fazer agora**")
+        if cor_final == "vermelho":
+            st.markdown("- Procure atendimento **imediato**.")
+        elif cor_final == "laranja":
+            st.markdown("- Procure avaliação **rápida** em unidade de saúde.")
+        elif cor_final == "amarelo":
+            st.markdown("- Requer atenção, mas pode aguardar avaliação **não imediata**.")
+        else:
+            st.markdown("- **Observação** dos sintomas e medidas simples em casa.")
+        card_fim()
 
         st.markdown("---")
-        st.subheader("📘 Legenda de Gravidade")
-        st.markdown("""
-- 🔴 **VERMELHO:** Situação crítica. Procure atendimento médico imediatamente.
-- 🟠 **LARANJA:** Caso urgente. Necessita avaliação rápida em unidade de saúde.
-- 🟡 **AMARELO:** Gravidade moderada. Requer atenção, mas pode aguardar avaliação.
-- 🟢 **VERDE:** Baixa gravidade. Pode observar os sintomas ou procurar atendimento não urgente.
-""")
-
+        st.subheader("Legenda de Gravidade")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(f"{tag_cor('VERDE')} &nbsp; Baixa gravidade", unsafe_allow_html=True)
+            st.markdown(f"{tag_cor('AMARELO')} &nbsp; Moderada, atenção", unsafe_allow_html=True)
+        with col2:
+            st.markdown(f"{tag_cor('LARANJA')} &nbsp; Urgente", unsafe_allow_html=True)
+            st.markdown(f"{tag_cor('VERMELHO')} &nbsp; Emergência", unsafe_allow_html=True)
