@@ -988,9 +988,10 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa é mordida e a pele fica machucada. Pode ser leve ou profunda, e em caso de cachorro ou animal desconhecido, é bom suspeitar de raiva.",
     "clinico": "Mordedura ou ferimento por mordida",
     "termos": {
-        "Mordida profunda": "Ferida que atravessa todas as camadas da pele.",
-        "Suspeita de raiva": "Quando a mordida é de animal desconhecido ou não vacinado.",
-        "Mordida superficial": "Arranhão ou machucado leve, só na parte de cima da pele."
+        "Mordida profunda com sangramento e suspeita de raiva": "Ferimento profundo causado por mordida, com sangramento e risco de raiva.",
+        "Mordida com dor e sinais de infecção": "Ferimento de mordida com dor e características de infecção (vermelhidão, calor, pus).",
+        "Mordida superficial com inchaço": "Ferimento leve de mordida com pequeno aumento de volume local.",
+        "Pequeno arranhão sem dor": "Lesão muito leve na pele, sem dor associada."
         }
     },
 
@@ -999,8 +1000,10 @@ def dicionario_sintomas():
     "popular": "Quando encosta em algo quente ou químico e a pele queima. Pode ficar vermelha, fazer bolhas ou queimar profundamente.",
     "clinico": "Queimadura térmica ou química",
     "termos": {
-        "Queimadura extensa": "Quando pega uma área grande do corpo.",
-        "Bolhas": "Quando a pele levanta com líquido dentro, sinal de queimadura mais profunda."
+        "Queimadura extensa, com bolhas e pele escura": "Lesão grave que afeta área grande, com bolhas e coloração escura indicando profundidade.",
+        "Queimadura moderada com bolhas e dor intensa": "Queimadura de gravidade intermediária, com bolhas e dor acentuada.",
+        "Queimadura pequena com vermelhidão e dor leve": "Lesão pequena com vermelhidão e dor suportável.",
+        "Apenas vermelhidão passageira sem dor": "Mancha vermelha na pele que melhora rapidamente, sem dor."
         }
     },
 
@@ -1009,8 +1012,10 @@ def dicionario_sintomas():
     "popular": "Machucado que aparece sozinho, sem cair ou se bater. Pode ter pus, doer, cheirar mal ou piorar com o tempo.",
     "clinico": "Úlcera cutânea ou lesão espontânea",
     "termos": {
-        "Secreção": "Líquido ou pus que sai da ferida.",
-        "Mal cheiro": "Cheiro forte vindo da ferida, sinal de infecção."
+        "Ferida grande com secreção e mal cheiro": "Ferimento extenso, com saída de secreção e odor desagradável.",
+        "Ferida dolorosa com sinais de infecção": "Ferida que apresenta dor e indícios de infecção como pus ou calor local.",
+        "Ferida pequena com vermelhidão": "Lesão reduzida com área avermelhada ao redor.",
+        "Apenas uma mancha sem dor ou secreção": "Alteração superficial na pele sem dor ou secreção."
         }
     },
 
@@ -1019,9 +1024,10 @@ def dicionario_sintomas():
     "popular": "Barriga estufada, soltando pum o tempo todo ou barulho alto no intestino. Às vezes não melhora nem depois de soltar.",
     "clinico": "Flatulência ou distensão abdominal",
     "termos": {
-        "Flatulência": "Pum em excesso.",
-        "Barulho intestinal alto": "Ruídos fortes na barriga.",
-        "Sem alívio": "Mesmo soltando gases, a dor ou desconforto continua."
+        "Dor abdominal intensa com inchaço e sem alívio": "Dor forte na barriga acompanhada de aumento de volume e sem melhora.",
+        "Desconforto forte e barulhos intestinais altos": "Sensação desconfortável no abdômen com sons intensos vindos do intestino.",
+        "Flatulência frequente com leve dor": "Eliminação de gases em excesso com dor leve.",
+        "Gases leves, sem incômodo relevante": "Pequena quantidade de gases sem causar desconforto."
         }
     },
 
@@ -1030,7 +1036,10 @@ def dicionario_sintomas():
     "popular": "Quando sai sangue pelo ânus ao evacuar. Pode ser pouco ou muito, e o sangue geralmente é vermelho vivo.",
     "clinico": "Rectorragia",
     "termos": {
-        "Vermelho vivo": "Cor do sangue quando o sangramento vem do final do intestino ou do ânus."
+        "Sangue vermelho vivo em grande quantidade": "Saída de sangue vermelho brilhante em volume elevado pelo reto.",
+        "Sangue moderado com dor abdominal": "Sangramento perceptível acompanhado de dor na região abdominal.",
+        "Poucas gotas de sangue no papel higiênico": "Sangue em pequena quantidade visível apenas no papel após evacuar.",
+        "Sangramento leve e isolado": "Pequeno sangramento que ocorre uma única vez."
         }
     },
 
@@ -2691,95 +2700,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_mordedura():
-    return [
-        "Mordida profunda com sangramento e suspeita de raiva",
-        "Mordida com dor e sinais de infecção",
-        "Mordida superficial com inchaço",
-        "Pequeno arranhão sem dor"
-    ]
-
-def classificar_mordedura(resp):
-    if "raiva" in resp:
-        return "vermelho", "Emergência! Vá ao hospital imediatamente. Risco de raiva."
-    elif "infecção" in resp:
-        return "laranja", "Atenção! Pode ser necessário antibiótico. Busque atendimento."
-    elif "inchaço" in resp:
-        return "amarelo", "Monitorar. Se aumentar, vá ao médico."
-    else:
-        return "verde", "Sem risco aparente. Mantenha o local limpo e observe."
-            
-def opcoes_queimaduras():
-    return [
-        "Queimadura extensa, com bolhas e pele escura",
-        "Queimadura moderada com bolhas e dor intensa",
-        "Queimadura pequena com vermelhidão e dor leve",
-        "Apenas vermelhidão passageira sem dor"
-    ]
-
-def classificar_queimaduras(resp):
-    if "extensa" in resp:
-        return "vermelho", "Queimadura grave. Vá ao pronto-socorro imediatamente."
-    elif "moderada" in resp:
-        return "laranja", "Pode necessitar de avaliação médica e curativo especializado."
-    elif "vermelhidão e dor leve" in resp:
-        return "amarelo", "Trate com pomada e observe."
-    else:
-        return "verde", "Sem gravidade. Mantenha a hidratação da pele."
-            
-def opcoes_ferida_nao_traumatica():
-    return [
-        "Ferida grande com secreção e mal cheiro",
-        "Ferida dolorosa com sinais de infecção",
-        "Ferida pequena com vermelhidão",
-        "Apenas uma mancha sem dor ou secreção"
-    ]
-
-def classificar_ferida_nao_traumatica(resp):
-    if "mal cheiro" in resp:
-        return "vermelho", "Infecção grave. Vá ao médico imediatamente."
-    elif "sinais de infecção" in resp:
-        return "laranja", "Necessário tratamento. Consulte um médico."
-    elif "vermelhidão" in resp:
-        return "amarelo", "Pode evoluir. Fique atento a pioras."
-    else:
-        return "verde", "Sem risco aparente. Mantenha limpo e seco."
-
-def opcoes_gases():
-    return [
-        "Dor abdominal intensa com inchaço e sem alívio",
-        "Desconforto forte e barulhos intestinais altos",
-        "Flatulência frequente com leve dor",
-        "Gases leves, sem incômodo relevante"
-    ]
-
-def classificar_gases(resp):
-    if "sem alívio" in resp:
-        return "laranja", "Sinais de distensão intestinal. Avaliação médica pode ser necessária."
-    elif "Desconforto forte" in resp:
-        return "amarelo", "Acompanhe os sintomas e procure ajuda se persistirem."
-    elif "leve dor" in resp:
-        return "amarelo", "Sintoma comum, observe a evolução."
-    else:
-        return "verde", "Sem sinais de alerta."
-
-def opcoes_sangramento_retal():
-    return [
-        "Sangue vermelho vivo em grande quantidade",
-        "Sangue moderado com dor abdominal",
-        "Poucas gotas de sangue no papel higiênico",
-        "Sangramento leve e isolado"
-    ]
-
-def classificar_sangramento_retal(resp):
-    if "grande quantidade" in resp:
-        return "vermelho", "Procure atendimento médico imediatamente."
-    elif "dor abdominal" in resp:
-        return "laranja", "Alerta para hemorroidas ou outras causas. Consulte o médico."
-    elif "poucas gotas" in resp:
-        return "amarelo", "Fique atento. Se recorrente, busque um especialista."
-    else:
-        return "verde", "Isolado e leve. Continue observando."
 
 def opcoes_confusao_mental():
     return [
@@ -4008,11 +3928,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 mapa_sintomas = {
     "Dor na perna e dificuladade para caminhar": (opcoes_dor_perna_caminhar, classificar_dor_perna_caminhar),
     "Dor no peito": (opcoes_dor_no_peito, classificar_dor_no_peito),
-    "Mordedura": (opcoes_mordedura, classificar_mordedura),
-    "Queimadura": (opcoes_queimaduras, classificar_queimaduras),
-    "Ferida não-traumática": (opcoes_ferida_nao_traumatica, classificar_ferida_nao_traumatica),
-    "Gases": (opcoes_gases, classificar_gases),
-    "Sangramento retal": (opcoes_sangramento_retal, classificar_sangramento_retal),
     "Confusão mental": (opcoes_confusao_mental, classificar_confusao_mental),
     "Perda de consciência": (opcoes_perda_consciencia, classificar_perda_consciencia),
     "Hipotensão ou colapso": (opcoes_hipotensao, classificar_hipotensao),
@@ -5331,6 +5246,288 @@ FLUXOS[normalizar("Alteração auditiva")] = {
         {"se": {"quadro": "Perda súbita da audição com zumbido ou dor"}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Vertigem intensa (rodação)"]}, "min_cor": "laranja"},
         {"se": {"sinais_associados": ["Secreção purulenta", "Febre"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Mordedura
+FLUXOS[normalizar("Mordedura")] = {
+    "label": "Mordedura",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é a situação principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mordida profunda com sangramento e suspeita de raiva": 3.5,
+                "Mordida com dor e sinais de infecção": 2.0,
+                "Mordida superficial com inchaço": 1.0,
+                "Pequeno arranhão sem dor": 0.0
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Quando ocorreu a mordida?",
+            "tipo": "radio",
+            "opcoes": {
+                "Menos de 24h": 1.0,
+                "Entre 1 e 3 dias": 0.6,
+                "Mais de 3 dias": 0.3
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Sangramento ativo difícil de estancar": 1.5,
+                "Ferida profunda/laceração extensa": 1.0,
+                "Secreção purulenta": 1.0,
+                "Febre": 0.8
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Animal desconhecido/não vacinado": 1.2,
+                "Mordida em mão/face/genitália": 1.0,
+                "Diabetes ou imunossupressão": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Mordida profunda com sangramento e suspeita de raiva"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Sangramento ativo difícil de estancar"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Secreção purulenta"], "tempo": "Entre 1 e 3 dias"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Queimaduras
+FLUXOS[normalizar("Queimaduras")] = {
+    "label": "Queimaduras",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Queimadura extensa, com bolhas e pele escura": 3.5,
+                "Queimadura moderada com bolhas e dor intensa": 2.0,
+                "Queimadura pequena com vermelhidão e dor leve": 1.0,
+                "Apenas vermelhidão passageira sem dor": 0.0
+            }
+        },
+        {
+            "id": "local",
+            "label": "Qual local foi atingido?",
+            "tipo": "radio",
+            "opcoes": {
+                "Face, mãos, pés, genitália ou grandes articulações": 1.2,
+                "Outro local do corpo": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Bolhas grandes ou rompendo": 1.0,
+                "Área escura/esbranquiçada (profunda)": 1.2,
+                "Sinais de infecção (pus, piora da dor)": 1.0
+            }
+        },
+        {
+            "id": "mecanismo",
+            "label": "Como aconteceu?",
+            "tipo": "radio",
+            "opcoes": {
+                "Fogo/explosão/eletricidade/química": 1.2,
+                "Líquido quente/sólido quente/sol": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Queimadura extensa, com bolhas e pele escura"}, "min_cor": "vermelho"},
+        {"se": {"local": "Face, mãos, pés, genitália ou grandes articulações"}, "min_cor": "laranja"},
+        {"se": {"mecanismo": "Fogo/explosão/eletricidade/química"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Ferida não-traumática
+FLUXOS[normalizar("Ferida não-traumática")] = {
+    "label": "Ferida não-traumática",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é a situação principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Ferida grande com secreção e mal cheiro": 3.0,
+                "Ferida dolorosa com sinais de infecção": 2.0,
+                "Ferida pequena com vermelhidão": 1.0,
+                "Apenas uma mancha sem dor ou secreção": 0.0
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Há quanto tempo está assim?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 2 semanas": 1.0,
+                "Entre 3 e 14 dias": 0.6,
+                "Menos de 3 dias": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre": 0.8,
+                "Aumento rápido do tamanho": 0.9,
+                "Dor intensa ou mal cheiro": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Diabetes descompensado": 0.9,
+                "Imobilidade ou pressão constante no local": 0.8,
+                "Insuficiência venosa/arterial": 0.7
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Ferida grande com secreção e mal cheiro"}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Dor intensa ou mal cheiro"]}, "min_cor": "laranja"},
+        {"se": {"fatores_risco": ["Diabetes descompensado"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Gases
+FLUXOS[normalizar("Gases")] = {
+    "label": "Gases",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está o desconforto?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor abdominal intensa com inchaço e sem alívio": 2.5,
+                "Desconforto forte e barulhos intestinais altos": 1.5,
+                "Flatulência frequente com leve dor": 1.0,
+                "Gases leves, sem incômodo relevante": 0.0
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Desde quando nota os sintomas?",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 3 dias": 0.8,
+                "Entre 24 e 72 horas": 0.5,
+                "Menos de 24 horas": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Vômitos persistentes": 1.0,
+                "Ausência de eliminação de gases/fezes": 1.2,
+                "Febre": 0.7,
+                "Sangue nas fezes": 1.2
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor abdominal intensa com inchaço e sem alívio"}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Ausência de eliminação de gases/fezes"]}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Sangue nas fezes"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# Fluxograma: Sangramento retal
+FLUXOS[normalizar("Sangramento retal")] = {
+    "label": "Sangramento retal",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como foi o sangramento?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sangue vermelho vivo em grande quantidade": 3.5,
+                "Sangue moderado com dor abdominal": 2.0,
+                "Poucas gotas de sangue no papel higiênico": 1.0,
+                "Sangramento leve e isolado": 0.2
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Hoje": 1.0,
+                "Há 2–7 dias": 0.6,
+                "Há mais de 7 dias": 0.3
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Tontura ou fraqueza": 1.0,
+                "Dor anal intensa": 0.8,
+                "Fezes pretas (melena)": 1.5,
+                "Febre": 0.7
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum fator se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso de anticoagulante": 1.0,
+                "Cirrose/doença hepática": 0.9,
+                "Constipação crônica": 0.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Sangue vermelho vivo em grande quantidade"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Fezes pretas (melena)"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Tontura ou fraqueza"]}, "min_cor": "laranja"},
+        {"se": {"fatores_risco": ["Uso de anticoagulante"]}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
         (6.0, "vermelho"),
