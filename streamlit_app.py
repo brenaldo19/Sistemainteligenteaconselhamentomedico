@@ -2715,98 +2715,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-
-def opcoes_movimentos_fetais():
-    return [
-        "Nenhum movimento fetal percebido nas últimas horas",
-        "Redução clara nos movimentos habituais",
-        "Movimentos presentes, mas menos ativos que o normal",
-        "Movimentos normais para o estágio gestacional"
-    ]
-
-def classificar_movimentos_fetais(resp):
-    if resp == "Nenhum movimento fetal percebido nas últimas horas":
-        return "vermelho", "Ausência de movimentos pode indicar sofrimento fetal. Busque avaliação médica urgente."
-    elif resp == "Redução clara nos movimentos habituais":
-        return "laranja", "Alteração na atividade fetal. Deve ser investigado pelo obstetra."
-    elif resp == "Movimentos presentes, mas menos ativos que o normal":
-        return "amarelo", "Pode ser normal em fases específicas da gestação. Observe e comunique qualquer mudança significativa."
-    else:
-        return "verde", "Movimentos fetais dentro do esperado. Continue acompanhando normalmente."
-
-def opcoes_trabalho_parto():
-    return [
-        "Contrações intensas com sangramento ou bolsa rota",
-        "Contrações regulares e dolorosas há mais de 1 hora",
-        "Contrações leves e irregulares",
-        "Apenas sensação de pressão pélvica sem dor"
-    ]
-
-def classificar_trabalho_parto(resp):
-    if resp == "Contrações intensas com sangramento ou bolsa rota":
-        return "vermelho", "Sinais de início do trabalho de parto com possíveis complicações. Dirija-se ao hospital imediatamente."
-    elif resp == "Contrações regulares e dolorosas há mais de 1 hora":
-        return "laranja", "Indica que o trabalho de parto pode estar começando. Procure orientação médica."
-    elif resp == "Contrações leves e irregulares":
-        return "amarelo", "Pode ser o início do trabalho de parto ou apenas contrações de treinamento. Observe a evolução."
-    else:
-        return "verde", "Sem indícios claros de início do trabalho de parto. Mantenha acompanhamento pré-natal."
-
-def opcoes_febre_lactente():
-    return [
-        "Febre alta persistente com prostração ou recusa alimentar",
-        "Febre alta mas bebê responde a estímulos",
-        "Febre leve com comportamento preservado",
-        "Febre passageira e sem outros sintomas"
-    ]
-
-def classificar_febre_lactente(resp):
-    if "prostração" in resp or "recusa alimentar" in resp:
-        return "vermelho", "Bebê com febre e sinais de gravidade como prostração ou recusa alimentar exige atendimento médico imediato."
-    elif "responde a estímulos" in resp:
-        return "laranja", "Febre alta, mas com boa resposta, ainda exige cuidado e monitoramento de evolução."
-    elif "comportamento preservado" in resp:
-        return "amarelo", "Febre leve, sem alteração no comportamento. Observe e mantenha hidratação."
-    else:
-        return "verde", "Febre passageira, sem sintomas de alerta. Continue observando e evite agasalhar em excesso."
-
-def opcoes_choro_persistente():
-    return [
-        "Choro inconsolável há mais de 2 horas com sinais de dor",
-        "Choro frequente e difícil de acalmar",
-        "Choro leve mas diferente do habitual",
-        "Choro normal para a idade"
-    ]
-
-
-def classificar_choro_persistente(resp):
-    if "inconsolável" in resp:
-        return "vermelho", "Choro inconsolável e prolongado pode indicar dor intensa, desconforto ou condição grave. Procure avaliação médica urgente."
-    elif "difícil de acalmar" in resp:
-        return "laranja", "Pode sugerir desconforto ou início de quadro infeccioso. Requer observação e possível consulta."
-    elif "diferente do habitual" in resp:
-        return "amarelo", "Mudanças sutis no padrão de choro podem indicar incômodo leve. Observe e anote se houver piora."
-    else:
-        return "verde", "Choro esperado para a idade. Mantenha a rotina e observação."
-
-def opcoes_ictericia_neonatal():
-    return [
-        "Icterícia intensa em face e corpo com sonolência excessiva",
-        "Amarelado moderado até o abdome",
-        "Amarelado leve no rosto e olhos",
-        "Discreto e com melhora espontânea"
-    ]
-
-def classificar_ictericia_neonatal(resp):
-    if "sonolência" in resp:
-        return "vermelho", "Icterícia intensa com sonolência pode indicar complicação neurológica. Procure atendimento imediatamente."
-    elif "abdome" in resp:
-        return "laranja", "A icterícia moderada requer avaliação para prevenir agravamento."
-    elif "leve no rosto" in resp:
-        return "amarelo", "Comum em recém-nascidos, mas precisa ser monitorado para evitar evolução."
-    else:
-        return "verde", "Sem sinais preocupantes. Mantenha acompanhamento neonatal."
-
 def opcoes_queda_crianca():
     return [
         "Queda com perda de consciência ou vômito",
@@ -5484,6 +5392,19 @@ FLUXOS[normalizar("Confusão mental")] = {
                 "Imunossupressão": 1.0
             }
         }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Desorientação completa e fala incoerente"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Fraqueza em um lado do corpo ou fala arrastada", "Convulsão recente", "Dor de cabeça intensa ou rigidez na nuca"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Febre ou infecção recente"]}, "min_cor": "laranja"},
+        {"se": {"uso_substancias": ["Hipoglicemiantes/insulina"]}, "min_cor": "laranja"},
+        {"se": {"condicoes_risco": ["Idade ≤ 4 anos ou ≥ 67 anos", "Imunossupressão"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
     ]
 }
 
@@ -5547,6 +5468,18 @@ FLUXOS[normalizar("Perda de consciência")] = {
             }
         }
     ]
+    "regras_excecao": [
+        {"se": {"quadro": "Perda total de consciência recente sem recuperação"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Trauma craniano durante a queda", "Convulsões (movimentos involuntários, mordedura de língua, incontinência)"]}, "min_cor": "vermelho"},
+        {"se": {"mecanismo": "Após dor torácica/palpitação/dispneia"}, "min_cor": "laranja"},
+        {"se": {"historico": ["Arritmia/Doença cardíaca conhecida", "Uso de anticoagulante"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
 }
 
 # -----------------------------
@@ -5600,7 +5533,20 @@ FLUXOS[normalizar("Hipotensão")] = {
             }
         }
     ]
+    "regras_excecao": [
+        {"se": {"quadro": "Pressão muito baixa com tontura e palidez extrema"}, "min_cor": "vermelho"},
+        {"se": {"sinais_de_choque": ["Pele fria/pegajosa, sudorese intensa", "Confusão/sonolência", "Pele muito pálida ou arroxeada"]}, "min_cor": "vermelho"},
+        {"se": {"possiveis_causas": ["Sangramento aparente ou suspeito", "Reação alérgica com inchaço/urticária/chiado"]}, "min_cor": "vermelho"},
+        {"se": {"condicoes_risco": ["Idade ≤ 4 anos ou ≥ 67 anos", "Doença cardíaca conhecida"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
 }
+
 # -----------------------------
 # HIPOglicemia
 # -----------------------------
@@ -5646,6 +5592,18 @@ FLUXOS[normalizar("Hipoglicemia")] = {
                 "Doença cardíaca conhecida": 1.0
             }
         }
+    ]
+    "regras_excecao": [
+        {"se": {"quadro": "Desmaio ou confusão com sudorese intensa"}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Uso recente de insulina ou remédio para diabetes"]}, "min_cor": "laranja"},
+        {"se": {"inicio": "Início súbito, nos últimos minutos"}, "min_cor": "laranja"},
+        {"se": {"condicoes_risco": ["Idade ≤ 4 anos ou ≥ 67 anos"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
     ]
 }
 
@@ -5695,6 +5653,18 @@ FLUXOS[normalizar("Hiperglicemia")] = {
             }
         }
     ]
+    "regras_excecao": [
+        {"se": {"quadro": "Sede intensa, urina excessiva e cansaço extremo"}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Infecção recente"]}, "min_cor": "laranja"},
+        {"se": {"inicio": "Início súbito, em poucas horas"}, "min_cor": "laranja"},
+        {"se": {"condicoes_risco": ["Doença renal ou cardíaca", "Idade ≤ 4 anos ou ≥ 67 anos"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
 }
 
 # -----------------------------
@@ -5743,6 +5713,18 @@ FLUXOS[normalizar("Temperatura baixa")] = {
             }
         }
     ]
+    "regras_excecao": [
+        {"se": {"quadro": "Extremidades frias com sonolência ou confusão"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Dificuldade para falar", "Pele muito pálida ou arroxeada"]}, "min_cor": "vermelho"},
+        {"se": {"exposicao": "Exposição prolongada ao frio"}, "min_cor": "laranja"},
+        {"se": {"condicoes_risco": ["Idade ≤ 4 anos ou ≥ 67 anos", "Doença cardíaca ou circulatória"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]    
 }
 
 # -----------------------------
@@ -5790,6 +5772,258 @@ FLUXOS[normalizar("Dor durante a gravidez")] = {
                 "Gestação de risco": 1.0
             }
         }
+    ]
+    "regras_excecao": [
+        {"se": {"quadro": "Dor intensa com sangramento ou perda de líquido"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Diminuição ou ausência de movimentos do bebê"]}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Pressão alta recente", "Febre"]}, "min_cor": "laranja"},
+        {"se": {"inicio": "Início súbito"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]    
+}
+# -----------------------------
+# MOVIMENTOS FETAIS
+# -----------------------------
+FLUXOS[normalizar("Movimentos fetais")] = {
+    "label": "Movimentos fetais",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como estão os movimentos do bebê?",
+            "tipo": "radio",
+            "opcoes": {
+                "Nenhum movimento fetal percebido nas últimas horas": 3.5,
+                "Redução clara nos movimentos habituais": 2.0,
+                "Movimentos presentes, mas menos ativos que o normal": 1.0,
+                "Movimentos normais para o estágio gestacional": 0.0
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando percebeu essa mudança?",
+            "tipo": "radio",
+            "opcoes": {
+                "Hoje": 1.3,
+                "Nos últimos dias": 0.8
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Sangramento vaginal": 1.3,
+                "Dor abdominal": 1.2,
+                "Perda de líquido pela vagina": 1.3
+            }
+        }
+    ]
+    "regras_excecao": [
+        {"se": {"quadro": "Nenhum movimento fetal percebido nas últimas horas"}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Perda de líquido pela vagina", "Sangramento vaginal"]}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Dor abdominal"]}, "min_cor": "laranja"},
+        {"se": {"inicio": "Hoje"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# -----------------------------
+# TRABALHO DE PARTO
+# -----------------------------
+FLUXOS[normalizar("Trabalho de parto")] = {
+    "label": "Trabalho de parto",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como estão as contrações?",
+            "tipo": "radio",
+            "opcoes": {
+                "Contrações intensas com sangramento ou bolsa rota": 3.5,
+                "Contrações regulares e dolorosas há mais de 1 hora": 2.0,
+                "Contrações leves e irregulares": 1.0,
+                "Apenas sensação de pressão pélvica sem dor": 0.0
+            }
+        },
+        {
+            "id": "intervalo",
+            "label": "Intervalo entre as contrações",
+            "tipo": "radio",
+            "opcoes": {
+                "Menos de 5 minutos": 1.3,
+                "Entre 5 e 10 minutos": 0.8,
+                "Mais de 10 minutos": 0.4
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Perda de líquido pela vagina": 1.3,
+                "Sangramento intenso": 1.3
+            }
+        }
+    ]
+    "regras_excecao": [
+        {"se": {"quadro": "Contrações intensas com sangramento ou bolsa rota"}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Sangramento intenso", "Perda de líquido pela vagina"]}, "min_cor": "vermelho"},
+        {"se": {"intervalo": "Menos de 5 minutos"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# -----------------------------
+# FEBRE EM LACTENTE
+# -----------------------------
+FLUXOS[normalizar("Febre em lactente")] = {
+    "label": "Febre em lactente",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o quadro principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Febre alta persistente com prostração ou recusa alimentar": 3.5,
+                "Febre alta mas bebê responde a estímulos": 2.0,
+                "Febre leve com comportamento preservado": 1.0,
+                "Febre passageira e sem outros sintomas": 0.0
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Duração da febre",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 48 horas": 1.0,
+                "Menos de 48 horas": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Vômitos persistentes": 1.0,
+                "Respiração acelerada/dificuldade para respirar": 1.3,
+                "Manchas na pele": 1.3
+            }
+        }
+    ]
+    "regras_excecao": [
+        {"se": {"quadro": "Febre alta persistente com prostração ou recusa alimentar"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Respiração acelerada/dificuldade para respirar", "Manchas na pele"]}, "min_cor": "vermelho"},
+        {"se": {"duracao": "Mais de 48 horas"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# -----------------------------
+# CHORO PERSISTENTE
+# -----------------------------
+FLUXOS[normalizar("Choro persistente")] = {
+    "label": "Choro persistente",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como é o choro?",
+            "tipo": "radio",
+            "opcoes": {
+                "Choro inconsolável há mais de 2 horas com sinais de dor": 3.5,
+                "Choro frequente e difícil de acalmar": 2.0,
+                "Choro leve mas diferente do habitual": 1.0,
+                "Choro normal para a idade": 0.0
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre": 1.0,
+                "Dificuldade para mamar": 1.0,
+                "Vômitos": 1.0
+            }
+        }
+    ]
+    "regras_excecao": [
+        {"se": {"quadro": "Choro inconsolável há mais de 2 horas com sinais de dor"}, "min_cor": "vermelho"},
+        {"se": {"fatores": ["Febre", "Vômitos"]}, "min_cor": "laranja"},
+        {"se": {"fatores": ["Dificuldade para mamar"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# -----------------------------
+# ICTERÍCIA NEONATAL
+# -----------------------------
+FLUXOS[normalizar("Icterícia neonatal")] = {
+    "label": "Icterícia neonatal",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual é o grau de amarelado?",
+            "tipo": "radio",
+            "opcoes": {
+                "Icterícia intensa em face e corpo com sonolência excessiva": 3.5,
+                "Amarelado moderado até o abdome": 2.0,
+                "Amarelado leve no rosto e olhos": 1.0,
+                "Discreto e com melhora espontânea": 0.0
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Primeiras 24 horas de vida": 1.3,
+                "Após 2º dia de vida": 0.6
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Sinais associados",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dificuldade para mamar": 1.0,
+                "Fezes esbranquiçadas": 1.3
+            }
+        }
+    ]
+    "regras_excecao": [
+        {"se": {"quadro": "Icterícia intensa em face e corpo com sonolência excessiva"}, "min_cor": "vermelho"},
+        {"se": {"inicio": "Primeiras 24 horas de vida"}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Fezes esbranquiçadas", "Dificuldade para mamar"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
     ]
 }
 
