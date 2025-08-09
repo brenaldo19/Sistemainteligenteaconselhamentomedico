@@ -3799,21 +3799,18 @@ FLUXOS[normalizar("Inchaço dos linfonodos")] = {
         }
     ],
     "regras_excecao": [
-        # Mantemos as exceções, mas só forçam LARANJA (não vermelho)
         {"se": {"febre_peso": "Febre alta (≥ 38,5°C) OU perda de peso > 10% em 6 meses", "duracao": "Mais de 4 semanas"}, "min_cor": "laranja"},
         {"se": {"tamanho": "≥ 2 cm", "consistencia_mobilidade": "Duro e fixo (pouco móvel)"}, "min_cor": "laranja"},
         {"se": {"localizacao": "Generalizado (em mais de uma região do corpo)", "febre_peso": ["Febre alta (≥ 38,5°C) OU perda de peso > 10% em 6 meses", "Febre baixa (37,8–38,4°C) OU perda de peso moderada"]}, "min_cor": "laranja"}
     ],
-    # Limiar mais alto: fica mais difícil sair de verde
     "mapeamento_cor": [
-        (6.0, "vermelho"),
+        (5.8, "vermelho"),
         (4.0, "laranja"),
         (2.2, "amarelo"),
         (0.0, "verde")
     ]
 }
 
-# Fluxograma: Nódulo na mama (conservador)
 # Fluxograma: Nódulo na mama (conservador, com sinais específicos moderados)
 FLUXOS[normalizar("Nódulo na mama")] = {
     "label": "Nódulo na mama",
