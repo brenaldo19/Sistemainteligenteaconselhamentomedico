@@ -4197,9 +4197,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 
 # Mapa atualizado de sintomas
 mapa_sintomas = {
-    "Dor nos testículos": (opcoes_dor_testiculos, classificar_dor_testiculos),
-    "Sangue no sêmen": (opcoes_sangue_semen, classificar_sangue_semen),
-    "Secreção mamilar(fora da amamentação)": (opcoes_secrecao_mamilar, classificar_secrecao_mamilar),
     "Dor na perna e dificuladade para caminhar": (opcoes_dor_perna_caminhar, classificar_dor_perna_caminhar),
     "Dor no peito": (opcoes_dor_no_peito, classificar_dor_no_peito),
     "Trauma na cabeça": (opcoes_trauma_craniano, classificar_trauma_craniano),
