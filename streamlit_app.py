@@ -2807,8 +2807,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 
     return cor_final
 
-# Mapa atualizado de sintomas
-mapa_sintomas = {}
 
 # >>> MOTOR DE FLUXOGRAMAS (DEVE VIR ANTES DA ETAPA 3) <<<
 FLUXOS = {}  # catálogo pode começar vazio
@@ -8135,7 +8133,7 @@ elif st.session_state.etapa == 2:
     st.header("2. Selecione até 3 sintomas principais")
 
     dic = dicionario_sintomas()
-    sintomas_disponiveis = sorted(set(list(mapa_sintomas.keys()) + labels_fluxos()))
+    sintomas_disponiveis = sorted(set(labels_fluxos() or []))
 
     if "sintomas_temp" not in st.session_state:
         st.session_state["sintomas_temp"] = ["", "", ""]
@@ -8200,12 +8198,6 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
                     st.session_state["fluxo_respostas"][chave] = {}
                 # Renderiza perguntas do fluxo
                 coletar_respostas_fluxo(sintoma)
-            else:
-                # Fallback antigo (mapa_sintomas)
-                func_opcoes, _ = mapa_sintomas[sintoma]
-                opcoes = func_opcoes()
-                escolha = st.radio(f"{sintoma}:", opcoes, key=f"opcao_{sintoma}")
-                st.session_state["respostas_usuario"][sintoma] = escolha
 
         enviado = st.form_submit_button("Ver resultado")
 
