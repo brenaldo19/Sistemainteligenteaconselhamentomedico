@@ -545,9 +545,10 @@ def dicionario_sintomas():
     "popular": "Quando a vista escurece, dobra ou embaça do nada, dificultando enxergar mesmo por pouco tempo.",
     "clinico": "Alteração visual aguda",
     "termos": {
-        "Visão muito turva": "Tudo fica embaçado como se estivesse com catarata.",
-        "Visão dupla ou embaçada": "Vê dois objetos ou tudo com contorno borrado.",
-        "Dificuldade temporária pra focar": "Fica difícil ler ou olhar para um ponto específico por um tempo."
+        "Perda súbita da visão ou visão muito turva de um lado": "Pode indicar AVC, descolamento de retina ou oclusão arterial ocular.",
+        "Visão dupla ou embaçada com dor de cabeça ou náusea": "Sugere aumento de pressão intracraniana ou distúrbio neurológico.",
+        "Leve embaçamento ou dificuldade temporária pra focar": "Geralmente fadiga ocular ou alteração momentânea da visão.",
+        "Cansaço visual leve, sem perda ou dor": "Sintoma leve e não relacionado a doenças graves."
         }
     },
 
@@ -622,8 +623,10 @@ def dicionario_sintomas():
     "popular": "Quando algo entra no olho, nariz ou ouvido — como sujeira, grão ou inseto — e pode causar dor, secreção ou febre.",
     "clinico": "Presença de corpo estranho em cavidade sensorial",
     "termos": {
-        "Secreção com febre": "Sai líquido e tem febre junto, sinal de infecção.",
-        "Presença confirmada, mas sem sintomas": "O objeto está lá, mas não está doendo nem incomodando."
+        "Dor intensa ou secreção com febre": "Possível infecção grave causada pelo corpo estranho.",
+        "Desconforto moderado e persistente": "Corpo estranho em local sensível que não saiu espontaneamente.",
+        "Leve irritação, sem dor ou sinais de infecção": "Irritação leve causada por contato com corpo estranho.",
+        "Presença confirmada, mas sem sintomas": "Objeto visível, mas sem causar inflamação ou dor."
         }
     },
 
@@ -632,10 +635,10 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa se corta com algo e o ferimento pode ser leve ou profundo, com risco de infecção.",
     "clinico": "Laceração ou corte",
     "termos": {
-        "Corte profundo": "Atinge camadas mais profundas da pele, sangra bastante.",
-        "Exposição de tecidos": "Dá pra ver carne ou gordura por baixo do corte.",
-        "Sinais de infecção (pus, vermelhidão)": "Mostra que o corte inflamou ou infeccionou.",
-        "Corte leve, limpo e controlado": "Pequeno, sem sangramento forte e fácil de limpar."
+        "Corte profundo com sangramento intenso e exposição de tecidos": "Ferimento grave com risco de hemorragia e infecção.",
+        "Ferida moderada com sangramento que demora a parar": "Sangramento persistente, com necessidade de cuidados médicos.",
+        "Ferida pequena, mas com sinais de infecção (pus, vermelhidão)": "Infecção localizada que requer tratamento.",
+        "Corte leve, limpo e controlado": "Ferimento superficial de baixa gravidade."
         }
     },
 
@@ -644,8 +647,10 @@ def dicionario_sintomas():
     "popular": "Quando algo entala e a pessoa não consegue respirar direito, nem tossir com força.",
     "clinico": "Obstrução das vias aéreas superiores",
     "termos": {
-        "Engasgo com tosse ineficaz": "Tenta tossir, mas o ar não sai e a tosse é fraca.",
-        "Respiração ofegante": "Respira com esforço e dificuldade."
+        "Engasgo com tosse ineficaz, lábios roxos ou dificuldade extrema": "Obstrução grave das vias aéreas, risco de asfixia.",
+        "Tosse persistente com respiração ofegante": "Obstrução parcial das vias aéreas ou irritação intensa.",
+        "Tossiu, mas respira normalmente agora": "Situação controlada, sem risco imediato.",
+        "Episódio leve e isolado, sem sinais atuais": "Engasgo leve, resolvido sem complicações."
         }
     },
 
@@ -654,8 +659,10 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa bebe, come ou entra em contato com algo que pode fazer mal, como produto de limpeza ou veneno.",
     "clinico": "Intoxicação exógena",
     "termos": {
-        "Substância tóxica": "Produto que pode causar dano ao corpo, como álcool em gel, remédio ou veneno.",
-        "Ingestão suspeita": "Acredita-se que a pessoa pode ter consumido algo perigoso, mesmo sem certeza."
+        "Ingestão de substância tóxica com confusão, vômito ou inconsciência": "Indica intoxicação grave, com risco de depressão neurológica ou falência de órgãos.",
+        "Ingestão suspeita com sintomas moderados (náusea, tontura)": "Sugere intoxicação moderada, possivelmente em fase inicial.",
+        "Ingestão leve com sintomas leves (enjoo leve, dor de barriga)": "Quadro leve e autolimitado, possivelmente por ingestão de pequena quantidade.",
+        "Ingestão pequena com sintomas ausentes ou mínimos": "Baixa probabilidade de complicações, mas requer observação."
         }
     },
 
@@ -748,8 +755,10 @@ def dicionario_sintomas():
     "popular": "Quando andar fica difícil por causa da dor ou fraqueza nas pernas, podendo até causar queda.",
     "clinico": "Claudicação ou limitação motora",
     "termos": {
-        "Dificuldade de mover a perna": "A perna parece pesada, fraca ou trava.",
-        "Queda": "A dor causou desequilíbrio ou a pessoa realmente caiu."
+        "Dor súbita com inchaço, vermelhidão ou dificuldade de mover a perna": "Possível trombose venosa profunda ou lesão grave, com sinais de comprometimento vascular.",
+        "Dor intensa após queda ou lesão recente": "Sugere fratura, luxação ou lesão musculoesquelética importante.",
+        "Dor moderada, persistente, mas ainda consegue caminhar": "Pode ser lesão muscular ou articular leve a moderada.",
+        "Dor leve e passageira, sem sinais visíveis": "Sintoma autolimitado, geralmente por esforço ou postura inadequada."
         }
     },
 
@@ -758,9 +767,10 @@ def dicionario_sintomas():
     "popular": "Quando o pescoço fica duro, dolorido e difícil de mexer, como se tivesse travado ou dormido de mau jeito.",
     "clinico": "Rigidez cervical ou torcicolo",
     "termos": {
-        "Rigidez importante": "O pescoço mal se mexe de tanta dor.",
-        "Posição ruim": "Ficou numa posição desconfortável por muito tempo.",
-        "Dor localizada": "A dor é em um ponto específico do pescoço."
+        "Dor intensa com febre, vômito ou confusão": "Pode indicar meningite ou infecção grave do sistema nervoso.",
+        "Rigidez importante com dor de cabeça forte": "Sinal de possível meningite ou comprometimento neurológico.",
+        "Dor moderada após esforço físico ou posição ruim": "Sugere causa muscular ou postural.",
+        "Dor leve e localizada, sem outros sintomas": "Desconforto localizado, geralmente de origem benigna."
         }
     },
 
@@ -2745,132 +2755,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_dor_perna_caminhar():
-    return[
-        "Dor súbita com inchaço, vermelhidão ou dificuldade de mover a perna",
-        "Dor intensa após queda ou lesão recente",
-        "Dor moderada, persistente, mas ainda consegue caminhar",
-        "Dor leve e passageira, sem sinais visíveis"
-    ]
-
-def classificar_dor_perna_caminhar(resp):
-    if resp == "Dor súbita com inchaço, vermelhidão ou dificuldade de mover a perna":
-        return "vermelho", "Sinais de trombose ou lesão grave. Atendimento imediato."
-    elif resp == "Dor intensa após queda ou lesão recente":
-        return "laranja", "Pode haver fratura ou entorse. Avaliação ortopédica recomendada."
-    elif resp == "Dor moderada, persistente, mas ainda consegue caminhar":
-        return "amarelo", "Quadro leve a moderado. Requer repouso e analgesia."
-    else:
-        return "verde", "Dor leve e passageira. Observe evolução."
-            
-def opcoes_intoxicacao():
-    return [
-        "Ingestão de substância tóxica com confusão, vômito ou inconsciência",
-        "Ingestão suspeita com sintomas moderados (náusea, tontura)",
-        "Ingestão leve com sintomas leves (enjoo leve, dor de barriga)",
-        "Ingestão pequena com sintomas ausentes ou mínimos"
-    ]
-
-def classificar_intoxicacao(resposta):
-    if resposta == "Ingestão de substância tóxica com confusão, vômito ou inconsciência":
-        return "vermelho", "Sinais graves de intoxicação. Procure atendimento médico imediatamente."
-    elif resposta == "Ingestão suspeita com sintomas moderados (náusea, tontura)":
-        return "laranja", "Pode ser um quadro moderado de intoxicação. Monitorar e buscar orientação médica."
-    elif resposta == "Ingestão leve com sintomas leves (enjoo leve, dor de barriga)":
-        return "amarelo", "Sintomas leves e transitórios. Mantenha hidratação e observação."
-    else:
-        return "verde", "Sem sinais de intoxicação relevante. Continue monitorando."
-
-def opcoes_dor_pescoco():
-    return [
-        "Dor intensa com febre, vômito ou confusão",
-        "Rigidez importante com dor de cabeça forte",
-        "Dor moderada após esforço físico ou posição ruim",
-        "Dor leve e localizada, sem outros sintomas"
-    ]
-
-def classificar_dor_pescoco(resposta):
-    if resposta == "Dor intensa com febre, vômito ou confusão":
-        return "vermelho", "Pode ser meningite ou outra condição grave. Procure ajuda médica imediatamente."
-    elif resposta == "Rigidez importante com dor de cabeça forte":
-        return "laranja", "Sinais que merecem avaliação médica. Pode haver comprometimento neurológico."
-    elif resposta == "Dor moderada após esforço físico ou posição ruim":
-        return "amarelo", "Geralmente de origem muscular. Repouso e analgésico podem ser suficientes."
-    else:
-        return "verde", "Dor leve e localizada. Monitorar apenas."
-
-def opcoes_alteracao_visao():
-    return [
-        "Perda súbita da visão ou visão muito turva de um lado",
-        "Visão dupla ou embaçada com dor de cabeça ou náusea",
-        "Leve embaçamento ou dificuldade temporária pra focar",
-        "Cansaço visual leve, sem perda ou dor"
-    ]
-
-def classificar_alteracao_visao(resposta):
-    if resposta == "Perda súbita da visão ou visão muito turva de um lado":
-        return "vermelho", "Emergência oftalmológica. Atendimento imediato é necessário."
-    elif resposta == "Visão dupla ou embaçada com dor de cabeça ou náusea":
-        return "laranja", "Pode indicar pressão elevada ou problema neurológico. Avaliação médica recomendada."
-    elif resposta == "Leve embaçamento ou dificuldade temporária pra focar":
-        return "amarelo", "Pode ser fadiga ocular ou alteração passageira. Observe evolução."
-    else:
-        return "verde", "Sem alterações visuais relevantes."
-
-def opcoes_engasgo():
-    return [
-        "Engasgo com tosse ineficaz, lábios roxos ou dificuldade extrema",
-        "Tosse persistente com respiração ofegante",
-        "Tossiu, mas respira normalmente agora",
-        "Episódio leve e isolado, sem sinais atuais"
-    ]
-
-def classificar_engasgo(resposta):
-    if resposta == "Engasgo com tosse ineficaz, lábios roxos ou dificuldade extrema":
-        return "vermelho", "Sinais de obstrução grave das vias aéreas. Proceda com manobra de desengasgo e procure socorro imediato."
-    elif resposta == "Tosse persistente com respiração ofegante":
-        return "laranja", "Desconforto respiratório significativo. Requer observação e possível avaliação médica."
-    elif resposta == "Tossiu, mas respira normalmente agora":
-        return "amarelo", "Situação controlada, mas continue observando o padrão respiratório."
-    else:
-        return "verde", "Episódio leve e isolado. Sem sinais de risco."
-
-def opcoes_ferimentos_cortes():
-    return [
-        "Corte profundo com sangramento intenso e exposição de tecidos",
-        "Ferida moderada com sangramento que demora a parar",
-        "Ferida pequena, mas com sinais de infecção (pus, vermelhidão)",
-        "Corte leve, limpo e controlado"
-    ]
-
-def classificar_ferimentos_cortes(opcao):
-    if opcao == "Corte profundo com sangramento intenso e exposição de tecidos":
-        return "vermelho", "Ferimento grave com risco de hemorragia ou infecção. Procure socorro imediato."
-    elif opcao == "Ferida moderada com sangramento que demora a parar":
-        return "laranja", "Requer cuidados para evitar infecção e estancar sangramento."
-    elif opcao == "Ferida pequena, mas com sinais de infecção (pus, vermelhidão)":
-        return "amarelo", "Monitorar e higienizar. Pode necessitar de pomada ou consulta médica."
-    else:
-        return "verde", "Ferimento leve e bem controlado. Higienize e proteja."
-
-def opcoes_corpo_estranho_sentidos():
-    return [
-        "Dor intensa ou secreção com febre",
-        "Desconforto moderado e persistente",
-        "Leve irritação, sem dor ou sinais de infecção",
-        "Presença confirmada, mas sem sintomas"
-    ]
-
-def classificar_corpo_estranho_sentidos(opcao):
-    if opcao == "Dor intensa ou secreção com febre":
-        return "vermelho", "Pode haver infecção ou lesão interna. Requer atendimento médico."
-    elif opcao == "Desconforto moderado e persistente":
-        return "laranja", "Situação incômoda. Pode precisar de remoção médica do corpo estranho."
-    elif opcao == "Leve irritação, sem dor ou sinais de infecção":
-        return "amarelo", "Quadro leve, mas continue observando se evolui."
-    else:
-        return "verde", "Sem sintomas preocupantes."
-
 def opcoes_dor_ao_urinar():
     return [
         "Dor intensa com sangue na urina ou febre",
@@ -3336,13 +3220,6 @@ def calcular_cor_final(cores, sintomas, sistemas_sintomas):
 
 # Mapa atualizado de sintomas
 mapa_sintomas = {
-    "Dor na perna e dificuladade para caminhar": (opcoes_dor_perna_caminhar, classificar_dor_perna_caminhar),
-    "Sinais de intoxicação ou envenenamento": (opcoes_intoxicacao, classificar_intoxicacao),
-    "Dores no pescoço ou rigidez na nuca": (opcoes_dor_pescoco, classificar_dor_pescoco),
-    "Alterações visuais súbitas": (opcoes_alteracao_visao, classificar_alteracao_visao),
-    "Engasgo ou obstrução das vias aéreas": (opcoes_engasgo, classificar_engasgo),
-    "Ferimentos ou cortes com objetos": (opcoes_ferimentos_cortes, classificar_ferimentos_cortes),
-    "Corpo estranho nos olhos, ouvidos ou nariz": (opcoes_corpo_estranho_sentidos, classificar_corpo_estranho_sentidos),
     "Ansiedade ou agitação intensa": (opcoes_ansiedade_agitacao, classificar_ansiedade_agitacao),
     "Diarreia": (opcoes_diarreia, classificar_diarreia),
     "Sensação de desmaio": (opcoes_sensacao_desmaio, classificar_sensacao_desmaio),
@@ -6832,6 +6709,391 @@ FLUXOS[normalizar("Dor ou olho vermelho")] = {
         {"se": {"quadro": "Dor ocular intensa ou perda súbita da visão"}, "min_cor": "vermelho"},
         {"se": {"fatores_agressores": "Trauma químico/poeira/impacto"}, "min_cor": "vermelho"},
         {"se": {"fatores_agressores": "Uso de lentes de contato", "quadro": "Olhos vermelhos com secreção e sensibilidade à luz"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# ===============================
+# DOR NA PERNA AO CAMINHAR
+# ===============================
+FLUXOS[normalizar("Dor na perna ao caminhar")] = {
+    "label": "Dor na perna ao caminhar",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor súbita com inchaço, vermelhidão ou dificuldade de mover a perna": 2.0,
+                "Dor intensa após queda ou lesão recente": 1.4,
+                "Dor moderada, persistente, mas ainda consegue caminhar": 0.6,
+                "Dor leve e passageira, sem sinais visíveis": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados (selecione se houver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Inchaço localizado e quente": 1.2,
+                "Vermelhidão marcada": 0.8,
+                "Formigamento ou fraqueza na perna": 0.8
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Fatores de risco recentes:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Imobilização/cirurgia recente": 1.0,
+                "Uso de anticoncepcional/hormônios": 0.8,
+                "História de trombose/câncer": 0.8,
+                "Idade ≥ 67 anos": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor súbita com inchaço, vermelhidão ou dificuldade de mover a perna"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Dor intensa após queda ou lesão recente"}, "min_cor": "laranja"},
+        {"se": {"sinais": ["Inchaço localizado e quente"]}, "min_cor": "laranja"},
+        {"se": {"fatores_risco": ["Imobilização/cirurgia recente", "História de trombose/câncer"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# INTOXICAÇÃO
+# ===============================
+FLUXOS[normalizar("Intoxicação")] = {
+    "label": "Intoxicação",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "O que aconteceu?",
+            "tipo": "radio",
+            "opcoes": {
+                "Ingestão de substância tóxica com confusão, vômito ou inconsciência": 2.0,
+                "Ingestão suspeita com sintomas moderados (náusea, tontura)": 1.2,
+                "Ingestão leve com sintomas leves (enjoo leve, dor de barriga)": 0.6,
+                "Ingestão pequena com sintomas ausentes ou mínimos": 0.2
+            }
+        },
+        {
+            "id": "agente",
+            "label": "Qual o possível agente?",
+            "tipo": "radio",
+            "opcoes": {
+                "Produto de limpeza/agrotóxico": 1.5,
+                "Remédio em dose alta": 1.2,
+                "Álcool/drogas": 0.8,
+                "Desconhecido": 0.4
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Quando foi a ingestão?",
+            "tipo": "radio",
+            "opcoes": {
+                "Menos de 1 hora": 1.0,
+                "Entre 1 e 6 horas": 0.6,
+                "Mais de 6 horas": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Vômitos repetidos": 1.0,
+                "Sonolência/confusão": 1.2,
+                "Convulsão": 1.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Ingestão de substância tóxica com confusão, vômito ou inconsciência"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Convulsão"]}, "min_cor": "vermelho"},
+        {"se": {"agente": "Produto de limpeza/agrotóxico"}, "min_cor": "vermelho"},
+        {"se": {"tempo": "Menos de 1 hora", "quadro": "Ingestão suspeita com sintomas moderados (náusea, tontura)"} , "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# DOR NO PESCOÇO
+# ===============================
+FLUXOS[normalizar("Dor no pescoço")] = {
+    "label": "Dor no pescoço",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor intensa com febre, vômito ou confusão": 2.0,
+                "Rigidez importante com dor de cabeça forte": 1.4,
+                "Dor moderada após esforço físico ou posição ruim": 0.6,
+                "Dor leve e localizada, sem outros sintomas": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Formigamento/fraqueza nos braços": 1.0,
+                "Trauma recente (acidente/queda)": 1.2,
+                "Febre alta (≥ 38,5°C)": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor intensa com febre, vômito ou confusão"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Rigidez importante com dor de cabeça forte"} , "min_cor": "laranja"},
+        {"se": {"sinais": ["Trauma recente (acidente/queda)"]}, "min_cor": "laranja"},
+        {"se": {"sinais": ["Formigamento/fraqueza nos braços"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.2, "laranja"),
+        (1.6, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# ALTERAÇÃO DE VISÃO
+# ===============================
+FLUXOS[normalizar("Alteração de visão")] = {
+    "label": "Alteração de visão",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "O que está acontecendo com a visão?",
+            "tipo": "radio",
+            "opcoes": {
+                "Perda súbita da visão ou visão muito turva de um lado": 2.0,
+                "Visão dupla ou embaçada com dor de cabeça ou náusea": 1.4,
+                "Leve embaçamento ou dificuldade temporária pra focar": 0.6,
+                "Cansaço visual leve, sem perda ou dor": 0.2
+            }
+        },
+        {
+            "id": "lado",
+            "label": "Afeta um olho ou os dois?",
+            "tipo": "radio",
+            "opcoes": {
+                "Um olho": 0.8,
+                "Dois olhos": 0.4
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Houve algum destes fatores?",
+            "tipo": "radio",
+            "opcoes": {
+                "Trauma químico/impacto recente": 1.6,
+                "Uso de lentes de contato": 0.8,
+                "Sem fator conhecido": 0.0
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dor ocular intensa": 1.2,
+                "Halos ao redor da luz/visão embaçada": 0.8,
+                "Dor de cabeça forte": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Perda súbita da visão ou visão muito turva de um lado"}, "min_cor": "vermelho"},
+        {"se": {"fatores": "Trauma químico/impacto recente"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Dor ocular intensa"]}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Visão dupla ou embaçada com dor de cabeça ou náusea"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# ENGASGO
+# ===============================
+FLUXOS[normalizar("Engasgo")] = {
+    "label": "Engasgo",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Engasgo com tosse ineficaz, lábios roxos ou dificuldade extrema": 2.0,
+                "Tosse persistente com respiração ofegante": 1.4,
+                "Tossiu, mas respira normalmente agora": 0.6,
+                "Episódio leve e isolado, sem sinais atuais": 0.2
+            }
+        },
+        {
+            "id": "objeto",
+            "label": "Suspeita de objeto/alimento preso?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sim, objeto pequeno (moeda/brinquedo)": 1.4,
+                "Sim, alimento": 0.8,
+                "Não sei": 0.4,
+                "Não": 0.0
+            }
+        },
+        {
+            "id": "idade",
+            "label": "Qual a faixa etária?",
+            "tipo": "radio",
+            "opcoes": {
+                "Bebê (< 1 ano)": 0.8,
+                "Criança (1–12 anos)": 0.4,
+                "Adolescente/adulto": 0.2
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Engasgo com tosse ineficaz, lábios roxos ou dificuldade extrema"}, "min_cor": "vermelho"},
+        {"se": {"objeto": "Sim, objeto pequeno (moeda/brinquedo)"} , "min_cor": "vermelho"},
+        {"se": {"quadro": "Tosse persistente com respiração ofegante"} , "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# FERIMENTOS E CORTES
+# ===============================
+FLUXOS[normalizar("Ferimentos e cortes")] = {
+    "label": "Ferimentos e cortes",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como é o ferimento?",
+            "tipo": "radio",
+            "opcoes": {
+                "Corte profundo com sangramento intenso e exposição de tecidos": 2.0,
+                "Ferida moderada com sangramento que demora a parar": 1.2,
+                "Ferida pequena, mas com sinais de infecção (pus, vermelhidão)": 0.8,
+                "Corte leve, limpo e controlado": 0.2
+            }
+        },
+        {
+            "id": "local",
+            "label": "Onde foi o corte?",
+            "tipo": "radio",
+            "opcoes": {
+                "Face, mãos, genitália ou grandes articulações": 1.2,
+                "Outro local do corpo": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais/fatores associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Sangramento que não para": 1.6,
+                "Mordida animal/humana": 1.4,
+                "Sujeira/contaminação no ferimento": 1.0,
+                "Corpo estranho visível": 1.0,
+                "Perda de sensibilidade no local": 1.0
+            }
+        },
+        {
+            "id": "vacina_tetano",
+            "label": "Vacina do tétano está em dia?",
+            "tipo": "radio",
+            "opcoes": {
+                "Não sei/atrasada": 0.8,
+                "Em dia": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Corte profundo com sangramento intenso e exposição de tecidos"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Sangramento que não para"]}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Mordida animal/humana", "Sujeira/contaminação no ferimento", "Corpo estranho visível"]}, "min_cor": "laranja"},
+        {"se": {"vacina_tetano": "Não sei/atrasada"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# CORPO ESTRANHO EM SENTIDOS
+# ===============================
+FLUXOS[normalizar("Corpo estranho em sentidos")] = {
+    "label": "Corpo estranho em sentidos",
+    "perguntas": [
+        {
+            "id": "local",
+            "label": "Onde está o corpo estranho?",
+            "tipo": "radio",
+            "opcoes": {
+                "Via aérea (garganta/traqueia)": 1.8,
+                "Nariz": 1.2,
+                "Ouvido": 1.0,
+                "Olho": 1.4
+            }
+        },
+        {
+            "id": "quadro",
+            "label": "Como está a situação agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor intensa ou secreção com febre": 2.0,
+                "Desconforto moderado e persistente": 1.2,
+                "Leve irritação, sem dor ou sinais de infecção": 0.6,
+                "Presença confirmada, mas sem sintomas": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Algum destes sinais está presente?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Dificuldade para respirar/deglutir": 1.8,
+                "Secreção com mau cheiro": 1.0,
+                "Vermelhidão/inchaço importante": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"local": "Via aérea (garganta/traqueia)"} , "min_cor": "vermelho"},
+        {"se": {"sinais": ["Dificuldade para respirar/deglutir"]}, "min_cor": "vermelho"},
+        {"se": {"local": "Olho", "quadro": "Dor intensa ou secreção com febre"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Desconforto moderado e persistente"}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
         (6.0, "vermelho"),
