@@ -395,7 +395,7 @@ def dicionario_sintomas():
         "Piora à noite": "A visão fica pior em ambientes escuros.",
         "Alterações de cores": "Mudança na percepção das cores."
     }
-}
+},
 
     "Ausência de menstruação": {
     "definicao": "Falta do ciclo menstrual no período esperado, podendo indicar gravidez, alterações hormonais ou outras condições médicas.",
