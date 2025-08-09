@@ -766,10 +766,9 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa começa a agir de forma esquisita do nada — vê coisas que não existem, parece confusa, fala coisas desconexas ou fica estranhamente calma ou agitada.",
     "clinico": "Alteração aguda de comportamento",
     "termos": {
-        "Alteração súbita de consciência": "Quando a pessoa muda do normal para o confuso ou estranho rapidamente.",
-        "Alucinação": "Ver, ouvir ou sentir coisas que não estão lá.",
-        "Lucidez parcial": "Está consciente, mas confusa ou com falas sem sentido.",
-        "Comportamento excêntrico": "Atitudes muito fora do padrão da pessoa, sem motivo aparente."
+        "Alucinação": "Vê/ouve coisas que não estão ali.",
+        "Rigidez na nuca": "Pescoço duro, difícil encostar o queixo no peito.",
+        "Imunossupressão": "Defesas do corpo enfraquecidas por doença/medicamento."
         }
     },
 
@@ -778,9 +777,9 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa está sangrando de verdade — seja pouco ou muito — e ainda não parou totalmente.",
     "clinico": "Hemorragia ativa",
     "termos": {
-        "Palidez": "Pessoa muito branca, sinal de perda de sangue.",
-        "Sangramento controlado": "Parou ou está quase parando, mas ainda tem um pouco.",
-        "Volume considerável": "Sangue suficiente pra encharcar pano ou roupa, ou que não para com pressão leve."
+        "Palidez/pele fria": "Pessoa fica muito branca e gelada ao toque.",
+        "Batimento muito acelerado": "Coração disparado mesmo em repouso.",
+        "Uso de anticoagulante": "Remédios que afinam o sangue e aumentam sangramento."
         }
     },
 
@@ -800,9 +799,9 @@ def dicionario_sintomas():
     "popular": "Quando o corpo reage mal a algo — como comida, remédio ou picada — e aparecem manchas vermelhas, coceira ou até sintomas no corpo todo.",
     "clinico": "Reação anafilática ou alérgica sistêmica",
     "termos": {
-        "Erupções leves": "Manchinhas ou bolinhas que aparecem na pele e somem rápido.",
-        "Placas vermelhas": "Manchas maiores, elevadas e vermelhas.",
-        "Sintomas sistêmicos": "Reação que afeta além da pele — como falta de ar, inchaço ou tontura."
+        "Placas vermelhas": "Manchas altas e avermelhadas que coçam (urticária).",
+        "Chiado no peito": "Som de apito ao respirar.",
+        "Tontura/desmaio": "Cabeça leve, visão escurecendo ou perda de consciência."
         }
     },
 
@@ -846,9 +845,9 @@ def dicionario_sintomas():
     "popular": "Quando a pessoa sente que vai cair, vê tudo girando ou chega a desmaiar por segundos ou minutos.",
     "clinico": "Síncope ou pré-síncope",
     "termos": {
-        "Perda de consciência prolongada": "Desmaiou e demorou pra acordar.",
-        "Palidez": "Ficou muito branca antes ou depois do desmaio.",
-        "Tontura ao levantar": "Fica tonto quando se levanta rápido, como se fosse desmaiar."
+        "Perda de consciência prolongada": "Ficou desacordado por mais tempo que um desmaio rápido.",
+        "Suor frio e palidez intensa": "Suor excessivo com pele muito pálida.",
+        "Arritmia": "Batimentos do coração fora do ritmo normal."
         }
     },
 
@@ -857,9 +856,9 @@ def dicionario_sintomas():
     "popular": "É diferente de só sentir falta de ar. Aqui, a pessoa parece estar 'lutando' pra respirar, com o peito subindo muito, chiado forte ou até sensação de sufocamento.",
     "clinico": "Insuficiência respiratória ou esforço respiratório aumentado",
     "termos": {
-        "Chiado grave": "Barulho alto no peito, como se estivesse assobiando ao respirar.",
-        "Contínua": "Não melhora mesmo depois de descansar ou sentar.",
-        "Desconforto extremo": "Sensação intensa de não conseguir respirar, causando pânico ou cansaço."
+        "Lábios/pontas dos dedos roxos": "Sinal de pouco oxigênio no sangue.",
+        "Súbito": "Começou de uma hora para outra.",
+        "Asma/bronquite/DPOC": "Doenças que dificultam a passagem de ar."
         }
     },
 
@@ -1320,10 +1319,9 @@ def dicionario_sintomas():
     "popular": "Aquela dor nas costas que pode piorar ao se mexer ou pegar peso, às vezes travando o movimento.",
     "clinico": "Lombalgia ou dorsalgia",
     "termos": {
-        "Irradiação": "É quando a dor nas costas vai para a perna ou outras partes.",
-        "Urinar": "Fazer xixi.",
-        "Repentina": "Começou a acontecer do nada",
-        "Localizada": "Quando a dor está em um só ponto das costas"
+        "Dormência em sela": "Formigamento/insensibilidade na região entre as pernas.",
+        "Irradiação para a perna (ciática)": "Dor que desce pela perna com formigamento ou fraqueza.",
+        "Trauma recente importante": "Queda forte, batida ou acidente recente."
         }
     },
 "Febre": {
@@ -2741,116 +2739,6 @@ def montar_mensagem_final(media_real, idade, imc, sexo, gravida, grupo_risco):
 
 # Funções já existentes
 
-def opcoes_sangramento_ativo():
-    return [
-        "Sangramento intenso que não para",
-        "Sangramento moderado com tontura ou palidez",
-        "Sangramento controlado, mas com volume considerável",
-        "Sangramento pequeno e controlado"
-    ]
-
-def classificar_sangramento_ativo(resp):
-    if resp == "Sangramento intenso que não para":
-        return "vermelho", "Sangramento abundante e contínuo pode indicar risco grave de hemorragia. Procure socorro imediatamente."
-    elif resp == "Sangramento moderado com tontura ou palidez":
-        return "laranja", "Sinais de perda significativa de sangue. É necessário atendimento médico rápido."
-    elif resp == "Sangramento controlado, mas com volume considerável":
-        return "amarelo", "Requer atenção e possível avaliação, mesmo que controlado."
-    else:
-        return "verde", "Sangramento leve e controlado. Continue observando."
-
-# Continuação: sintomas 11 a 21 no novo modelo (funções de opções e classificação)
-
-def opcoes_desmaio_tontura():
-    return [
-        "Desmaio com perda de consciência prolongada",
-        "Desmaio com recuperação, mas com confusão ou palidez",
-        "Tontura ao levantar, sem outros sintomas",
-        "Sensação leve de desequilíbrio"
-    ]
-
-def classificar_desmaio_tontura(resp):
-    if resp == "Desmaio com perda de consciência prolongada":
-        return "vermelho", "Pode indicar condição neurológica ou cardiovascular grave. Atendimento imediato é essencial."
-    elif resp == "Desmaio com recuperação, mas com confusão ou palidez":
-        return "laranja", "Sugere instabilidade circulatória. Avaliação médica é recomendada."
-    elif resp == "Tontura ao levantar, sem outros sintomas":
-        return "amarelo", "Pode ser hipotensão postural. Hidrate-se e evite movimentos bruscos."
-    else:
-        return "verde", "Tontura leve e isolada. Continue monitorando."
-
-def opcoes_comportamento_estranho():
-    return [
-        "Alteração súbita de consciência, agressividade ou alucinação",
-        "Confusão mental com febre ou sinais de infecção",
-        "Desorientação leve, mas com lucidez parcial",
-        "Comportamento excêntrico, mas sem risco"
-    ]
-
-def classificar_comportamento_estranho(resp):
-    if resp == "Alteração súbita de consciência, agressividade ou alucinação":
-        return "vermelho", "Mudanças comportamentais graves podem indicar distúrbio neurológico ou intoxicação. Procure ajuda urgente."
-    elif resp == "Confusão mental com febre ou sinais de infecção":
-        return "laranja", "Pode estar associado a infecção grave como meningite. Atenção médica necessária."
-    elif resp == "Desorientação leve, mas com lucidez parcial":
-        return "amarelo", "Alteração leve, porém merece observação."
-    else:
-        return "verde", "Comportamento sem risco evidente. Acompanhe a evolução."
-
-def opcoes_dificuldade_respiratoria():
-    return [
-        "Falta de ar intensa com lábios roxos, confusão ou chiado grave",
-        "Falta de ar moderada e contínua",
-        "Respiração acelerada sem desconforto extremo",
-        "Respiração leve com leve desconforto"
-    ]
-
-def classificar_dificuldade_respiratoria(resp):
-    if resp == "Falta de ar intensa com lábios roxos, confusão ou chiado grave":
-        return "vermelho", "Sinais de insuficiência respiratória grave. Procure atendimento imediato."
-    elif resp == "Falta de ar moderada e contínua":
-        return "laranja", "Desconforto respiratório relevante. Requer avaliação médica."
-    elif resp == "Respiração acelerada sem desconforto extremo":
-        return "amarelo", "Situação leve, mas que exige atenção se persistir."
-    else:
-        return "verde", "Sem alterações importantes na respiração."
-
-def opcoes_dor_nas_costas():
-    return [
-        "Dor intensa e repentina com dificuldade para andar ou urinar",
-        "Dor forte persistente que não melhora com repouso",
-        "Dor moderada após esforço físico",
-        "Dor leve, localizada e controlável"
-    ]
-
-def classificar_dor_nas_costas(resp):
-    if resp == "Dor intensa e repentina com dificuldade para andar ou urinar":
-        return "vermelho", "Pode indicar compressão neurológica ou problema renal. Procure socorro médico."
-    elif resp == "Dor forte persistente que não melhora com repouso":
-        return "laranja", "Dor de difícil controle. Avaliação ortopédica ou clínica pode ser necessária."
-    elif resp == "Dor moderada após esforço físico":
-        return "amarelo", "Causa mecânica provável. Repouso e analgesia podem ser suficientes."
-    else:
-        return "verde", "Dor leve e autolimitada. Monitoramento apenas."
-
-def opcoes_reacao_alergica():
-    return [
-        "Inchaço de rosto, lábios ou dificuldade para respirar",
-        "Coceira intensa com placas vermelhas pelo corpo",
-        "Erupções leves e localizadas",
-        "Alergia leve e sem sintomas sistêmicos"
-    ]
-
-def classificar_reacao_alergica(resp):
-    if resp == "Inchaço de rosto, lábios ou dificuldade para respirar":
-        return "vermelho", "Sinais de anafilaxia. Atendimento de emergência é fundamental."
-    elif resp == "Coceira intensa com placas vermelhas pelo corpo":
-        return "laranja", "Reação alérgica significativa. Requer tratamento e monitoramento."
-    elif resp == "Erupções leves e localizadas":
-        return "amarelo", "Pode ser controlada com cuidados simples. Observe evolução."
-    else:
-        return "verde", "Sem sinais de gravidade. Cuidados básicos são suficientes."
-
 def opcoes_alteracoes_urinarias():
     return [
         "Urina com sangue ou incapacidade de urinar",
@@ -3572,7 +3460,6 @@ mapa_sintomas = {
     "Sensibilidade à luz ou som": (opcoes_sensibilidade_luz_som, classificar_sensibilidade_luz_som),
     "Náusea ou enjoo": (opcoes_nausea, classificar_nausea),
     "Dor no ombro ou braço": (opcoes_dor_ombro_braco, classificar_dor_ombro_braco),
-    "Reação alérgica": (opcoes_reacao_alergica, classificar_reacao_alergica),
     "Sangramento gastrointestinal": (opcoes_sangramento_gi, classificar_sangramento_gi),
     "Corpo estranho na garganta": (opcoes_corpo_estranho_garganta, classificar_corpo_estranho_garganta),
     "Icterícia (pele ou olhos amarelados)": (opcoes_ictericia, classificar_ictericia),
@@ -3580,17 +3467,12 @@ mapa_sintomas = {
     "Tremores ou movimentos involuntários": (opcoes_tremores, classificar_tremores),
     "Retenção urinária": (opcoes_retencao_urinaria, classificar_retencao_urinaria),
     "Infecção em ferida": (opcoes_infeccao_ferida, classificar_infeccao_ferida),
-    "Desmaio ou tontura": (opcoes_desmaio_tontura, classificar_desmaio_tontura),
-    "Dor nas costas": (opcoes_dor_nas_costas, classificar_dor_nas_costas),
-    "Dificuldade respiratória": (opcoes_dificuldade_respiratoria, classificar_dificuldade_respiratoria),
     "Lesões na pele": (opcoes_lesoes_na_pele, classificar_lesoes_na_pele),
     "Dor ou olho vermelho": (opcoes_dor_ou_olho_vermelho, classificar_dor_ou_olho_vermelho),
     "Formigamento ou perda de força": (opcoes_formigamento_perda_forca, classificar_formigamento_perda_forca),
     "Sangramento vaginal": (opcoes_sangramento_vaginal, classificar_sangramento_vaginal),
     "Dor ou dificulade ao urinar": (opcoes_dor_ao_urinar, classificar_dor_ao_urinar),
     "Inchaço incomum": (opcoes_inchaco, classificar_inchaco),
-    "Comportamento estranho à normalidade": (opcoes_comportamento_estranho, classificar_comportamento_estranho),
-    "Sangramento ativo": (opcoes_sangramento_ativo, classificar_sangramento_ativo),
     "Alergia cutânea": (opcoes_alergia_cutanea, classificar_alergia_cutanea),
     }
 mapa_sintomas = dict(sorted(mapa_sintomas.items()))
@@ -6317,6 +6199,336 @@ FLUXOS[normalizar("Dor abdominal")] = {
         {"se": {"quadro": "Dor intensa e súbita com rigidez na barriga ou vômitos"}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Sangue nas fezes ou no vômito", "Barriga muito dura"]}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Sem eliminar gases/fezes"], "quadro": "Dor moderada com febre ou vômito persistente"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# SANGRAMENTO ATIVO
+# ===============================
+FLUXOS[normalizar("Sangramento ativo")] = {
+    "label": "Sangramento ativo",
+    "perguntas": [
+        {
+            "id": "intensidade",
+            "label": "Qual a intensidade agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sangramento intenso que não para": 2.0,
+                "Sangramento moderado com tontura ou palidez": 1.2,
+                "Sangramento controlado, mas com volume considerável": 0.6,
+                "Sangramento pequeno e controlado": 0.0
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Apareceu algum destes sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Palidez/pele fria": 1.0,
+                "Batimento muito acelerado": 0.8,
+                "Desmaio ou quase desmaio": 1.5
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Algum desses se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso de anticoagulante": 1.2,
+                "Gestação/puerpério": 1.0,
+                "Idade ≥ 67 anos": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"intensidade": "Sangramento intenso que não para"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Desmaio ou quase desmaio"]}, "min_cor": "vermelho"},
+        {"se": {"fatores_risco": ["Uso de anticoagulante"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# DESMAIO / TONTURA
+# ===============================
+FLUXOS[normalizar("Desmaio/Tontura")] = {
+    "label": "Desmaio/Tontura",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Desmaio com perda de consciência prolongada": 2.0,
+                "Desmaio com recuperação, mas com confusão ou palidez": 1.2,
+                "Tontura ao levantar, sem outros sintomas": 0.6,
+                "Sensação leve de desequilíbrio": 0.2
+            }
+        },
+        {
+            "id": "gatilho",
+            "label": "O que desencadeou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor no peito/palpitação/falta de ar": 1.5,
+                "Calor, ficar muito tempo em pé ou levantar rápido": 0.6,
+                "Sem gatilho claro": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Houve algum destes?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Trauma na queda (bateu a cabeça)": 1.3,
+                "Suor frio e palidez intensa": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Histórico/condições:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Arritmia/Doença cardíaca": 1.2,
+                "Uso de anticoagulante": 0.8,
+                "Diabetes com uso de insulina/hipoglicemiante": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Desmaio com perda de consciência prolongada"}, "min_cor": "vermelho"},
+        {"se": {"gatilho": "Dor no peito/palpitação/falta de ar"}, "min_cor": "laranja"},
+        {"se": {"sinais_associados": ["Trauma na queda (bateu a cabeça)"]}, "min_cor": "vermelho"},
+        {"se": {"fatores_risco": ["Arritmia/Doença cardíaca"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# COMPORTAMENTO ESTRANHO
+# ===============================
+FLUXOS[normalizar("Comportamento estranho")] = {
+    "label": "Comportamento estranho",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está o comportamento?",
+            "tipo": "radio",
+            "opcoes": {
+                "Alteração súbita de consciência, agressividade ou alucinação": 2.0,
+                "Confusão mental com febre ou sinais de infecção": 1.4,
+                "Desorientação leve, mas com lucidez parcial": 0.6,
+                "Comportamento excêntrico, mas sem risco": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "De repente (minutos/horas)": 1.2,
+                "Aos poucos (dias/semana)": 0.4
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Apareceu junto:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Febre": 0.8,
+                "Rigidez na nuca": 1.5,
+                "Uso recente de álcool/drogas ou remédios sedativos": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Condições de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Demência/AVC prévio": 0.8,
+                "Imunossupressão": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Alteração súbita de consciência, agressividade ou alucinação"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Rigidez na nuca"]}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Confusão mental com febre ou sinais de infecção"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# DIFICULDADE RESPIRATÓRIA
+# ===============================
+FLUXOS[normalizar("Dificuldade respiratória")] = {
+    "label": "Dificuldade respiratória",
+    "perguntas": [
+        {
+            "id": "gravidade",
+            "label": "Quão intensa está agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Falta de ar intensa com lábios roxos, confusão ou chiado grave": 2.0,
+                "Falta de ar moderada e contínua": 1.2,
+                "Respiração acelerada sem desconforto extremo": 0.6,
+                "Respiração leve com leve desconforto": 0.2
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início dos sintomas",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 1.3,
+                "Gradual (dias)": 0.5
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Há algum desses sinais?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Lábios/pontas dos dedos roxos": 1.8,
+                "Dor no peito": 1.5,
+                "Febre": 0.6
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Condições presentes:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Asma/bronquite/DPOC": 0.8,
+                "Doença cardíaca": 0.8,
+                "Alergia conhecida": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"gravidade": "Falta de ar intensa com lábios roxos, confusão ou chiado grave"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Lábios/pontas dos dedos roxos"]}, "min_cor": "vermelho"},
+        {"se": {"inicio": "Súbito (minutos/horas)", "sinais_associados": ["Dor no peito"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# DOR NAS COSTAS
+# ===============================
+FLUXOS[normalizar("Dor nas costas")] = {
+    "label": "Dor nas costas",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a dor agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor intensa e repentina com dificuldade para andar ou urinar": 2.0,
+                "Dor forte persistente que não melhora com repouso": 1.2,
+                "Dor moderada após esforço físico": 0.6,
+                "Dor leve, localizada e controlável": 0.2
+            }
+        },
+        {
+            "id": "irradia",
+            "label": "A dor desce para a perna (ciática)?",
+            "tipo": "radio",
+            "opcoes": {
+                "Sim, com formigamento/fraqueza": 1.0,
+                "Não": 0.0
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Há sinais de alerta?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Perda de urina/fezes ou dormência em sela": 1.6,
+                "Febre": 0.8,
+                "Trauma recente importante": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Dor intensa e repentina com dificuldade para andar ou urinar"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Perda de urina/fezes ou dormência em sela"]}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Trauma recente importante"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.5, "laranja"),
+        (1.8, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# ===============================
+# REAÇÃO ALÉRGICA
+# ===============================
+FLUXOS[normalizar("Reação alérgica")] = {
+    "label": "Reação alérgica",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual opção descreve melhor?",
+            "tipo": "radio",
+            "opcoes": {
+                "Inchaço de rosto, lábios ou dificuldade para respirar": 2.0,
+                "Coceira intensa com placas vermelhas pelo corpo": 1.2,
+                "Erupções leves e localizadas": 0.6,
+                "Alergia leve e sem sintomas sistêmicos": 0.2
+            }
+        },
+        {
+            "id": "sinais_associados",
+            "label": "Apareceu junto?",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Chiado no peito/falta de ar": 1.5,
+                "Tontura/desmaio": 1.2,
+                "Vômitos ou cólicas": 0.8
+            }
+        },
+        {
+            "id": "exposicao",
+            "label": "Houve contato com possível causa?",
+            "tipo": "radio",
+            "opcoes": {
+                "Alimento/remédio/picada de inseto recente": 0.8,
+                "Sem exposição conhecida": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Inchaço de rosto, lábios ou dificuldade para respirar"}, "min_cor": "vermelho"},
+        {"se": {"sinais_associados": ["Chiado no peito/falta de ar", "Tontura/desmaio"]}, "min_cor": "vermelho"}
     ],
     "mapeamento_cor": [
         (6.0, "vermelho"),
