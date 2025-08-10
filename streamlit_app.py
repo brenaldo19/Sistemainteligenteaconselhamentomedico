@@ -9448,12 +9448,13 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
 
 
 # Só processa e exibe resultados SE o botão foi clicado
+# Só processa e exibe resultados SE o botão foi clicado
 if enviado:
     st.markdown("---")
 
-    # ===== helpers puramente visuais =====
-    import re
+    import re  # para quebrar texto em bullets
 
+    # ===== helpers visuais =====
     def tag_cor(cor_txt: str) -> str:
         cores = {
             "vermelho":  "#d9342b",
@@ -9486,173 +9487,37 @@ if enviado:
     def card_fim():
         st.markdown("</div>", unsafe_allow_html=True)
 
-    def bullets_motivo(texto: str):
-        itens = [i.strip() for i in re.split(r"[;•\n]", str(texto)) if i.strip()]
-        if itens:
-            st.markdown("**Por que chegou a esta cor:**")
-            for i in itens[:4]:
-                st.markdown(f"- {i}")
-
-    # ===== toggle para revelar pontuação (apenas estética) =====
-    mostrar_pontuacao = st.toggle("Mostrar pontuação numérica (avançado)", value=False)
-
-    # >>>>>>>>>>> FIX AQUI: inicializa antes do loop <<<<<<<<<<<
-    cores_geradas = []
-
-    # ===== lista de resultados por sintoma (cards) =====
-    for sintoma in st.session_state.sintomas_escolhidos:
-        score = None  # garante variável disponível em qualquer ramo
-
-        if eh_fluxo(sintoma):
-            chave = normalizar(sintoma)
-            # garante que o dicionário exista
-            if "fluxo_respostas" not in st.session_state:
-                st.session_state["fluxo_respostas"] = {}
-            if chave not in st.session_state["fluxo_respostas"]:
-                st.session_state["fluxo_respostas"][chave] = {}
-
-            cor, score = pontuar_fluxo(sintoma, st.session_state["fluxo_respostas"][chave])
-            motivo = f"Pontuação composta: {score:.1f} • Itens do fluxograma selecionados."
-        else:
-            # sintomas simples do mapa
-            _, func_classificacao = mapa_sintomas[sintoma]
-            escolha = st.session_state["respostas_usuario"][sintoma]
-            cor, motivo = func_classificacao(escolha)
-
-        cores_geradas.append(cor)
-
-        card_inicio(sintoma, cor)
-        bullets_motivo(motivo)
-        if mostrar_pontuacao:
-            if score is not None:
-                st.markdown(
-                    "<div style='margin-top:8px;color:#6c757d'>Pontuação: "
-                    f"<b>{score:.1f}</b></div>",
-                    unsafe_allow_html=True
-                )
-            else:
-                st.markdown(
-                    "<div style='margin-top:8px;color:#6c757d'>Pontuação: —</div>",
-                    unsafe_allow_html=True
-                )
-        card_fim()
-
-    st.markdown("---")
-
-    # ===== cor final combinada (mantém sua lógica) =====
-    cor_final = classificar_combinacao(
-        sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
-        cores=cores_geradas
-    )
-
-    # --- AJUSTE CONSERVADOR POR FATORES (idade/gravidez e duplicidade de sistema) ---
-    gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
-    idade_paciente = st.session_state.get("idade")
-
-    ajuste_niveis = calcular_ajuste_por_fatores_conservador(
-        sintomas_escolhidos=st.session_state.sintomas_escolhidos,
-        cores_individuais=cores_geradas,
-        sintoma_para_sistema=sintoma_para_sistema,
-        idade=idade_paciente,
-        gravida=gravidez
-    )
-
-    if ajuste_niveis >= 1:
-        cor_final = aumentar_cor_em_1_nivel(cor_final)
-
-    # ===== card final =====
-    st.markdown("## Resultado preliminar")
-    card_inicio("Gravidade estimada", cor_final)
-    st.markdown("**O que fazer agora**")
-    if cor_final == "vermelho":
-        st.markdown("- Procure atendimento **imediato**.")
-    elif cor_final == "laranja":
-        st.markdown("- Procure avaliação **rápida** em unidade de saúde.")
-    elif cor_final == "amarelo":
-        st.markdown("- Requer atenção, mas pode aguardar avaliação **não imediata**.")
-    else:
-        st.markdown("- **Observação** dos sintomas e medidas simples em casa.")
-    card_fim()
-
-    st.markdown("---")
-    st.subheader("Legenda de Gravidade")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown(f"{tag_cor('VERDE')} &nbsp; Baixa gravidade", unsafe_allow_html=True)
-        st.markdown(f"{tag_cor('AMARELO')} &nbsp; Moderada, atenção", unsafe_allow_html=True)
-    with col2:
-        st.markdown(f"{tag_cor('LARANJA')} &nbsp; Urgente", unsafe_allow_html=True)
-        st.markdown(f"{tag_cor('VERMELHO')} &nbsp; Emergência", unsafe_allow_html=True)
-# Só processa e exibe resultados SE o botão foi clicado
-# Só processa e exibe resultados SE o botão foi clicado
-if enviado:
-    st.markdown("---")
-
-    # ===== helpers visuais (estética) =====
-    def tag_cor(cor_txt: str) -> str:
-        cores = {
-            "vermelho":  "#d9342b",
-            "laranja":   "#f08c00",
-            "amarelo":   "#e0c200",
-            "verde":     "#2f9e44",
-        }
-        hexa = cores.get(str(cor_txt).lower(), "#6c757d")
-        return f"""
-        <span style="
-            display:inline-block;padding:.2rem .6rem;border-radius:999px;
-            background:{hexa}1A;color:{hexa};font-weight:600;
-            border:1px solid {hexa}40;font-size:.9rem">
-            {cor_txt.upper()}
-        </span>
-        """
-
-    def card_inicio(titulo: str, cor_txt: str):
-        st.markdown(
-            f"""
-            <div style="border:1px solid #e9ecef;border-radius:12px;padding:14px;margin:8px 0;">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                <h4 style="margin:0;font-weight:700">{titulo}</h4>
-                {tag_cor(cor_txt)}
-              </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-    def card_fim():
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    # ===== util: extrair "motivos" a partir do próprio fluxograma =====
-    def motivos_do_fluxo(nome_sintoma: str, respostas_fluxo: dict) -> list[str]:
-        """Gera 2–4 bullets legíveis a partir das respostas e regras de exceção acionadas."""
+    # ===== monta justificativas a partir do próprio fluxo =====
+    def justificativas_do_fluxo(nome_sintoma: str, respostas_fluxo: dict) -> list[str]:
+        """Gera 2–4 bullets legíveis a partir das respostas e das regras de exceção disparadas."""
         chave = normalizar(nome_sintoma)
         fluxo = FLUXOS[chave]
-        bullets = []
+        itens = []
 
-        # 1) regras de exceção acionadas (se existirem)
+        # 1) regras de exceção acionadas (destacar primeiro)
         try:
-            regras = fluxo.get("regras_excecao", [])
-            for regra in regras:
+            for regra in fluxo.get("regras_excecao", []):
                 cond = regra.get("se", {})
                 disparou = True
-                partes_legiveis = []
+                partes = []
                 for k, v in cond.items():
                     resp_user = respostas_fluxo.get(k)
                     if isinstance(v, list):  # checkbox precisa conter todos
                         if not isinstance(resp_user, list) or not all(x in (resp_user or []) for x in v):
                             disparou = False
                             break
-                        partes_legiveis.extend(v)
+                        partes.extend(v)
                     else:  # radio/string
                         if resp_user != v:
                             disparou = False
                             break
-                        partes_legiveis.append(v)
-                if disparou and partes_legiveis:
-                    bullets.append("Regra de exceção: " + "; ".join(partes_legiveis))
+                        partes.append(v)
+                if disparou and partes:
+                    itens.append("Regra de exceção acionada: " + "; ".join(partes))
         except Exception:
-            pass  # nunca quebre a UI por causa de motivo
+            pass
 
-        # 2) até completar 4 itens, inclua escolhas relevantes do usuário
+        # 2) completar com escolhas do usuário
         try:
             for pergunta in fluxo.get("perguntas", []):
                 pid = pergunta.get("id")
@@ -9662,26 +9527,24 @@ if enviado:
                     continue
                 if isinstance(resp, list):
                     if resp:
-                        bullets.append(f"{plabel}: " + ", ".join(resp))
+                        itens.append(f"{plabel}: " + ", ".join(resp))
                 else:
-                    bullets.append(f"{plabel}: {resp}")
-                if len(bullets) >= 4:
+                    itens.append(f"{plabel}: {resp}")
+                if len(itens) >= 4:
                     break
         except Exception:
             pass
 
-        # fallback
-        if not bullets:
-            bullets = ["Resultado baseado nas respostas do fluxograma."]
-        return bullets[:4]
+        if not itens:
+            itens = ["Resultado baseado nas respostas do fluxograma."]
+        return itens[:4]
 
-    # ===== processamento =====
+    # ===== processamento por sintoma =====
     cores_geradas = []
 
     for sintoma in st.session_state.sintomas_escolhidos:
         if eh_fluxo(sintoma):
             chave = normalizar(sintoma)
-            # garante dicionário de respostas
             if "fluxo_respostas" not in st.session_state:
                 st.session_state["fluxo_respostas"] = {}
             if chave not in st.session_state["fluxo_respostas"]:
@@ -9691,22 +9554,23 @@ if enviado:
             cores_geradas.append(cor)
 
             card_inicio(sintoma, cor)
-            for b in motivos_do_fluxo(sintoma, st.session_state["fluxo_respostas"][chave]):
+            st.markdown("**Justificativa para a cor**")
+            for b in justificativas_do_fluxo(sintoma, st.session_state["fluxo_respostas"][chave]):
                 st.markdown(f"- {b}")
             card_fim()
 
         else:
-            # Se existir algum sintoma não‑fluxo, apenas exiba a cor sem score/justificativa
-            # Você pode adaptar aqui se tiver uma função de classificação simples.
-            cor = "amarelo"  # fallback seguro (ajuste conforme sua lógica)
+            # Caso existam sintomas não‑fluxo, usar fallback visual simples (sem pontuação).
+            cor = "amarelo"  # ajuste conforme sua regra
             cores_geradas.append(cor)
             card_inicio(sintoma, cor)
+            st.markdown("**Justificativa para a cor**")
             st.markdown("- Resultado baseado na seleção do sintoma.")
             card_fim()
 
     st.markdown("---")
 
-    # ===== cor final combinada (sua lógica permanece) =====
+    # ===== cor final combinada (sua lógica) =====
     cor_final = classificar_combinacao(
         sintomas=[s.lower() for s in st.session_state.sintomas_escolhidos],
         cores=cores_geradas
