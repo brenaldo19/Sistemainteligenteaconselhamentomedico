@@ -1773,7 +1773,8 @@ sistemas = {
         "Respiração",
         "Apneia Simples",
         "Sopro Sustentado",
-        "Contagem em uma Respiração"
+        "Contagem em uma Respiração",
+        "Diferenciar Falta de Ar e Dificuldade Respiratória",
     ],
     "🧬 Vascular / Circulatório": [
         "Enchimento Capilar",
@@ -1799,10 +1800,12 @@ sistemas = {
     "☕ Energia e Vitalidade": [
         "Energia Matinal",
         "Variação de Peso (Últimos 30 Dias)"
+    ],
+    "Testes de apuração de sintomas": [
+        "Palpação de Linfonodos (Check-list)"
     ]
-    "Testes de verificação de sintomas específicos": [
-    "Palpação de Linfonodos (Check-list)"
 }
+
 
 subteste = None
 if opcao == "Autotestes para apuração de sintoma":
@@ -1953,6 +1956,47 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Memória 
                     if key in st.session_state:
                         del st.session_state[key]
                 st.rerun()
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Diferenciar Falta de Ar e Dificuldade Respiratória":
+    st.subheader("🌬️ Diferenciar Falta de Ar e Dificuldade Respiratória")
+
+    st.markdown("""
+    Este autoteste ajuda a diferenciar entre **sensação subjetiva de falta de ar** e **dificuldade real para respirar**.
+
+    **Definições rápidas:**
+    - **Falta de ar**: sensação desconfortável de que precisa de mais ar, mas consegue movimentar o ar normalmente.
+    - **Dificuldade respiratória**: incapacidade ou esforço anormal para mover o ar (entrada ou saída).
+
+    **Responda às perguntas abaixo:**
+    """)
+
+    # Perguntas
+    inicio_subito = st.radio("O sintoma começou de forma súbita (em segundos/minutos)?", ["Não", "Sim"], index=0, horizontal=True)
+    fala_frases = st.radio("Você consegue falar frases completas sem parar para respirar?", ["Sim", "Não"], index=0, horizontal=True)
+    posicao_alivia = st.radio("Mudar de posição (sentar, inclinar) alivia o sintoma?", ["Não", "Sim"], index=0, horizontal=True)
+    chiado_estridor = st.radio("Há ruído alto ao respirar (chiado ou estridor)?", ["Não", "Sim"], index=0, horizontal=True)
+    esforco_visivel = st.radio("Movimentos visíveis de esforço para respirar (pescoço, tórax, abdome)?", ["Não", "Sim"], index=0, horizontal=True)
+
+    if st.button("Analisar tipo de sintoma respiratório"):
+        score_dificuldade = 0
+        if fala_frases == "Não":
+            score_dificuldade += 2
+        if chiado_estridor == "Sim":
+            score_dificuldade += 2
+        if esforco_visivel == "Sim":
+            score_dificuldade += 2
+        if inicio_subito == "Sim":
+            score_dificuldade += 1
+
+        if score_dificuldade >= 4:
+            st.error("🚨 Indícios fortes de **dificuldade respiratória**.")
+            st.markdown("🔎 Relacionados: **dificuldade respiratória**, possivelmente obstrução ou comprometimento pulmonar grave.")
+        elif score_dificuldade >= 2:
+            st.warning("⚠️ Indícios mistos, com elementos de dificuldade respiratória. Monitore e procure avaliação se piorar.")
+            st.markdown("🔎 Relacionados: **dificuldade respiratória** e/ou **falta de ar**.")
+        else:
+            st.success("✅ Mais compatível com **falta de ar subjetiva**.")
+            st.markdown("🔎 Relacionados: **falta de ar**, geralmente associada a ansiedade, esforço físico ou condicionamento.")
+
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Visão":
     st.subheader("👁️ Teste Visual com Dificuldade Progressiva")
 
