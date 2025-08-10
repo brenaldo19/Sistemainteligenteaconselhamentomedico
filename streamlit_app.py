@@ -1773,8 +1773,7 @@ sistemas = {
         "Respiração",
         "Apneia Simples",
         "Sopro Sustentado",
-        "Contagem em uma Respiração",
-        "Diferenciar Falta de Ar e Dificuldade Respiratória",
+        "Contagem em uma Respiração"
     ],
     "🧬 Vascular / Circulatório": [
         "Enchimento Capilar",
@@ -1801,10 +1800,57 @@ sistemas = {
         "Energia Matinal",
         "Variação de Peso (Últimos 30 Dias)"
     ],
-    "Testes de apuração de sintomas": [
+    "🩺 Testes de apuração de sintomas específicos": [
+        # Alertas/neurológico/obstétrico
+        "Perda Súbita de Coordenação",
+        "Desmaio ou tontura",
+        "Trabalho de parto",
+        "Redução dos movimentos fetais",
+        "Icterícia Neonatal",
+
+        # Respiratório/Circulatório
+        "Diferenciar Falta de Ar e Dificuldade Respiratória",
+        "Hipotensão",
+
+        # Infecciosos/metabólicos/termo-regulação
+        "Calafrios",
+        "Hipoglicemia",
+        "Hiperglicemia",
+
+        # Neuro/sono/cognição
+        "Perda de Memória",
+        "Sonolência Excessiva",
+        "Insônia",
+        "Tremores ou movimentos involuntários",
+        "Alterações na fala",
+
+        # Olhos/pele/geral
+        "Dor ou olho vermelho",
+        "Icterícia",
+        "Infecção em ferida",
+
+        # Mama/testículo
+        "Secreção Mamilar (fora da amamentação)",
+        "Nódulo na Mama",
+        "Nódulo Testicular",
+
+        # Edemas/vascular
+        "Edema Inexplicado",
+        "Extremidades Frias/Arroxeadas",
+
+        # Ginecológico
+        "Menstruação Excessiva",
+        "Ausência de Menstruação",
+
+        # Digestivo
+        "Dificuldade para engolir",
+        "Diferenciação entre sangramento retal e gastrointestinal",
+
+        # Check-list físico
         "Palpação de Linfonodos (Check-list)"
     ]
 }
+
 
 
 subteste = None
@@ -1926,6 +1972,172 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Tempo de 
                 if key in st.session_state:
                     del st.session_state[key]
             st.rerun()
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Calafrios":
+    st.subheader("🥶 Teste de Calafrios (Temperatura + Contexto)")
+
+    st.markdown("""
+    Este teste verifica **presença e intensidade de febre** e **contexto dos calafrios**.
+
+    **Como fazer:** informe temperatura mais alta medida e marque os sinais associados.
+    """)
+
+    temp = st.number_input("Temperatura máxima (°C) nas últimas 24–48h", min_value=34.0, max_value=43.0, step=0.1, format="%.1f")
+    repeticoes = st.selectbox("Frequência dos calafrios hoje", ["Nenhum", "Uma vez", "Várias vezes ao dia"])
+    confusao = st.checkbox("Confusão/desorientação")
+    hipotensao = st.checkbox("Pressão baixa/tontura ao levantar")
+    urinaria = st.checkbox("Dor ao urinar / urina turva")
+    tosse = st.checkbox("Tosse com catarro/dor no peito")
+    ferida = st.checkbox("Ferida com vermelhidão/calor/saída de pus")
+    viagem = st.checkbox("Calafrios após viagem para área endêmica")
+
+    risco = 0
+    if temp >= 39.0: risco += 2
+    elif 38.0 <= temp < 39.0: risco += 1
+    if repeticoes == "Várias vezes ao dia": risco += 1
+    if confusao: risco += 2
+    if hipotensao: risco += 1
+    if urinaria: risco += 1
+    if tosse: risco += 1
+    if ferida: risco += 1
+    if viagem: risco += 1
+
+    if risco >= 4:
+        st.error("🚨 Calafrios com sinais de alerta.")
+        st.markdown("🔎 Sintomas relacionados: **Calafrios**, **Febre**, **Confusão mental**, **Alterações urinárias**, **Tosse**, **Infecção em ferida**")
+    elif risco >= 2:
+        st.warning("⚠️ Calafrios com possível foco associado.")
+        st.markdown("🔎 Sintomas relacionados: **Calafrios**, **Febre**, **Alterações urinárias**")
+    else:
+        st.success("✅ Sem sinais relevantes além de calafrios isolados.")
+        st.markdown("🔎 Sintoma base: **Calafrios**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Sudorese Noturna":
+    st.subheader("🌙 Teste de Sudorese Noturna (Duração + Red Flags)")
+
+    st.markdown("""
+    Este teste verifica **duração/intensidade do suor noturno** e sinais associados.
+    """)
+
+    duracao = st.selectbox("Há quanto tempo ocorre?", ["Menos de 1 semana", "1–3 semanas", "≥ 4 semanas"])
+    encharca = st.checkbox("Encharca roupa/lençol")
+    febre = st.checkbox("Febre")
+    perda_peso = st.checkbox("Perda de peso não intencional (ou rápida)")
+    tosse_persistente = st.checkbox("Tosse há > 2 semanas")
+    tosse_sangue = st.checkbox("Tosse com sangue")
+    linfonodo = st.checkbox("Inchaço dos linfonodos")
+    palpitacoes = st.checkbox("Palpitações")
+    ansiedade = st.checkbox("Ansiedade ou agitação intensas")
+
+    risco = 0
+    if duracao == "≥ 4 semanas": risco += 2
+    if encharca: risco += 1
+    if febre: risco += 1
+    if perda_peso: risco += 2
+    if tosse_persistente: risco += 1
+    if tosse_sangue: risco += 2
+    if linfonodo: risco += 1
+    if palpitacoes or ansiedade: risco += 1
+
+    if risco >= 5:
+        st.error("🚨 Sudorese noturna importante com sinais de alerta.")
+        st.markdown("🔎 Sintomas relacionados: **Sudorese noturna**, **Febre**, **Perda de peso súbita**, **Tosse**, **Inchaço dos linfonodos**, **Palpitações**, **Ansiedade ou agitação intensas**")
+    elif risco >= 2:
+        st.warning("⚠️ Sudorese noturna com achados associados.")
+        st.markdown("🔎 Sintomas relacionados: **Sudorese noturna**, **Febre**, **Perda de peso súbita**")
+    else:
+        st.success("✅ Sudorese noturna leve/recente sem outros sinais relevantes.")
+        st.markdown("🔎 Sintoma base: **Sudorese noturna**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Insônia":
+    st.subheader("😵‍💫 Teste de Insônia (Duração + Impacto)")
+
+    st.markdown("""
+    Este teste avalia **tempo de duração**, **impacto no dia a dia** e **sinais associados**.
+    """)
+
+    duracao = st.selectbox("Duração", ["Há menos de 1 semana", "Entre 1–4 semanas", "Há mais de 1 mês"])
+    impacto = st.selectbox("Impacto no dia a dia", ["Leve/sem grande impacto", "Prejuízo moderado", "Incapaz de trabalhar/estudar/dirigir"])
+    ideacao = st.checkbox("Ideação suicida")
+    mania = st.checkbox("Humor elevado/energia excessiva (mania)")
+    ansiedade = st.checkbox("Ansiedade intensa/pânico")
+    apneia = st.checkbox("Suspeita de apneia (ronco/pausas respiratórias)")
+    dor_cronica = st.checkbox("Dor crônica")
+    estimulantes = st.checkbox("Uso de estimulantes (cafeína/anfetaminas)")
+
+    risco = 0
+    if duracao == "Há mais de 1 mês": risco += 1
+    if impacto == "Prejuízo moderado": risco += 1
+    if impacto == "Incapaz de trabalhar/estudar/dirigir": risco += 2
+    if ideacao: risco += 3
+    if mania: risco += 1
+    if ansiedade: risco += 1
+    if apneia: risco += 1
+    if dor_cronica: risco += 1
+
+    if risco >= 4:
+        st.error("🚨 Insônia com alto impacto/sinais importantes.")
+        st.markdown("🔎 Sintomas relacionados: **Insônia**, **Ansiedade ou agitação intensas**")
+    elif risco >= 2:
+        st.warning("⚠️ Insônia relevante com alguns fatores associados.")
+        st.markdown("🔎 Sintomas relacionados: **Insônia**, **Ansiedade ou agitação intensas**")
+    else:
+        st.success("✅ Insônia leve/recente sem sinais de alerta.")
+        st.markdown("🔎 Sintoma base: **Insônia**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Hipoglicemia":
+    st.subheader("🧪 Teste de Hipoglicemia (Sintomas + Contexto)")
+
+    st.markdown("""
+    Este teste verifica **sintomas típicos de glicose baixa** e **gatilhos comuns**.
+    """)
+
+    desmaio_confusao_suor = st.checkbox("Desmaio ou confusão com sudorese intensa")
+    tremor_fome = st.checkbox("Tontura/tremores e fome súbita")
+    jejum = st.checkbox("Jejum prolongado")
+    exercicio = st.checkbox("Atividade física intensa sem alimentação")
+
+    risco = 0
+    if desmaio_confusao_suor: risco += 3
+    if tremor_fome: risco += 2
+    if jejum: risco += 1
+    if exercicio: risco += 1
+
+    if risco >= 4:
+        st.error("🚨 Quadro compatível com hipoglicemia significativa.")
+        st.markdown("🔎 Sintomas relacionados: **Hipoglicemia**, **Desmaio ou tontura**, **Confusão mental**")
+    elif risco >= 2:
+        st.warning("⚠️ Sugestivo de hipoglicemia leve/moderada.")
+        st.markdown("🔎 Sintomas relacionados: **Hipoglicemia**, **Desmaio ou tontura**")
+    else:
+        st.success("✅ Sem combinação forte de sintomas de hipoglicemia.")
+        st.markdown("🔎 Sintoma base: **Hipoglicemia**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Hiperglicemia":
+    st.subheader("🧪 Teste de Hiperglicemia (Sede/Frequência Urinária + Sinais)")
+
+    st.markdown("""
+    Este teste avalia **padrão de sede/urina** e **sinais associados** a glicose alta.
+    """)
+
+    sede_noite = st.checkbox("Muita sede e urinar em excesso (inclusive à noite)")
+    leve_freq = st.checkbox("Leve aumento da frequência urinária")
+    perda_peso = st.checkbox("Perda de peso rápida (ou não intencional)")
+    nausea_dor = st.checkbox("Náusea/vômito e/ou dor abdominal")
+    carbos = st.checkbox("Excesso de carboidratos recentemente")
+
+    risco = 0
+    if sede_noite: risco += 2
+    if leve_freq: risco += 1
+    if perda_peso: risco += 1
+    if nausea_dor: risco += 2
+    if carbos: risco += 1
+
+    if risco >= 4:
+        st.error("🚨 Achados compatíveis com hiperglicemia importante.")
+        st.markdown("🔎 Sintomas relacionados: **Hiperglicemia**, **Náusea ou enjoo**, **Perda de peso súbita**")
+    elif risco >= 2:
+        st.warning("⚠️ Sinais sugestivos de hiperglicemia.")
+        st.markdown("🔎 Sintomas relacionados: **Hiperglicemia**, **Náusea ou enjoo**")
+    else:
+        st.success("✅ Sem combinação forte para hiperglicemia pelos critérios informados.")
+        st.markdown("🔎 Sintoma base: **Hiperglicemia**")
+
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Memória Curta":
     st.subheader("🧠 Teste de Memória Curta")
 
@@ -1956,6 +2168,463 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Memória 
                     if key in st.session_state:
                         del st.session_state[key]
                 st.rerun()
+# 1 - Alterações na fala
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Alterações na fala":
+    st.subheader("🗣️ Teste de Alterações na Fala")
+
+    st.markdown("""
+    Este teste ajuda a identificar **mudanças súbitas na clareza da fala**, que podem indicar problemas neurológicos ou eventos agudos, como um AVC.
+    
+    ### Como fazer:
+    1. Escolha uma frase curta e conhecida (ex: "O céu é azul e o sol está brilhando").
+    2. Leia a frase em voz alta em ritmo normal.
+    3. Repita a frase duas vezes, prestando atenção se houve alteração na articulação, gagueira ou troca de palavras.
+    4. Se possível, peça para alguém ouvir e avaliar.
+
+    **OBS**: Faça o teste em um momento de calma, sem distrações.
+    """)
+
+    resp = st.radio("Você percebeu dificuldade ou alteração na fala?", ["Não", "Sim, leve", "Sim, acentuada"])
+    if resp:
+        if resp == "Sim, acentuada":
+            st.error("🚨 Alteração grave na fala. Pode indicar condição neurológica aguda. Procure atendimento médico imediatamente.")
+            st.markdown("🔎 Sintoma base: **Alterações na fala**")
+        elif resp == "Sim, leve":
+            st.warning("⚠️ Pequena alteração identificada. Se persistir ou piorar, procure atendimento.")
+            st.markdown("🔎 Sintoma base: **Alterações na fala**")
+        else:
+            st.success("✅ Nenhuma alteração significativa detectada.")
+
+# 2 - Alterações visuais súbitas
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Alterações visuais súbitas":
+    st.subheader("👁️ Teste de Alterações Visuais Súbitas")
+
+    st.markdown("""
+    Este teste serve para verificar se há **perda ou alteração súbita na visão**, o que pode estar relacionado a problemas oculares ou neurológicos.
+    
+    ### Como fazer:
+    1. Cubra um olho e olhe para um objeto fixo.
+    2. Troque para o outro olho e repita.
+    3. Compare se a nitidez, as cores ou o campo de visão mudam.
+    4. Verifique também se há pontos escuros, flashes de luz ou áreas borradas.
+    """)
+
+    resp = st.radio("Você percebeu perda súbita, manchas ou alterações no campo visual?", ["Não", "Sim, de forma parcial", "Sim, de forma total"])
+    if resp:
+        if resp == "Sim, de forma total":
+            st.error("🚨 Perda total súbita da visão. Procure atendimento médico imediatamente.")
+            st.markdown("🔎 Sintoma base: **Alterações visuais súbitas**")
+        elif resp == "Sim, de forma parcial":
+            st.warning("⚠️ Alteração parcial detectada. Requer avaliação médica.")
+            st.markdown("🔎 Sintoma base: **Alterações visuais súbitas**")
+        else:
+            st.success("✅ Nenhuma alteração visual relevante detectada.")
+
+# 3 - Tremores ou movimentos involuntários
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Tremores ou movimentos involuntários":
+    st.subheader("🤲 Teste de Tremores ou Movimentos Involuntários")
+
+    st.markdown("""
+    Este teste ajuda a identificar tremores que podem estar relacionados a **condições neurológicas, metabólicas ou medicamentosas**.
+    
+    ### Como fazer:
+    1. Estenda os braços à frente, com as mãos abertas e relaxadas.
+    2. Observe por 20 segundos se há tremores perceptíveis.
+    3. Segure um copo com água e veja se há dificuldade para manter firme.
+    """)
+
+    resp = st.radio("Você percebeu tremores ou movimentos involuntários durante o teste?", ["Não", "Sim, leves", "Sim, intensos"])
+    if resp:
+        if resp == "Sim, intensos":
+            st.error("🚨 Tremores intensos detectados. Necessário atendimento médico.")
+            st.markdown("🔎 Sintoma base: **Tremores ou movimentos involuntários**")
+        elif resp == "Sim, leves":
+            st.warning("⚠️ Tremores leves detectados. Acompanhe e procure avaliação se piorar.")
+            st.markdown("🔎 Sintoma base: **Tremores ou movimentos involuntários**")
+        else:
+            st.success("✅ Nenhum tremor detectado.")
+
+# 4 - Dificuldade para engolir
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Dificuldade para engolir":
+    st.subheader("🥛 Teste de Dificuldade para Engolir (Deglutição)")
+
+    st.markdown("""
+    Este teste verifica se há **dificuldade ou dor ao engolir líquidos ou sólidos**, o que pode estar relacionado a problemas na garganta ou esôfago.
+    
+    ### Como fazer:
+    1. Beba um gole de água em posição sentada e relaxada.
+    2. Perceba se há dor, engasgo ou sensação de bloqueio.
+    3. Repita com um pequeno pedaço de alimento macio.
+    """)
+
+    resp = st.radio("Você sentiu dor, bloqueio ou engasgo ao engolir?", ["Não", "Sim, leve", "Sim, acentuado"])
+    if resp:
+        if resp == "Sim, acentuado":
+            st.error("🚨 Dificuldade acentuada para engolir. Procure atendimento médico imediatamente.")
+            st.markdown("🔎 Sintoma base: **Dificuldade para engolir**")
+        elif resp == "Sim, leve":
+            st.warning("⚠️ Pequena dificuldade identificada. Acompanhe e busque avaliação se persistir.")
+            st.markdown("🔎 Sintoma base: **Dificuldade para engolir**")
+        else:
+            st.success("✅ Deglutição normal.")
+
+# 5 - Icterícia
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Icterícia":
+    st.subheader("🟡 Teste de Icterícia (Pele e Olhos Amarelados)")
+
+    st.markdown("""
+    Este teste ajuda a identificar a coloração amarelada da pele ou dos olhos, que pode indicar problemas no fígado, vesícula ou sangue.
+    
+    ### Como fazer:
+    1. Em ambiente iluminado, olhe atentamente para o branco dos olhos.
+    2. Compare com um papel branco para perceber diferença.
+    3. Observe também se a pele parece mais amarelada que o normal.
+    """)
+
+    resp = st.radio("Você percebeu coloração amarelada na pele ou nos olhos?", ["Não", "Sim"])
+    if resp:
+        if resp == "Sim":
+            st.error("🚨 Sinal de icterícia detectado. Procure atendimento médico para investigação.")
+            st.markdown("🔎 Sintoma base: **Icterícia**")
+        else:
+            st.success("✅ Nenhum sinal de icterícia detectado.")
+
+# 6 - Infecção em ferida
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Infecção em ferida":
+    st.subheader("🩹 Teste de Infecção em Ferida")
+
+    st.markdown("""
+    Este teste ajuda a verificar se uma ferida pode estar infeccionada.
+    
+    ### Como fazer:
+    1. Observe a ferida sob boa iluminação.
+    2. Verifique se há vermelhidão, calor local, inchaço ou pus.
+    3. Note também se há dor crescente na região.
+    """)
+
+    resp = st.radio("A ferida apresenta sinais de infecção?", ["Não", "Sim, leves", "Sim, acentuados"])
+    if resp:
+        if resp == "Sim, acentuados":
+            st.error("🚨 Infecção grave suspeita. Procure atendimento médico.")
+            st.markdown("🔎 Sintoma base: **Infecção em ferida**")
+        elif resp == "Sim, leves":
+            st.warning("⚠️ Sinais leves de infecção. Acompanhe e mantenha cuidados.")
+            st.markdown("🔎 Sintoma base: **Infecção em ferida**")
+        else:
+            st.success("✅ Nenhum sinal de infecção detectado.")
+# 7 - Desmaio ou tontura
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Desmaio ou tontura":
+    st.subheader("🌀 Teste de Sensação de Desmaio ou Tontura")
+
+    st.markdown("""
+    Este teste ajuda a perceber **instabilidade ou perda de consciência iminente**, que pode estar relacionada a queda de pressão, problemas neurológicos ou cardíacos.
+    
+    ### Como fazer:
+    1. Fique em pé em local seguro.
+    2. Feche os olhos por 10 segundos e perceba se há desequilíbrio.
+    3. Caso tenha se sentido tonto nos últimos minutos, registre a intensidade.
+    """)
+
+    resp = st.radio("Você sentiu tontura ou quase desmaiou durante o teste ou recentemente?", ["Não", "Sim, leve", "Sim, acentuado"])
+    if resp:
+        if resp == "Sim, acentuado":
+            st.error("🚨 Tontura intensa ou desmaio recente detectado. Procure atendimento médico imediatamente.")
+            st.markdown("🔎 Sintoma base: **Desmaio ou tontura**")
+        elif resp == "Sim, leve":
+            st.warning("⚠️ Episódio leve de tontura. Acompanhe e procure avaliação se persistir.")
+            st.markdown("🔎 Sintoma base: **Desmaio ou tontura**")
+        else:
+            st.success("✅ Nenhuma alteração detectada.")
+
+# 8 - Dor ou olho vermelho
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Dor ou olho vermelho":
+    st.subheader("👁️ Teste de Dor ou Olho Vermelho")
+
+    st.markdown("""
+    Este teste verifica sinais de **irritação ou inflamação ocular**.
+    
+    ### Como fazer:
+    1. Observe os olhos em frente a um espelho, sob boa iluminação.
+    2. Veja se há vermelhidão, inchaço ou secreção.
+    3. Note também se há dor, ardência ou sensação de corpo estranho.
+    """)
+
+    resp = st.radio("Há dor ou vermelhidão nos olhos?", ["Não", "Sim, leve", "Sim, acentuada"])
+    if resp:
+        if resp == "Sim, acentuada":
+            st.error("🚨 Dor ocular intensa ou vermelhidão importante. Pode indicar infecção ou lesão. Procure atendimento.")
+            st.markdown("🔎 Sintoma base: **Dor ou olho vermelho**")
+        elif resp == "Sim, leve":
+            st.warning("⚠️ Sinais leves de irritação ocular. Acompanhe e mantenha higiene ocular.")
+            st.markdown("🔎 Sintoma base: **Dor ou olho vermelho**")
+        else:
+            st.success("✅ Nenhum sinal preocupante detectado.")
+
+# 9 - Hipotensão
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Hipotensão":
+    st.subheader("📉 Teste de Pressão Baixa (Hipotensão)")
+
+    st.markdown("""
+    Este teste ajuda a identificar sintomas relacionados à **pressão arterial baixa**.
+    
+    ### Como fazer:
+    1. Sente-se por alguns minutos.
+    2. Levante-se lentamente e perceba se há tontura, visão turva ou fraqueza.
+    3. Se tiver aparelho de pressão, meça antes e após levantar.
+    """)
+
+    resp = st.radio("Você apresentou sinais de pressão baixa no teste?", ["Não", "Sim, leves", "Sim, acentuados"])
+    if resp:
+        if resp == "Sim, acentuados":
+            st.error("🚨 Queda de pressão significativa. Procure atendimento médico.")
+            st.markdown("🔎 Sintoma base: **Hipotensão**")
+        elif resp == "Sim, leves":
+            st.warning("⚠️ Sintomas leves de hipotensão. Hidrate-se e descanse.")
+            st.markdown("🔎 Sintoma base: **Hipotensão**")
+        else:
+            st.success("✅ Nenhum sinal de hipotensão detectado.")
+
+# 10 - Redução dos movimentos fetais
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Redução dos movimentos fetais":
+    st.subheader("🤰 Teste de Redução dos Movimentos Fetais")
+
+    st.markdown("""
+    Este teste é indicado para gestantes que desejam monitorar **a atividade do bebê**.
+    
+    ### Como fazer:
+    1. Sente-se ou deite-se confortavelmente após uma refeição.
+    2. Coloque as mãos sobre o abdômen.
+    3. Conte os movimentos do bebê durante 2 horas.
+    4. Menos de 10 movimentos nesse período pode ser sinal de alerta.
+    """)
+
+    resp = st.radio("A quantidade de movimentos do bebê foi menor que o habitual?", ["Não", "Sim"])
+    if resp:
+        if resp == "Sim":
+            st.error("🚨 Movimentos fetais reduzidos. Procure atendimento obstétrico imediatamente.")
+            st.markdown("🔎 Sintoma base: **Redução dos movimentos fetais**")
+        else:
+            st.success("✅ Movimentação fetal dentro do esperado.")
+
+# 11 - Trabalho de parto
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Trabalho de parto":
+    st.subheader("⏳ Teste de Trabalho de Parto")
+
+    st.markdown("""
+    Este teste ajuda a identificar se as contrações indicam início de **trabalho de parto**.
+    
+    ### Como fazer:
+    1. Deite-se ou sente-se confortavelmente.
+    2. Anote o intervalo entre as contrações.
+    3. Se as contrações ocorrerem a cada 5 minutos ou menos, com duração superior a 30 segundos, pode ser sinal de trabalho de parto ativo.
+    """)
+
+    resp = st.radio("As contrações estão regulares e próximas?", ["Não", "Sim"])
+    if resp:
+        if resp == "Sim":
+            st.error("🚨 Possível trabalho de parto. Procure assistência médica imediatamente.")
+            st.markdown("🔎 Sintoma base: **Trabalho de parto**")
+        else:
+            st.success("✅ Sem sinais claros de trabalho de parto ativo.")
+
+# 12 - Diferenciação entre sangramento retal e gastrointestinal
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Diferenciação entre sangramento retal e gastrointestinal":
+    st.subheader("🩸 Teste de Diferenciação entre Sangramento Retal e Gastrointestinal")
+
+    st.markdown("""
+    Este teste auxilia a observar características do sangramento para indicar a possível origem.
+    
+    ### Como fazer:
+    1. Observe a cor do sangue nas fezes ou no papel higiênico.
+    2. Sangue vermelho vivo geralmente sugere origem retal ou anal.
+    3. Fezes escuras ou com sangue marrom/escuro podem indicar origem mais alta, no trato gastrointestinal.
+    """)
+
+    resp = st.radio("Qual foi a característica observada?", ["Nenhuma alteração", "Sangue vermelho vivo", "Sangue escuro ou fezes enegrecidas"])
+    if resp:
+        if resp == "Sangue vermelho vivo":
+            st.warning("⚠️ Sangramento possivelmente de origem retal ou anal. Requer avaliação médica.")
+            st.markdown("🔎 Sintoma base: **Sangramento retal**")
+        elif resp == "Sangue escuro ou fezes enegrecidas":
+            st.error("🚨 Possível sangramento gastrointestinal. Procure atendimento médico imediatamente.")
+            st.markdown("🔎 Sintoma base: **Sangramento gastrointestinal**")
+        else:
+            st.success("✅ Nenhum sangramento detectado.")
+
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Perda de Memória":
+    st.subheader("🧠 Teste de Perda de Memória (Início e Sinais de Alerta)")
+
+    st.markdown("Avalia **início**, **progressão** e **red flags** associados à perda de memória.")
+
+    inicio = st.selectbox("Quando começou?", ["Horas/Dias (súbito)", "Semanas/Meses (progressivo)", "Eventual/leve"])
+    fala = st.checkbox("Alterações na fala")
+    forca = st.checkbox("Fraqueza/formigamento de um lado")
+    visao = st.checkbox("Alteração visual súbita")
+    cefaleia = st.checkbox("Cefaleia muito intensa/pior da vida")
+    conv = st.checkbox("Convulsão")
+    trauma = st.checkbox("Trauma craniano recente")
+    febre = st.checkbox("Febre")
+    sed_alcool = st.checkbox("Uso de sedativos/álcool")
+    idade65 = st.checkbox("Idoso (>65 anos)")
+
+    risco = 0
+    if inicio == "Horas/Dias (súbito)": risco += 2
+    if inicio == "Semanas/Meses (progressivo)": risco += 1
+    if fala: risco += 2
+    if forca: risco += 2
+    if visao: risco += 2
+    if cefaleia: risco += 2
+    if conv: risco += 2
+    if trauma: risco += 1
+    if febre: risco += 1
+    if sed_alcool: risco += 1
+    if idade65: risco += 1
+
+    if risco >= 5:
+        st.error("🚨 Achados compatíveis com comprometimento neurológico relevante.")
+        st.markdown("🔎 Sintomas relacionados: **Perda de memória**, **Alterações na fala**, **Alterações visuais súbitas**, **Formigamento ou perda de força**, **Dor de cabeça**, **Convulsão**, **Trauma na cabeça**, **Febre**")
+    elif risco >= 2:
+        st.warning("⚠️ Alteração de memória com fatores associados. Monitorar/avaliar.")
+        st.markdown("🔎 Sintomas relacionados: **Perda de memória**, **Alterações na fala**, **Dor de cabeça**")
+    else:
+        st.success("✅ Sem fortes sinais de alerta com base nas respostas.")
+        st.markdown("🔎 Sintoma base: **Perda de memória**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Sonolência Excessiva":
+    st.subheader("😴 Teste de Sonolência Excessiva (Risco e Contexto)")
+
+    st.markdown("Pontua **situações de adormecer** e **red flags**.")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        ativa = st.checkbox("Já dormiu durante conversas/dirigindo")
+        passiva = st.checkbox("Adormece em atividades passivas (TV, leitura)")
+        confusao = st.checkbox("Confusão/desorientação junto com sono")
+        cefaleia_mat = st.checkbox("Cefaleia matinal frequente")
+    with col2:
+        ronco = st.checkbox("Ronco alto/pausas respiratórias (apneia)")
+        sedativos = st.checkbox("Uso de sedativos/álcool")
+        febre = st.checkbox("Febre")
+        deficit = st.checkbox("Fraqueza/déficit focal")
+
+    inicio = st.selectbox("Quando começou?", ["Últimas 24–48h (súbito)", "Semanas/Meses (progressivo)", "Indefinido/leve"])
+
+    risco = 0
+    if ativa: risco += 3
+    if passiva: risco += 1
+    if confusao: risco += 2
+    if cefaleia_mat: risco += 1
+    if ronco: risco += 1
+    if sedativos: risco += 1
+    if febre: risco += 1
+    if deficit: risco += 2
+    if inicio == "Últimas 24–48h (súbito)": risco += 1
+    if inicio == "Semanas/Meses (progressivo)": risco += 1
+
+    if risco >= 5:
+        st.error("🚨 Sonolência com sinais de maior risco.")
+        st.markdown("🔎 Sintomas relacionados: **Sonolência excessiva**, **Febre**, **Formigamento ou perda de força**")
+    elif risco >= 2:
+        st.warning("⚠️ Sonolência relevante. Reavalie hábitos/uso de sedativos e sinais noturnos (apneia).")
+        st.markdown("🔎 Sintomas relacionados: **Sonolência excessiva**")
+    else:
+        st.success("✅ Baixa pontuação para sonolência excessiva.")
+        st.markdown("🔎 Sintoma base: **Sonolência excessiva**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Nódulo na Mama":
+    st.subheader("🎀 Teste de Nódulo na Mama (Autoexame Guiado)")
+
+    st.markdown("""
+    Checklist simples para **sinais de alerta** em nódulo mamário.
+    Faça a inspeção em frente ao espelho (braços ao lado e acima da cabeça) e a palpação em toda a mama e axila.
+    """)
+
+    retracao = st.checkbox("Retração da pele / aspecto de “casca de laranja”")
+    secrecao = st.checkbox("Secreção mamilar (qualquer tipo)")
+    mamilo = st.checkbox("Alteração do mamilo (inversão/ferida)")
+    axila = st.checkbox("Nódulo axilar do mesmo lado")
+    assimetria = st.checkbox("Assimetria súbita da mama")
+    dor_nao_ciclica = st.checkbox("Dor não cíclica persistente")
+
+    risco = 0
+    if retracao: risco += 2
+    if secrecao: risco += 2
+    if mamilo: risco += 2
+    if axila: risco += 2
+    if assimetria: risco += 2
+    if dor_nao_ciclica: risco += 1
+
+    if risco >= 4:
+        st.error("🚨 Achados mamários que merecem avaliação prioritária.")
+        st.markdown("🔎 Sintomas relacionados: **Nódulo na mama**, **Secreção mamilar (fora da amamentação)**, **Inchaço dos linfonodos**")
+    elif risco >= 2:
+        st.warning("⚠️ Alterações relevantes identificadas no autoexame.")
+        st.markdown("🔎 Sintomas relacionados: **Nódulo na mama**, **Secreção mamilar (fora da amamentação)**")
+    else:
+        st.success("✅ Sem sinais de alto risco no checklist.")
+        st.markdown("🔎 Sintoma base: **Nódulo na mama**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Nódulo Testicular":
+    st.subheader("🟢 Teste de Nódulo Testicular (Autoexame no Banho)")
+
+    st.markdown("""
+    No banho quente, palpe cada testículo com ambas as mãos. Procure **áreas endurecidas** ou **caroços**.
+    Marque o que encontrou:
+    """)
+
+    endurecimento = st.checkbox("Endurecimento de parte do testículo")
+    aumento_rapido = st.checkbox("Aumento rápido do volume testicular (dias/semanas)")
+    peso_escroto = st.checkbox("Sensação de peso no escroto")
+    dor_surda = st.checkbox("Dor surda em baixo-ventre/virilha (não aguda)")
+    gineco = st.checkbox("Aumento de mamas/sensibilidade mamilar")
+    criptorq = st.checkbox("Histórico de testículo não descido (criptorquidia)")
+
+    risco = 0
+    if endurecimento: risco += 2
+    if aumento_rapido: risco += 2
+    if peso_escroto: risco += 1
+    if dor_surda: risco += 1
+    if gineco: risco += 1
+    if criptorq: risco += 1
+
+    if risco >= 4:
+        st.error("🚨 Achados compatíveis com massa testicular relevante.")
+        st.markdown("🔎 Sintomas relacionados: **Nódulo testicular**, **Dor nos testículos**")
+    elif risco >= 2:
+        st.warning("⚠️ Alterações testiculares que merecem avaliação.")
+        st.markdown("🔎 Sintomas relacionados: **Nódulo testicular**, **Dor nos testículos**")
+    else:
+        st.success("✅ Sem sinais fortes no autoexame.")
+        st.markdown("🔎 Sintoma base: **Nódulo testicular**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Secreção Mamilar (fora da amamentação)":
+    st.subheader("🍼 Teste de Secreção Mamilar (Caracterização)")
+
+    st.markdown("Descreva a secreção e se ocorre **sem apertar**:")
+
+    tipo = st.selectbox("Tipo de secreção", [
+        "Transparente/leitosa (fora da amamentação)", "Amarelada/esverdeada", "Aquosa clara", "Com sangue (hemática)"
+    ])
+    espontanea = st.checkbox("Sai sozinha (sem apertar)")
+    ao_comprimir = st.checkbox("Aparece apenas ao apertar")
+    retracao = st.checkbox("Retração do mamilo")
+    ferida = st.checkbox("Ferida/crosta no mamilo")
+    nodulo = st.checkbox("Nódulo palpável na mama")
+
+    risco = 0
+    if tipo == "Com sangue (hemática)": risco += 3
+    if tipo == "Amarelada/esverdeada": risco += 1
+    if espontanea: risco += 2
+    if retracao: risco += 2
+    if ferida: risco += 1
+    if nodulo: risco += 2
+
+    if risco >= 5:
+        st.error("🚨 Padrão de secreção com sinais de maior risco.")
+        st.markdown("🔎 Sintomas relacionados: **Secreção mamilar (fora da amamentação)**, **Nódulo na mama**")
+    elif risco >= 2:
+        st.warning("⚠️ Secreção com características que merecem avaliação.")
+        st.markdown("🔎 Sintomas relacionados: **Secreção mamilar (fora da amamentação)**, **Nódulo na mama**")
+    else:
+        st.success("✅ Sem fortes sinais de alerta pela descrição atual.")
+        st.markdown("🔎 Sintoma base: **Secreção mamilar (fora da amamentação)**")
+
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Diferenciar Falta de Ar e Dificuldade Respiratória":
     st.subheader("🌬️ Diferenciar Falta de Ar e Dificuldade Respiratória")
 
@@ -2120,6 +2789,143 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Toque Rá
                 del st.session_state[k]
         st.rerun()
 
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Extremidades Frias/Arroxeadas":
+    st.subheader("🧊 Teste de Extremidades Frias/Arroxeadas (Reperfusão + Frio leve)")
+
+    st.markdown("""
+    Este teste observa **circulação nas extremidades** e **mudança de cor ao frio leve**.
+
+    ### Como fazer (seguro):
+    1) **Fóvea (cacifo):** Pressione a polpa de um dedo da mão por **5 segundos** e solte.  
+       → Clique **Iniciar** ao pressionar, e **Soltar** ao tirar o dedo.  
+       → Conte quanto tempo a cor **volta ao normal**.
+    2) **Frio leve (opcional):** Encoste a ponta dos dedos em **água fria** (torneira fria por 10–15 s).  
+       Observe se mudam para **branco/azul/vermelho** e se ficam **dormentes**.
+
+    **Pare** se sentir dor intensa, dormência importante ou piora súbita.
+    """)
+
+    # --- Estado
+    if "frio_inicio" not in st.session_state:
+        st.session_state.frio_inicio = None
+        st.session_state.frio_tempo = None
+
+    colA, colB = st.columns(2)
+    with colA:
+        if st.session_state.frio_inicio is None:
+            if st.button("Iniciar (pressionando agora)"):
+                st.session_state.frio_inicio = time.time()
+                st.rerun()
+        else:
+            if st.button("Soltar (parei de pressionar)"):
+                st.session_state.frio_tempo = round(time.time() - st.session_state.frio_inicio, 2)
+                st.session_state.frio_inicio = None
+                st.rerun()
+    with colB:
+        mudou_cor = st.checkbox("Mudança de cor ao frio (branco/azul/vermelho)")
+        dormencia = st.checkbox("Dormência ou formigamento no frio")
+        dor_mov   = st.checkbox("Dor ao movimentar os dedos")
+        feridas   = st.checkbox("Feridas/rachaduras nas pontas dos dedos")
+
+    if st.session_state.frio_tempo is not None:
+        t = st.session_state.frio_tempo
+        st.subheader(f"🕒 Reperfusão: **{t} s**")
+
+        risco = 0
+        if t > 3: risco += 1
+        if mudou_cor: risco += 1
+        if dormencia: risco += 1
+        if dor_mov: risco += 1
+        if feridas: risco += 1
+
+        if risco >= 3:
+            st.error("🚨 Achados consistentes com alteração circulatória periférica.")
+            st.markdown("🔎 Sintomas relacionados: **Mãos ou pés frios e arroxeados**, **Formigamento ou perda de força**")
+        elif risco == 2:
+            st.warning("⚠️ Alteração leve/moderada. Observe e reavalie em dias quentes.")
+            st.markdown("🔎 Sintomas relacionados: **Mãos ou pés frios e arroxeados**, **Formigamento ou perda de força**")
+        elif t <= 2 and not (mudou_cor or dormencia or dor_mov or feridas):
+            st.success("✅ Reperfusão rápida e sem alterações ao frio leve.")
+            st.markdown("🔎 Sintoma base: **Mãos ou pés frios e arroxeados**")
+        else:
+            st.info("ℹ️ Resultado intermediário. Repetir em ambiente neutro (sem frio).")
+            st.markdown("🔎 Sintoma base: **Mãos ou pés frios e arroxeados**")
+
+        if st.button("Refazer teste (Extremidades Frias)"):
+            for k in ["frio_inicio", "frio_tempo"]:
+                if k in st.session_state: del st.session_state[k]
+            st.rerun()
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Ausência de Menstruação":
+    st.subheader("🩸 Teste de Ausência de Menstruação (Atraso e Sinais de Alerta)")
+
+    st.markdown("""
+    Este autoteste estima **quantos dias de atraso** e verifica **sinais associados**.
+
+    **Como fazer:** Informe a data do **último período** e responda às perguntas.
+    """)
+
+    hoje = datetime.date.today()
+    dt = st.date_input("Data do último primeiro dia da menstruação (LMP)", value=hoje)
+    sangramento = st.checkbox("Sangramento vaginal fora do padrão")
+    dor_abd = st.checkbox("Dor abdominal intensa")
+    tontura = st.checkbox("Tontura/desmaio")
+    febre = st.checkbox("Febre")
+
+    # Dias de atraso estimado (ciclo padrão ~28d)
+    atraso = (hoje - dt).days - 28
+    atraso = max(atraso, 0)
+
+    st.markdown(f"**Atraso estimado:** {atraso} dias")
+
+    risco = 0
+    if atraso >= 28: risco += 2  # ≥ 4 semanas
+    elif atraso >= 7: risco += 1
+    if dor_abd: risco += 2
+    if sangramento: risco += 2
+    if tontura: risco += 1
+    if febre: risco += 1
+
+    if risco >= 4:
+        st.error("🚨 Atraso significativo com sinais de alerta.")
+        st.markdown("🔎 Sintomas relacionados: **Ausência de menstruação**, **Sangramento vaginal**, **Dor abdominal**, **Desmaio ou tontura**, **Febre**")
+    elif risco >= 2:
+        st.warning("⚠️ Atraso relevante. Monitorar e considerar avaliação.")
+        st.markdown("🔎 Sintomas relacionados: **Ausência de menstruação**, **Sangramento vaginal**, **Dor abdominal**")
+    else:
+        st.success("✅ Atraso discreto ou sem sinais de alerta importantes no momento.")
+        st.markdown("🔎 Sintoma base: **Ausência de menstruação**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Menstruação Excessiva":
+    st.subheader("💧 Teste de Menstruação Excessiva (Quantificação Simples)")
+
+    st.markdown("""
+    Este teste ajuda a estimar **volume** pelo número de absorventes/fraldas **encharcados** e sintomas associados.
+    """)
+
+    qtd = st.number_input("Absorventes/fraldas totalmente encharcados por dia", min_value=0, step=1)
+    coag = st.checkbox("Coágulos grandes")
+    tontura = st.checkbox("Tontura/desmaio")
+    dor_abd = st.checkbox("Dor abdominal intensa")
+    febre = st.checkbox("Febre")
+
+    risco = 0
+    if qtd >= 8: risco += 3
+    elif 5 <= qtd <= 7: risco += 2
+    elif 3 <= qtd <= 4: risco += 1
+    if coag: risco += 1
+    if tontura: risco += 1
+    if dor_abd: risco += 1
+    if febre: risco += 1
+
+    if risco >= 4:
+        st.error("🚨 Perda elevada e/ou sinais associados importantes.")
+        st.markdown("🔎 Sintomas relacionados: **Menstruação excessiva**, **Desmaio ou tontura**, **Dor abdominal**, **Febre**, **Sangramento vaginal**")
+    elif risco >= 2:
+        st.warning("⚠️ Volume aumentado. Observe evolução e sinais de alerta.")
+        st.markdown("🔎 Sintomas relacionados: **Menstruação excessiva**, **Desmaio ou tontura**, **Dor abdominal**")
+    else:
+        st.success("✅ Sem evidência forte de excesso pelo critério informado.")
+        st.markdown("🔎 Sintoma base: **Menstruação excessiva**")
+
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Palpação de Linfonodos (Check-list)":
     st.subheader("🔎 Palpação de Linfonodos – Check-list guiado")
 
@@ -2192,6 +2998,116 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Palpaçã
 
     if st.button("Limpar respostas (Linfonodos)"):
         st.rerun()
+
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Edema Inexplicado":
+    st.subheader("💦 Teste de Edema Inexplicado (Fóvea + Distribuição)")
+
+    st.markdown("""
+    Este teste verifica **edema em cacifo (fóvea)** e **padrão** (um lado, ambos, rosto/pálpebras) e **início**.
+
+    **Como fazer o cacifo:** Pressione a área inchada por **5 segundos** e solte.  
+    Marque se **fica uma “marquinha”** que demora a voltar.
+    """)
+
+    lado = st.selectbox("Localização do inchaço", ["Ambos os lados", "Um lado apenas", "Rosto/pálpebras", "Outro"])
+    inicio_subito = st.checkbox("Início súbito (minutos/horas)")
+    fovea = st.checkbox("“Afunda” ao pressionar (fóvea positiva)")
+    verm_dor = st.checkbox("Vermelhidão/dor local")
+    falta_ar = st.checkbox("Falta de ar")
+    dor_peito = st.checkbox("Dor no peito")
+    febre = st.checkbox("Febre")
+    ganho_peso = st.checkbox("Aumento súbito de peso (dias)")
+
+    risco = 0
+    if lado == "Um lado apenas": risco += 2
+    if lado == "Rosto/pálpebras": risco += 1
+    if inicio_subito: risco += 2
+    if fovea: risco += 1
+    if verm_dor: risco += 1
+    if falta_ar: risco += 2
+    if dor_peito: risco += 2
+    if febre: risco += 1
+    if ganho_peso: risco += 1
+
+    if risco >= 5:
+        st.error("🚨 Padrão e sinais compatíveis com edema de maior relevância clínica.")
+        st.markdown("🔎 Sintomas relacionados: **Edema inexplicado**, **Falta de ar**, **Dor no peito**, **Febre**, **Inchaço nos olhos ou face**, **Inchaço incomum**")
+    elif risco >= 3:
+        st.warning("⚠️ Edema com achados que merecem observação e reavaliação.")
+        st.markdown("🔎 Sintomas relacionados: **Edema inexplicado**, **Inchaço nos olhos ou face**")
+    else:
+        st.success("✅ Achados leves/auto-limitados pelo relato atual.")
+        st.markdown("🔎 Sintoma base: **Edema inexplicado**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Perda Súbita de Coordenação":
+    st.subheader("🧠 Teste de Coordenação Súbita (Dedo‑Nariz + Equilíbrio)")
+
+    st.markdown("""
+    Este teste combina **prova dedo‑nariz cronometrada** e **equilíbrio estático**.
+
+    **Como fazer dedo‑nariz (mão dominante):**  
+    1) Toque a ponta do nariz e depois toque um ponto fixo à sua frente (ex.: tampinha) a ~50 cm.  
+    2) Repita **10 vezes** o mais rápido possível, **sem errar**.  
+    Clique **Iniciar** ao começar e **Pare** ao terminar.
+
+    **Equilíbrio estático:**  
+    Fique em pé, pés juntos, braços estendidos à frente por **10 s**.  
+    Marque se houve **instabilidade/queda do braço**.
+    """)
+
+    # Cronômetro dedo-nariz
+    if "dn_inicio" not in st.session_state:
+        st.session_state.dn_inicio = None
+        st.session_state.dn_tempo = None
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.session_state.dn_inicio is None:
+            if st.button("Iniciar (Dedo‑Nariz)"):
+                st.session_state.dn_inicio = time.time()
+                st.rerun()
+        else:
+            if st.button("Pare (completei 10 toques)"):
+                st.session_state.dn_tempo = round(time.time() - st.session_state.dn_inicio, 2)
+                st.session_state.dn_inicio = None
+                st.rerun()
+    with col2:
+        erros = st.checkbox("Errei o alvo / tremor claro")
+        instabilidade = st.checkbox("Instabilidade em pé (10 s)")
+        fala = st.checkbox("Fala alterada de repente")
+        visao = st.checkbox("Alteração visual súbita")
+        forca = st.checkbox("Formigamento/perda de força de um lado")
+        cefaleia = st.checkbox("Cefaleia muito intensa/súbita")
+        trauma = st.checkbox("Trauma na cabeça nas últimas 48h")
+        conv = st.checkbox("Convulsão")
+
+    if st.session_state.dn_tempo is not None:
+        t = st.session_state.dn_tempo
+        st.subheader(f"🕒 Dedo‑Nariz (10 repetições): **{t} s**")
+
+        risco = 0
+        if t > 12: risco += 1
+        if erros: risco += 2
+        if instabilidade: risco += 2
+        if fala: risco += 2
+        if visao: risco += 2
+        if forca: risco += 2
+        if cefaleia: risco += 2
+        if trauma: risco += 1
+        if conv: risco += 2
+
+        if risco >= 5:
+            st.error("🚨 Achados compatíveis com déficit neurológico agudo.")
+            st.markdown("🔎 Sintomas relacionados: **Perda súbita de coordenação**, **Alterações na fala**, **Alterações visuais súbitas**, **Formigamento ou perda de força**, **Dor de cabeça**, **Trauma na cabeça**, **Convulsão**")
+        elif risco >= 2:
+            st.warning("⚠️ Alteração de coordenação/estabilidade. Reavalie em curto prazo.")
+            st.markdown("🔎 Sintomas relacionados: **Perda súbita de coordenação**, **Alterações na fala**")
+        else:
+            st.success("✅ Coordenação preservada pelos critérios do teste.")
+            st.markdown("🔎 Sintoma base: **Perda súbita de coordenação**")
+
+        if st.button("Refazer teste (Coordenação)"):
+            for k in ["dn_inicio", "dn_tempo"]:
+                if k in st.session_state: del st.session_state[k]
+            st.rerun()
 
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo Seletivo":
     st.subheader("✋ Teste de Reflexo Seletivo – Clique apenas quando aparecer o número 7")
@@ -2577,6 +3493,40 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Hidrataç
             if st.button("Refazer teste de hidratação"):
                 del st.session_state.etapa_hidrat
                 st.rerun()
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Icterícia Neonatal":
+    st.subheader("👶 Teste de Icterícia Neonatal (Observação em Casa)")
+
+    st.markdown("""
+    Para recém-nascidos nos primeiros dias: avalia **extensão da cor amarelada** e **comportamento**.
+    **Atenção:** em RN, sinais de alerta exigem avaliação **rápida**.
+    """)
+
+    faixa = st.selectbox("Até onde vai a cor amarela?", [
+        "Só rosto", "Até o abdome (moderado)", "Abaixo do umbigo/corpo todo"
+    ])
+    sonol = st.checkbox("Sonolência excessiva (muito difícil de acordar)")
+    aliment = st.checkbox("Recusa/queda importante da mamada")
+    febre = st.checkbox("Febre")
+    piora = st.checkbox("Piora nas últimas 24h")
+
+    risco = 0
+    if faixa == "Abaixo do umbigo/corpo todo": risco += 3
+    if faixa == "Até o abdome (moderado)": risco += 1
+    if sonol: risco += 2
+    if aliment: risco += 2
+    if febre: risco += 2
+    if piora: risco += 1
+
+    if risco >= 5:
+        st.error("🚨 Sinais importantes em icterícia neonatal.")
+        st.markdown("🔎 Sintomas relacionados: **Icterícia neonatal**, **Vômito em criança** (se presente), **Diarreia em criança** (se presente)")
+    elif risco >= 2:
+        st.warning("⚠️ Icterícia com achados que merecem avaliação.")
+        st.markdown("🔎 Sintoma base: **Icterícia neonatal**")
+    else:
+        st.success("✅ Padrão leve, com tendência a melhorar espontaneamente.")
+        st.markdown("🔎 Sintoma base: **Icterícia neonatal**")
+
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Coordenação Fina":
     st.subheader("✍️ Teste de Coordenação Fina – Espiral com a mão não dominante")
 
