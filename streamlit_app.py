@@ -2175,20 +2175,20 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Palpaçã
         # decisão
         if alerta >= 5:
             st.error("🚨 Achados que **merecem avaliação médica**. Procure atendimento.")
-            st.markdown("🔎 Relacionados: **inchaço dos linfonodos**, **edema inexplicado**, **infecção em ferida**")
+            st.markdown("🔎Possíveis sintomas relacionados: **inchaço dos linfonodos**, **edema inexplicado**, **infecção em ferida**")
         elif alerta >= 3:
             # se ferida infectada, orientar cuidado local
             if ferida == "Sim":
                 st.warning("⚠️ Achados intermediários, com **sinais de infecção em ferida**. Higienize, acompanhe e procure avaliação se piorar.")
             else:
                 st.warning("⚠️ Achados intermediários. Monitore por alguns dias e reavalie.")
-            st.markdown("🔎 Relacionados: **inchaço dos linfonodos**, **infecção em ferida**, **edema inexplicado**")
+            st.markdown("🔎Possíveis sintomas relacionados: **inchaço dos linfonodos**, **infecção em ferida**, **edema inexplicado**")
         else:
             if ferida == "Sim":
                 st.success("✅ Sem sinais de alarme. Parece **infecção local de ferida**; mantenha cuidados e observe por 7–14 dias.")
             else:
                 st.success("✅ Sem sinais de alarme no momento. Observe evolução por 7–14 dias.")
-            st.markdown("🔎 Relacionados: **inchaço dos linfonodos**, **edema inexplicado**")
+            st.markdown("🔎Possíveis sintomas relacionados: **inchaço dos linfonodos**, **edema inexplicado**")
 
     if st.button("Limpar respostas (Linfonodos)"):
         st.rerun()
