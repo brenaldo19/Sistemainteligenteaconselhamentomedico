@@ -1752,6 +1752,7 @@ sistemas = {
         "Memória Curta",
         "Reflexo Seletivo",
         "Coordenação Fina",
+        "Toque Rápido (10s)",
         "Equilíbrio",
         "Humor e Ansiedade",
         "Humor na última semana"
@@ -1771,7 +1772,8 @@ sistemas = {
     "🫁 Respiratório": [
         "Respiração",
         "Apneia Simples",
-        "Sopro Sustentado"
+        "Sopro Sustentado",
+        "Contagem em uma Respiração"
     ],
     "🧬 Vascular / Circulatório": [
         "Enchimento Capilar",
@@ -1798,6 +1800,8 @@ sistemas = {
         "Energia Matinal",
         "Variação de Peso (Últimos 30 Dias)"
     ]
+    "Testes de verificação de sintomas específicos": [
+    "Palpação de Linfonodos (Check-list)"
 }
 
 subteste = None
@@ -1989,6 +1993,71 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Visão":
                 if key in st.session_state:
                     del st.session_state[key]
             st.rerun()
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Toque Rápido (10s)":
+    st.subheader("👆 Toque Rápido (10 segundos)")
+
+    idade = st.session_state.get("idade")
+    if idade is None:
+        faixa = "adulto"
+    elif idade <= 12:
+        faixa = "crianca"
+    elif idade >= 67:
+        faixa = "idoso"
+    else:
+        faixa = "adulto"
+
+    # cortes por faixa etária: [baixo, comum_max]
+    # <baixo -> lento; entre baixo e comum_max -> comum; >comum_max -> muito bom
+    cortes = {
+        "crianca": [18, 45],
+        "adulto":  [20, 40],
+        "idoso":   [15, 35],
+    }
+    c_baixo, c_comum_max = cortes[faixa]
+
+    st.markdown("Mede **destreza/velocidade motora fina**: quantos cliques consegue fazer em **10 segundos**.")
+
+    if "tap_inicio" not in st.session_state:
+        st.session_state.tap_inicio = None
+        st.session_state.tap_contagem = 0
+
+    cols = st.columns(2)
+    with cols[0]:
+        if st.session_state.tap_inicio is None:
+            if st.button("Iniciar 10s"):
+                st.session_state.tap_inicio = time.time()
+                st.session_state.tap_contagem = 0
+                st.rerun()
+        else:
+            decorrido = time.time() - st.session_state.tap_inicio
+            restante = max(0, 10 - int(decorrido))
+            st.info(f"Cronômetro: {restante} s")
+            if restante == 0:
+                st.success("Tempo encerrado!")
+    with cols[1]:
+        if st.session_state.tap_inicio is not None and (time.time() - st.session_state.tap_inicio) < 10:
+            if st.button("Clique!"):
+                st.session_state.tap_contagem += 1
+                st.rerun()
+        else:
+            st.button("Clique!", disabled=True)
+
+    st.metric("Cliques contabilizados", st.session_state.tap_contagem)
+
+    if st.session_state.tap_inicio is None and st.session_state.tap_contagem > 0:
+        total = st.session_state.tap_contagem
+        if total < c_baixo:
+            st.error("🚨 Abaixo do esperado para a sua faixa etária.")
+            st.markdown("🔎 Relacionados: **Formigamento ou perda de força,tremores ou movimentos involuntários**")
+        elif total <= c_comum_max:
+            st.success("✅ Faixa comum para a sua faixa etária.")
+        else:
+            st.info("💪 Desempenho acima do comum para a sua faixa.")
+
+    if st.button("Refazer teste (Toque Rápido)"):
+        for k in ["tap_inicio", "tap_contagem"]:
+            if k in st.session_state: del st.session_state[k]
+        st.rerun()
 
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo Seletivo":
     st.subheader("✋ Teste de Reflexo Seletivo – Clique apenas quando aparecer o número 7")
@@ -2491,6 +2560,66 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Percepç�
         else:
             st.error("🚨 Dificuldade significativa em distinguir cores. Pode ser bom investigar daltonismo.")
             st.markdown("🔎 Possíveis sintomas relacionados: **(Suspeita de daltonismo)**")
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Contagem em uma Respiração":
+    st.subheader("🗣️ Contagem em uma Respiração (um fôlego)")
+
+    idade = st.session_state.get("idade")
+    if idade is None:
+        faixa = "adulto"
+    elif idade <= 12:
+        faixa = "crianca"
+    elif idade >= 67:
+        faixa = "idoso"
+    else:
+        faixa = "adulto"
+
+    # cortes por faixa etária
+    # ordem: [limite_muito_baixo, limite_baixo, limite_ok]
+    cortes = {
+        "crianca": [8, 16, 26],
+        "adulto":  [10, 20, 30],
+        "idoso":   [8, 18, 26],
+    }
+    c = cortes[faixa]
+
+    st.markdown("""
+    **Como fazer:**
+    1. Respire fundo, clique em **Iniciar**, e comece a contar em voz alta: "1, 2, 3, ..."
+    2. Pare quando precisar inspirar de novo e digite o último número alcançado.
+    """)
+
+    if "onebreath_inicio" not in st.session_state:
+        st.session_state.onebreath_inicio = None
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.session_state.onebreath_inicio is None:
+            if st.button("Iniciar"):
+                st.session_state.onebreath_inicio = time.time()
+                st.rerun()
+        else:
+            st.info("Contando... fale em voz alta até precisar inspirar novamente.")
+    with col2:
+        terminou = st.button("Terminei")
+
+    if terminou:
+        st.session_state.onebreath_inicio = None
+        st.rerun()
+
+    contagem = st.number_input("Digite o último número que conseguiu falar em um fôlego:", min_value=0, step=1, value=0)
+
+    if st.button("Ver resultado"):
+        if contagem <= c[0]:
+            st.error("🚨 Resultado baixo para a sua faixa etária.")
+            st.markdown("🔎 Relacionados: **falta de ar, dificuldade respiratória, ansiedade ou agitação intensas**")
+        elif contagem <= c[1]:
+            st.warning("⚠️ Abaixo do ideal na sua faixa. Monitore.")
+            st.markdown("🔎 Relacionados: **Falta de ar,ansiedade ou agitação intensas**")
+        elif contagem <= c[2]:
+            st.success("✅ Dentro do esperado para a sua faixa etária.")
+        else:
+            st.info("💪 Desempenho acima do esperado.")
+
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Recuperação Cardíaca":
     st.subheader("❤️ Teste de Recuperação da Frequência Cardíaca")
 
