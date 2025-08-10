@@ -2051,7 +2051,6 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Toque Rá
         faixa = "adulto"
 
     # cortes por faixa etária: [baixo, comum_max]
-    # <baixo -> lento; entre baixo e comum_max -> comum; >comum_max -> muito bom
     cortes = {
         "crianca": [18, 45],
         "adulto":  [20, 40],
@@ -2061,25 +2060,40 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Toque Rá
 
     st.markdown("Mede **destreza/velocidade motora fina**: quantos cliques consegue fazer em **10 segundos**.")
 
+    # Estados seguros
     if "tap_inicio" not in st.session_state:
         st.session_state.tap_inicio = None
+    if "tap_contagem" not in st.session_state:
         st.session_state.tap_contagem = 0
+    if "tap_finalizado" not in st.session_state:
+        st.session_state.tap_finalizado = False
 
     cols = st.columns(2)
     with cols[0]:
-        if st.session_state.tap_inicio is None:
+        if st.session_state.tap_inicio is None and not st.session_state.tap_finalizado:
             if st.button("Iniciar 10s"):
                 st.session_state.tap_inicio = time.time()
                 st.session_state.tap_contagem = 0
+                st.session_state.tap_finalizado = False
                 st.rerun()
         else:
-            decorrido = time.time() - st.session_state.tap_inicio
-            restante = max(0, 10 - int(decorrido))
-            st.info(f"Cronômetro: {restante} s")
-            if restante == 0:
+            # cronômetro rodando
+            if st.session_state.tap_inicio is not None:
+                decorrido = time.time() - st.session_state.tap_inicio
+                restante = max(0, 10 - int(decorrido))
+                st.info(f"Cronômetro: {restante} s")
+                if restante == 0:
+                    # encerra automaticamente quando zera
+                    st.session_state.tap_inicio = None
+                    st.session_state.tap_finalizado = True
+                    st.success("Tempo encerrado!")
+                    st.rerun()
+            else:
                 st.success("Tempo encerrado!")
+
     with cols[1]:
-        if st.session_state.tap_inicio is not None and (time.time() - st.session_state.tap_inicio) < 10:
+        # botão de clique ativo somente durante a janela dos 10s
+        if st.session_state.tap_inicio is not None and not st.session_state.tap_finalizado:
             if st.button("Clique!"):
                 st.session_state.tap_contagem += 1
                 st.rerun()
@@ -2088,19 +2102,95 @@ elif opcao == "Autotestes para apuração de sintoma" and subteste == "Toque Rá
 
     st.metric("Cliques contabilizados", st.session_state.tap_contagem)
 
-    if st.session_state.tap_inicio is None and st.session_state.tap_contagem > 0:
+    # FEEDBACK FINAL — sempre aparece quando finalizar
+    if st.session_state.tap_finalizado:
         total = st.session_state.tap_contagem
         if total < c_baixo:
             st.error("🚨 Abaixo do esperado para a sua faixa etária.")
-            st.markdown("🔎 Relacionados: **Formigamento ou perda de força,tremores ou movimentos involuntários**")
+            st.markdown("🔎 Relacionados: **fadiga, dor, tremor, lentificação motora**")
         elif total <= c_comum_max:
             st.success("✅ Faixa comum para a sua faixa etária.")
         else:
             st.info("💪 Desempenho acima do comum para a sua faixa.")
 
+    # reset
     if st.button("Refazer teste (Toque Rápido)"):
-        for k in ["tap_inicio", "tap_contagem"]:
-            if k in st.session_state: del st.session_state[k]
+        for k in ["tap_inicio", "tap_contagem", "tap_finalizado"]:
+            if k in st.session_state:
+                del st.session_state[k]
+        st.rerun()
+
+elif opcao == "Autotestes para apuração de sintoma" and subteste == "Palpação de Linfonodos (Check-list)":
+    st.subheader("🔎 Palpação de Linfonodos – Check-list guiado")
+
+    st.markdown("""
+    **Objetivo:** ajudar a perceber sinais que **podem** sugerir linfonodo aumentado.
+    **Locais comuns:** pescoço (cadeia cervical), abaixo da mandíbula, atrás da orelha, axilas, virilha.
+
+    **Atenção:** este autoteste **não substitui avaliação clínica**.
+    """)
+
+    idade = st.session_state.get("idade")
+    risco_idade = 1 if (isinstance(idade, (int, float)) and (idade <= 4 or idade >= 67)) else 0
+
+    regioes = st.multiselect(
+        "Regiões onde você percebeu 'caroço' ou 'inchaço':",
+        ["Pescoço (lateral)", "Abaixo da mandíbula", "Atrás da orelha", "Axila", "Virilha"]
+    )
+
+    dor = st.radio("Há dor ao toque?", ["Não", "Leve", "Moderada", "Intensa"], index=0, horizontal=True)
+    mobilidade = st.radio("O 'caroço' se move sob a pele quando empurrado?", ["Sim (móvel)", "Pouco móvel", "Fixo"], index=0, horizontal=True)
+    consistencia = st.radio("Consistência percebida:", ["Macia/borrachosa", "Firme", "Dura/pedra"], index=0, horizontal=True)
+    tamanho = st.radio("Estimativa de tamanho:", ["< 1 cm", "1–2 cm", "> 2 cm"], index=0, horizontal=True)
+    duracao = st.radio("Tempo de duração do 'caroço':", ["< 1 semana", "1–3 semanas", "> 3 semanas"], index=0, horizontal=True)
+
+    # Campos diretamente ligados aos sintomas que você tem no sistema:
+    ferida = st.radio("Existe **ferida** próxima com sinais de infecção (vermelho, calor, pus)?", ["Não", "Sim"], index=0, horizontal=True)
+    edema_inexp = st.radio("Existe **edema (inchaço)** em outra parte do corpo sem explicação?", ["Não", "Sim"], index=0, horizontal=True)
+
+    sinais_sistemicos = st.multiselect("Sinais sistêmicos (se houver):", ["Febre", "Perda de peso", "Suor noturno"])
+
+    if st.button("Analisar palpação"):
+        alerta = 0
+
+        # tamanho
+        alerta += 2 if tamanho == "> 2 cm" else (1 if tamanho == "1–2 cm" else 0)
+        # mobilidade
+        alerta += 2 if mobilidade == "Fixo" else (1 if mobilidade == "Pouco móvel" else 0)
+        # consistência
+        alerta += 2 if consistencia == "Dura/pedra" else (1 if consistencia == "Firme" else 0)
+        # duração
+        alerta += 2 if duracao == "> 3 semanas" else (1 if duracao == "1–3 semanas" else 0)
+        # sistêmicos
+        if any(s in ["Febre", "Perda de peso", "Suor noturno"] for s in sinais_sistemicos):
+            alerta += 2
+        # dor (não soma risco — mais compatível com processo infeccioso/inflamatório)
+        # idade de risco
+        alerta += risco_idade
+        # ferida infectada próxima puxa mais para causa infecciosa local (sem somar risco de alarme)
+        # edema inexplicado soma 1 (pode sugerir algo sistêmico)
+        if edema_inexp == "Sim":
+            alerta += 1
+
+        # decisão
+        if alerta >= 5:
+            st.error("🚨 Achados que **merecem avaliação médica**. Procure atendimento.")
+            st.markdown("🔎 Relacionados: **inchaço dos linfonodos**, **edema inexplicado**, **infecção em ferida**")
+        elif alerta >= 3:
+            # se ferida infectada, orientar cuidado local
+            if ferida == "Sim":
+                st.warning("⚠️ Achados intermediários, com **sinais de infecção em ferida**. Higienize, acompanhe e procure avaliação se piorar.")
+            else:
+                st.warning("⚠️ Achados intermediários. Monitore por alguns dias e reavalie.")
+            st.markdown("🔎 Relacionados: **inchaço dos linfonodos**, **infecção em ferida**, **edema inexplicado**")
+        else:
+            if ferida == "Sim":
+                st.success("✅ Sem sinais de alarme. Parece **infecção local de ferida**; mantenha cuidados e observe por 7–14 dias.")
+            else:
+                st.success("✅ Sem sinais de alarme no momento. Observe evolução por 7–14 dias.")
+            st.markdown("🔎 Relacionados: **inchaço dos linfonodos**, **edema inexplicado**")
+
+    if st.button("Limpar respostas (Linfonodos)"):
         st.rerun()
 
 elif opcao == "Autotestes para apuração de sintoma" and subteste == "Reflexo Seletivo":
