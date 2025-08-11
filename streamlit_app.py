@@ -9,8 +9,6 @@ from pathlib import Path
 import time
 import random
 import pandas as pd
-import importlib
-at = importlib.import_module("src.ui.autotestes")
 
 # ==== PATHS ====
 ROOT = Path(__file__).resolve().parent
