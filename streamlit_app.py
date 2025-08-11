@@ -223,7 +223,7 @@ router = {
     "Cor da Urina": render_cor_da_urina,
 
     # Cutâneo
-    "Pele e Coceira": render_pele_coceira,
+    "Pele e Coceira": render_pele_e_coceira,
 
     # Energia e Vitalidade
     "Energia Matinal": render_energia_matinal,
