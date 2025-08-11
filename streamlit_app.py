@@ -99,7 +99,7 @@ from datetime import datetime
 
 # ==== IMPORTS DO PROJETO ====
 # Dicionário de sintomas
-from .data.dicionario_sintomas import dic
+from .dicionario_sintomas import dic
 # Todos os renders dos autotestes
 from .ui.autotestes import *
 
