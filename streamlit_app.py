@@ -520,8 +520,6 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
             idade=idade_paciente,
             gravida=gravidez
 )
-
-        )
         if ajuste_niveis >= 1:
             cor_final = aumentar_cor_em_1_nivel(cor_final)
 
