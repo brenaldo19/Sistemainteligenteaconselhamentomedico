@@ -593,6 +593,7 @@ def render_visao_contraste():
 # ========== CAMPO VISUAL ==========
 def render_campo_visual():
     st.subheader("👁️ Campo Visual – Dedos Laterais")
+    st.markdown("Fique de frente para um espelho e estique os braços para as laterais,observe seu rosto,e fique mexendo os dedos")
     campo = st.radio("Percebeu movimento com dedos bem laterais?", ["Sim, com os dois olhos","Apenas com um olho","Com dificuldade"], index=0)
     if st.button("Ver resultado"):
         if campo == "Sim, com os dois olhos":
@@ -645,6 +646,7 @@ def render_desmaio_tontura():
 # ========== CARDÍACO (PÓS-ESFORÇO) ==========
 def render_cardiaco():
     st.subheader("❤️ Frequência Cardíaca pós-esforço")
+    st.markdown("Sente-se em uma cadeira,depois mantenha um ritmo constante de sentar e levantar,depois que terminar,responda as perguntas")
     st.session_state.setdefault("c_etapa", 0)
     st.session_state.setdefault("c_bpm15", None)
     st.session_state.setdefault("c_fc", None)
@@ -697,6 +699,7 @@ def render_cardiaco():
 # ========== RECUPERAÇÃO CARDÍACA ==========
 def render_recuperacao_cardiaca():
     st.subheader("❤️ Recuperação da FC")
+    st.markdown("Sente-se em uma cadeira,depois sente e levante em ritmo constante por um minuto,então descanse por um minuto,leve a mão ao peito e conte quantos batimentos você contou em 15 segundos e preencha")
     idade = st.session_state.get("idade", 30)
     imc = st.session_state.get("imc", 22)
     risco = "cardíaca" in st.session_state.get("grupos_risco_refinados", [])
@@ -716,6 +719,7 @@ def render_recuperacao_cardiaca():
 # ========== PALPITAÇÕES ==========
 def render_palpitacoes():
     st.subheader("💓 Palpitações (Mão no Peito)")
+    st.markdown("Leve a mão ao peito e observe seus batimentos e responda")
     ritmo = st.radio("Ritmo:", ["Regular","Levemente irregular","Muito irregular"], index=0)
     forca = st.radio("Força:", ["Normal","Muito forte","Muito fraca","Variando"], index=0)
     sensacao = st.radio("Desconforto/aceleração sem razão?", ["Não","Sim"], index=0)
@@ -733,6 +737,7 @@ def render_palpitacoes():
 # ========== APNEIA SIMPLES ==========
 def render_apneia_simples():
     st.subheader("🌬️ Apneia Simples (prender respiração)")
+    st.markdown("Aperte o botão e prenda a respiração o máximo possível,e quando tiver que respirar novamente,aperte para parar")
     st.session_state.setdefault("ap_inicio", None)
     st.session_state.setdefault("ap_tempo", None)
 
@@ -766,6 +771,7 @@ def render_apneia_simples():
 # ========== SOPRO SUSTENTADO ==========
 def render_sopro_sustentado():
     st.subheader("🫁 Sopro Sustentado – som 'Fffff'")
+    st.markdown("Aperte o botão e assopre o máximo possível,ao parar,aperte o botão para encerrar a contagem"
     st.session_state.setdefault("sp_inicio", None)
     st.session_state.setdefault("sp_tempo", None)
 
@@ -887,6 +893,7 @@ def render_nodulo_testicular():
 # ========== ENCHIMENTO CAPILAR ==========
 def render_enchimento_capilar():
     st.subheader("🩸 Enchimento Capilar (unha)")
+    st.markdown("Aperte a sua unha com a outra mão por aproximadamente 2 segundos,ao soltar,ela estará branca,conte quanto tempo ela demora para voltar ao normal e responda")
     tempo = st.number_input("Segundos para voltar à cor normal:", 0, 10, step=1)
     if st.button("Ver resultado"):
         if tempo <= 2:
@@ -902,6 +909,7 @@ def render_enchimento_capilar():
 # ========== FORÇA DA MÃO ==========
 def render_forca_da_mao():
     st.subheader("✊ Força de Pegada Manual (ambas as mãos)")
+    st.markdown("Pegue um objeto com sua mão direita primeiramente e segure ele o mais forte que conseguir durante um minuto,depois,repita o processo com a esquerda e responda as perguntas")
     st.session_state.setdefault("pg_etapa", "direita")
     st.session_state.setdefault("pg_result", {})
 
@@ -941,6 +949,7 @@ def render_forca_da_mao():
 # ========== SUBIR ESCADA COM UMA PERNA ==========
 def render_subir_escada_uma_perna():
     st.subheader("🦿 Subir Escada com Uma Perna")
+    st.markdown("Tente subir a escada com uma perna com as pernas direita e esquerda e responda as perguntas. **Teste de risco**")
     direita = st.radio("Conseguiu com a perna direita?", ["Sim","Com dificuldade","Não"], key="esc_dir")
     esquerda = st.radio("Conseguiu com a perna esquerda?", ["Sim","Com dificuldade","Não"], key="esc_esq")
     if st.button("Resultado"):
@@ -1210,6 +1219,7 @@ def render_perda_memoria():
 # ========== EQUILÍBRIO ==========
 def render_equilibrio():
     st.subheader("🦶 Equilíbrio com Olhos Fechados")
+    st.markdown("Se mantenha em pé por 30 segundos com os olhos fechados e responda a pergunta")
     conseguiu = st.radio("Manteve 30s?", ["Sim, sem problemas","Sim, com desequilíbrio leve","Não"], index=0)
     if st.button("Resultado"):
         if conseguiu == "Sim, sem problemas":
