@@ -90,9 +90,9 @@ if manual_aberto:
 
 # ==== IMPORTS DO PROJETO ====
 # Dicionário de sintomas
-from dicionario.py import dic
+from dicionario import dic
 # Todos os renders dos autotestes
-from .ui.autotestes import *
+from src.ui.autotestes import *
 
 st.set_page_config(page_title="Sistema de Triagem", layout="centered")
 
