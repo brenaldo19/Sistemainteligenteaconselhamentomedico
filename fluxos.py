@@ -5037,8 +5037,8 @@ FLUXOS[normalizar("Dificuldade para engolir")] = {
 # ===============================
 # 8) TREMores
 # ===============================
-FLUXOS[normalizar("Tremores ou movimentos invouluntários")] = {
-    "label": "Tremores ou movimentos invouluntários",
+FLUXOS[normalizar("Tremores ou movimentos involuntários")] = {
+    "label": "Tremores ou movimentos involuntários",
     "perguntas": [
         {
             "id": "quadro",
