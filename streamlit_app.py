@@ -64,8 +64,12 @@ pontuar_fluxo = fl.pontuar_fluxo
 labels_fluxos = fl.labels_fluxos
 eh_fluxo = fl.eh_fluxo
 
-# # autotestes (mantenha comentado até corrigir o módulo)
-# at = _import_or_show(lambda: __import__("src.ui.autotestes", fromlist=["*"]), "src.ui.autotestes")
+try:
+    from src.ui.autotestes import *
+except Exception as e:
+    import streamlit as st
+    st.error(f"Falha ao carregar autotestes: {e}")
+
 
 # ---------------- Session state inicial ----------------
 VALORES_INICIAIS = {
