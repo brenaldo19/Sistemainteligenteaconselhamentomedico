@@ -149,7 +149,6 @@ sistemas_autotestes = {
         "Sudorese Noturna",
         # Olhos/pele/geral
         "Dor ou olho vermelho",
-        "Icterícia",
         "Infecção em ferida",
         "Alterações visuais súbitas",
         # Mama/testículo
@@ -242,7 +241,6 @@ router = {
     "Alterações na fala": render_alteracoes_fala,
 
     "Dor ou olho vermelho": render_dor_olho_vermelho,
-    "Icterícia": render_ictericia,
     "Infecção em ferida": render_infeccao_em_ferida,
 
     "Nódulo na Mama": render_nodulo_na_mama,
