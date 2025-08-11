@@ -143,7 +143,6 @@ sistemas_autotestes = {
         "Hiperglicemia",
         # Neuro/sono/cognição
         "Perda de Memória",
-        "Sonolência Excessiva",
         "Insônia",
         "Tremores ou movimentos involuntários",
         "Alterações na fala",
@@ -238,7 +237,6 @@ router = {
     "Hiperglicemia": render_hiperglicemia,
 
     "Perda de Memória": render_perda_memoria,
-    "Sonolência Excessiva": render_sonolencia_excessiva,
     "Insônia": render_insonia,
     "Tremores ou movimentos involuntários": render_tremores,
     "Alterações na fala": render_alteracoes_fala,
