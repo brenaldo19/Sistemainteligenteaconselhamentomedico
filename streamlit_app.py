@@ -241,7 +241,7 @@ router = {
 
     "Dor ou olho vermelho": render_dor_olho_vermelho,
 
-    "Nódulo na Mama": render_nodulo_na_mama,
+    "Nódulo na Mama": render_nodulo_mama,
     "Nódulo Testicular": render_nodulo_testicular,
     "Secreção Mamilar (fora da amamentação)": render_secrecao_mamilar,
 
