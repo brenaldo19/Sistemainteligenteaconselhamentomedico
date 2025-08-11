@@ -191,7 +191,7 @@ router = {
     "Campo Visual": render_campo_visual,
     "Percepção de Cores": render_percepcao_cores,
     "Audição (Frequências Altas e Baixas)": render_audicao_frequencias,
-    "Audição (Detecção de Som)": render_audicao_deteccao,
+    "Audição (Detecção de Som)": render_audicao_deteccao_de_som,
 
     # Cardíaco
     "Cardíaco": render_cardiaco,
