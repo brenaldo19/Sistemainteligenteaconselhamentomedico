@@ -1,23 +1,22 @@
 import streamlit as st
-from datetime import datetime
 import pandas as pd
+from datetime import datetime
 from pathlib import Path
 
-# Imports do seu domínio (agora externos)
-from src.dicionario import dic
-# Ative só se o arquivo existir:
-# from src.ui.autotestes import *
+from dicionario import dic
+# ative só se existir ui/autotestes.py
+# from ui.autotestes import *
 
-from src.utils import calcular_imc, classificar_imc
-from src.dados_sintomas import sistemas_sintomas, sintoma_para_sistema
-from src.logica import (
+from utils import calcular_imc, classificar_imc
+from dados_sintomas import sistemas_sintomas, sintoma_para_sistema
+from logica import (
     gerar_sistemas_afetados_por_fatores,
     sistemas_afetados_secundariamente,
     verificar_se_deve_subir_cor,
     classificar_combinacao,
     calcular_ajuste_por_fatores_conservador,
 )
-from src.fluxos import (
+from fluxos import (
     FLUXOS,
     coletar_respostas_fluxo,
     pontuar_fluxo,
