@@ -1,4 +1,4 @@
-from utils import normalizar
+from .utils import normalizar
 
 sistemas_sintomas = {
     "cardiaco": [
