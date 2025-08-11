@@ -202,7 +202,7 @@ router = {
     "Respiração": render_respiracao,
     "Apneia Simples": render_apneia_simples,
     "Sopro Sustentado": render_sopro_sustentado,
-    "Contagem em uma Respiração": render_contagem_uma_respiracao,
+    "Contagem em uma Respiração": render_contagem_em_uma_respiracao,
 
     # Vascular / Circulatório
     "Enchimento Capilar": render_enchimento_capilar,
