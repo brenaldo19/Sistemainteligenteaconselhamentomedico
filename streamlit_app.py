@@ -99,9 +99,9 @@ from datetime import datetime
 
 # ==== IMPORTS DO PROJETO ====
 # Dicionário de sintomas
-from src.data.dicionario_sintomas import dic
+from .data.dicionario_sintomas import dic
 # Todos os renders dos autotestes
-from src.ui.autotestes import *
+from .ui.autotestes import *
 
 st.set_page_config(page_title="Sistema de Triagem", layout="centered")
 
