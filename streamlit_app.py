@@ -91,7 +91,7 @@ if manual_aberto:
 # Dicionário de sintomas
 from dicionario import dic
 # Todos os renders dos autotestes
-from .ui.autotestes import *
+from src.ui.autotestes import *
 
 st.set_page_config(page_title="Sistema de Triagem", layout="centered")
 
