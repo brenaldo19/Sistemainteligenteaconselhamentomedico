@@ -3,8 +3,8 @@ import pandas as pd
 from datetime import datetime
 from pathlib import Path
 
-from dicionario import dic
-# ative só se existir ui/autotestes.py
+from dicionario.py import dic   # ou: from dicionario import dic
+# Se existir ui/autotestes.py, ative a linha abaixo:
 # from ui.autotestes import *
 
 from utils import calcular_imc, classificar_imc
@@ -98,7 +98,7 @@ from datetime import datetime
 
 # ==== IMPORTS DO PROJETO ====
 # Dicionário de sintomas
-from .dicionario_sintomas import dic
+from dicionario_sintomas import dic
 # Todos os renders dos autotestes
 from .ui.autotestes import *
 
