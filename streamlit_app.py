@@ -1,11 +1,11 @@
-import streamlit as st
-import pandas as pd
-from datetime import datetime
 from pathlib import Path
+import sys
+sys.path.append(str(Path(__file__).resolve().parent))
+# Se seus módulos estão dentro de /src, descomente a linha abaixo:
+# sys.path.append(str(Path(__file__).resolve().parent / "src"))
 
 from dicionario import dic
-from src.ui.autotestes import *
-from utils import calcular_imc, classificar_imc
+from utils import calcular_imc, classificar_imc, normalizar, aumentar_cor_em_1_nivel
 from dados_sintomas import sistemas_sintomas, sintoma_para_sistema
 from logica import (
     gerar_sistemas_afetados_por_fatores,
@@ -14,16 +14,7 @@ from logica import (
     classificar_combinacao,
     calcular_ajuste_por_fatores_conservador,
 )
-from fluxos import (
-    FLUXOS,
-    coletar_respostas_fluxo,
-    pontuar_fluxo,
-    labels_fluxos,
-    eh_fluxo,
-    calcular_cor_final,
-)
-
-
+from fluxos import FLUXOS, coletar_respostas_fluxo, pontuar_fluxo, labels_fluxos, eh_fluxo
 
 # ---------------- Session state inicial ----------------
 # Estado inicial unificado
@@ -347,7 +338,7 @@ if st.session_state.etapa == 1:
 elif st.session_state.etapa == 2:
     st.header("2. Selecione até 3 sintomas principais")
 
-    dic = dicionario_sintomas()
+
     sintomas_disponiveis = sorted(set(labels_fluxos() or []))
 
     if "sintomas_temp" not in st.session_state:
@@ -517,10 +508,8 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
         st.markdown("---")
 
         # ===== cor final combinada =====
-        cor_final = classificar_combinacao(
-            sintomas=[s.lower() for s in st.session_state["sintomas_escolhidos"]],
-            cores=cores_geradas
-        )
+        cor_final = classificar_combinacao(cores_geradas)
+        
 
         # --- ajuste conservador (idade/gravidez etc.) ---
         gravidez = str(st.session_state.get("gravida", "")).strip().lower() in ["sim", "true", "1"]
@@ -528,9 +517,10 @@ elif st.session_state.etapa == 3 and st.session_state.get("etapa_3"):
         ajuste_niveis = calcular_ajuste_por_fatores_conservador(
             sintomas_escolhidos=st.session_state["sintomas_escolhidos"],
             cores_individuais=cores_geradas,
-            sintoma_para_sistema=sintoma_para_sistema,
             idade=idade_paciente,
             gravida=gravidez
+)
+
         )
         if ajuste_niveis >= 1:
             cor_final = aumentar_cor_em_1_nivel(cor_final)
