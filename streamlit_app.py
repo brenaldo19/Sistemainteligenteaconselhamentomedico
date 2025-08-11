@@ -133,7 +133,6 @@ sistemas_autotestes = {
     "🩺 Testes de apuração de sintomas específicos": [
         # Alertas/neurológico/obstétrico
         "Desmaio ou tontura",
-        "Redução dos movimentos fetais",
         "Icterícia Neonatal",
         # Respiratório/Circulatório
         "Diferenciar Falta de Ar e Dificuldade Respiratória",
@@ -229,7 +228,6 @@ router = {
 
     # Específicos
     "Desmaio ou tontura": render_desmaio_tontura,
-    "Redução dos movimentos fetais": render_reducao_movimentos_fetais,
     "Icterícia Neonatal": render_ictericia_neonatal,
 
     "Diferenciar Falta de Ar e Dificuldade Respiratória": render_diferenciar_falta_de_ar,
