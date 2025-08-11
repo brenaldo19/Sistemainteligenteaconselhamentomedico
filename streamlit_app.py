@@ -4,7 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 from dicionario import dic
-from ui.autotestes import *
+from src.ui.autotestes import *
 from utils import calcular_imc, classificar_imc
 from dados_sintomas import sistemas_sintomas, sintoma_para_sistema
 from logica import (
