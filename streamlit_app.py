@@ -51,13 +51,17 @@ st.markdown("**Atenção**: este sistema oferece aconselhamento inicial e não s
 st.markdown("Leia o manual para entender todas as funcionalidades e utilizar melhor o sistema.")
 st.markdown("---")
 
+from pathlib import Path
+
 # ---------------- Manual (toggle) ----------------
 manual_aberto = st.toggle("Manual do sistema – clique para abrir/fechar", value=False)
 if manual_aberto:
+    manual_path = Path(__file__).resolve().parent / "src" / "textos" / "manual.md"
     try:
-        st.markdown(Path("textos/manual.md").read_text(encoding="utf-8"))
-    except Exception:
-        st.info("Manual não encontrado. Verifique se o arquivo 'textos/manual.md' existe.")
+        st.markdown(manual_path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        st.info(f"Manual não encontrado no caminho: {manual_path}")
+
 
 # ===================== A PARTIR DAQUI, SUA INTERFACE EXISTENTE =====================
 # Mantenha o restante do seu layout, formulários e fluxo de etapas aqui.
