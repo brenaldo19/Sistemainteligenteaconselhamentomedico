@@ -90,15 +90,9 @@ if manual_aberto:
 # - Ajuste conservador (calcular_ajuste_por_fatores_conservador),
 # - Mensagens de saída.
 
-
-
-import streamlit as st
-import pandas as pd
-from datetime import datetime
-
 # ==== IMPORTS DO PROJETO ====
 # Dicionário de sintomas
-from dicionario_sintomas import dic
+from dicionario.py import dic
 # Todos os renders dos autotestes
 from .ui.autotestes import *
 
