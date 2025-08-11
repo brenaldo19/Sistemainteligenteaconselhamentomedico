@@ -5,87 +5,147 @@ import streamlit as st
 
 # ========== 1) TEMPO DE REAÇÃO ==========
 def render_tempo_de_reacao():
+    import streamlit as st
+    import time
+    import random
+
     st.subheader("🧠 Teste de Tempo de Reação")
-    st.warning("⚠️ A primeira tentativa é de preparação e **não será contabilizada**.")
+    st.warning("⚠️ A primeira tentativa é apenas um treino e **não será contabilizada** na média final.")
 
-    # estados (prefixo tr_)
-    st.session_state.setdefault("tr_testando", False)
-    st.session_state.setdefault("tr_ready", False)
-    st.session_state.setdefault("tr_start", None)
-    st.session_state.setdefault("tr_delay", None)
-    st.session_state.setdefault("tr_tentativa", 1)
-    st.session_state.setdefault("tr_resultados", [])
+    # ---- Estados deste teste ----
+    st.session_state.setdefault("tentativa", 1)        # 1 = treino; 2..8 = válidas
+    st.session_state.setdefault("resultados", [])      # guarda 7 tempos válidos
+    st.session_state.setdefault("testando", False)     # está no ciclo do teste?
+    st.session_state.setdefault("ready", False)        # já liberou o clique?
+    st.session_state.setdefault("start_time", None)    # início do tempo de reação
+    st.session_state.setdefault("delay", None)         # atraso aleatório antes do clique
 
-    # fluxo
-    if not st.session_state.tr_testando and st.session_state.tr_tentativa <= 8:
-        st.session_state.tr_delay = random.uniform(3, 7)
-        st.session_state.tr_ready = False
-        st.session_state.tr_testando = True
-        st.experimental_rerun()
+    # Correção fixa (latência de app/ambiente)
+    CORRECAO_SISTEMA = 0.47
 
-    elif st.session_state.tr_testando and not st.session_state.tr_ready:
-        time.sleep(st.session_state.tr_delay)
-        st.session_state.tr_start = time.perf_counter()
-        st.session_state.tr_ready = True
-        st.experimental_rerun()
+    # ---- Fluxo principal ----
+    # Ainda há tentativas (1 treino + 7 válidas) -> total de 8 "rodadas"
+    if st.session_state.tentativa <= 8:
 
-    elif st.session_state.tr_testando and st.session_state.tr_ready:
-        st.success("✅ Clique agora!")
-        if st.button("🟢 Clique aqui!"):
-            fim = time.perf_counter()
-            tempo_reacao = fim - (st.session_state.tr_start or fim) - 0.47  # correção interna
-            if st.session_state.tr_tentativa != 1:
-                st.session_state.tr_resultados.append(tempo_reacao)
-            st.session_state.tr_tentativa += 1
-            st.session_state.tr_testando = False
-            st.session_state.tr_ready = False
-            st.experimental_rerun()
+        # 1) Não está testando? Inicia um novo ciclo com atraso aleatório
+        if not st.session_state.testando:
+            st.session_state.delay = random.uniform(3, 7)
+            st.session_state.ready = False
+            st.session_state.testando = True
+            st.rerun()
 
-    elif st.session_state.tr_tentativa > 8:
+        # 2) Entrou no ciclo mas ainda não liberou o clique: espera o delay e libera
+        elif st.session_state.testando and not st.session_state.ready:
+            time.sleep(st.session_state.delay)
+            st.session_state.start_time = time.time()
+            st.session_state.ready = True
+            st.rerun()
+
+        # 3) Clique liberado
+        else:  # testando == True and ready == True
+            st.success("✅ Clique agora!")
+            if st.button("🟢 Clique aqui!"):
+                fim = time.time()
+                bruto = fim - (st.session_state.start_time or fim)
+                tempo_reacao = max(0.01, bruto - CORRECAO_SISTEMA)  # evita negativo
+
+                # Tentativa 1 = treino → não conta
+                if st.session_state.tentativa != 1:
+                    st.session_state.resultados.append(tempo_reacao)
+
+                # avança
+                st.session_state.tentativa += 1
+                st.session_state.testando = False
+                st.session_state.ready = False
+                st.session_state.start_time = None
+                st.rerun()
+
+        # info de progresso
+        if st.session_state.tentativa == 1:
+            st.caption("🎯 Tentativa de treino")
+        else:
+            feitas = len(st.session_state.resultados)
+            st.caption(f"📌 Tentativas válidas registradas: {feitas}/7")
+
+        # botão de reset rápido (se precisar recomeçar)
+        if st.button("🔁 Recomeçar teste de reação"):
+            for k in ["tentativa", "resultados", "testando", "ready", "start_time", "delay"]:
+                if k in st.session_state:
+                    del st.session_state[k]
+            st.rerun()
+
+    # ---- Finalização: já fez 1 treino + 7 válidas ----
+    else:
         st.subheader("⏱️ Resultados")
-        for i, r in enumerate(st.session_state.tr_resultados, start=2):
+        # lista das tentativas válidas (exibe como Tentativa 2..8)
+        for i, r in enumerate(st.session_state.resultados, start=2):
             st.write(f"Tentativa {i}: ⏱️ {r:.2f} s")
 
-        if st.session_state.tr_resultados:
-            media = sum(st.session_state.tr_resultados) / len(st.session_state.tr_resultados)
-            st.subheader(f"🏁 Média final: **{media:.2f} s**")
+        if st.session_state.resultados:
+            media = sum(st.session_state.resultados) / len(st.session_state.resultados)
+        else:
+            media = 0.0
 
-            # Perfil e faixas (mantido do seu miolo, simplificado para não depender de outros estados)
-            idade = st.session_state.get("idade", 30)
-            imc = st.session_state.get("imc", 22)
-            gravidez = st.session_state.get("gravida", False)
-            sexo = st.session_state.get("sexo", "Outro")
-            riscos = st.session_state.get("grupos_risco_refinados", [])
+        # ===== Perfil / faixas esperadas (mesma lógica que você usava) =====
+        idade = st.session_state.get("idade", 30)
+        imc = st.session_state.get("imc", 22)
+        gravidez = st.session_state.get("gravida", False)
+        sexo = st.session_state.get("sexo", "Outro")
+        riscos = st.session_state.get("grupos_risco_refinados", [])
 
-            base = 0.40
-            if idade <= 7: base += 0.20
-            elif idade <= 16: base += 0.10
-            elif idade <= 35: base += 0.00
-            elif idade <= 58: base += 0.05
-            else: base += 0.10
+        base = 0.40  # base geral
 
-            if imc < 16: base += 0.10
-            elif imc >= 30: base += 0.05
-            if gravidez: base += 0.08
-            if "neurológica" in riscos or "psiquiátrica" in riscos: base += 0.10
-            if "cardíaca" in riscos: base += 0.05
-            if "respiratória" in riscos: base += 0.05
+        # Ajustes por idade
+        if idade <= 7:
+            base += 0.20
+        elif idade <= 16:
+            base += 0.10
+        elif idade <= 35:
+            base += 0.00
+        elif idade <= 58:
+            base += 0.05
+        else:
+            base += 0.10
 
-            lim_inf = base * 0.75
-            lim_sup = base * 1.25
+        # Ajustes por IMC
+        if imc < 16:
+            base += 0.10
+        elif imc >= 30:
+            base += 0.05
 
-            if media < lim_inf:
-                st.success("⚡ Seu tempo está **acima do esperado**. Excelente reflexo!")
-            elif media > lim_sup:
-                st.warning("🐢 Seu tempo está **abaixo do esperado**. Considere repetir o teste mais tarde.")
-                st.markdown("🔎 Relacionados: **Hipoglicemia, Hipotensão/colapso, Formigamento ou perda de força**")
-            else:
-                st.info("✅ Dentro do esperado para seu perfil.")
+        # Gravidez
+        if str(gravidez).lower() in ["sim", "true", "1"]:
+            base += 0.08
 
-        if st.button("🔁 Refazer o teste (Tempo de Reação)"):
-            for k in ["tr_testando","tr_ready","tr_start","tr_delay","tr_tentativa","tr_resultados"]:
-                if k in st.session_state: del st.session_state[k]
-            st.experimental_rerun()
+        # Riscos específicos
+        if "neurológica" in riscos or "psiquiátrica" in riscos:
+            base += 0.10
+        if "cardíaca" in riscos:
+            base += 0.05
+        if "respiratória" in riscos:
+            base += 0.05
+
+        # Janela de tolerância de 25%
+        lim_inferior = base * 0.75
+        lim_superior = base * 1.25
+
+        st.markdown("---")
+        st.subheader(f"🏁 Média final: **{media:.2f} s**")
+
+        if media < lim_inferior:
+            st.success("⚡ Seu tempo está **acima do esperado**. Excelente reflexo!")
+        elif media > lim_superior:
+            st.warning("🐢 Seu tempo está **abaixo do esperado**. Considere repetir o teste mais tarde.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Hipoglicemia, Hipotensão/colapso, Formigamento ou perda de força**")
+        else:
+            st.info("✅ Seu tempo está **dentro do esperado**.")
+
+        # Reset total para poder refazer do zero
+        if st.button("🔁 Refazer o teste"):
+            for k in ["tentativa", "resultados", "testando", "ready", "start_time", "delay"]:
+                if k in st.session_state:
+                    del st.session_state[k]
+            st.rerun()
 
 
 # ========== 2) CALAFrIOS ==========
