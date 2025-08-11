@@ -1468,3 +1468,56 @@ def render_urinario():
             st.markdown("🔎 Possíveis sintomas relacionados: **Alterações urinárias; retenção ou incontinência (depende do caso)**")
         if st.button("Refazer teste urinário"):
             st.experimental_rerun()
+            # ======================= ENERGIA MATINAL =======================
+def render_energia_matinal():
+    st.subheader("☕ Teste de Energia ao Acordar")
+    st.markdown("""
+    Esse teste ajuda a identificar **níveis de fadiga e alerta ao longo do dia**.
+    """)
+
+    sono = st.radio("Você costuma acordar...", [
+        "Descansado(a) e disposto(a)",
+        "Com leve cansaço",
+        "Muito cansado(a), mesmo dormindo bem"
+    ])
+    cafe = st.radio("Você precisa de café ou estimulante para funcionar pela manhã?",
+                    ["Não", "Às vezes", "Todos os dias"])
+
+    if st.button("Ver resultado (Energia matinal)"):
+        pontos = 0
+        if sono == "Com leve cansaço": pontos += 1
+        if sono == "Muito cansado(a), mesmo dormindo bem": pontos += 2
+        if cafe == "Às vezes": pontos += 1
+        if cafe == "Todos os dias": pontos += 2
+
+        if pontos == 0:
+            st.success("✅ Energia matinal adequada.")
+        elif pontos <= 2:
+            st.warning("⚠️ Pode haver leve fadiga acumulada.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Náusea ou enjoo, Confusão mental**")
+        else:
+            st.error("🚨 Sinais de fadiga importante. Avalie seu sono, rotina e alimentação.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Hipotensão ou colapso, Náusea ou enjoo, Confusão mental**")
+
+
+# ======================= VARIAÇÃO DE PESO (30 DIAS) =======================
+def render_variacao_peso_30d():
+    st.subheader("⚖️ Variação de Peso nos Últimos 30 Dias")
+    peso_atual = st.number_input("Digite seu peso atual (kg):", min_value=20.0, max_value=300.0, step=0.1)
+    peso_passado = st.number_input("Digite seu peso de 30 dias atrás (kg):", min_value=20.0, max_value=300.0, step=0.1)
+
+    if st.button("Ver resultado (Variação de peso)"):
+        variacao = peso_atual - peso_passado
+        percentual = (abs(variacao) / peso_passado) * 100 if peso_passado else 0.0
+
+        st.markdown(f"📉 Variação: **{variacao:.1f} kg** ({percentual:.1f}%)")
+
+        if percentual < 2:
+            st.success("✅ Variação dentro da faixa esperada.")
+        elif percentual <= 5:
+            st.info("⚠️ Pequena variação detectada. Fique atento(a).")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Náusea ou enjoo, Ansiedade ou agitação intensa, Comportamento estranho à normalidade**")
+        else:
+            st.warning("🚨 Variação significativa! Considere investigar causas clínicas ou comportamentais.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Náusea ou enjoo, Hiperglicemia, Hipoglicemia, Ansiedade ou agitação intensa, Comportamento estranho à normalidade**")
+
