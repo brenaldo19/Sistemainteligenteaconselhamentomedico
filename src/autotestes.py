@@ -407,3 +407,664 @@ def render_respiracao():
             for k in ["fr_contando","fr_valor"]:
                 if k in st.session_state: del st.session_state[k]
             st.experimental_rerun()
+
+# ========== TR-10s: TOQUE RÁPIDO (10s) ==========
+def render_toque_rapido_10s():
+    st.subheader("👆 Toque Rápido (10 segundos)")
+    idade = st.session_state.get("idade")
+    if idade is None: faixa = "adulto"
+    elif idade <= 12: faixa = "crianca"
+    elif idade >= 67: faixa = "idoso"
+    else: faixa = "adulto"
+
+    cortes = {"crianca":[18,45], "adulto":[20,40], "idoso":[15,35]}
+    c_baixo, c_comum_max = cortes[faixa]
+
+    st.session_state.setdefault("tr10_inicio", None)
+    st.session_state.setdefault("tr10_contagem", 0)
+    st.session_state.setdefault("tr10_finalizou", False)
+
+    c1, c2 = st.columns(2)
+    with c1:
+        if st.session_state.tr10_inicio is None and not st.session_state.tr10_finalizou:
+            if st.button("Iniciar 10s"):
+                st.session_state.tr10_inicio = time.perf_counter()
+                st.session_state.tr10_contagem = 0
+                st.session_state.tr10_finalizou = False
+                st.experimental_rerun()
+        else:
+            if st.session_state.tr10_inicio is not None:
+                dec = time.perf_counter() - st.session_state.tr10_inicio
+                rest = max(0, 10 - int(dec))
+                st.info(f"Cronômetro: {rest} s")
+                if rest == 0:
+                    st.session_state.tr10_inicio = None
+                    st.session_state.tr10_finalizou = True
+                    st.success("Tempo encerrado!")
+                    st.experimental_rerun()
+            else:
+                st.success("Tempo encerrado!")
+
+    with c2:
+        if st.session_state.tr10_inicio is not None and not st.session_state.tr10_finalizou:
+            if st.button("Clique!"):
+                st.session_state.tr10_contagem += 1
+                st.experimental_rerun()
+        else:
+            st.button("Clique!", disabled=True)
+
+    st.metric("Cliques contabilizados", st.session_state.tr10_contagem)
+
+    if st.session_state.tr10_finalizou:
+        total = st.session_state.tr10_contagem
+        if total < c_baixo:
+            st.error("🚨 Abaixo do esperado para a sua faixa etária.")
+            st.markdown("🔎 Relacionados: **fadiga, dor, tremor, lentificação motora**")
+        elif total <= c_comum_max:
+            st.success("✅ Faixa comum para a sua faixa.")
+        else:
+            st.info("💪 Acima do comum para a sua faixa.")
+
+    if st.button("Refazer (Toque Rápido 10s)"):
+        for k in ["tr10_inicio","tr10_contagem","tr10_finalizou"]:
+            if k in st.session_state: del st.session_state[k]
+        st.experimental_rerun()
+
+
+# ========== DIFERENCIAR FALTA DE AR x DIFICULDADE RESPIRATÓRIA ==========
+def render_diferenciar_falta_de_ar():
+    st.subheader("🌬️ Diferenciar Falta de Ar vs Dificuldade Respiratória")
+    inicio_subito = st.radio("Início súbito (segundos/minutos)?", ["Não","Sim"], index=0, horizontal=True)
+    fala_frases = st.radio("Consegue falar frases completas?", ["Sim","Não"], index=0, horizontal=True)
+    posicao_alivia = st.radio("Mudar de posição alivia?", ["Não","Sim"], index=0, horizontal=True)
+    chiado_estridor = st.radio("Chiado/estridor alto ao respirar?", ["Não","Sim"], index=0, horizontal=True)
+    esforco_visivel = st.radio("Esforço visível para respirar?", ["Não","Sim"], index=0, horizontal=True)
+
+    if st.button("Analisar"):
+        score = 0
+        if fala_frases == "Não": score += 2
+        if chiado_estridor == "Sim": score += 2
+        if esforco_visivel == "Sim": score += 2
+        if inicio_subito == "Sim": score += 1
+
+        if score >= 4:
+            st.error("🚨 Indícios fortes de **dificuldade respiratória**.")
+            st.markdown("🔎 Relacionados: **obstrução/comprometimento pulmonar**")
+        elif score >= 2:
+            st.warning("⚠️ Indícios mistos de dificuldade respiratória.")
+        else:
+            st.success("✅ Mais compatível com **falta de ar subjetiva**.")
+
+
+# ========== VISÃO (CONTRASTE) ==========
+def render_visao_contraste():
+    st.subheader("👁️ Teste Visual com Dificuldade Progressiva")
+    st.session_state.setdefault("vis_numeros", None)
+    st.session_state.setdefault("vis_contrastes", None)
+
+    if st.session_state.vis_numeros is None:
+        todos = random.sample(range(10, 99), 5)
+        st.session_state.vis_numeros = [str(n) for n in todos]
+        st.session_state.vis_contrastes = ["#000000","#666666","#999999","#BBBBBB","#DDDDDD"]
+
+    html = "<div style='font-size:16px; letter-spacing:12px;'>"
+    for num, cor in zip(st.session_state.vis_numeros, st.session_state.vis_contrastes):
+        html += f"<span style='color:{cor}'>{num}</span>  "
+    html += "</div>"
+    st.markdown(html, unsafe_allow_html=True)
+
+    resposta = st.text_input("Quais números você viu? (separe por espaço)").strip()
+    if st.button("Verificar"):
+        usuario = resposta.split() if resposta else []
+        corretos = [n for n in usuario if n in st.session_state.vis_numeros]
+        st.success(f"Acertou {len(corretos)} número(s): {', '.join(corretos) or '—'}")
+        if len(corretos) == 5:
+            st.info("✅ Visão excelente no baixo contraste.")
+        elif len(corretos) >= 4:
+            st.warning("⚠️ Leve dificuldade em baixo contraste.")
+        else:
+            st.error("🚨 Dificuldade significativa. Considere avaliar com oftalmologista.")
+    if st.button("Refazer (Visão)"):
+        for k in ["vis_numeros","vis_contrastes"]:
+            if k in st.session_state: del st.session_state[k]
+        st.experimental_rerun()
+
+
+# ========== CAMPO VISUAL ==========
+def render_campo_visual():
+    st.subheader("👁️ Campo Visual – Dedos Laterais")
+    campo = st.radio("Percebeu movimento com dedos bem laterais?", ["Sim, com os dois olhos","Apenas com um olho","Com dificuldade"], index=0)
+    if st.button("Ver resultado"):
+        if campo == "Sim, com os dois olhos":
+            st.success("✅ Campo periférico preservado.")
+        elif campo == "Apenas com um olho":
+            st.warning("⚠️ Diferença entre os olhos. Investigar.")
+        else:
+            st.error("🚨 Campo visual comprometido. Avaliação oftalmológica indicada.")
+
+
+# ========== PERCEPÇÃO DE CORES ==========
+def render_percepcao_cores():
+    st.subheader("🌈 Percepção de Cores")
+    html = """
+    <div style='display:flex;gap:20px;font-size:14px;'>
+        <div style='background-color:red;width:50px;height:50px;'></div>
+        <div style='background-color:green;width:50px;height:50px;'></div>
+        <div style='background-color:blue;width:50px;height:50px;'></div>
+        <div style='background-color:#E6B800;width:50px;height:50px;'></div>
+        <div style='background-color:#00CED1;width:50px;height:50px;'></div>
+    </div>
+    """
+    st.markdown(html, unsafe_allow_html=True)
+    resp = st.text_input("Digite as cores que enxerga (separe por vírgulas):").lower()
+    if st.button("Ver resultado"):
+        corretas = ["vermelho","verde","azul","amarelo","turquesa"]
+        entrada = [c.strip() for c in resp.split(",") if c.strip()]
+        acertos = [c for c in entrada if c in corretas]
+        st.success(f"Acertou {len(acertos)}: {', '.join(acertos) or '—'}")
+        if len(acertos) == 5:
+            st.info("✅ Percepção aparentemente normal.")
+        elif len(acertos) >= 3:
+            st.warning("⚠️ Dificuldade com alguns tons.")
+        else:
+            st.error("🚨 Dificuldade significativa — possível daltonismo. Investigar.")
+
+
+# ========== DESMAIO / TONTURA ==========
+def render_desmaio_tontura():
+    st.subheader("🌀 Desmaio ou tontura")
+    resp = st.radio("Teve tontura ou quase desmaiou ao ficar em pé/olhos fechados 10s?", ["Não","Sim, leve","Sim, acentuado"], index=0)
+    if resp == "Sim, acentuado":
+        st.error("🚨 Tontura intensa/desmaio recente. Procure atendimento.")
+    elif resp == "Sim, leve":
+        st.warning("⚠️ Episódio leve. Observe e avalie se persistir.")
+    else:
+        st.success("✅ Sem alteração detectada.")
+
+
+# ========== CARDÍACO (PÓS-ESFORÇO) ==========
+def render_cardiaco():
+    st.subheader("❤️ Frequência Cardíaca pós-esforço")
+    st.session_state.setdefault("c_etapa", 0)
+    st.session_state.setdefault("c_bpm15", None)
+    st.session_state.setdefault("c_fc", None)
+
+    if st.session_state.c_etapa == 0:
+        if st.button("Iniciar esforço (1 min senta-levanta)"):
+            st.session_state.c_etapa = 1; st.experimental_rerun()
+    elif st.session_state.c_etapa == 1:
+        st.info("⏳ Faça 1 minuto de senta-levanta.")
+        time.sleep(60); st.session_state.c_etapa = 2; st.experimental_rerun()
+    elif st.session_state.c_etapa == 2:
+        st.success("✅ Termine e sente-se. Prepare contagem de 15s.")
+        if st.button("Iniciar 15s"): st.session_state.c_etapa = 3; st.experimental_rerun()
+    elif st.session_state.c_etapa == 3:
+        st.info("⏳ Conte batimentos por 15s…")
+        time.sleep(15); st.session_state.c_etapa = 4; st.experimental_rerun()
+    elif st.session_state.c_etapa == 4:
+        bat = st.number_input("Batimentos em 15s:", 0, 100, step=1)
+        if st.button("Ver resultado"):
+            st.session_state.c_bpm15 = bat
+            st.session_state.c_fc = bat * 4
+            st.session_state.c_etapa = 5
+            st.experimental_rerun()
+    elif st.session_state.c_etapa == 5:
+        fc = st.session_state.c_fc
+        idade = st.session_state.get("idade", 30)
+        imc = st.session_state.get("imc", 22)
+        riscos = st.session_state.get("grupos_risco_refinados", [])
+        obeso = imc >= 30
+        risco_card = "cardíaca" in riscos
+        lim = 110 if idade < 12 else (100 if idade <= 39 else (105 if idade <= 59 else 110))
+        if obeso: lim -= 3
+        if risco_card: lim -= 5
+
+        st.subheader(f"📈 FC estimada: **{fc} bpm** (limite esperado {lim})")
+        if fc < 60:
+            st.warning("📉 Bradicardia/boa adaptação (avaliar com sintomas).")
+        elif fc <= lim:
+            st.success("✅ Dentro do esperado após esforço leve.")
+        elif fc <= lim + 10:
+            st.warning("⚠️ Leve taquicardia.")
+        else:
+            st.error("🚨 Muito acima do esperado.")
+        if st.button("Refazer (Cardíaco)"):
+            for k in ["c_etapa","c_bpm15","c_fc"]:
+                if k in st.session_state: del st.session_state[k]
+            st.experimental_rerun()
+
+
+# ========== RECUPERAÇÃO CARDÍACA ==========
+def render_recuperacao_cardiaca():
+    st.subheader("❤️ Recuperação da FC")
+    idade = st.session_state.get("idade", 30)
+    imc = st.session_state.get("imc", 22)
+    risco = "cardíaca" in st.session_state.get("grupos_risco_refinados", [])
+    bpm15 = st.number_input("Batimentos em 15s após 1 min de descanso:", 0, 100, step=1)
+    if st.button("Avaliar"):
+        bpm = bpm15 * 4
+        limite = (100 if idade < 40 else 105) - (3 if imc >= 30 else 0) - (5 if risco else 0)
+        st.subheader(f"📈 FC estimada: **{bpm} bpm** (limite {limite})")
+        if bpm <= limite:
+            st.success("✅ Boa recuperação.")
+        elif bpm <= limite + 10:
+            st.warning("⚠️ Recuperação mais lenta que o ideal.")
+        else:
+            st.error("🚨 FC alta mesmo após descanso.")
+
+
+# ========== PALPITAÇÕES ==========
+def render_palpitacoes():
+    st.subheader("💓 Palpitações (Mão no Peito)")
+    ritmo = st.radio("Ritmo:", ["Regular","Levemente irregular","Muito irregular"], index=0)
+    forca = st.radio("Força:", ["Normal","Muito forte","Muito fraca","Variando"], index=0)
+    sensacao = st.radio("Desconforto/aceleração sem razão?", ["Não","Sim"], index=0)
+    if st.button("Resultado"):
+        risco_card = "cardíaca" in st.session_state.get("grupos_risco_refinados", [])
+        alerta = (ritmo != "Regular") + (forca != "Normal") + (sensacao == "Sim") + (1 if risco_card else 0)
+        if alerta == 0:
+            st.success("✅ Nada anormal percebido.")
+        elif alerta == 1:
+            st.warning("⚠️ Sinais leves. Repita em outro momento.")
+        else:
+            st.error("🚨 Sinais de alteração. Procure avaliação.")
+
+
+# ========== APNEIA SIMPLES ==========
+def render_apneia_simples():
+    st.subheader("🌬️ Apneia Simples (prender respiração)")
+    st.session_state.setdefault("ap_inicio", None)
+    st.session_state.setdefault("ap_tempo", None)
+
+    if st.session_state.ap_inicio is None:
+        if st.button("Iniciar (prender agora)"):
+            st.session_state.ap_inicio = time.perf_counter()
+            st.experimental_rerun()
+    else:
+        if st.button("Soltei o ar (parar)"):
+            st.session_state.ap_tempo = round(time.perf_counter() - st.session_state.ap_inicio)
+            st.session_state.ap_inicio = None
+            st.experimental_rerun()
+
+    if st.session_state.ap_tempo is not None:
+        t = st.session_state.ap_tempo
+        st.subheader(f"🕒 {t} segundos")
+        if t < 15:
+            st.error("🚨 Capacidade muito baixa.")
+        elif t < 25:
+            st.warning("⚠️ Abaixo do ideal.")
+        elif t < 40:
+            st.success("✅ Dentro do esperado.")
+        else:
+            st.info("💪 Excelente resistência.")
+        if st.button("Refazer (Apneia)"):
+            for k in ["ap_inicio","ap_tempo"]:
+                if k in st.session_state: del st.session_state[k]
+            st.experimental_rerun()
+
+
+# ========== SOPRO SUSTENTADO ==========
+def render_sopro_sustentado():
+    st.subheader("🫁 Sopro Sustentado – som 'Fffff'")
+    st.session_state.setdefault("sp_inicio", None)
+    st.session_state.setdefault("sp_tempo", None)
+
+    if st.session_state.sp_inicio is None:
+        if st.button("Começar sopro"):
+            st.session_state.sp_inicio = time.perf_counter()
+            st.experimental_rerun()
+    else:
+        if st.button("Parei"):
+            st.session_state.sp_tempo = round(time.perf_counter() - st.session_state.sp_inicio)
+            st.session_state.sp_inicio = None
+            st.experimental_rerun()
+
+    if st.session_state.sp_tempo is not None:
+        t = st.session_state.sp_tempo
+        st.subheader(f"📏 Duração: **{t} s**")
+        if t < 10:
+            st.error("🚨 Força respiratória baixa.")
+        elif t < 20:
+            st.warning("⚠️ Capacidade moderada.")
+        else:
+            st.success("✅ Boa capacidade.")
+        if st.button("Refazer (Sopro)"):
+            for k in ["sp_inicio","sp_tempo"]:
+                if k in st.session_state: del st.session_state[k]
+            st.experimental_rerun()
+
+
+# ========== ENCHIMENTO CAPILAR ==========
+def render_enchimento_capilar():
+    st.subheader("🩸 Enchimento Capilar (unha)")
+    tempo = st.number_input("Segundos para voltar à cor normal:", 0, 10, step=1)
+    if st.button("Ver resultado"):
+        if tempo <= 2:
+            st.success("✅ Normal.")
+        elif tempo <= 3:
+            st.warning("⚠️ Levemente prolongado.")
+        else:
+            st.error("🚨 Lento — possível problema circulatório.")
+    if st.button("Refazer (Capilar)"):
+        st.experimental_rerun()
+
+
+# ========== FORÇA DA MÃO ==========
+def render_forca_da_mao():
+    st.subheader("✊ Força de Pegada Manual (ambas as mãos)")
+    st.session_state.setdefault("pg_etapa", "direita")
+    st.session_state.setdefault("pg_result", {})
+
+    if st.session_state.pg_etapa in ["direita","esquerda"]:
+        lado = st.session_state.pg_etapa
+        if st.button(f"Iniciar mão {lado} (1 min)"):
+            st.session_state.pg_etapa = f"{lado}_timer"; st.experimental_rerun()
+    elif st.session_state.pg_etapa.endswith("_timer"):
+        lado = st.session_state.pg_etapa.replace("_timer","")
+        st.info(f"⏳ Segure a garrafa com a mão **{lado}** por 1 minuto.")
+        time.sleep(60); st.session_state.pg_etapa = f"{lado}_result"; st.experimental_rerun()
+    elif st.session_state.pg_etapa.endswith("_result"):
+        lado = st.session_state.pg_etapa.replace("_result","")
+        terminou = st.radio(f"Aguentou 60s na mão {lado}?", ["Sim","Não"], key=f"pg_term_{lado}")
+        sentiu = st.multiselect(f"Sintomas na mão {lado}:", ["Tremor","Formigamento","Dor","Nenhum"], key=f"pg_sent_{lado}")
+        if st.button(f"Salvar mão {lado}"):
+            score = (0 if terminou=="Sim" else 1) + (1 if any(s in ["Tremor","Formigamento","Dor"] for s in sentiu) else 0)
+            st.session_state.pg_result[lado] = score
+            st.session_state.pg_etapa = "esquerda" if lado=="direita" else "fim"
+            st.experimental_rerun()
+    elif st.session_state.pg_etapa == "fim":
+        d = st.session_state.pg_result.get("direita",0)
+        e = st.session_state.pg_result.get("esquerda",0)
+        def txt(score, lado):
+            if score == 0: return f"✅ **{lado}**: força/resistência preservadas."
+            if score == 1: return f"⚠️ **{lado}**: leve fadiga/sintoma. Observe."
+            return f"🚨 **{lado}**: fraqueza/desconforto. Avaliação indicada."
+        st.markdown(txt(d, "Mão direita"))
+        st.markdown(txt(e, "Mão esquerda"))
+        if abs(d-e) >= 2: st.warning("⚖️ Diferença importante entre as mãos.")
+        if st.button("Refazer (Força da mão)"):
+            for k in ["pg_etapa","pg_result"]:
+                if k in st.session_state: del st.session_state[k]
+            st.experimental_rerun()
+
+
+# ========== SUBIR ESCADA COM UMA PERNA ==========
+def render_subir_escada_uma_perna():
+    st.subheader("🦿 Subir Escada com Uma Perna")
+    direita = st.radio("Conseguiu com a perna direita?", ["Sim","Com dificuldade","Não"], key="esc_dir")
+    esquerda = st.radio("Conseguiu com a perna esquerda?", ["Sim","Com dificuldade","Não"], key="esc_esq")
+    if st.button("Resultado"):
+        def nota(r): return 0 if r=="Sim" else (1 if r=="Com dificuldade" else 2)
+        score = nota(direita) + nota(esquerda)
+        if score == 0:
+            st.success("✅ Força/equilíbrio preservados.")
+        elif score <= 2:
+            st.warning("⚠️ Leve dificuldade — possível desequilíbrio muscular.")
+        else:
+            st.error("🚨 Dificuldade significativa — avalie.")
+
+
+# ========== HIDRATAÇÃO (TURGOR) ==========
+def render_hidratacao():
+    st.subheader("💦 Hidratação pela Pele (Turgor)")
+    st.session_state.setdefault("hid_etapa", 0)
+    if st.session_state.hid_etapa == 0:
+        if st.button("Iniciar cronômetro 2s (belisque a pele)"):
+            st.session_state.hid_etapa = 1; st.experimental_rerun()
+    elif st.session_state.hid_etapa == 1:
+        st.info("⏳ Segure a pele por 2 segundos…")
+        time.sleep(2); st.success("✅ Solte e observe!"); st.session_state.hid_etapa = 2; st.experimental_rerun()
+    elif st.session_state.hid_etapa == 2:
+        resultado = st.radio("Após soltar, o que ocorreu?", ["Voltou imediatamente","Ficou enrugada/demorou"], index=0)
+        if st.button("Ver resultado"):
+            if resultado == "Voltou imediatamente":
+                st.success("✅ Hidratação parece boa.")
+            else:
+                st.error("🚨 Pode haver desidratação. Beba água e observe.")
+        if st.button("Refazer (Hidratação)"):
+            del st.session_state.hid_etapa; st.experimental_rerun()
+
+
+# ========== ICTERÍCIA NEONATAL ==========
+def render_ictericia_neonatal():
+    st.subheader("👶 Icterícia Neonatal (observação)")
+    faixa = st.selectbox("Extensão da cor amarela:", ["Só rosto","Até o abdome","Abaixo do umbigo/corpo todo"])
+    sonol = st.checkbox("Sonolência excessiva")
+    aliment = st.checkbox("Recusa/queda da mamada")
+    febre = st.checkbox("Febre")
+    piora = st.checkbox("Piora nas últimas 24h")
+
+    risco = (3 if faixa=="Abaixo do umbigo/corpo todo" else (1 if faixa=="Até o abdome" else 0))
+    if sonol: risco += 2
+    if aliment: risco += 2
+    if febre: risco += 2
+    if piora: risco += 1
+
+    if st.button("Resultado"):
+        if risco >= 5:
+            st.error("🚨 Sinais importantes em icterícia neonatal.")
+        elif risco >= 2:
+            st.warning("⚠️ Achados que merecem avaliação.")
+        else:
+            st.success("✅ Padrão leve, tende a melhorar.")
+
+
+# ========== EDEMA INEXPLICADO ==========
+def render_edema_inexplicado():
+    st.subheader("💦 Edema Inexplicado (Fóvea + Distribuição)")
+    lado = st.selectbox("Localização", ["Ambos","Um lado","Rosto/pálpebras","Outro"])
+    inicio_subito = st.checkbox("Início súbito (min/horas)")
+    fovea = st.checkbox("Afunda ao pressionar (fóvea +)")
+    verm_dor = st.checkbox("Vermelhidão/dor local")
+    falta_ar = st.checkbox("Falta de ar")
+    dor_peito = st.checkbox("Dor no peito")
+    febre = st.checkbox("Febre")
+    ganho_peso = st.checkbox("Aumento súbito de peso (dias)")
+
+    risco = 0
+    if lado == "Um lado": risco += 2
+    if lado == "Rosto/pálpebras": risco += 1
+    if inicio_subito: risco += 2
+    if fovea: risco += 1
+    if verm_dor: risco += 1
+    if falta_ar: risco += 2
+    if dor_peito: risco += 2
+    if febre: risco += 1
+    if ganho_peso: risco += 1
+
+    if st.button("Resultado"):
+        if risco >= 5:
+            st.error("🚨 Edema com sinais relevantes.")
+        elif risco >= 3:
+            st.warning("⚠️ Achados que merecem observação.")
+        else:
+            st.success("✅ Achados leves / auto‑limitados.")
+
+
+# ========== LINFONODOS ==========
+def render_linfonodos():
+    st.subheader("🔎 Palpação de Linfonodos (check‑list)")
+    idade = st.session_state.get("idade")
+    risco_idade = 1 if (isinstance(idade,(int,float)) and (idade <= 4 or idade >= 67)) else 0
+
+    regioes = st.multiselect("Regiões:", ["Pescoço (lateral)","Abaixo da mandíbula","Atrás da orelha","Axila","Virilha"])
+    dor = st.radio("Dor ao toque?", ["Não","Leve","Moderada","Intensa"], index=0, horizontal=True)
+    mobilidade = st.radio("Mobilidade:", ["Móvel","Pouco móvel","Fixo"], index=0, horizontal=True)
+    consist = st.radio("Consistência:", ["Macia/borrachosa","Firme","Dura/pedra"], index=0, horizontal=True)
+    tam = st.radio("Tamanho:", ["< 1 cm","1–2 cm","> 2 cm"], index=0, horizontal=True)
+    dur = st.radio("Duração:", ["< 1 semana","1–3 semanas","> 3 semanas"], index=0, horizontal=True)
+    ferida = st.radio("Ferida próxima com sinais de infecção?", ["Não","Sim"], index=0, horizontal=True)
+    edema_inexp = st.radio("Edema em outra parte sem explicação?", ["Não","Sim"], index=0, horizontal=True)
+    sist = st.multiselect("Sinais sistêmicos:", ["Febre","Perda de peso","Suor noturno"])
+
+    if st.button("Analisar"):
+        alerta = 0
+        alerta += 2 if tam == "> 2 cm" else (1 if tam == "1–2 cm" else 0)
+        alerta += 2 if mobilidade == "Fixo" else (1 if mobilidade == "Pouco móvel" else 0)
+        alerta += 2 if consist == "Dura/pedra" else (1 if consist == "Firme" else 0)
+        alerta += 2 if dur == "> 3 semanas" else (1 if dur == "1–3 semanas" else 0)
+        if any(s in ["Febre","Perda de peso","Suor noturno"] for s in sist): alerta += 2
+        alerta += risco_idade
+        if edema_inexp == "Sim": alerta += 1
+
+        if alerta >= 5:
+            st.error("🚨 Achados que merecem **avaliação médica**.")
+        elif alerta >= 3:
+            if ferida == "Sim":
+                st.warning("⚠️ Achados intermediários + ferida infectada próxima. Higienize e acompanhe.")
+            else:
+                st.warning("⚠️ Achados intermediários. Monitorar e reavaliar.")
+        else:
+            if ferida == "Sim":
+                st.success("✅ Sem alarme; parece infecção local de ferida. Observe 7–14 dias.")
+            else:
+                st.success("✅ Sem sinais de alarme no momento.")
+
+
+# ========== EXTREMIDADES FRIAS / ARROXEADAS ==========
+def render_extremidades_frias():
+    st.subheader("🧊 Extremidades Frias/Arroxeadas (Reperfusão + Frio leve)")
+    st.session_state.setdefault("ef_inicio", None)
+    st.session_state.setdefault("ef_tempo", None)
+
+    cA, cB = st.columns(2)
+    with cA:
+        if st.session_state.ef_inicio is None:
+            if st.button("Iniciar (pressionando agora)"):
+                st.session_state.ef_inicio = time.perf_counter()
+                st.experimental_rerun()
+        else:
+            if st.button("Soltar (parei)"):
+                st.session_state.ef_tempo = round(time.perf_counter() - st.session_state.ef_inicio, 2)
+                st.session_state.ef_inicio = None
+                st.experimental_rerun()
+    with cB:
+        mudou_cor = st.checkbox("Mudança de cor ao frio (branco/azul/vermelho)")
+        dormencia = st.checkbox("Dormência/formigamento no frio")
+        dor_mov   = st.checkbox("Dor ao movimentar os dedos")
+        feridas   = st.checkbox("Feridas/rachaduras nas pontas")
+
+    if st.session_state.ef_tempo is not None:
+        t = st.session_state.ef_tempo
+        st.subheader(f"🕒 Reperfusão: **{t} s**")
+        risco = (1 if t > 3 else 0) + int(mudou_cor) + int(dormencia) + int(dor_mov) + int(feridas)
+        if risco >= 3:
+            st.error("🚨 Achados consistentes com alteração circulatória periférica.")
+        elif risco == 2:
+            st.warning("⚠️ Alteração leve/moderada. Reavalie em dias quentes.")
+        elif t <= 2 and not (mudou_cor or dormencia or dor_mov or feridas):
+            st.success("✅ Reperfusão rápida, sem alterações.")
+        else:
+            st.info("ℹ️ Resultado intermediário. Repita em ambiente neutro.")
+        if st.button("Refazer (Extremidades frias)"):
+            for k in ["ef_inicio","ef_tempo"]:
+                if k in st.session_state: del st.session_state[k]
+            st.experimental_rerun()
+
+
+# ========== AUSÊNCIA DE MENSTRUAÇÃO ==========
+def render_ausencia_menstruacao():
+    st.subheader("🩸 Ausência de Menstruação (atraso + sinais)")
+    import datetime as _dt
+    hoje = _dt.date.today()
+    dt = st.date_input("Primeiro dia da última menstruação", value=hoje)
+    sangramento = st.checkbox("Sangramento fora do padrão")
+    dor_abd = st.checkbox("Dor abdominal intensa")
+    tontura = st.checkbox("Tontura/desmaio")
+    febre = st.checkbox("Febre")
+
+    atraso = max((hoje - dt).days - 28, 0)
+    st.markdown(f"**Atraso estimado:** {atraso} dias")
+
+    risco = (2 if atraso >= 28 else (1 if atraso >= 7 else 0))
+    if dor_abd: risco += 2
+    if sangramento: risco += 2
+    if tontura: risco += 1
+    if febre: risco += 1
+
+    if st.button("Resultado"):
+        if risco >= 4:
+            st.error("🚨 Atraso significativo com sinais de alerta.")
+        elif risco >= 2:
+            st.warning("⚠️ Atraso relevante. Monitorar/avaliar.")
+        else:
+            st.success("✅ Atraso discreto, sem sinais fortes.")
+
+
+# ========== MENSTRUAÇÃO EXCESSIVA ==========
+def render_menstruacao_excessiva():
+    st.subheader("💧 Menstruação Excessiva (quantificação simples)")
+    qtd = st.number_input("Absorventes/fraldas ENCHARCADOS por dia", 0, step=1)
+    coag = st.checkbox("Coágulos grandes")
+    tontura = st.checkbox("Tontura/desmaio")
+    dor_abd = st.checkbox("Dor abdominal intensa")
+    febre = st.checkbox("Febre")
+
+    risco = (3 if qtd >= 8 else (2 if 5 <= qtd <= 7 else (1 if 3 <= qtd <= 4 else 0)))
+    if coag: risco += 1
+    if tontura: risco += 1
+    if dor_abd: risco += 1
+    if febre: risco += 1
+
+    if st.button("Resultado"):
+        if risco >= 4:
+            st.error("🚨 Perda elevada e/ou sinais associados importantes.")
+        elif risco >= 2:
+            st.warning("⚠️ Volume aumentado. Observe evolução.")
+        else:
+            st.success("✅ Sem evidência forte de excesso.")
+
+
+# ========== DIFERENCIAÇÃO: SANGRAMENTO RETAL x GI ==========
+def render_diferenciar_sangramento_ret_gi():
+    st.subheader("🩸 Diferenciar Sangramento Retal vs Gastrointestinal")
+    resp = st.radio("Característica observada:", ["Nenhuma","Sangue vermelho vivo","Sangue escuro/fezes enegrecidas"], index=0)
+    if st.button("Resultado"):
+        if resp == "Sangue vermelho vivo":
+            st.warning("⚠️ Possível origem retal/anal. Avaliar.")
+        elif resp == "Sangue escuro/fezes enegrecidas":
+            st.error("🚨 Possível sangramento gastrointestinal. Procure atendimento.")
+        else:
+            st.success("✅ Sem sangramento detectado.")
+
+
+# ========== PERDA DE MEMÓRIA (INÍCIO + RED FLAGS) ==========
+def render_perda_memoria():
+    st.subheader("🧠 Perda de Memória (Início + Red Flags)")
+    inicio = st.selectbox("Quando começou?", ["Horas/Dias (súbito)","Semanas/Meses (progressivo)","Eventual/leve"])
+    fala = st.checkbox("Alterações na fala")
+    forca = st.checkbox("Fraqueza/formigamento de um lado")
+    visao = st.checkbox("Alteração visual súbita")
+    cefaleia = st.checkbox("Cefaleia muito intensa")
+    conv = st.checkbox("Convulsão")
+    trauma = st.checkbox("Trauma craniano recente")
+    febre = st.checkbox("Febre")
+    sed_alcool = st.checkbox("Sedativos/álcool")
+    idade65 = st.checkbox("Idoso (>65 anos)")
+
+    risco = (2 if inicio=="Horas/Dias (súbito)" else (1 if inicio=="Semanas/Meses (progressivo)" else 0))
+    for flag, val in {
+        fala:2, forca:2, visao:2, cefaleia:2, conv:2, trauma:1, febre:1, sed_alcool:1, idade65:1
+    }.items():
+        if flag: risco += val
+
+    if st.button("Resultado"):
+        if risco >= 5:
+            st.error("🚨 Comprometimento neurológico relevante — avalie.")
+        elif risco >= 2:
+            st.warning("⚠️ Fatores associados presentes. Monitorar/avaliar.")
+        else:
+            st.success("✅ Sem sinais fortes de alerta pelo relato.")
+
+
+# ========== EQUILÍBRIO ==========
+def render_equilibrio():
+    st.subheader("🦶 Equilíbrio com Olhos Fechados")
+    conseguiu = st.radio("Manteve 30s?", ["Sim, sem problemas","Sim, com desequilíbrio leve","Não"], index=0)
+    if st.button("Resultado"):
+        if conseguiu == "Sim, sem problemas":
+            st.success("✅ Equilíbrio adequado.")
+        elif conseguiu == "Sim, com desequilíbrio leve":
+            st.warning("⚠️ Pequena instabilidade. Observe.")
+        else:
+            st.error("🚨 Dificuldade aparente de equilíbrio.")
