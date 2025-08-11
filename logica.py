@@ -1,6 +1,6 @@
-from .utils import normalizar, max_cor
-from .utils import classificar_imc  # se precisar aqui
-from .dados_sintomas import sintoma_para_sistema, sistemas_secundarios
+from utils import normalizar, max_cor
+from utils import classificar_imc  # se precisar aqui
+from dados_sintomas import sintoma_para_sistema, sistemas_secundarios
 
 def gerar_sistemas_afetados_por_fatores(idade, imc_class, gravida, condicoes_brutas):
     refinados = {normalizar(x) for x in (condicoes_brutas or [])}
