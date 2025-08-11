@@ -230,7 +230,7 @@ router = {
     "Variação de Peso (Últimos 30 Dias)": render_variacao_peso_30d,
 
     # Específicos
-    "Perda Súbita de Coordenação": render_perda_subita_coordenacao,
+    "Perda Súbita de Coordenação": render_perda_subita_de_coordenacao,
     "Desmaio ou tontura": render_desmaio_tontura,
     "Trabalho de parto": render_trabalho_de_parto,
     "Redução dos movimentos fetais": render_reducao_movimentos_fetais,
