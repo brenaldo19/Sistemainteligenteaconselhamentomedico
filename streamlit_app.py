@@ -149,7 +149,6 @@ sistemas_autotestes = {
         "Sudorese Noturna",
         # Olhos/pele/geral
         "Dor ou olho vermelho",
-        "Infecção em ferida",
         "Alterações visuais súbitas",
         # Mama/testículo
         "Secreção Mamilar (fora da amamentação)",
@@ -241,7 +240,6 @@ router = {
     "Alterações na fala": render_alteracoes_fala,
 
     "Dor ou olho vermelho": render_dor_olho_vermelho,
-    "Infecção em ferida": render_infeccao_em_ferida,
 
     "Nódulo na Mama": render_nodulo_na_mama,
     "Nódulo Testicular": render_nodulo_testicular,
