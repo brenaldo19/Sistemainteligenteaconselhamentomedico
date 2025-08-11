@@ -793,6 +793,96 @@ def render_sopro_sustentado():
                 if k in st.session_state: del st.session_state[k]
             st.experimental_rerun()
 
+def render_nodulo_mama():
+    st.subheader("🧪 Nódulo na Mama")
+    duro_fixo = st.checkbox("Nódulo duro e pouco móvel (parece 'preso'")
+    crescimento_rapido = st.checkbox("Crescimento perceptível em semanas/meses")
+    retracao_pele_mamilo = st.checkbox("Retração do mamilo ou pele com aspecto de 'casca de laranja'")
+    secrecao_sanguinolenta = st.checkbox("Saída de secreção sanguinolenta pelo mamilo")
+    assimetria_recente = st.checkbox("Assimetria recente entre as mamas")
+    dor_ciclica = st.checkbox("Dor que varia com o ciclo (mastalgia cíclica)")
+
+    risco = 0
+    if duro_fixo: risco += 2
+    if crescimento_rapido: risco += 1
+    if retracao_pele_mamilo: risco += 2
+    if secrecao_sanguinolenta: risco += 2
+    if assimetria_recente: risco += 1
+    if dor_ciclica: risco += 0  # dor cíclica isolada costuma ser benigno
+
+    if duro_fixo and (retracao_pele_mamilo or secrecao_sanguinolenta):
+        risco = max(risco, 5)  # reforço para combinação de sinais de alarme
+
+    if risco >= 5:
+        st.error("🚨 Sinais de alerta para nódulo mamário. Procure avaliação com mastologista o quanto antes.")
+        st.markdown("🔎 Relacionados: **Nódulo na Mama, Secreção Mamilar, Lesões na pele**")
+    elif risco >= 2:
+        st.warning("⚠️ Achados que merecem avaliação clínica em breve.")
+        st.markdown("🔎 Relacionados: **Nódulo na Mama, Secreção Mamilar**")
+    else:
+        st.success("✅ Sem combinação forte de sinais de alerta no momento.")
+
+def render_secrecao_mamilar():
+    st.subheader("🧪 Secreção Mamilar (fora da amamentação)")
+    unilateral = st.checkbox("Secreção unilateral (apenas uma mama)")
+    espontanea = st.checkbox("Secreção espontânea (sem apertar)")
+    unico_ducto = st.checkbox("Saindo de um único ponto/ducto")
+    sanguinolenta = st.checkbox("Secreção sanguinolenta ou serossanguinolenta")
+    transparente = st.checkbox("Transparente/água de rocha")
+    esverdeada_leitosa = st.checkbox("Esverdeada/amarelada/leitosa (fora da amamentação)")
+
+    risco = 0
+    if unilateral: risco += 1
+    if espontanea: risco += 1
+    if unico_ducto: risco += 1
+    if sanguinolenta: risco += 2
+    if transparente: risco += 1
+    if esverdeada_leitosa: risco += 0  # frequentemente benigno/ducto-ectasia/galactorreia
+
+    # combinação clássica de alerta: unilateral + espontânea + único ducto + sanguinolenta
+    if unilateral and espontanea and unico_ducto and sanguinolenta:
+        risco = max(risco, 5)
+
+    if risco >= 5 or sanguinolenta:
+        st.error("🚨 Padrão de alerta para secreção mamilar. Agende avaliação com mastologista.")
+        st.markdown("🔎 Relacionados: **Secreção Mamilar, Nódulo na Mama**")
+    elif risco >= 2:
+        st.warning("⚠️ Achados que justificam avaliação clínica.")
+        st.markdown("🔎 Relacionados: **Secreção Mamilar**")
+    else:
+        st.success("✅ Sem combinação forte de sinais de alerta no momento.")
+
+def render_nodulo_testicular():
+    st.subheader("🧪 Nódulo Testicular")
+    aumento_indolor = st.checkbox("Aumento de volume indolor no testículo")
+    nodulo_duro = st.checkbox("Nódulo firme/duro ao toque")
+    assimetria_recente = st.checkbox("Assimetria recente entre os testículos")
+    peso_escroto = st.checkbox("Sensação de peso no escroto")
+    dor_subita_intensa = st.checkbox("Dor súbita intensa com náusea/vômito")
+    febre_dor_progressiva = st.checkbox("Dor progressiva com febre (sensação de inflamação)")
+
+    # atalho emergente: torção testicular
+    if dor_subita_intensa:
+        st.error("🚨 Dor súbita intensa com náusea pode indicar **torção testicular**. Procure **emergência imediatamente**.")
+        st.markdown("🔎 Relacionados: **Dor nos testículos**")
+        # mesmo que haja outros achados, a orientação urgente prevalece
+        return
+
+    risco = 0
+    if aumento_indolor: risco += 2
+    if nodulo_duro: risco += 2
+    if assimetria_recente: risco += 1
+    if peso_escroto: risco += 1
+    if febre_dor_progressiva: risco += 1  # pode sugerir orquiepididimite (infeccioso), menos típico de tumor
+
+    if (aumento_indolor and nodulo_duro) or risco >= 4:
+        st.error("🚨 Achados compatíveis com nódulo testicular suspeito. Procure urologista com brevidade.")
+        st.markdown("🔎 Relacionados: **Nódulo Testicular, Dor nos testículos**")
+    elif risco >= 2:
+        st.warning("⚠️ Achados que justificam avaliação clínica.")
+        st.markdown("🔎 Relacionados: **Nódulo Testicular**")
+    else:
+        st.success("✅ Sem combinação forte de sinais de alerta no momento.")
 
 # ========== ENCHIMENTO CAPILAR ==========
 def render_enchimento_capilar():
