@@ -8,7 +8,7 @@ from src.dicionario import dic
 # Ative só se o arquivo existir:
 # from src.ui.autotestes import *
 
-from src.utils import normalizar, calcular_imc, classificar_imc
+from src.utils import calcular_imc, classificar_imc
 from src.dados_sintomas import sistemas_sintomas, sintoma_para_sistema
 from src.logica import (
     gerar_sistemas_afetados_por_fatores,
