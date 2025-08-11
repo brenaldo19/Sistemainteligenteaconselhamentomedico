@@ -1068,3 +1068,403 @@ def render_equilibrio():
             st.warning("⚠️ Pequena instabilidade. Observe.")
         else:
             st.error("🚨 Dificuldade aparente de equilíbrio.")
+
+# ======================= REFLEXO SELETIVO =======================
+def render_reflexo_seletivo():
+    st.subheader("✋ Teste de Reflexo Seletivo – Clique apenas quando aparecer o número 7")
+    st.write("Você verá 10 números. Clique **somente** quando aparecer o número 7.")
+
+    if "clique_reflexo" not in st.session_state:
+        numeros = [random.randint(0, 9) for _ in range(9)]
+        numeros.append(7)
+        random.shuffle(numeros)
+        st.session_state.clique_reflexo = {
+            "numeros": numeros,
+            "respostas": [],
+            "indice": 0
+        }
+
+    dados = st.session_state.clique_reflexo
+    total = len(dados["numeros"])
+
+    if dados["indice"] < total:
+        atual = dados["numeros"][dados["indice"]]
+        st.markdown(f"### Número mostrado: **{atual}**")
+        st.markdown(f"Rodada {dados['indice'] + 1} de {total}")
+
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            if st.button("Clique se for 7", key=f"clicar_{dados['indice']}"):
+                clicou = (atual == 7)
+                dados["respostas"].append(("clicou", atual))
+                dados["indice"] += 1
+                st.experimental_rerun()
+        with col2:
+            if st.button("Ignorar", key=f"ignorar_{dados['indice']}"):
+                dados["respostas"].append(("ignorou", atual))
+                dados["indice"] += 1
+                st.experimental_rerun()
+    else:
+        st.subheader("📊 Resultado do Teste")
+
+        cliques_certos = sum(1 for acao, n in dados["respostas"] if acao == "clicou" and n == 7)
+        cliques_errados = sum(1 for acao, n in dados["respostas"] if acao == "clicou" and n != 7)
+        deixou_passar = sum(1 for acao, n in dados["respostas"] if acao == "ignorou" and n == 7)
+        total_7 = dados["numeros"].count(7)
+
+        st.write(f"Números 7 apresentados: {total_7}")
+        st.write(f"Cliques corretos: {cliques_certos}")
+        st.write(f"Cliques errados (falsos positivos): {cliques_errados}")
+        st.write(f"Números 7 ignorados (erros por omissão): {deixou_passar}")
+
+        if cliques_errados == 0 and deixou_passar == 0:
+            st.success("✅ Excelente! Atenção e reflexos muito bons.")
+        elif cliques_errados <= 1 and deixou_passar <= 1:
+            st.info("⚠️ Bom desempenho, mas pode melhorar atenção seletiva.")
+            st.markdown("🔎 Sintomas relacionados: **Ansiedade, Agitação, Tremores**")
+        else:
+            st.warning("🔄 Atenção baixa ou reflexo impreciso. Praticar foco seletivo pode ajudar.")
+            st.markdown("🔎 Sintomas relacionados: **Confusão mental, Agitação intensa, Comportamento estranho à normalidade**")
+
+        if st.button("Refazer teste (Reflexo Seletivo)"):
+            del st.session_state["clique_reflexo"]
+            st.experimental_rerun()
+
+
+# ======================= COORDENAÇÃO FINA =======================
+def render_coordenacao_fina():
+    st.subheader("✍️ Teste de Coordenação Fina – Espiral com a mão não dominante")
+    st.markdown("""
+    Este teste avalia sua **coordenação motora fina**. Você vai desenhar uma espiral usando a **mão que você menos usa** (geralmente a esquerda para destros, e vice-versa).
+
+    ### Como fazer:
+    1. Pegue papel e caneta.
+    2. Com a mão não dominante, tente desenhar uma espiral.
+    3. Depois desenhe outra com a mão dominante.
+    4. Compare os dois resultados.
+    """)
+
+    tremor = st.radio("O desenho com a mão não dominante saiu com muito tremor?", ["Não", "Leve", "Moderado", "Grave"])
+    comparacao = st.radio("Comparado com a mão dominante, a diferença foi...", ["Pequena", "Moderada", "Muito grande"])
+
+    if st.button("Ver resultado (Coordenação Fina)"):
+        if tremor == "Grave" or comparacao == "Muito grande":
+            st.error("🚨 Pode haver alteração significativa na coordenação fina. Se isso for incomum, procure orientação médica.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Tremores ou movimentos involuntários**")
+        elif tremor in ["Moderado"] or comparacao == "Moderada":
+            st.warning("⚠️ Coordenação não dominante reduzida. Normal em alguns casos, mas vale observar.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Tremores ou movimentos involuntários**")
+        else:
+            st.success("✅ Coordenação fina preservada. Diferença entre as mãos dentro do esperado.")
+
+
+# ======================= HUMOR E ANSIEDADE =======================
+def render_humor_ansiedade():
+    st.subheader("🧠 Teste de Humor e Pensamentos Acelerados")
+    st.markdown("Como você tem se sentido nos últimos 7 dias?")
+    humor = st.slider("Numa escala de 0 a 10, como está seu humor geral?", 0, 10, 5)
+    acelerado = st.radio("Pensamentos acelerados/dificuldade de desligar a mente?", ["Não", "Às vezes", "Sim, com frequência"])
+    sono = st.radio("Tem dormido bem?", ["Sim", "Sono leve/interrompido", "Insônia ou dificuldade para dormir"])
+
+    if st.button("Ver resultado (Humor e Ansiedade)"):
+        score = 0
+        if humor <= 3: score += 1
+        if acelerado == "Sim, com frequência": score += 1
+        if sono != "Sim": score += 1
+
+        if score == 0:
+            st.success("✅ Humor e mente equilibrados no momento.")
+        elif score == 1:
+            st.warning("⚠️ Leves sinais de estresse ou alteração emocional.")
+        else:
+            st.error("🚨 Sinais de sobrecarga mental ou emocional. Procure ajuda se persistir.")
+
+
+# ======================= HUMOR NA ÚLTIMA SEMANA =======================
+def render_humor_ultima_semana():
+    st.subheader("🧠 Avaliação de Humor nos Últimos 7 Dias")
+    st.write("Avalie seu humor em cada dia (1 a 5).")
+    humor_dias = []
+    for i in range(1, 8):
+        nota = st.slider(f"Dia {i}", min_value=1, max_value=5, value=3, key=f"humor_dia_{i}")
+        humor_dias.append(nota)
+
+    if st.button("Ver resultado (Humor da semana)"):
+        media = sum(humor_dias) / 7
+        st.markdown(f"📊 **Média do humor nos últimos 7 dias: {media:.2f}**")
+        if media >= 4:
+            st.success("😊 Humor predominantemente positivo.")
+        elif media >= 2.5:
+            st.info("😐 Humor dentro do esperado, com variações.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Ansiedade ou agitação intensa, Comportamento estranho à normalidade**")
+        else:
+            st.warning("😟 Humor predominantemente baixo. Avalie se algo está afetando seu bem-estar.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Ansiedade ou agitação intensa, Comportamento estranho à normalidade, Confusão mental**")
+
+
+# ======================= AUDIÇÃO – DETECÇÃO DE SOM =======================
+def render_audicao_deteccao_de_som():
+    st.subheader("🔊 Teste de Detecção de Som")
+    st.info("Use fones de ouvido. Ajuste o volume para um nível confortável.")
+    if st.button("▶️ Tocar som de teste (1000 Hz)"):
+        st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/bip_bip_1000Hz_4s.mp3", format="audio/mp3")
+
+    resposta = st.radio("Você conseguiu ouvir o som com clareza?", ["Sim", "Não", "Somente em um dos ouvidos"])
+    if st.button("Ver resultado (Detecção de Som)"):
+        if resposta in ["Não", "Somente em um dos ouvidos"]:
+            st.warning("⚠️ Sinal de alteração na audição.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Alteração na audição**")
+        else:
+            st.success("✅ Tudo certo com sua audição.")
+
+
+# ======================= AUDIÇÃO – FREQUÊNCIAS ALTAS/BAIXAS =======================
+def render_audicao_frequencias():
+    st.subheader("🎧 Teste de Frequências Auditivas")
+    st.markdown("Clique para ouvir cada frequência. Use fones de ouvido.")
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("🔈 Frequência baixa (250 Hz)"):
+            st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/beep_250Hz.mp3", format="audio/mp3")
+        if st.button("🔈 Frequência média (1000 Hz)"):
+            st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/beep_1000Hz.mp3", format="audio/mp3")
+    with col2:
+        if st.button("🔈 Frequência alta (8000 Hz)"):
+            st.audio("https://raw.githubusercontent.com/brenaldo19/Sistemainteligenteaconselhamentomedico/main/beep_8000Hz.mp3", format="audio/mp3")
+
+    resposta = st.radio("Você ouviu todos os sons com clareza?",
+                         ["Sim", "Não ouvi o grave (250 Hz)", "Não ouvi o médio", "Não ouvi o agudo (8000 Hz)"])
+    if st.button("Ver resultado (Frequências)"):
+        if resposta != "Sim":
+            st.warning("⚠️ Pode indicar perda auditiva seletiva.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Alteração na audição**")
+        else:
+            st.success("✅ Sem alterações aparentes.")
+
+
+# ======================= CONTAGEM EM UMA RESPIRAÇÃO =======================
+def render_contagem_em_uma_respiracao():
+    st.subheader("🗣️ Contagem em uma Respiração (um fôlego)")
+    idade = st.session_state.get("idade")
+    if idade is None: faixa = "adulto"
+    elif idade <= 12: faixa = "crianca"
+    elif idade >= 67: faixa = "idoso"
+    else: faixa = "adulto"
+    cortes = {"crianca":[8,16,26], "adulto":[10,20,30], "idoso":[8,18,26]}
+    c = cortes[faixa]
+
+    st.markdown("""
+    **Como fazer:**
+    1. Respire fundo, clique em **Iniciar**, e comece a contar em voz alta: "1, 2, 3, ..."
+    2. Pare quando precisar inspirar de novo e digite o último número alcançado.
+    """)
+
+    st.session_state.setdefault("onebreath_inicio", None)
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.session_state.onebreath_inicio is None:
+            if st.button("Iniciar"):
+                st.session_state.onebreath_inicio = time.perf_counter()
+                st.experimental_rerun()
+        else:
+            st.info("Contando... fale em voz alta até precisar inspirar novamente.")
+    with col2:
+        if st.button("Terminei"):
+            st.session_state.onebreath_inicio = None
+            st.experimental_rerun()
+
+    contagem = st.number_input("Digite o último número que conseguiu falar em um fôlego:", min_value=0, step=1, value=0)
+    if st.button("Ver resultado (Contagem em um fôlego)"):
+        if contagem <= c[0]:
+            st.error("🚨 Resultado baixo para a sua faixa etária.")
+            st.markdown("🔎 Relacionados: **falta de ar, dificuldade respiratória, ansiedade ou agitação intensas**")
+        elif contagem <= c[1]:
+            st.warning("⚠️ Abaixo do ideal na sua faixa. Monitore.")
+            st.markdown("🔎 Relacionados: **Falta de ar, ansiedade ou agitação intensas**")
+        elif contagem <= c[2]:
+            st.success("✅ Dentro do esperado para a sua faixa etária.")
+        else:
+            st.info("💪 Desempenho acima do esperado.")
+
+
+# ======================= VARIZES =======================
+def render_varizes():
+    st.subheader("🦵 Teste de Peso nas Pernas (Possível Sinal de Varizes)")
+    st.markdown("""
+    Fique **parado em pé** por **2 minutos**, sem apoio. Observe peso, desconforto, formigamento ou dor.
+    """)
+
+    sintomas = st.multiselect("Durante os 2 minutos, você sentiu:", ["Peso nas pernas", "Inchaço", "Formigamento", "Dor", "Nenhum sintoma"])
+    idade = st.session_state.get("idade", 30)
+    imc = st.session_state.get("imc", 22)
+
+    if st.button("Ver resultado (Varizes)"):
+        risco = 0
+        if idade > 50: risco += 1
+        if imc >= 30: risco += 1
+        if any(s != "Nenhum sintoma" for s in sintomas): risco += 1
+
+        if risco == 0:
+            st.success("✅ Nenhum sinal relevante de varizes foi percebido.")
+        elif risco == 1:
+            st.warning("⚠️ Pequeno desconforto. Vale observar a frequência dos sintomas.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Formigamento ou perda de força**")
+        else:
+            st.error("🚨 Possível comprometimento venoso nas pernas. Pode indicar início de quadro de varizes.")
+
+
+# ======================= LEVANTAR DO CHÃO =======================
+def render_levantar_do_chao():
+    st.subheader("🧍‍♂️ Teste de Mobilidade: Levantar do Chão sem Apoio")
+    st.markdown("""
+    1. Sente-se no chão.
+    2. Tente levantar-se **sem usar as mãos** (ou o mínimo possível).
+    """)
+
+    apoio = st.radio("Para se levantar, você usou:", [
+        "Apenas as pernas (sem mãos)",
+        "Uma das mãos",
+        "Ambas as mãos ou precisei de apoio externo"
+    ])
+
+    idade = st.session_state.get("idade", 30)
+
+    if st.button("Ver resultado (Levantar do chão)"):
+        if apoio == "Apenas as pernas (sem mãos)":
+            st.success("✅ Excelente mobilidade e força funcional.")
+        elif apoio == "Uma das mãos":
+            st.warning("⚠️ Leve dificuldade funcional. Normal em algumas pessoas.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Formigamento ou perda de força**")
+        else:
+            st.error("🚨 Mobilidade comprometida. Pode indicar fraqueza ou limitação funcional.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Formigamento ou perda de força, dor na perna ou dificuldade pra caminhar**")
+        if idade > 60 and apoio != "Apenas as pernas (sem mãos)":
+            st.markdown("👴 Em pessoas >60, esse teste é um preditor de risco de quedas.")
+
+
+# ======================= COR DA URINA =======================
+def render_cor_da_urina():
+    st.subheader("💧 Teste Visual da Cor da Urina")
+    st.markdown("Observe sua urina e escolha a cor mais próxima.")
+
+    cor = st.radio("Qual cor mais se parece com a sua urina?", [
+        "Transparente ou amarelo-claro",
+        "Amarelo forte",
+        "Amarelo escuro ou âmbar",
+        "Laranja ou marrom",
+        "Vermelha ou com sangue visível"
+    ])
+
+    if st.button("Ver resultado (Cor da urina)"):
+        if cor == "Transparente ou amarelo-claro":
+            st.success("✅ Hidratação adequada. Urina normal.")
+        elif cor == "Amarelo forte":
+            st.warning("⚠️ Leve desidratação. Beba mais água.")
+        elif cor == "Amarelo escuro ou âmbar":
+            st.warning("⚠️ Provável desidratação. Fique atento à ingestão de líquidos.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Alterações urinárias**")
+        elif cor == "Laranja ou marrom":
+            st.error("🚨 Pode haver presença de bile, desidratação severa ou uso de medicamentos.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Icterícia**")
+        else:
+            st.error("🚨 Sangue na urina. **Procure um médico imediatamente.**")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Infecção urinária, dor ou dificuldade ao urinar**")
+
+
+# ======================= DIGESTÃO =======================
+def render_digestao():
+    st.subheader("🍽️ Teste de Sensações Pós-Refeição")
+    st.markdown("Marque sintomas que costuma sentir **após uma refeição comum**.")
+    sintomas = st.multiselect("Sintomas:", [
+        "Azia ou queimação no peito",
+        "Empachamento (sensação de peso)",
+        "Arroto frequente",
+        "Inchaço abdominal ou gases",
+        "Nada disso"
+    ])
+
+    if st.button("Ver resultado (Digestão)"):
+        if not sintomas or "Nada disso" in sintomas:
+            st.success("✅ Digestão aparentemente normal.")
+        elif len(sintomas) == 1:
+            st.info("🔎 Sintoma isolado. Observe se repete com frequência.")
+        elif len(sintomas) == 2:
+            st.warning("⚠️ Desconforto digestivo recorrente (possível relação com alimentação).")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Gases, dor abdominal**")
+        else:
+            st.error("🚨 Múltiplos sintomas digestivos. Avaliação médica pode ser indicada.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Gases, dor abdominal, diarreia, náusea e enjoo**")
+
+
+# ======================= RITMO INTESTINAL =======================
+def render_ritmo_intestinal():
+    st.subheader("🚽 Teste de Ritmo Intestinal")
+    freq = st.radio("Frequência semanal:", ["Todos os dias", "4 a 6 vezes", "1 a 3 vezes", "Menos de 1 vez"])
+    aspecto = st.radio("Consistência das fezes:", ["Macias/normais", "Muito duras", "Muito moles/líquidas", "Varia bastante"])
+
+    if st.button("Ver resultado (Ritmo intestinal)"):
+        risco = 0
+        if freq in ["1 a 3 vezes", "Menos de 1 vez"]: risco += 1
+        if aspecto in ["Muito duras", "Muito moles/líquidas", "Varia bastante"]: risco += 1
+
+        if risco == 0:
+            st.success("✅ Ritmo e consistência normais.")
+        elif risco == 1:
+            st.warning("⚠️ Leve alteração. Observe nos próximos dias.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Diarreia**")
+        else:
+            st.error("🚨 Alterações importantes. Avaliação pode ser necessária.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Diarreia, sangramento gastrointestinal, sangramento retal**")
+
+
+# ======================= PELE E COCEIRA =======================
+def render_pele_e_coceira():
+    st.subheader("🧴 Autoavaliação de Manchas ou Coceiras na Pele")
+    alteracoes = st.multiselect("Você percebeu recentemente:", [
+        "Manchas vermelhas ou escuras",
+        "Coceira frequente",
+        "Descamação ou ressecamento excessivo",
+        "Lesões que não cicatrizam",
+        "Nada disso"
+    ])
+
+    if st.button("Ver resultado (Pele e Coceira)"):
+        if not alteracoes or "Nada disso" in alteracoes:
+            st.success("✅ Nenhuma alteração cutânea perceptível no momento.")
+        elif "Lesões que não cicatrizam" in alteracoes:
+            st.error("🚨 Lesões persistentes precisam ser avaliadas por um dermatologista.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Manchas anormais na pele, Infecção em ferida, lesões na pele, alergia cutânea**")
+        elif len(alteracoes) >= 2:
+            st.warning("⚠️ Múltiplos sinais de alteração cutânea. Fique atento e monitore a evolução.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Coceira, Infecção em ferida, lesões na pele, alergia cutânea**")
+        else:
+            st.info("🔎 Pequena alteração percebida. Se persistir por dias, procure um profissional.")
+
+
+# ======================= URINÁRIO =======================
+def render_urinario():
+    st.subheader("💧 Teste Informal de Frequência Urinária")
+    st.markdown("Avalia padrão diário de urina para possíveis alterações renais/urinárias.")
+
+    freq = st.selectbox("Quantas vezes você urina por dia (em média)?", ["Menos de 4 vezes", "4 a 7 vezes", "8 a 10 vezes", "Mais de 10 vezes"])
+    nocturia = st.radio("Você acorda à noite para urinar?", ["Não", "1 vez", "2 vezes ou mais"])
+    jato = st.radio("Dificuldade para iniciar/interromper o jato?", ["Não", "Leve", "Moderada", "Grave"])
+
+    if st.button("Ver resultado (Urinário)"):
+        score = 0
+        if freq in ["Menos de 4 vezes", "Mais de 10 vezes"]: score += 1
+        if nocturia == "2 vezes ou mais": score += 1
+        if jato in ["Moderada", "Grave"]: score += 1
+
+        st.markdown("---")
+        st.subheader("📊 Avaliação")
+        if score == 0:
+            st.success("✅ Nenhum sinal de alteração evidente no padrão urinário.")
+        elif score == 1:
+            st.warning("⚠️ Leve alteração no padrão urinário. Mantenha atenção.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Alterações urinárias**")
+        else:
+            st.error("🚨 Alterações percebidas. Considere procurar urologista ou clínico.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Alterações urinárias; retenção ou incontinência (depende do caso)**")
+        if st.button("Refazer teste urinário"):
+            st.experimental_rerun()
