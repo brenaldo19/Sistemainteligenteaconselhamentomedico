@@ -1,5 +1,5 @@
 import streamlit as st
-from .utils import normalizar, score_para_cor, max_cor
+from utils import normalizar, score_para_cor, max_cor
 
 FLUXOS = {}  # Catálogo principal
 
