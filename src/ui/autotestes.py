@@ -771,7 +771,7 @@ def render_apneia_simples():
 # ========== SOPRO SUSTENTADO ==========
 def render_sopro_sustentado():
     st.subheader("🫁 Sopro Sustentado – som 'Fffff'")
-    st.markdown("Aperte o botão e assopre o máximo possível,ao parar,aperte o botão para encerrar a contagem"
+    st.markdown("Aperte o botão e assopre o máximo possível,ao parar,aperte o botão para encerrar a contagem")
     st.session_state.setdefault("sp_inicio", None)
     st.session_state.setdefault("sp_tempo", None)
 
