@@ -5,18 +5,16 @@ import pandas as pd
 from pathlib import Path
 
 # Imports do seu domínio (agora externos)
-from dicionario import dic
-from fluxos import FLUXOS, coletar_respostas_fluxo, pontuar_fluxo, labels_fluxos, eh_fluxo, calcular_cor_final
-from utils import calcular_imc, classificar_imc
-from dados_sintomas import sistemas_sintomas, sintoma_para_sistema
+from src.dicionario import dic
 from src.ui.autotestes import *
-from logica import (
-    gerar_sistemas_afetados_por_fatores,
-    sistemas_afetados_secundariamente,
-    verificar_se_deve_subir_cor,
-    classificar_combinacao,
-    calcular_ajuste_por_fatores_conservador,
-)
+from src.utils import calcular_imc, classificar_imc
+from src.dados_sintomas import sistemas_sintomas, sintoma_para_sistema
+from src.logica import (gerar_sistemas_afetados_por_fatores, sistemas_afetados_secundariamente,
+                        verificar_se_deve_subir_cor, classificar_combinacao,
+                        calcular_ajuste_por_fatores_conservador)
+from src.fluxos import (FLUXOS, coletar_respostas_fluxo, pontuar_fluxo,
+                        labels_fluxos, eh_fluxo, calcular_cor_final)
+
 
 # ---------------- Session state inicial ----------------
 # Estado inicial unificado
