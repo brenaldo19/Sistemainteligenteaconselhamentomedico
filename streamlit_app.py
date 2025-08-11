@@ -151,10 +151,12 @@ sistemas_autotestes = {
         "Insônia",
         "Tremores ou movimentos involuntários",
         "Alterações na fala",
+        "Sudorese noturna"
         # Olhos/pele/geral
         "Dor ou olho vermelho",
         "Icterícia",
         "Infecção em ferida",
+        "Alterações visuais súbitas",
         # Mama/testículo
         "Secreção Mamilar (fora da amamentação)",
         "Nódulo na Mama",
