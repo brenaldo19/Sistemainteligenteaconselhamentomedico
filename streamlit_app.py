@@ -1,349 +1,72 @@
+# ===== topo do arquivo: streamlit_app.py =====
 import streamlit as st
-from datetime import datetime
-import pandas as pd
-import unicodedata
-import re
+from pathlib import Path
 
-def normalizar(texto: str) -> str:
-    if not isinstance(texto, str):
-        return ""
-    t = unicodedata.normalize("NFKD", texto).encode("ASCII", "ignore").decode("ASCII")
-    t = t.strip().lower()
-    t = re.sub(r"\s+", "_", t)
-    t = re.sub(r"[^a-z0-9_]", "", t)
-    return t
+# Imports do seu domínio (agora externos)
+from utils import calcular_imc, classificar_imc
+from dados_sintomas import sistemas_sintomas, sintoma_para_sistema
+from logica import (
+    gerar_sistemas_afetados_por_fatores,
+    sistemas_afetados_secundariamente,
+    verificar_se_deve_subir_cor,
+    classificar_combinacao,
+    calcular_ajuste_por_fatores_conservador,
+)
 
-ORDEM_CORES = ["verde", "amarelo", "laranja", "vermelho"]
-
-def max_cor(*cores):
-    idx = [ORDEM_CORES.index(c) for c in cores if c in ORDEM_CORES]
-    return ORDEM_CORES[max(idx)] if idx else "verde"
-
-def score_para_cor(score, tabela):
-    # Ordena por limiar, do maior pro menor
-    tabela_ord = sorted(tabela, key=lambda x: x[0], reverse=True)
-    for limiar, cor in tabela_ord:
-        if score >= limiar:
-            return cor
-    return "verde"
-
-# ===============================
-# MAPEAMENTO DE SINTOMAS E SISTEMAS
-# ===============================
-
-sistemas_sintomas = {
-    "cardiaco": [
-        "dor no peito", "palpitação", "dor no ombro ou braço", "queimação no peito"
-    ],
-    "respiratorio": [
-        "falta de ar", "dificuldade respiratória", "engasgo ou obstrução das vias aéreas"
-    ],
-    "neurologico": [
-        "convulsão", "confusão mental", "comportamento estranho à normalidade",
-        "desmaio ou tontura", "alterações na fala", "alterações visuais súbitas",
-        "tremores ou movimentos involuntários", "formigamento ou perda de força", "sensação de desmaio"
-    ],
-    "gastrointestinal": [
-        "náusea ou enjoo", "diarreia em criança", "sangramento gastrointestinal",
-        "vômito em criança", "dor abdominal", "gases", "diarreia", "sangramento retal", "vômito"
-    ],
-    "urinario": [
-        "dor ou dificuldade ao urinar", "retenção urinária", "incontinência urinária",
-        "alterações urinárias"
-    ],
-    "musculoesqueletico": [
-        "dor nas articulações", "dor nas costas", "dor na perna e dificuldade pra caminhar",
-        "trauma ou queda", "dor no ombro ou braço"
-    ],
-    "cutaneo": [
-        "alergia cutânea", "reação alérgica", "lesões na pele", "Manchas anormais na pele", "coceira na pele", "inchaço incomum"
-    ],
-    "oftalmologico": [
-        "alterações visuais súbitas", "dor ou olho vermelho", "inchaço nos olhos ou face",
-        "corpo estranho nos olhos, ouvidos ou nariz"
-    ],
-    "otorrino": [
-        "dor no ouvido", "coriza e espirros", "sangramento nasal", "Alteração na audição", "dificuldade pra engolir", "corpo estranho na garganta"
-    ],
-    "obstetrico": [
-        "dor durante a gravidez", "trabalho de parto", "redução dos movimentos fetais", "sangramento vaginal"
-    ],
-    "pediatrico": [
-        "febre lactente", "icterícia neonatal", "queda em criança", "choro persistente"
-    ],
-    "hematologico": [
-        "sangramento ativo", "sangramento gastrointestinal", "sangramento nasal", "sangramento retal", "inchaço dos linfonodos"
-    ],
-    "psiquiatrico": [
-        "ansiedade ou agitação intensas", "comportamento estranho à normalidade"
-    ],
-    "endocrino": [
-        "hipoglicemia", "hiperglicemia", "hipotensão", "temperatura muito baixa"
-    ],
-    "hepatico": [
-        "icterícia", "icterícia neonatal"
-    ],
-    "infeccioso": [
-        "febre", "infecção em ferida", "sinais de intoxicação ou envenenamento"
-    ],
-    "reprodutor_masculino": [
-        "nódulo testicular", "dor nos testículos", "sangue no sêmen"
-    ],
-    "mamario": [
-        "nódulo mamário", "secreção mamilar (fora da amamentação)"
-    ],
-    "ginecologico": [
-        "sangramento vaginal"  # (também listado em obstétrico por regra de exceção)
-    ]
-}
-
-# Recria o mapa sintoma → sistema JÁ com normalização
-sintoma_para_sistema = {
-    normalizar(s): k
-    for k, lista in sistemas_sintomas.items()
-    for s in lista
-}
-
-# Dicionário sintoma → sistema, já normalizado
-sintoma_para_sistema = {
-    normalizar(sintoma): sistema
-    for sistema, lista in sistemas_sintomas.items()
-    for sintoma in lista
-}
-
-# ===============================
-# CONTROLE INICIAL DO SESSION_STATE
-# ===============================
-valores_iniciais = {
+# ---------------- Session state inicial ----------------
+VALORES_INICIAIS = {
     "etapa": 1,
     "etapa_2": False,
     "etapa_3": False,
     "congelar_inputs": False,
-    "sintomas_escolhidos": []
+    "sintomas_escolhidos": [],
 }
+for k, v in VALORES_INICIAIS.items():
+    if k not in st.session_state:
+        st.session_state[k] = v
 
-for chave, valor in valores_iniciais.items():
-    if chave not in st.session_state:
-        st.session_state[chave] = valor
-
-manual_aberto = st.toggle("📘 Manual do sistema – clique para abrir/fechar")
-
-if manual_aberto:
-    st.markdown("""
-    ### 📘 Guia de Uso – Sistema de Aconselhamento Médico
-
-    Muitos recorrem a bancos de pesquisa, como o Google, quando se sentem doentes,não por ignorância, mas por desespero diante de um sistema de saúde que fecha as portas para quem não tem cartão de crédito. Este sistema foi criado para tentar atenuar, ainda que minimamente, essa desigualdade, oferecendo, de forma ética e responsável, um aconselhamento inteligente, confiável e acessível. Não porque somos melhores, mas sim porque somos iguais.
-
-    Além disso, também desenvolvemos um dicionário e buscamos adaptar tudo para a linguagem mais popular possível, pois estamos cansados de uma linguagem médica excessivamente técnica,limitando o entendimento real da situação.
-    
-    Este sistema foi feito pra ajudar você a **entender melhor seus sintomas** antes de buscar um atendimento,ao final do aconselhamento principal será fornecida uma cor a você,ao receber o resultado receberá uma legenda explicando quais são os melhores próximos passos a serem tomados,mas o sistema se manifesta em todas as suas nuances,não somente no resultado final,fique atento a todas as mensagens fornecidas pelo sistema para uma experiência mais completa.
-
-    A forma de uso do site mais efetiva é a seguinte:**Primeiro passo**-Preencher o formulário inicial com seus dados corretos para melhor orientação (Não divulgamos nem sequer guardamos suas informações no sistema,esse questionário foi feito unicamente pra uma compreensão melhor do seu quadro clínico ao analisar seus sintomas).**Segundo passo**-Realizar os testes para apuração de sintomas presentes na aba lateral pra confirmar seus sintomas já suspeitos e fazer um check-up de rotina para garantir que está tudo em ordem.**Terceiro passo**-Selecionar até 3 sintomas principais que você está sentindo e ir para o detalhamento.**Quarto passo**-Responder honestamente as perguntas feitas sobre o sintoma para podermos apurar mais precisamente a gravidade dos sintomas.**Quinto passo**-Você receberá uma cor para indicar a gravidade de cada sintoma,e após isso será feito um cálculo para apurar a gravidade do quadro geral,e após isso,você receberá sua cor final, também será fornecido porque achamos que cada sintomas deve apresentar a cor que apresenta 
-
-    **Para ter acesso as bases da nossa lógica,nossa bússola moral,nossos ideiais e nossa mensagem de vida e solidariedade na íntegra,acesse o MANIFESTO COSA,onde destrinchamos as nossas motivações para o projeto e os aspectos técnicos,para garantir a transparência do projeto e a uniformização do aconselhamento;para acessar o nosso manifesto clique no link** https://drive.google.com/file/d/1zfLeDnJ_EkVuc1s9t6lixxNvGBLRMyX6/view?usp=drive_link
-    
-    - **🧠 Dicionário de Sintomas:** explica os sintomas em dois níveis, técnico e em linguagem acessível,além disso,explica os termos que serão apresentados durante a questão de detalhamento do sintoma
-    - **🧪 Autotestes:** você pode fazer alguns testes simples em casa para investigar sinais do corpo.
-    - **📊 Aconselhamento Principal:** aqui você escolhe um sintoma, responde perguntas e recebe um nível de atenção (Entre 'Pode ficar tranquilo' até 'Vá ao médico o mais rápido possível).
-
-    > 🧭 A ideia é funcionar como um **guia de viagem pelo seu corpo**, não como um diagnóstico final.
-
-    **Observações importantes**:Se estiver no celular,consulte o dicionário antes de escolher os sintomas,pois a escolha manual de sintomas no celular se manifesta melhor ao escrever-se o sintoma,e para escrever corretamente e ter certeza que o sintoma selecionado é o certo a ser selecionado para seu caso,siga a instrução de consulta.
-    
-    **Observações importantes**:No menu lateral esquerda,você terá três opções,'Nenhuma','Dicionário de sintomas' e 'Autotestes para apuração de sintomas',caso você selecione o primeiro a tela ficará livre para você seguir o aconselhamento principal normalmente,já se você escolher algum dos outros dois,o escolhido ficará na parte de cima da tela,onde você poderá interagir com ele,mantendo o aconselhamento principal na parte de baixo da tela
-    
-    **Observações importantes**:Os autotestes só ficarão disponíveis após você preencher todos os seus dados na primeira etapa,pois estes serão importantes para cálculos posteriores
-    
-    **Observações importantes**:O sistema NÃO guarda seus dados,tudo é feito internamente e sem qualquer tipo de exportação de dados
-    
-    **⚠️ Importante**:O sistema **NÃO substitui consulta médica**. Se estiver em dúvida, procure um profissional.
-
-    """)
-
-
-# ===============================
-# FUNÇÕES UTILITÁRIAS
-# ===============================
-def aumentar_cor_em_1_nivel(cor_atual):
-    ordem = ["verde", "amarelo", "laranja", "vermelho"]
-    try:
-        idx = ordem.index(cor_atual)
-        if idx < len(ordem) - 1:
-            return ordem[idx + 1]
-        else:
-            return cor_atual  # já é vermelho, não sobe mais
-    except ValueError:
-        return cor_atual  # cor inválida, retorna como veio
-
-def calcular_imc(altura, peso):
-    """Retorna o IMC com uma casa decimal."""
-    try:
-        return round(peso / (altura ** 2), 1)
-    except ZeroDivisionError:
-        return None
-
-def classificar_imc(imc):
-    """Classifica o IMC como Desnutrido, Normal ou Obeso."""
-    if imc is None:
-        return "Inválido"
-    elif imc < 18.5:
-        return "Desnutrido"
-    elif imc >= 30:
-        return "Obeso"
-    else:
-        return "Normal"
-
-def gerar_sistemas_afetados_por_fatores(idade, imc_class, gravida, condicoes_brutas):
-    # tudo em slug (sem acento/caixa)
-    refinados = {normalizar(x) for x in (condicoes_brutas or [])}
-
-    if idade is not None:
-        if idade < 5:
-            refinados.update(["infeccioso","respiratorio","neurologico","musculoesqueletico","otorrino","gastrointestinal","pediatrico"])
-        elif idade > 60:
-            refinados.update(["cardiaco","neurologico","musculoesqueletico","endocrino","infeccioso","hepatico","oftalmologico","cutaneo","urinario"])
-        elif idade < 14 and imc_class == "Desnutrido":
-            refinados.add("neurologico")
-
-    if imc_class == "Obeso":
-        refinados.update(["cardiaco","respiratorio","hematologico","psiquiatrico","endocrino","musculoesqueletico"])
-    elif imc_class == "Desnutrido":
-        refinados.update(["infeccioso","hematologico","gastrointestinal","musculoesqueletico","neurologico","psiquiatrico"])
-
-    if str(gravida).lower() in ["sim","true","1"]:
-        refinados.update(["hematologico","endocrino","mamario","infeccioso","otorrino","musculoesqueletico","ginecologico","obstetrico"])
-        if idade is not None and idade < 16:
-            refinados.update(["cardiaco","neurologico","endocrino","obstetrico","psiquiatrico","mamario","ginecologico"])
-
-    return list(refinados)
-
-def sistemas_afetados_secundariamente(grupo_primario):
-    g = normalizar(grupo_primario)
-    tabela = {
-        "cardiaco": ["respiratorio", "hematologico", "urinario", "neurologico"],
-        "respiratorio": ["cardiaco", "otorrino", "neurologico"],
-        "neurologico": ["psiquiatrico", "musculoesqueletico", "urinario", "gastrointestinal", "respiratorio", "cardiaco"],
-        "gastrointestinal": ["hepatico", "hematologico", "urinario"],
-        "urinario": ["cardiaco", "endocrino"],
-        "otorrino": ["respiratorio"],
-        "hematologico": ["cardiaco", "endocrino", "hepatico", "urinario"],
-        "psiquiatrico": ["neurologico"],
-        "endocrino": ["cardiaco", "hepatico", "hematologico"],
-        "hepatico": ["gastrointestinal", "hematologico"],
-        "autoimune": ["cutaneo","hematologico","urinario","neurologico","musculoesqueletico","hepatico","psiquiatrico"],
-        "diabetes": ["neurologico","oftalmologico","urinario","cardiaco","cutaneo","hematologico"],
-        "reprodutor_masculino": ["reprodutor_masculino"],
-        "mamario": ["mamario"],
-        "pediatrico": ["pediatrico"],
-        "obstetrico": ["obstetrico"],
-        "cutaneo": ["cutaneo"],
-        "oftalmologico": ["oftalmologico"],
-        "ginecologico": ["ginecologico"],
-    }
-    return tabela.get(g, [])
-
-def verificar_se_deve_subir_cor(sintomas_escolhidos, sistemas_afetados, sintoma_para_sistema):
-    sistemas_norm = {normalizar(s) for s in (sistemas_afetados or [])}
-    for s in sintomas_escolhidos:
-        sistema = sintoma_para_sistema.get(normalizar(s))
-        if sistema and sistema in sistemas_norm:
-            return True
-    return False
-
-
-    for sintoma in sintomas_norm:
-        sistema = sintoma_para_sistema.get(sintoma)
-        if sistema and normalizar(sistema) in sistemas_norm:
-            return True
-    return False
-
-def classificar_combinacao(sintomas, cores):
-    """
-    Combina de forma conservadora:
-    1) Nunca rebaixa abaixo da maior cor individual.
-    2) Usa soma de pesos para ESCALAR quando fizer sentido.
-    """
-    pesos = {"verde": 0.2, "amarelo": 1.0, "laranja": 3.5, "vermelho": 6.5}
-    total = sum(pesos.get(c, 0) for c in cores)
-
-    # 1) Maior cor individual (nunca abaixo disso)
-    cor_individual_max = max_cor(*cores)
-
-    # 2) Escalonamento por soma
-    if any(c == "vermelho" for c in cores):
-        cor_por_total = "vermelho"
-    elif total >= 4.5:
-        cor_por_total = "vermelho"
-    elif total >= 2.2:
-        cor_por_total = "laranja"
-    elif total >= 1.0:
-        cor_por_total = "amarelo"
-    else:
-        cor_por_total = "verde"
-
-    # Resultado final = máximo entre a maior individual e a do total
-    return max_cor(cor_individual_max, cor_por_total)
-
-
-# --- AJUSTE CONSERVADOR POR FATORES (idade/gravidez e duplicidade de sistema) ---
-def calcular_ajuste_por_fatores_conservador(
-    sintomas_escolhidos,
-    cores_individuais,
-    sintoma_para_sistema,
-    idade=None,
-    gravida=False
-):
-    """
-    Retorna 0 (sem ajuste) ou 1 (sobe 1 nível).
-
-    Regras:
-      - Se TODOS os sintomas estão VERDES → NÃO ajusta.
-      - Só considera ajuste se houver pelo menos um sintoma AMARELO, LARANJA ou VERMELHO.
-      - Ajusta (sobe 1) se:
-          a) idade <= 4 ou >= 67, OU gravidez verdadeira; OU
-          b) houver >= 2 sintomas do MESMO sistema corporal.
-    """
-    cores_individuais = cores_individuais or []
-    sintomas_escolhidos = sintomas_escolhidos or []
-
-    # 1) Tudo verde? Não ajusta
-    if all(c == "verde" for c in cores_individuais):
-        return 0
-
-    # 2) Só consideramos ajuste se houver alguma cor >= amarelo
-    if not any(c in ("amarelo", "laranja", "vermelho") for c in cores_individuais):
-        return 0
-
-    # 3) Risco alto por idade/gravidez
-    risco_alto = False
-    if idade is not None and (idade <= 4 or idade >= 67):
-        risco_alto = True
-    if str(gravida).strip().lower() in ["sim", "true", "1"]:
-        risco_alto = True
-
-    # 4) Checa duplicidade de sistema entre os sintomas escolhidos
-    contagem_por_sistema = {}
-    for s in sintomas_escolhidos:
-        sist = sintoma_para_sistema.get(normalizar(s))
-        if not sist:
-            continue
-        contagem_por_sistema[sist] = contagem_por_sistema.get(sist, 0) + 1
-
-    duplicidade_sistema = any(qtd >= 2 for qtd in contagem_por_sistema.values())
-
-    # 5) Critério final de ajuste
-    if risco_alto or duplicidade_sistema:
-        return 1
-
-    return 0
-
-st.title("Sistema Inteligente de Aconselhamento médico")
-st.markdown("⚠️ Este sistema é apenas um aconselhamento inicial e **não substitui atendimento médico.**")
-st.markdown("👋 Olá! Bem-vindo ao sistema de aconselhamento interativo.")
-st.markdown("Consulte o manual do sistema para coompreender todas as funcionalidades do site e usá-lo mais eficientemente")
-st.markdown("Responda com sinceridade. O único beneficiado por sua honestidade nesse sistema é você mesmo")
+# ---------------- Cabeçalho e avisos ----------------
+st.title("Sistema Inteligente de Aconselhamento Médico")
+st.markdown("**Atenção**: este sistema oferece aconselhamento inicial e não substitui atendimento médico.")
+st.markdown("Leia o manual para entender todas as funcionalidades e utilizar melhor o sistema.")
 st.markdown("---")
 
+# ---------------- Manual (toggle) ----------------
+manual_aberto = st.toggle("Manual do sistema – clique para abrir/fechar", value=False)
+if manual_aberto:
+    try:
+        st.markdown(Path("textos/manual.md").read_text(encoding="utf-8"))
+    except Exception:
+        st.info("Manual não encontrado. Verifique se o arquivo 'textos/manual.md' existe.")
+
+# ===================== A PARTIR DAQUI, SUA INTERFACE EXISTENTE =====================
+# Mantenha o restante do seu layout, formulários e fluxo de etapas aqui.
+# Use as funções importadas acima (sem redefinir utilitários/dados/lógica no app).
+#
+# Exemplos de uso (se já tinha estes trechos, mantenha-os no lugar apropriado):
+#
+# with st.form("form_dados_iniciais"):
+#     idade = st.number_input("Idade", 0, 120, step=1)
+#     altura = st.number_input("Altura (m)", 0.5, 2.5, step=0.01)
+#     peso = st.number_input("Peso (kg)", 10.0, 300.0, step=0.1)
+#     gravida = st.selectbox("Está grávida?", ["Não", "Sim"])
+#     condicoes = st.text_input("Condições pré-existentes (separadas por vírgula)")
+#     enviado = st.form_submit_button("Salvar dados")
+#
+# if enviado:
+#     imc = calcular_imc(altura, peso)
+#     imc_class = classificar_imc(imc)
+#     condicoes_brutas = [c.strip() for c in condicoes.split(",")] if condicoes else []
+#     sistemas_afetados = gerar_sistemas_afetados_por_fatores(idade, imc_class, gravida, condicoes_brutas)
+#     st.session_state["fatores_sistemas"] = sistemas_afetados
+#     st.success(f"Sistemas afetados por fatores: {', '.join(sistemas_afetados) or 'Nenhum'}")
+#
+# Depois, siga com:
+# - Seleção de sintomas (usando 'sistemas_sintomas' e/ou seu próprio UI),
+# - Detalhamento por sintoma,
+# - Cálculo de cores individuais e combinação (classificar_combinacao),
+# - Ajuste conservador (calcular_ajuste_por_fatores_conservador),
+# - Mensagens de saída.
 
 # SIDEBAR – BOTÃO DO DICIONÁRIO
 def dicionario_sintomas():
