@@ -1,35 +1,79 @@
 import streamlit as st
+
+# SEMPRE primeiro: configura a página antes de qualquer outro comando Streamlit
+st.set_page_config(page_title="Sistema de Triagem", layout="centered")
+
+# ==== IMPORTS PADRÃO ====
+import sys
+from pathlib import Path
 import time
 import random
 import pandas as pd
-from pathlib import Path
-import sys
-sys.path.append(str(Path(__file__).resolve().parent))
-# Se seus módulos estão dentro de /src, descomente a linha abaixo:
-# sys.path.append(str(Path(__file__).resolve().parent / "src"))
 
-from dicionario import dic
-from utils import calcular_imc, classificar_imc, normalizar, aumentar_cor_em_1_nivel
-from dados_sintomas import sistemas_sintomas, sintoma_para_sistema
-from logica import (
-    gerar_sistemas_afetados_por_fatores,
-    sistemas_afetados_secundariamente,
-    verificar_se_deve_subir_cor,
-    classificar_combinacao,
-    calcular_ajuste_por_fatores_conservador,
-)
-from fluxos import FLUXOS, coletar_respostas_fluxo, pontuar_fluxo, labels_fluxos, eh_fluxo
+# ==== PATHS ====
+ROOT = Path(__file__).resolve().parent
+sys.path.append(str(ROOT))               # para importar módulos locais (ex.: dicionario.py)
+sys.path.append(str(ROOT / "src"))       # descomentei de fato a pasta /src
+
+# ==== IMPORTS DO PROJETO (com diagnóstico de erro) ====
+def _import_or_show(mod_import_fn, label: str):
+    try:
+        return mod_import_fn()
+    except Exception as e:
+        st.error(f"Falha ao importar {label}: {e}")
+        st.stop()
+
+# dicionário
+dic = _import_or_show(lambda: __import__("dicionario", fromlist=["dic"]).dic, "dicionario.dic")
+
+# utils
+utils = _import_or_show(lambda: __import__("utils", fromlist=[
+    "calcular_imc","classificar_imc","normalizar","aumentar_cor_em_1_nivel"
+]), "utils")
+calcular_imc = utils.calcular_imc
+classificar_imc = utils.classificar_imc
+normalizar = utils.normalizar
+aumentar_cor_em_1_nivel = utils.aumentar_cor_em_1_nivel
+
+# dados_sintomas
+ds = _import_or_show(lambda: __import__("dados_sintomas", fromlist=["sistemas_sintomas","sintoma_para_sistema"]), "dados_sintomas")
+sistemas_sintomas = ds.sistemas_sintomas
+sintoma_para_sistema = ds.sintoma_para_sistema
+
+# logica
+lg = _import_or_show(lambda: __import__("logica", fromlist=[
+    "gerar_sistemas_afetados_por_fatores",
+    "sistemas_afetados_secundariamente",
+    "verificar_se_deve_subir_cor",
+    "classificar_combinacao",
+    "calcular_ajuste_por_fatores_conservador",
+]), "logica")
+gerar_sistemas_afetados_por_fatores = lg.gerar_sistemas_afetados_por_fatores
+sistemas_afetados_secundariamente = lg.sistemas_afetados_secundariamente
+verificar_se_deve_subir_cor = lg.verificar_se_deve_subir_cor
+classificar_combinacao = lg.classificar_combinacao
+calcular_ajuste_por_fatores_conservador = lg.calcular_ajuste_por_fatores_conservador
+
+# fluxos
+fl = _import_or_show(lambda: __import__("fluxos", fromlist=[
+    "FLUXOS","coletar_respostas_fluxo","pontuar_fluxo","labels_fluxos","eh_fluxo"
+]), "fluxos")
+FLUXOS = fl.FLUXOS
+coletar_respostas_fluxo = fl.coletar_respostas_fluxo
+pontuar_fluxo = fl.pontuar_fluxo
+labels_fluxos = fl.labels_fluxos
+eh_fluxo = fl.eh_fluxo
+
+# # autotestes (mantenha comentado até corrigir o módulo)
+# at = _import_or_show(lambda: __import__("src.ui.autotestes", fromlist=["*"]), "src.ui.autotestes")
 
 # ---------------- Session state inicial ----------------
-# Estado inicial unificado
 VALORES_INICIAIS = {
-    # fluxo do aconselhamento
     "etapa": 1,
     "etapa_2": False,
     "etapa_3": False,
     "congelar_inputs": False,
     "sintomas_escolhidos": [],
-    # fluxo dos autotestes
     "tentativa": 1,
     "resultados": [],
     "testando": False,
@@ -46,54 +90,14 @@ st.markdown("**Atenção**: este sistema oferece aconselhamento inicial e não s
 st.markdown("Leia o manual para entender todas as funcionalidades e utilizar melhor o sistema.")
 st.markdown("---")
 
-from pathlib import Path
-
 # ---------------- Manual (toggle) ----------------
 manual_aberto = st.toggle("Manual do sistema – clique para abrir/fechar", value=False)
 if manual_aberto:
-    manual_path = Path(__file__).resolve().parent / "src" / "textos" / "manual.md"
+    manual_path = ROOT / "src" / "textos" / "manual.md"
     try:
         st.markdown(manual_path.read_text(encoding="utf-8"))
     except FileNotFoundError:
         st.info(f"Manual não encontrado no caminho: {manual_path}")
-
-
-# ===================== A PARTIR DAQUI, SUA INTERFACE EXISTENTE =====================
-# Mantenha o restante do seu layout, formulários e fluxo de etapas aqui.
-# Use as funções importadas acima (sem redefinir utilitários/dados/lógica no app).
-#
-# Exemplos de uso (se já tinha estes trechos, mantenha-os no lugar apropriado):
-#
-# with st.form("form_dados_iniciais"):
-#     idade = st.number_input("Idade", 0, 120, step=1)
-#     altura = st.number_input("Altura (m)", 0.5, 2.5, step=0.01)
-#     peso = st.number_input("Peso (kg)", 10.0, 300.0, step=0.1)
-#     gravida = st.selectbox("Está grávida?", ["Não", "Sim"])
-#     condicoes = st.text_input("Condições pré-existentes (separadas por vírgula)")
-#     enviado = st.form_submit_button("Salvar dados")
-#
-# if enviado:
-#     imc = calcular_imc(altura, peso)
-#     imc_class = classificar_imc(imc)
-#     condicoes_brutas = [c.strip() for c in condicoes.split(",")] if condicoes else []
-#     sistemas_afetados = gerar_sistemas_afetados_por_fatores(idade, imc_class, gravida, condicoes_brutas)
-#     st.session_state["fatores_sistemas"] = sistemas_afetados
-#     st.success(f"Sistemas afetados por fatores: {', '.join(sistemas_afetados) or 'Nenhum'}")
-#
-# Depois, siga com:
-# - Seleção de sintomas (usando 'sistemas_sintomas' e/ou seu próprio UI),
-# - Detalhamento por sintoma,
-# - Cálculo de cores individuais e combinação (classificar_combinacao),
-# - Ajuste conservador (calcular_ajuste_por_fatores_conservador),
-# - Mensagens de saída.
-
-# ==== IMPORTS DO PROJETO ====
-# Dicionário de sintomas
-from dicionario import dic
-# Todos os renders dos autotestes
-#from src.ui.autotestes import *
-
-st.set_page_config(page_title="Sistema de Triagem", layout="centered")
 
 # --- ESTADO INICIAL (mínimo necessário) ---
 st.session_state.setdefault("etapa", 1)
