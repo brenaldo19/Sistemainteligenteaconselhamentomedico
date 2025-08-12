@@ -167,7 +167,6 @@ sistemas_autotestes = {
         "Insônia",
         "Tremores ou movimentos involuntários",
         "Alterações na fala",
-        "Sudorese Noturna",
         # Olhos/pele/geral
         "Dor ou olho vermelho",
         "Alterações visuais súbitas",
