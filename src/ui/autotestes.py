@@ -631,16 +631,6 @@ def render_percepcao_cores():
             st.error("🚨 Dificuldade significativa — possível daltonismo. Investigar.")
 
 
-# ========== DESMAIO / TONTURA ==========
-def render_desmaio_tontura():
-    st.subheader("🌀 Desmaio ou tontura")
-    resp = st.radio("Teve tontura ou quase desmaiou ao ficar em pé/olhos fechados 10s?", ["Não","Sim, leve","Sim, acentuado"], index=0)
-    if resp == "Sim, acentuado":
-        st.error("🚨 Tontura intensa/desmaio recente. Procure atendimento.")
-    elif resp == "Sim, leve":
-        st.warning("⚠️ Episódio leve. Observe e avalie se persistir.")
-    else:
-        st.success("✅ Sem alteração detectada.")
 
 
 # ========== CARDÍACO (PÓS-ESFORÇO) ==========
@@ -1008,36 +998,7 @@ def render_ictericia_neonatal():
             st.success("✅ Padrão leve, tende a melhorar.")
 
 
-# ========== EDEMA INEXPLICADO ==========
-def render_edema_inexplicado():
-    st.subheader("💦 Edema Inexplicado (Fóvea + Distribuição)")
-    lado = st.selectbox("Localização", ["Ambos","Um lado","Rosto/pálpebras","Outro"])
-    inicio_subito = st.checkbox("Início súbito (min/horas)")
-    fovea = st.checkbox("Afunda ao pressionar (fóvea +)")
-    verm_dor = st.checkbox("Vermelhidão/dor local")
-    falta_ar = st.checkbox("Falta de ar")
-    dor_peito = st.checkbox("Dor no peito")
-    febre = st.checkbox("Febre")
-    ganho_peso = st.checkbox("Aumento súbito de peso (dias)")
 
-    risco = 0
-    if lado == "Um lado": risco += 2
-    if lado == "Rosto/pálpebras": risco += 1
-    if inicio_subito: risco += 2
-    if fovea: risco += 1
-    if verm_dor: risco += 1
-    if falta_ar: risco += 2
-    if dor_peito: risco += 2
-    if febre: risco += 1
-    if ganho_peso: risco += 1
-
-    if st.button("Resultado"):
-        if risco >= 5:
-            st.error("🚨 Edema com sinais relevantes.")
-        elif risco >= 3:
-            st.warning("⚠️ Achados que merecem observação.")
-        else:
-            st.success("✅ Achados leves / auto‑limitados.")
 
 
 # ========== LINFONODOS ==========
@@ -1070,7 +1031,7 @@ def render_linfonodos():
             st.error("🚨 Achados que merecem **avaliação médica**.")
         elif alerta >= 3:
             if ferida == "Sim":
-                st.warning("⚠️ Achados intermediários + ferida infectada próxima. Higienize e acompanhe.")
+                st.warning("⚠️ Achados intermediários + ferida infectada próxima.Higienize e acompanhe.")
             else:
                 st.warning("⚠️ Achados intermediários. Monitorar e reavaliar.")
         else:
@@ -1080,45 +1041,7 @@ def render_linfonodos():
                 st.success("✅ Sem sinais de alarme no momento.")
 
 
-# ========== EXTREMIDADES FRIAS / ARROXEADAS ==========
-def render_extremidades_frias():
-    st.subheader("🧊 Extremidades Frias/Arroxeadas (Reperfusão + Frio leve)")
-    st.session_state.setdefault("ef_inicio", None)
-    st.session_state.setdefault("ef_tempo", None)
 
-    cA, cB = st.columns(2)
-    with cA:
-        if st.session_state.ef_inicio is None:
-            if st.button("Iniciar (pressionando agora)"):
-                st.session_state.ef_inicio = time.perf_counter()
-                st.rerun()
-        else:
-            if st.button("Soltar (parei)"):
-                st.session_state.ef_tempo = round(time.perf_counter() - st.session_state.ef_inicio, 2)
-                st.session_state.ef_inicio = None
-                st.rerun()
-    with cB:
-        mudou_cor = st.checkbox("Mudança de cor ao frio (branco/azul/vermelho)")
-        dormencia = st.checkbox("Dormência/formigamento no frio")
-        dor_mov   = st.checkbox("Dor ao movimentar os dedos")
-        feridas   = st.checkbox("Feridas/rachaduras nas pontas")
-
-    if st.session_state.ef_tempo is not None:
-        t = st.session_state.ef_tempo
-        st.subheader(f"🕒 Reperfusão: **{t} s**")
-        risco = (1 if t > 3 else 0) + int(mudou_cor) + int(dormencia) + int(dor_mov) + int(feridas)
-        if risco >= 3:
-            st.error("🚨 Achados consistentes com alteração circulatória periférica.")
-        elif risco == 2:
-            st.warning("⚠️ Alteração leve/moderada. Reavalie em dias quentes.")
-        elif t <= 2 and not (mudou_cor or dormencia or dor_mov or feridas):
-            st.success("✅ Reperfusão rápida, sem alterações.")
-        else:
-            st.info("ℹ️ Resultado intermediário. Repita em ambiente neutro.")
-        if st.button("Refazer (Extremidades frias)"):
-            for k in ["ef_inicio","ef_tempo"]:
-                if k in st.session_state: del st.session_state[k]
-            st.rerun()
 
 
 # ========== AUSÊNCIA DE MENSTRUAÇÃO ==========
