@@ -183,38 +183,6 @@ def render_calafrios():
         st.success("✅ Sem sinais relevantes além de calafrios isolados.")
 
 
-# ========== 3) SUDORESE NOTURNA ==========
-def render_sudorese_noturna():
-    st.subheader("🌙 Sudorese Noturna (Duração + Red Flags)")
-    duracao = st.selectbox("Há quanto tempo?", ["Menos de 1 semana", "1–3 semanas", "≥ 4 semanas"])
-    encharca = st.checkbox("Encharca roupa/lençol")
-    febre = st.checkbox("Febre")
-    perda_peso = st.checkbox("Perda de peso não intencional/rápida")
-    tosse_persistente = st.checkbox("Tosse > 2 semanas")
-    tosse_sangue = st.checkbox("Tosse com sangue")
-    linfonodo = st.checkbox("Inchaço dos linfonodos")
-    palpitacoes = st.checkbox("Palpitações")
-    ansiedade = st.checkbox("Ansiedade/agitação intensas")
-
-    risco = 0
-    if duracao == "≥ 4 semanas": risco += 2
-    if encharca: risco += 1
-    if febre: risco += 1
-    if perda_peso: risco += 2
-    if tosse_persistente: risco += 1
-    if tosse_sangue: risco += 2
-    if linfonodo: risco += 1
-    if palpitacoes or ansiedade: risco += 1
-
-    if risco >= 5:
-        st.error("🚨 Sudorese noturna com sinais de alerta.")
-        st.markdown("🔎 Relacionados: **Sudorese noturna, Febre, Perda de peso, Tosse, Linfonodos, Palpitações, Ansiedade**")
-    elif risco >= 2:
-        st.warning("⚠️ Sudorese noturna com achados associados.")
-        st.markdown("🔎 Relacionados: **Sudorese noturna, Febre, Perda de peso**")
-    else:
-        st.success("✅ Quadro leve/recente sem outros sinais relevantes.")
-
 
 # ========== 4) INSÔNIA ==========
 def render_insonia():
