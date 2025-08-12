@@ -154,7 +154,6 @@ sistemas_autotestes = {
     "☕ Energia e Vitalidade": ["Energia Matinal", "Variação de Peso (Últimos 30 Dias)"],
     "🩺 Testes de apuração de sintomas específicos": [
         # Alertas/neurológico/obstétrico
-        "Desmaio ou tontura",
         "Icterícia Neonatal",
         # Respiratório/Circulatório
         "Diferenciar Falta de Ar e Dificuldade Respiratória",
@@ -176,9 +175,6 @@ sistemas_autotestes = {
         "Secreção Mamilar (fora da amamentação)",
         "Nódulo na Mama",
         "Nódulo Testicular",
-        # Edemas/vascular
-        "Edema Inexplicado",
-        "Extremidades Frias/Arroxeadas",
         # Ginecológico
         "Menstruação Excessiva",
         "Ausência de Menstruação",
