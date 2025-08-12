@@ -246,7 +246,6 @@ router = {
     "Variação de Peso (Últimos 30 Dias)": render_variacao_peso_30d,
 
     # Específicos
-    "Desmaio ou tontura": render_desmaio_tontura,
     "Icterícia Neonatal": render_ictericia_neonatal,
 
     "Diferenciar Falta de Ar e Dificuldade Respiratória": render_diferenciar_falta_de_ar,
@@ -267,8 +266,6 @@ router = {
     "Nódulo Testicular": render_nodulo_testicular,
     "Secreção Mamilar (fora da amamentação)": render_secrecao_mamilar,
 
-    "Edema Inexplicado": render_edema_inexplicado,
-    "Extremidades Frias/Arroxeadas": render_extremidades_frias,
 
     "Menstruação Excessiva": render_menstruacao_excessiva,
     "Ausência de Menstruação": render_ausencia_menstruacao,
