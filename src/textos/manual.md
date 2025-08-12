@@ -15,7 +15,7 @@ Este sistema existe para ajudar você a entender melhor seus sintomas antes de b
 
 **Transparência do projeto**
 Para conhecer nossa base lógica, princípios éticos e diretrizes técnicas, acesse o **MANIFESTO COSA**:
-https://drive.google.com/file/d/1zfLeDnJ_EkVuc1s9t6lixxNvGBLRMyX6/view?usp=drive_link
+https://drive.google.com/file/d/16Qh0_gi_NFwNat6BtGaikW3obF657OFB/view?usp=sharing
 
 **Recursos**
 - **Dicionário de sintomas**: explicações técnicas e em linguagem acessível, incluindo termos usados no detalhamento.
