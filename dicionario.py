@@ -29,7 +29,7 @@ def dicionario_sintomas():
             "Trauma de cabeça/coluna": "Bateu a cabeça ou coluna durante o afogamento."
         }
     },
-    "Queimadura (genérica, sem tipo)": {
+    "Queimadura ": {
         "definicao": "Lesão causada por calor, eletricidade, produtos químicos ou radiação.",
         "popular": "Pessoa sofreu uma queimadura.",
         "clinico": "Lesão térmica/química/elétrica",
