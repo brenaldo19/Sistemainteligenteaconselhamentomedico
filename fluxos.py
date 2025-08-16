@@ -96,6 +96,621 @@ def labels_fluxos():
 def eh_fluxo(label):
     return normalizar(label) in FLUXOS
 
+# =========================
+# PACOTE DE FLUXOS CRÍTICOS
+# =========================
+
+# 1) ACIDENTE ELÉTRICO
+FLUXOS[normalizar("Acidente elétrico")] = {
+    "label": "Acidente elétrico",
+    "perguntas": [
+        {
+            "id": "mecanismo",
+            "label": "Qual foi a situação principal?",
+            "tipo": "radio",
+            "opcoes": {
+                "Choque de alta tensão (>1000V) ou raio": 4.0,
+                "Choque de média tensão (110–380V) com tempo de contato prolongado": 2.5,
+                "Choque breve de baixa/média tensão sem queda": 1.0,
+                "Formigamento leve sem lesão aparente": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados (selecione os que tiver):",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Perda de consciência, confusão ou desmaio": 2.0,
+                "Dor no peito, palpitação ou falta de ar": 1.8,
+                "Queimaduras de entrada/saída": 1.5,
+                "Quedas ou trauma associado": 1.2,
+                "Espasmos musculares persistentes": 0.8
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Quando ocorreu o evento?",
+            "tipo": "radio",
+            "opcoes": {
+                "Agora ou < 1 hora": 1.0,
+                "1 a 24 horas": 0.6,
+                "Há > 24 horas": 0.2
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Algum fator de risco se aplica?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Áreas molhadas (banho/piscina/chuva)": 0.7,
+                "Gravidez": 0.6,
+                "Idade ≤ 4 anos": 0.8,
+                "Idade ≥ 67 anos": 0.6,
+                "Cardiopatia conhecida ou marca-passo": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"mecanismo": "Choque de alta tensão (>1000V) ou raio"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Perda de consciência, confusão ou desmaio", "Dor no peito, palpitação ou falta de ar"]}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Queimaduras de entrada/saída"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 2) AFOGAMENTO
+FLUXOS[normalizar("Afogamento")] = {
+    "label": "Afogamento",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a pessoa agora?",
+            "tipo": "radio",
+            "opcoes": {
+                "Inconsciente ou com respiração anormal": 5.0,
+                "Tosse intensa, falta de ar ou cianose": 3.0,
+                "Tosse leve e náusea, respiração normal": 1.2,
+                "Assustada, sem sintomas respiratórios": 0.3
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Tempo submerso aproximado:",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 1 minuto": 2.0,
+                "< 1 minuto": 0.8,
+                "Não sabe": 0.8
+            }
+        },
+        {
+            "id": "meio",
+            "label": "Meio onde ocorreu:",
+            "tipo": "radio",
+            "opcoes": {
+                "Mar/rio/represa": 0.6,
+                "Piscina": 0.4,
+                "Banheira/caixa d’água": 0.3
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≤ 4 anos": 0.8,
+                "Idade ≥ 67 anos": 0.6,
+                "Trauma de cabeça ou coluna na água": 1.5,
+                "Ingestão de álcool/drogas": 0.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Inconsciente ou com respiração anormal"}, "min_cor": "vermelho"},
+        {"se": {"riscos": ["Trauma de cabeça ou coluna na água"]}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Tosse intensa, falta de ar ou cianose"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 3) QUEIMADURA (GENÉRICA, SEM TIPO)
+FLUXOS[normalizar("Queimadura (genérica, sem tipo)")] = {
+    "label": "Queimadura (genérica, sem tipo)",
+    "perguntas": [
+        {
+            "id": "extensao",
+            "label": "Extensão/gravidade aparente:",
+            "tipo": "radio",
+            "opcoes": {
+                "Extensa, com bolhas grandes/dermóide ou áreas escuras": 3.5,
+                "Moderada, bolhas pequenas ou dor intensa localizada": 2.0,
+                "Superficial (vermelhidão leve), pequena área": 0.6,
+                "Mínima, sem bolhas": 0.2
+            }
+        },
+        {
+            "id": "local",
+            "label": "Local atingido:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Face/pescoço": 1.5,
+                "Mãos/pés/genitália": 1.5,
+                "Grandes articulações": 1.0
+            }
+        },
+        {
+            "id": "agente",
+            "label": "Agente provável:",
+            "tipo": "radio",
+            "opcoes": {
+                "Química/ elétrica": 2.0,
+                "Térmica (fogo/escaldadura)": 1.0,
+                "Solar": 0.4
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Inalação de fumaça": 2.0,
+                "Idade ≤ 4 anos": 0.8,
+                "Idade ≥ 67 anos": 0.6,
+                "Doenças crônicas importantes": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"agente": "Química/ elétrica"}, "min_cor": "vermelho"},
+        {"se": {"riscos": ["Inalação de fumaça"]}, "min_cor": "vermelho"},
+        {"se": {"local": ["Face/pescoço", "Mãos/pés/genitália"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 4) FRATURA OU LUXAÇÃO
+FLUXOS[normalizar("Fratura ou luxação")] = {
+    "label": "Fratura ou luxação",
+    "perguntas": [
+        {
+            "id": "gravidade",
+            "label": "Situação principal:",
+            "tipo": "radio",
+            "opcoes": {
+                "Deformidade evidente/encurtamento ou fratura exposta": 3.5,
+                "Dor intensa com incapacidade de apoio/uso": 2.2,
+                "Dor moderada com inchaço localizado": 1.0,
+                "Dor leve sem limitação": 0.2
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Formigamento/fraqueza distal": 1.2,
+                "Estalo ou crepitação": 0.8,
+                "Hematoma extenso": 0.6
+            }
+        },
+        {
+            "id": "tempo",
+            "label": "Quando ocorreu?",
+            "tipo": "radio",
+            "opcoes": {
+                "Agora ou < 24h": 0.8,
+                "1–7 dias": 0.4,
+                "> 7 dias": 0.2
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≥ 67 anos": 0.6,
+                "Osteoporose/uso crônico de corticoide": 0.6,
+                "Uso de anticoagulante": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"gravidade": "Deformidade evidente/encurtamento ou fratura exposta"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Formigamento/fraqueza distal"]}, "min_cor": "laranja"},
+        {"se": {"gravidade": "Dor intensa com incapacidade de apoio/uso"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (2.8, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 5) INSOLAÇÃO
+FLUXOS[normalizar("Insolação")] = {
+    "label": "Insolação",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Quadro principal:",
+            "tipo": "radio",
+            "opcoes": {
+                "Alteração de consciência ou convulsão": 4.0,
+                "Temperatura corporal muito alta (pele quente e seca)": 3.0,
+                "Dor de cabeça intensa, tontura, náusea": 1.5,
+                "Mal-estar leve após sol": 0.4
+            }
+        },
+        {
+            "id": "exposicao",
+            "label": "Exposição ao calor:",
+            "tipo": "radio",
+            "opcoes": {
+                "Prolongada/atividade intensa sob sol": 1.2,
+                "Moderada": 0.6,
+                "Breve": 0.2
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≤ 4 anos": 0.8,
+                "Idade ≥ 67 anos": 0.8,
+                "Doenças cardíacas/renais": 0.6,
+                "Diuréticos/anticolinérgicos": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Alteração de consciência ou convulsão"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Temperatura corporal muito alta (pele quente e seca)"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.4, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 6) EXAUSTÃO POR CALOR
+FLUXOS[normalizar("Exaustão por calor")] = {
+    "label": "Exaustão por calor",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Sintomas principais:",
+            "tipo": "radio",
+            "opcoes": {
+                "Fraqueza intensa, tontura com pré-síncope": 2.2,
+                "Cãibras, náusea/vômito, cefaleia": 1.5,
+                "Cansaço e suor excessivo": 0.8,
+                "Desconforto leve": 0.2
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Duração da exposição ao calor:",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 2 horas de atividade no calor": 1.0,
+                "30–120 min": 0.6,
+                "< 30 min": 0.2
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Desidratação provável": 0.8,
+                "Idade ≤ 4 anos": 0.6,
+                "Idade ≥ 67 anos": 0.6,
+                "Doença cardíaca/renal": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Fraqueza intensa, tontura com pré-síncope"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (3.8, "vermelho"),
+        (2.2, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 7) EXPOSIÇÃO A FUMAÇA OU INCÊNDIO
+FLUXOS[normalizar("Exposição a fumaça ou incêndio")] = {
+    "label": "Exposição a fumaça ou incêndio",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como está a respiração?",
+            "tipo": "radio",
+            "opcoes": {
+                "Falta de ar importante, rouquidão ou confusão": 3.5,
+                "Tosse persistente e dor no peito": 2.0,
+                "Irritação leve de olhos/garganta": 0.8,
+                "Sem sintomas respiratórios": 0.2
+            }
+        },
+        {
+            "id": "exposicao",
+            "label": "Exposição:",
+            "tipo": "radio",
+            "opcoes": {
+                "Ambiente fechado/inalação intensa": 2.0,
+                "Ambiente aberto": 0.6
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Fuligem no nariz/boca": 1.5,
+                "Queimadura facial/pelos nasais chamuscados": 1.5,
+                "Náusea, dor de cabeça (suspeita de CO)": 1.2
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≤ 4 anos": 0.6,
+                "Idade ≥ 67 anos": 0.6,
+                "Asma/Doença pulmonar": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Falta de ar importante, rouquidão ou confusão"}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Fuligem no nariz/boca", "Queimadura facial/pelos nasais chamuscados"]}, "min_cor": "vermelho"},
+        {"se": {"sinais": ["Náusea, dor de cabeça (suspeita de CO)"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.4, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 8) EXPOSIÇÃO A PRODUTOS QUÍMICOS
+FLUXOS[normalizar("Exposição a produtos químicos")] = {
+    "label": "Exposição a produtos químicos",
+    "perguntas": [
+        {
+            "id": "via",
+            "label": "Via de exposição:",
+            "tipo": "radio",
+            "opcoes": {
+                "Inalação ou ingestão": 3.0,
+                "Contato ocular": 2.0,
+                "Contato cutâneo": 1.0
+            }
+        },
+        {
+            "id": "sintomas",
+            "label": "Sintomas atuais:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Falta de ar, chiado ou dor no peito": 2.0,
+                "Vômitos persistentes ou sonolência": 1.8,
+                "Dor intensa/queimação em olhos/pele": 1.5,
+                "Irritação leve em pele/olhos": 0.6
+            }
+        },
+        {
+            "id": "agente",
+            "label": "Tipo de agente (se souber):",
+            "tipo": "radio",
+            "opcoes": {
+                "Corrosivo/ácido/base forte/organofosforado": 2.5,
+                "Solvente/álcool/limpeza comum": 0.8,
+                "Desconhecido": 1.0
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Exposição prolongada/ambiente fechado": 0.8,
+                "Idade ≤ 4 anos": 0.6,
+                "Idade ≥ 67 anos": 0.6,
+                "Asma/Doença pulmonar": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"via": "Inalação ou ingestão"}, "min_cor": "laranja"},
+        {"se": {"agente": "Corrosivo/ácido/base forte/organofosforado"}, "min_cor": "vermelho"},
+        {"se": {"sintomas": ["Falta de ar, chiado ou dor no peito", "Vômitos persistentes ou sonolência"]}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 9) DESIDRATAÇÃO
+FLUXOS[normalizar("Desidratação")] = {
+    "label": "Desidratação",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Gravidade aparente:",
+            "tipo": "radio",
+            "opcoes": {
+                "Letargia, confusão ou olhos muito fundos": 3.0,
+                "Tontura ao levantar, boca muito seca, diurese reduzida": 1.8,
+                "Sede aumentada e urina amarela escura": 1.0,
+                "Sede leve": 0.3
+            }
+        },
+        {
+            "id": "perdas",
+            "label": "Perdas recentes:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Vômitos frequentes": 1.2,
+                "Diarreia intensa": 1.2,
+                "Febre": 0.6,
+                "Suor excessivo": 0.6
+            }
+        },
+        {
+            "id": "ingestao",
+            "label": "Consegue ingerir líquidos?",
+            "tipo": "radio",
+            "opcoes": {
+                "Não ou vomita tudo": 1.8,
+                "Pouco": 0.8,
+                "Sim": 0.2
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≤ 4 anos": 0.8,
+                "Idade ≥ 67 anos": 0.8,
+                "Doença renal/cardiaca": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Letargia, confusão ou olhos muito fundos"}, "min_cor": "vermelho"},
+        {"se": {"ingestao": "Não ou vomita tudo"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (2.4, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 10) PARADA CARDIORRESPIRATÓRIA
+FLUXOS[normalizar("Parada cardiorrespiratória")] = {
+    "label": "Parada cardiorrespiratória",
+    "perguntas": [
+        {
+            "id": "estado",
+            "label": "Situação observada:",
+            "tipo": "radio",
+            "opcoes": {
+                "Inconsciente, sem respiração normal": 10.0,
+                "Respiração agônica (gasping) ou desconhecida": 6.0,
+                "Outro (apenas mal-estar)": 1.0
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Quando começou?",
+            "tipo": "radio",
+            "opcoes": {
+                "Agora/≤ 5 min": 2.0,
+                "5–15 min": 1.0,
+                "> 15 min": 0.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"estado": "Inconsciente, sem respiração normal"}, "min_cor": "vermelho"},
+        {"se": {"estado": "Respiração agônica (gasping) ou desconhecida"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (9.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 11) ARRITMIA OU MAL SÚBITO NO CORAÇÃO
+FLUXOS[normalizar("Arritmia ou mal súbito no coração")] = {
+    "label": "Arritmia ou mal súbito no coração",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Sintoma principal agora:",
+            "tipo": "radio",
+            "opcoes": {
+                "Desmaio/síncope ou quase desmaio": 3.0,
+                "Dor no peito/pressão com palpitação": 2.5,
+                "Palpitação com falta de ar/tontura": 1.8,
+                "Palpitação leve, sem outros sintomas": 0.6
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Duração do episódio atual:",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 20 minutos contínuos": 1.2,
+                "5–20 minutos": 0.8,
+                "< 5 minutos": 0.3
+            }
+        },
+        {
+            "id": "historico",
+            "label": "Histórico relevante:",
+            "tipo": "checkbox",
+            "opcoes": {
+                "Cardiopatia conhecida/insuficiência cardíaca": 1.0,
+                "Uso de estimulantes (energético, cocaína, etc.)": 0.8,
+                "Episódios prévios de arritmia": 0.6
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco adicionais:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≥ 67 anos": 0.6,
+                "Gravidez": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Desmaio/síncope ou quase desmaio"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Dor no peito/pressão com palpitação"}, "min_cor": "vermelho"},
+        {"se": {"quadro": "Palpitação com falta de ar/tontura"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.4, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 FLUXOS[normalizar("Inchaço dos linfonodos")] = {
     "label": "Inchaço dos linfonodos",
     "perguntas": [
