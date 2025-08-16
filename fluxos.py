@@ -224,7 +224,7 @@ FLUXOS[normalizar("Afogamento")] = {
 }
 
 # 3) QUEIMADURA (GENÉRICA, SEM TIPO)
-FLUXOS[normalizar("Queimadura (genérica, sem tipo)")] = {
+FLUXOS[normalizar("Queimadura")] = {
     "label": "Queimadura (genérica, sem tipo)",
     "perguntas": [
         {
