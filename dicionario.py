@@ -1,5 +1,154 @@
 def dicionario_sintomas():
     d={
+    "Acidente elétrico": {
+        "definicao": "Exposição ao choque elétrico, podendo causar queimaduras, arritmias e comprometimento de órgãos vitais.",
+        "popular": "Pessoa levou um choque elétrico.",
+        "clinico": "Eletrocussão",
+        "termos": {
+            "Choque de alta tensão (>1000V) ou raio": "Contato direto com energia elétrica de alta intensidade ou raio.",
+            "Choque de média tensão com contato prolongado": "Choque em fios ou tomadas por alguns segundos.",
+            "Choque breve de baixa/média tensão": "Contato rápido com tomada ou fio desencapado.",
+            "Formigamento leve sem lesão": "Sensação de choque fraco sem marcas.",
+            "Perda de consciência/confusão": "Pessoa desmaiou ou ficou desorientada.",
+            "Dor no peito ou palpitação": "Sintomas cardíacos após o choque.",
+            "Queimaduras de entrada/saída": "Marcas visíveis na pele onde a corrente entrou ou saiu.",
+            "Queda ou trauma associado": "A pessoa caiu ou se machucou durante o choque.",
+            "Espasmos musculares persistentes": "Contrações involuntárias após o choque."
+        }
+    },
+    "Afogamento": {
+        "definicao": "Aspiração de água ou outro líquido que compromete a respiração e oxigenação.",
+        "popular": "Pessoa se afogou na água.",
+        "clinico": "Submersão / Quase-afogamento",
+        "termos": {
+            "Inconsciente ou respiração anormal": "Pessoa desacordada ou com respiração irregular.",
+            "Tosse intensa e falta de ar": "Sintomas respiratórios graves após sair da água.",
+            "Tosse leve e náusea": "Engoliu água e tossiu, mas respira bem.",
+            "Assustada sem sintomas": "Susto sem sinais respiratórios.",
+            "Tempo submerso ≥ 1 minuto": "A pessoa ficou tempo prolongado debaixo d’água.",
+            "Trauma de cabeça/coluna": "Bateu a cabeça ou coluna durante o afogamento."
+        }
+    },
+    "Queimadura (genérica, sem tipo)": {
+        "definicao": "Lesão causada por calor, eletricidade, produtos químicos ou radiação.",
+        "popular": "Pessoa sofreu uma queimadura.",
+        "clinico": "Lesão térmica/química/elétrica",
+        "termos": {
+            "Queimadura extensa com bolhas grandes ou áreas escuras": "Queimadura grave em grande área do corpo.",
+            "Queimadura moderada com bolhas pequenas": "Queimadura de 2º grau em área limitada.",
+            "Queimadura superficial (vermelhidão)": "Vermelhidão parecida com queimadura de sol.",
+            "Química ou elétrica": "Queimadura causada por ácido, base ou choque.",
+            "Térmica (fogo ou líquido quente)": "Queimadura causada por calor direto.",
+            "Solar": "Queimadura causada por exposição ao sol."
+        }
+    },
+    "Fratura ou luxação": {
+        "definicao": "Ruptura óssea (fratura) ou deslocamento da articulação (luxação).",
+        "popular": "Quebrou ou deslocou um osso.",
+        "clinico": "Fratura / Luxação",
+        "termos": {
+            "Deformidade evidente ou fratura exposta": "Osso torto ou saindo da pele.",
+            "Dor intensa com incapacidade de apoio": "Não consegue usar o membro devido à dor.",
+            "Dor moderada com inchaço": "Membro dolorido e inchado, mas ainda utilizável.",
+            "Formigamento/fraqueza distal": "Sensação de fraqueza ou formigamento abaixo da lesão.",
+            "Estalo ou crepitação": "Som ou sensação de osso rangendo.",
+            "Hematoma extenso": "Grande mancha roxa no local da lesão."
+        }
+    },
+    "Insolação": {
+        "definicao": "Exposição prolongada ao sol/calor que eleva perigosamente a temperatura corporal.",
+        "popular": "Golpe de calor pelo sol forte.",
+        "clinico": "Hipertermia por calor",
+        "termos": {
+            "Alteração de consciência ou convulsão": "Pessoa ficou confusa ou teve convulsão no calor.",
+            "Pele quente e seca, febre alta": "Sinal de insolação grave.",
+            "Dor de cabeça, tontura e náusea": "Sintomas moderados após sol intenso.",
+            "Mal-estar leve": "Desconforto após pegar sol."
+        }
+    },
+    "Exaustão por calor": {
+        "definicao": "Perda de líquidos e sais após exposição intensa ao calor.",
+        "popular": "Pessoa passou mal de calor.",
+        "clinico": "Exaustão térmica",
+        "termos": {
+            "Fraqueza intensa, tontura": "Sensação de desmaio por calor.",
+            "Cãibras, náusea ou dor de cabeça": "Sintomas comuns da exaustão.",
+            "Cansaço com suor excessivo": "Fadiga devido ao calor.",
+            "Desconforto leve": "Sensação de calor suportável."
+        }
+    },
+    "Exposição a fumaça ou incêndio": {
+        "definicao": "Inalação de fumaça em incêndios, podendo causar intoxicação e queimaduras respiratórias.",
+        "popular": "Pessoa inalou fumaça.",
+        "clinico": "Inalação de fumaça / Intoxicação por CO",
+        "termos": {
+            "Falta de ar ou confusão": "Pessoa não respira direito ou está confusa.",
+            "Tosse persistente e dor no peito": "Sintomas moderados após fumaça.",
+            "Irritação leve": "Olhos e garganta ardendo.",
+            "Fuligem no nariz/boca": "Sujeira preta visível nas vias aéreas.",
+            "Queimadura facial/pelos chamuscados": "Queimadura ao redor do nariz/boca.",
+            "Náusea/dor de cabeça (CO)": "Sinais de intoxicação por monóxido de carbono."
+        }
+    },
+    "Exposição a produtos químicos": {
+        "definicao": "Contato, inalação ou ingestão de substâncias tóxicas ou corrosivas.",
+        "popular": "Pessoa teve contato com produto químico perigoso.",
+        "clinico": "Intoxicação química / Lesão cáustica",
+        "termos": {
+            "Inalação ou ingestão": "Respirou fumaça tóxica ou engoliu produto.",
+            "Contato ocular": "Produto químico entrou no olho.",
+            "Contato cutâneo": "Produto químico na pele.",
+            "Falta de ar ou dor no peito": "Sintomas respiratórios graves.",
+            "Vômitos ou sonolência": "Sinais de intoxicação sistêmica.",
+            "Dor intensa em olhos/pele": "Queimação imediata.",
+            "Irritação leve": "Ardência leve sem gravidade.",
+            "Corrosivo/ácido/base forte": "Produto altamente perigoso.",
+            "Solvente/limpeza comum": "Produto de menor risco."
+        }
+    },
+    "Desidratação": {
+        "definicao": "Perda excessiva de água e sais minerais no organismo.",
+        "popular": "Pessoa está desidratada.",
+        "clinico": "Hipovolemia por desidratação",
+        "termos": {
+            "Letargia, confusão, olhos fundos": "Sinais graves de desidratação.",
+            "Tontura ao levantar, boca seca": "Sintomas moderados.",
+            "Sede aumentada, urina escura": "Sinais leves de desidratação.",
+            "Sede leve": "Apenas vontade aumentada de beber água.",
+            "Vômitos frequentes": "Perda de líquido pelo estômago.",
+            "Diarreia intensa": "Perda de líquido pelo intestino.",
+            "Febre": "Aumenta a perda de líquidos.",
+            "Não consegue ingerir líquidos": "Pessoa não consegue beber ou vomita tudo."
+        }
+    },
+    "Parada cardiorrespiratória": {
+        "definicao": "Interrupção súbita da circulação sanguínea e da respiração.",
+        "popular": "Pessoa parou de respirar e o coração parou.",
+        "clinico": "PCR – Parada cardiorrespiratória",
+        "termos": {
+            "Inconsciente sem respiração": "Pessoa está desacordada e não respira.",
+            "Respiração agônica": "Respiração fraca e irregular, como gasping.",
+            "Agora/≤ 5 min": "Parada muito recente.",
+            "5–15 min": "Parada intermediária.",
+            "> 15 min": "Parada prolongada."
+        }
+    },
+    "Arritmia ou mal súbito no coração": {
+        "definicao": "Distúrbio no ritmo cardíaco que pode causar desmaios e risco de morte súbita.",
+        "popular": "Coração disparou ou parou de bater direito.",
+        "clinico": "Arritmia cardíaca / Síndrome de mal súbito",
+        "termos": {
+            "Desmaio ou quase desmaio": "Pessoa apagou ou quase desmaiou.",
+            "Dor no peito com palpitação": "Pressão no peito junto com coração acelerado.",
+            "Palpitação com falta de ar": "Coração acelerado acompanhado de falta de ar.",
+            "Palpitação leve": "Coração batendo rápido mas sem sintomas graves.",
+            "≥ 20 minutos": "Episódio longo de palpitação.",
+            "Histórico de cardiopatia": "Doença cardíaca já conhecida.",
+            "Uso de estimulantes": "Consumo de café, energético, cocaína etc."
+        }
+    }
+}
+
 "Mãos ou pés frios e arroxeados": {
     "definicao": "Alteração de temperatura e cor nas extremidades, geralmente causada por má circulação ou resposta exagerada ao frio.",
     "popular": "Mãos ou pés ficam frios e com cor arroxeada.",
