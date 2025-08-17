@@ -96,6 +96,837 @@ def labels_fluxos():
 def eh_fluxo(label):
     return normalizar(label) in FLUXOS
 
+# 1) CHIADO NO PEITO (SIBILOS)
+FLUXOS[normalizar("Chiado no peito (sibilos)")] = {
+    "label": "Chiado no peito (sibilos)",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Intensidade dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Chiado intenso, dificuldade para falar": 4.0,
+                "Chiado moderado, falta de ar em repouso": 2.5,
+                "Chiado leve apenas ao esforço": 1.0,
+                "Chiado ocasional, sem falta de ar": 0.4
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito, em minutos": 1.5,
+                "Horas": 0.8,
+                "Dias": 0.3
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de asma/bronquite": 0.6,
+                "Uso de inalador sem melhora": 0.6,
+                "Idade ≤ 4 anos": 0.6,
+                "Idade ≥ 67 anos": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Chiado intenso, dificuldade para falar"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 2) TOSSE COM SANGUE (HEMOPTISE)
+FLUXOS[normalizar("Tosse com sangue (hemoptise)")] = {
+    "label": "Tosse com sangue (hemoptise)",
+    "perguntas": [
+        {
+            "id": "volume",
+            "label": "Quantidade de sangue:",
+            "tipo": "radio",
+            "opcoes": {
+                "Grande volume (≥ 200 ml)": 4.0,
+                "Moderado (até 200 ml)": 2.5,
+                "Pequeno volume (estrias de sangue)": 1.0
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Duração/recorrência:",
+            "tipo": "radio",
+            "opcoes": {
+                "Persistente há dias": 1.0,
+                "Episódico, apenas uma vez": 0.4
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Fatores associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de tuberculose/câncer pulmonar": 1.0,
+                "Febre e perda de peso": 0.8,
+                "Tabagismo intenso": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"volume": "Grande volume (≥ 200 ml)"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 3) ROUQUIDÃO SÚBITA OU PERSISTENTE
+FLUXOS[normalizar("Rouquidão súbita ou persistente")] = {
+    "label": "Rouquidão súbita ou persistente",
+    "perguntas": [
+        {
+            "id": "duracao",
+            "label": "Duração da rouquidão:",
+            "tipo": "radio",
+            "opcoes": {
+                "Mais de 3 semanas": 2.5,
+                "Entre 1–3 semanas": 1.0,
+                "Menos de 1 semana": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Dificuldade para respirar": 2.0,
+                "Dor ou dificuldade para engolir": 1.5,
+                "Sangue na saliva": 1.5,
+                "Tabagismo/álcool em excesso": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"associados": "Dificuldade para respirar"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (2.5, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 4) EXPECTORAÇÃO COM ODOR FÉTIDO
+FLUXOS[normalizar("Expectoração com odor fétido")] = {
+    "label": "Expectoração com odor fétido",
+    "perguntas": [
+        {
+            "id": "quantidade",
+            "label": "Quantidade de secreção:",
+            "tipo": "radio",
+            "opcoes": {
+                "Grande volume purulento": 2.5,
+                "Moderado": 1.0,
+                "Pequeno volume": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Febre alta": 1.5,
+                "Dor torácica": 1.2,
+                "Perda de peso": 0.8,
+                "Halitose": 0.4
+            }
+        }
+    ],
+    "mapeamento_cor": [
+        (4.0, "vermelho"),
+        (2.0, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 5) DORMÊNCIA EM PARTE DO CORPO
+FLUXOS[normalizar("Dormência em parte do corpo")] = {
+    "label": "Dormência em parte do corpo",
+    "perguntas": [
+        {
+            "id": "local",
+            "label": "Local da dormência:",
+            "tipo": "radio",
+            "opcoes": {
+                "Um lado inteiro do corpo (hemicorpo)": 3.0,
+                "Braço ou perna isolados": 2.0,
+                "Dedos ou extremidades apenas": 0.6
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (em segundos/minutos)": 2.0,
+                "Progressivo (horas/dias)": 1.0,
+                "Intermitente": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Dificuldade para falar": 2.0,
+                "Alteração de visão": 1.5,
+                "Fraqueza em membro": 1.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"local": "Um lado inteiro do corpo (hemicorpo)"}, "min_cor": "vermelho"},
+        {"se": {"inicio": "Súbito (em segundos/minutos)"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# 6) CRISES DE MOVIMENTOS REPETITIVOS (MIOCLONIAS)
+FLUXOS[normalizar("Crises de movimentos repetitivos (mioclonias)")] = {
+    "label": "Crises de movimentos repetitivos (mioclonias)",
+    "perguntas": [
+        {
+            "id": "frequencia",
+            "label": "Frequência dos episódios:",
+            "tipo": "radio",
+            "opcoes": {
+                "Múltiplos episódios por hora": 3.0,
+                "Várias vezes ao dia": 2.0,
+                "Episódios esporádicos": 0.6
+            }
+        },
+        {
+            "id": "consciência",
+            "label": "Consciência durante os episódios:",
+            "tipo": "radio",
+            "opcoes": {
+                "Perda de consciência": 3.0,
+                "Confusão ou amnésia pós-episódio": 1.5,
+                "Consciência preservada": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Trauma craniano recente": 1.5,
+                "Febre": 1.0,
+                "Déficit neurológico focal": 2.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"consciência": "Perda de consciência"}, "min_cor": "vermelho"},
+        {"se": {"associados": "Déficit neurológico focal"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+
+# 8) VISÃO DUPLA (DIPLOPIA)
+FLUXOS[normalizar("Visão dupla (diplopia)")] = {
+    "label": "Visão dupla (diplopia)",
+    "perguntas": [
+        {
+            "id": "inicio",
+            "label": "Início da diplopia:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 2.5,
+                "Progressivo (dias+)": 1.0,
+                "Intermitente": 0.6
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sinais/sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Pálpebra caída (ptose) ou desvio ocular": 1.5,
+                "Dor de cabeça intensa": 1.0,
+                "Fraqueza/fala alterada": 2.0
+            }
+        },
+        {
+            "id": "trauma",
+            "label": "História de trauma ocular/craniano recente:",
+            "tipo": "radio",
+            "opcoes": {
+                "Sim": 1.5,
+                "Não": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"inicio": "Súbito (minutos/horas)"}, "min_cor": "laranja"},
+        {"se": {"associados": "Fraqueza/fala alterada"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (2.5, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 9) PELE FRIA E ÚMIDA ASSOCIADA A MAL-ESTAR
+FLUXOS[normalizar("Pele fria e úmida associada a mal-estar")] = {
+    "label": "Pele fria e úmida associada a mal-estar",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Quadro atual:",
+            "tipo": "radio",
+            "opcoes": {
+                "Mal-estar intenso com tontura/pré-síncope": 2.5,
+                "Náusea, sudorese e fraqueza": 1.5,
+                "Leve indisposição": 0.4
+            }
+        },
+        {
+            "id": "dorpeito",
+            "label": "Dor/pressão no peito associada:",
+            "tipo": "radio",
+            "opcoes": {
+                "Sim": 2.0,
+                "Não": 0.0
+            }
+        },
+        {
+            "id": "pressao",
+            "label": "Pressão arterial medida (se souber):",
+            "tipo": "radio",
+            "opcoes": {
+                "Muito baixa (hipotensão)": 2.0,
+                "Desconhecida/normal": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"dorpeito": "Sim"}, "min_cor": "vermelho"},
+        {"se": {"pressao": "Muito baixa (hipotensão)"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (2.5, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 10) VÔMITO COM SANGUE (HEMATÊMESE)
+FLUXOS[normalizar("Vômito com sangue (hematêmese)")] = {
+    "label": "Vômito com sangue (hematêmese)",
+    "perguntas": [
+        {
+            "id": "volume",
+            "label": "Volume de sangue no vômito:",
+            "tipo": "radio",
+            "opcoes": {
+                "Grande volume/“em jato”": 4.0,
+                "Moderado": 2.5,
+                "Traços/estrias de sangue": 1.0
+            }
+        },
+        {
+            "id": "sinais",
+            "label": "Sinais associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Fezes pretas (melena) ou sangue nas fezes": 1.5,
+                "Tontura ou desmaio": 1.5,
+                "Dor abdominal intensa": 1.0,
+                "Uso de AAS/AINEs/álcool": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"volume": "Grande volume/“em jato”"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 11) AUMENTO DO VOLUME ABDOMINAL (DISTENSÃO)
+FLUXOS[normalizar("Aumento do volume abdominal (distensão)")] = {
+    "label": "Aumento do volume abdominal (distensão)",
+    "perguntas": [
+        {
+            "id": "instalacao",
+            "label": "Instalação da distensão:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbita (horas)": 2.0,
+                "Dias": 1.0,
+                "Semanas+": 0.6
+            }
+        },
+        {
+            "id": "sintomas",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Vômitos biliosos/fecaloides": 2.0,
+                "Ausência de evacuação/eliminações": 1.5,
+                "Febre": 1.0,
+                "Dor abdominal intensa": 1.5
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Condições de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Cirurgia abdominal recente": 1.0,
+                "Hérnia conhecida": 0.8,
+                "Doença hepática conhecida": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"sintomas": "Vômitos biliosos/fecaloides"}, "min_cor": "vermelho"},
+        {"se": {"sintomas": "Ausência de evacuação/eliminações"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 12) SANGUE NA URINA (HEMATÚRIA)
+FLUXOS[normalizar("Sangue na urina (hematúria)")] = {
+    "label": "Sangue na urina (hematúria)",
+    "perguntas": [
+        {
+            "id": "intensidade",
+            "label": "Intensidade da hematúria:",
+            "tipo": "radio",
+            "opcoes": {
+                "Urina vermelha/“colorida” a olho nu": 2.5,
+                "Apenas traços (suspeita microscópica)": 0.8
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Dor lombar/cólica": 1.5,
+                "Febre/calafrios": 1.5,
+                "Coágulos ao urinar": 1.5,
+                "Dor/ardor para urinar": 1.0
+            }
+        },
+        {
+            "id": "fatores",
+            "label": "Fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Uso de anticoagulantes": 1.0,
+                "Histórico de cálculos": 0.8,
+                "Trauma abdominal/perineal": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"associados": "Coágulos ao urinar"}, "min_cor": "laranja"},
+        {"se": {"associados": "Febre/calafrios"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (2.5, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# 13) CORRIMENTO URETRAL ANORMAL
+FLUXOS[normalizar("Corrimento uretral anormal")] = {
+    "label": "Corrimento uretral anormal",
+    "perguntas": [
+        {
+            "id": "aspecto",
+            "label": "Aspecto do corrimento:",
+            "tipo": "radio",
+            "opcoes": {
+                "Purulento (espesso, amarelado/esverdeado)": 2.5,
+                "Clareado/transparente": 1.0,
+                "Pequena secreção esporádica": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Ardência ao urinar": 1.5,
+                "Febre": 1.5,
+                "Dor testicular": 1.5,
+                "Úlcera/lesão genital": 1.0
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Histórico:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Relação sexual desprotegida recente": 1.5,
+                "Parceiros múltiplos": 1.0,
+                "IST prévia": 0.8
+            }
+        }
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (2.5, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 14) CORRIMENTO VAGINAL FÉTIDO
+FLUXOS[normalizar("Corrimento vaginal fétido")] = {
+    "label": "Corrimento vaginal fétido",
+    "perguntas": [
+        {
+            "id": "odor",
+            "label": "Intensidade do odor:",
+            "tipo": "radio",
+            "opcoes": {
+                "Odor muito forte/fétido": 2.5,
+                "Odor perceptível, mas não intenso": 1.0,
+                "Sem odor significativo": 0.2
+            }
+        },
+        {
+            "id": "aspecto",
+            "label": "Aspecto do corrimento:",
+            "tipo": "radio",
+            "opcoes": {
+                "Espesso e purulento": 1.5,
+                "Acre/branco esfarelado": 1.0,
+                "Aquoso": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Febre/dor abdominal": 2.0,
+                "Prurido vaginal": 1.0,
+                "Dor pélvica": 1.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"associados": "Febre/dor abdominal"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),
+        (2.5, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 15) DOR PÉLVICA CÍCLICA
+FLUXOS[normalizar("Dor pélvica cíclica")] = {
+    "label": "Dor pélvica cíclica",
+    "perguntas": [
+        {
+            "id": "intensidade",
+            "label": "Intensidade da dor:",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor incapacitante (não realiza atividades)": 2.5,
+                "Dor moderada (atrapalha atividades)": 1.5,
+                "Dor leve suportável": 0.6
+            }
+        },
+        {
+            "id": "ciclo",
+            "label": "Relação com ciclo menstrual:",
+            "tipo": "radio",
+            "opcoes": {
+                "Sempre presente em menstruação": 1.5,
+                "Ocasional, variável": 0.6,
+                "Sem relação clara": 0.2
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Sangramento intenso": 1.5,
+                "Febre": 1.0,
+                "Infertilidade/diagnóstico de endometriose": 0.8
+            }
+        }
+    ],
+    "mapeamento_cor": [
+        (3.5, "vermelho"),
+        (2.0, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 16) DOR MUSCULAR DIFUSA (MIALGIA)
+FLUXOS[normalizar("Dor muscular difusa (mialgia)")] = {
+    "label": "Dor muscular difusa (mialgia)",
+    "perguntas": [
+        {
+            "id": "intensidade",
+            "label": "Intensidade da dor:",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor intensa generalizada": 2.0,
+                "Dor moderada difusa": 1.0,
+                "Dor leve": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Febre": 1.0,
+                "Fraqueza intensa": 1.5,
+                "Exposição a esforço excessivo": 0.6,
+                "Uso de estatinas/medicações": 0.8
+            }
+        }
+    ],
+    "mapeamento_cor": [
+        (3.0, "vermelho"),
+        (2.0, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 17) RIGIDEZ MATINAL NAS ARTICULAÇÕES
+FLUXOS[normalizar("Rigidez matinal nas articulações")] = {
+    "label": "Rigidez matinal nas articulações",
+    "perguntas": [
+        {
+            "id": "duracao",
+            "label": "Duração da rigidez pela manhã:",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 1 hora": 2.0,
+                "30–60 min": 1.5,
+                "< 30 min": 0.4
+            }
+        },
+        {
+            "id": "frequencia",
+            "label": "Frequência dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Diariamente": 1.5,
+                "Algumas vezes na semana": 0.6,
+                "Esporádico": 0.2
+            }
+        },
+        {
+            "id": "locais",
+            "label": "Locais acometidos:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Pequenas articulações (mãos/pés)": 1.0,
+                "Grandes articulações": 0.6,
+                "Generalizado": 0.8
+            }
+        }
+    ],
+    "mapeamento_cor": [
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 18) INTOLERÂNCIA AO FRIO
+FLUXOS[normalizar("Intolerância ao frio")] = {
+    "label": "Intolerância ao frio",
+    "perguntas": [
+        {
+            "id": "grau",
+            "label": "Grau de intolerância:",
+            "tipo": "radio",
+            "opcoes": {
+                "Extrema, mesmo em ambientes quentes": 2.0,
+                "Moderada, facilmente sente frio": 1.0,
+                "Leve, tolerável": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Cansaço/fraqueza": 1.0,
+                "Ganho de peso": 0.6,
+                "Pele seca/cabelos quebradiços": 0.6
+            }
+        }
+    ],
+    "mapeamento_cor": [
+        (2.5, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 19) INTOLERÂNCIA AO CALOR
+FLUXOS[normalizar("Intolerância ao calor")] = {
+    "label": "Intolerância ao calor",
+    "perguntas": [
+        {
+            "id": "grau",
+            "label": "Grau de intolerância:",
+            "tipo": "radio",
+            "opcoes": {
+                "Extrema, sensação insuportável": 2.0,
+                "Moderada, desconforto frequente": 1.0,
+                "Leve, tolerável": 0.4
+            }
+        },
+        {
+            "id": "associados",
+            "label": "Sintomas associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Sudorese excessiva": 1.0,
+                "Perda de peso inexplicada": 0.8,
+                "Palpitações/tremores": 1.0
+            }
+        }
+    ],
+    "mapeamento_cor": [
+        (2.5, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 20) ATAQUES DE PÂNICO
+FLUXOS[normalizar("Ataques de pânico")] = {
+    "label": "Ataques de pânico",
+    "perguntas": [
+        {
+            "id": "frequencia",
+            "label": "Frequência das crises:",
+            "tipo": "radio",
+            "opcoes": {
+                "Múltiplas vezes na semana": 2.0,
+                "Uma vez por semana": 1.0,
+                "Episódico raro": 0.4
+            }
+        },
+        {
+            "id": "sintomas",
+            "label": "Sintomas presentes durante crise:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Sensação de morte iminente": 1.5,
+                "Palpitações/tremores": 1.0,
+                "Falta de ar": 1.0,
+                "Tontura/desmaio": 1.0
+            }
+        }
+    ],
+    "mapeamento_cor": [
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
+# 21) IDEAÇÃO SUICIDA
+FLUXOS[normalizar("Ideação suicida")] = {
+    "label": "Ideação suicida",
+    "perguntas": [
+        {
+            "id": "ideacao",
+            "label": "Pensamentos suicidas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Plano ativo de se machucar": 4.0,
+                "Pensamentos frequentes sem plano": 3.0,
+                "Pensamentos ocasionais": 1.5
+            }
+        },
+        {
+            "id": "historico",
+            "label": "Histórico:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Tentativa prévia": 2.0,
+                "Transtorno psiquiátrico diagnosticado": 1.5,
+                "Abuso de álcool/drogas": 1.0
+            }
+        },
+        {
+            "id": "rede",
+            "label": "Rede de apoio:",
+            "tipo": "radio",
+            "opcoes": {
+                "Isolamento social": 1.5,
+                "Apoio familiar/pessoal presente": 0.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"ideacao": "Plano ativo de se machucar"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (6.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.5, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 # =========================
 # PACOTE DE FLUXOS CRÍTICOS
 # =========================
@@ -219,19 +1050,6 @@ FLUXOS[normalizar("Afogamento")] = {
         (6.0, "vermelho"),
         (3.0, "laranja"),
         (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-
-    "regras_excecao": [
-        {"se": {"agente": "Química/ elétrica"}, "min_cor": "vermelho"},
-        {"se": {"riscos": ["Inalação de fumaça"]}, "min_cor": "vermelho"},
-        {"se": {"local": ["Face/pescoço", "Mãos/pés/genitália"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.2, "amarelo"),
         (0.0, "verde")
     ]
 }
