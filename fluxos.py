@@ -96,8 +96,8 @@ def labels_fluxos():
 def eh_fluxo(label):
     return normalizar(label) in FLUXOS
 
-FLUXOS[normalizar("Dor muscular localizada (cãibra)")] = {
-    "label": "Dor muscular localizada (cãibra)",
+FLUXOS[normalizar("Dor muscular localizada ")] = {
+    "label": "Dor muscular localizada ",
     "perguntas": [
         {
             "id": "intensidade",
