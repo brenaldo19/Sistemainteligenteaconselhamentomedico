@@ -360,23 +360,6 @@ def dicionario_sintomas():
     }
 },
 
-"Daltonismo": {
-    "definicao": "Alteração na percepção das cores, geralmente hereditária, podendo ser adquirida em casos raros.",
-    "popular": "Dificuldade para diferenciar algumas cores.",
-    "clinico": "Deficiência de percepção cromática",
-    "termos": {
-        "Desde a infância (sempre foi assim)": "A dificuldade para diferenciar cores existe desde pequeno.",
-        "Percebi há meses/anos": "O problema começou a ser notado recentemente.",
-        "Início súbito (dias/semanas)": "A dificuldade surgiu repentinamente.",
-        "Um olho apenas": "A alteração é percebida somente em um olho.",
-        "Ambos os olhos": "A alteração ocorre nos dois olhos.",
-        "Dor ocular": "Desconforto ou dor nos olhos.",
-        "Queda de acuidade visual": "Visão embaçada ou menos nítida.",
-        "Fotofobia": "Sensibilidade excessiva à luz.",
-        "Cefaleia": "Dor de cabeça.",
-        "Olho vermelho": "Olho com vermelhidão visível."
-    }
-},
 "Delírio ou alucinações": {
     "definicao": "Percepção de coisas irreais ou crenças falsas, podendo estar associada a condições neurológicas, psiquiátricas ou intoxicações.",
     "popular": "Está vendo ou ouvindo coisas que não existem ou acreditando em coisas que não são reais.",
@@ -937,17 +920,6 @@ def dicionario_sintomas():
         "Palidez/pele fria": "Pessoa fica muito branca e gelada ao toque.",
         "Batimento muito acelerado": "Coração disparado mesmo em repouso.",
         "Uso de anticoagulante": "Remédios que afinam o sangue e aumentam sangramento."
-        }
-    },
-
-"Alergia cutânea": {
-    "definicao": "Reação alérgica que afeta a pele, causando coceira, vermelhidão ou descamação.",
-    "popular": "Quando a pele fica irritada, coçando, com manchas vermelhas ou até sem sintomas, mas com aspecto diferente.",
-    "clinico": "Dermatite alérgica",
-    "termos": {
-        "Urticária": "Placas vermelhas na pele que coçam muito.",
-        "Erupção": "Aparecimento repentino de manchas ou bolinhas na pele.",
-        "Edema": "Inchaço em alguma parte do corpo."
         }
     },
 
