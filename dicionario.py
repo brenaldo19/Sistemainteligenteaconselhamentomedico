@@ -29,19 +29,7 @@ def dicionario_sintomas():
             "Trauma de cabeça/coluna": "Bateu a cabeça ou coluna durante o afogamento."
         }
     },
-    "Queimadura ": {
-        "definicao": "Lesão causada por calor, eletricidade, produtos químicos ou radiação.",
-        "popular": "Pessoa sofreu uma queimadura.",
-        "clinico": "Lesão térmica/química/elétrica",
-        "termos": {
-            "Queimadura extensa com bolhas grandes ou áreas escuras": "Queimadura grave em grande área do corpo.",
-            "Queimadura moderada com bolhas pequenas": "Queimadura de 2º grau em área limitada.",
-            "Queimadura superficial (vermelhidão)": "Vermelhidão parecida com queimadura de sol.",
-            "Química ou elétrica": "Queimadura causada por ácido, base ou choque.",
-            "Térmica (fogo ou líquido quente)": "Queimadura causada por calor direto.",
-            "Solar": "Queimadura causada por exposição ao sol."
-        }
-    },
+
     "Fratura ou luxação": {
         "definicao": "Ruptura óssea (fratura) ou deslocamento da articulação (luxação).",
         "popular": "Quebrou ou deslocou um osso.",
@@ -121,33 +109,7 @@ def dicionario_sintomas():
             "Não consegue ingerir líquidos": "Pessoa não consegue beber ou vomita tudo."
         }
     },
-    "Parada cardiorrespiratória": {
-        "definicao": "Interrupção súbita da circulação sanguínea e da respiração.",
-        "popular": "Pessoa parou de respirar e o coração parou.",
-        "clinico": "PCR – Parada cardiorrespiratória",
-        "termos": {
-            "Inconsciente sem respiração": "Pessoa está desacordada e não respira.",
-            "Respiração agônica": "Respiração fraca e irregular, como gasping.",
-            "Agora/≤ 5 min": "Parada muito recente.",
-            "5–15 min": "Parada intermediária.",
-            "> 15 min": "Parada prolongada."
-        }
-    },
-    "Arritmia ou mal súbito no coração": {
-        "definicao": "Distúrbio no ritmo cardíaco que pode causar desmaios e risco de morte súbita.",
-        "popular": "Coração disparou ou parou de bater direito.",
-        "clinico": "Arritmia cardíaca / Síndrome de mal súbito",
-        "termos": {
-            "Desmaio ou quase desmaio": "Pessoa apagou ou quase desmaiou.",
-            "Dor no peito com palpitação": "Pressão no peito junto com coração acelerado.",
-            "Palpitação com falta de ar": "Coração acelerado acompanhado de falta de ar.",
-            "Palpitação leve": "Coração batendo rápido mas sem sintomas graves.",
-            "≥ 20 minutos": "Episódio longo de palpitação.",
-            "Histórico de cardiopatia": "Doença cardíaca já conhecida.",
-            "Uso de estimulantes": "Consumo de café, energético, cocaína etc."
-        }
-    }
-}
+
 
 "Mãos ou pés frios e arroxeados": {
     "definicao": "Alteração de temperatura e cor nas extremidades, geralmente causada por má circulação ou resposta exagerada ao frio.",
@@ -1172,17 +1134,6 @@ def dicionario_sintomas():
         }
     },
 
-"Gases": {
-    "definicao": "Acúmulo de ar no intestino, provocando distensão e desconforto.",
-    "popular": "Barriga estufada, soltando pum o tempo todo ou barulho alto no intestino. Às vezes não melhora nem depois de soltar.",
-    "clinico": "Flatulência ou distensão abdominal",
-    "termos": {
-        "Dor abdominal intensa com inchaço e sem alívio": "Dor forte na barriga acompanhada de aumento de volume e sem melhora.",
-        "Desconforto forte e barulhos intestinais altos": "Sensação desconfortável no abdômen com sons intensos vindos do intestino.",
-        "Flatulência frequente com leve dor": "Eliminação de gases em excesso com dor leve.",
-        "Gases leves, sem incômodo relevante": "Pequena quantidade de gases sem causar desconforto."
-        }
-    },
 
 "Sangramento retal": {
     "definicao": "Presença de sangue saindo pelo ânus, geralmente visível nas fezes ou no papel higiênico.",
