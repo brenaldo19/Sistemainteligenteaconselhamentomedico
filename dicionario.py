@@ -16,6 +16,21 @@ def dicionario_sintomas():
             "Espasmos musculares persistentes": "Contrações involuntárias após o choque."
         }
     },
+    "Dor muscular localizada (cãibra)": {
+        "definicao": "Contração involuntária, súbita e dolorosa de um músculo ou grupo muscular.",
+        "popular": "Músculo travou, deu cãibra.",
+        "clinico": "Espasmo muscular / Cãibra",
+        "termos": {
+            "Dor intensa e súbita": "Dor forte que aparece de repente em um músculo.",
+            "Contração muscular visível": "O músculo fica duro ou repuxado.",
+            "Alívio ao alongar ou massagear": "Melhora quando estica ou faz massagem.",
+            "Cãibra durante exercício": "Aparece durante atividade física.",
+            "Cãibra noturna": "Surge à noite, geralmente em repouso.",
+            "Recorrente": "Acontece repetidamente ao longo de dias ou semanas.",
+            "Associação com desidratação ou medicamentos": "Relacionada a falta de líquidos ou uso de diuréticos."
+    }
+},
+
     "Afogamento": {
         "definicao": "Aspiração de água ou outro líquido que compromete a respiração e oxigenação.",
         "popular": "Pessoa se afogou na água.",
