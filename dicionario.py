@@ -29,7 +29,7 @@ def dicionario_sintomas():
             "Trauma de cabeça/coluna": "Bateu a cabeça ou coluna durante o afogamento."
         }
     },
-        "Chiado no peito (sibilos)": {
+        "Chiado no peito": {
     "definicao": "Som agudo/assobiado na respiração por estreitamento das vias aéreas, podendo causar dispneia.",
     "popular": "Peito chiando, como um assobio ao respirar.",
     "clinico": "Sibilância / Broncoespasmo",
@@ -48,7 +48,7 @@ def dicionario_sintomas():
     }
 },
 
-"Tosse com sangue (hemoptise)": {
+"Tosse com sangue ": {
     "definicao": "Eliminação de sangue pelas vias aéreas inferiores durante a tosse.",
     "popular": "Cuspindo sangue ao tossir.",
     "clinico": "Hemoptise",
@@ -93,7 +93,7 @@ def dicionario_sintomas():
         "Halitose": "Mau hálito marcante."
     }
 },
-"Visão dupla (diplopia)": {
+"Visão dupla": {
     "definicao": "Percepção de duas imagens de um único objeto, causada por desalinhamento ocular ou alteração neurológica.",
     "popular": "Enxerga tudo duplicado.",
     "clinico": "Diplopia",
@@ -121,7 +121,7 @@ def dicionario_sintomas():
     }
 },
 
-"Vômito com sangue (hematêmese)": {
+"Vômito com sangue": {
     "definicao": "Eliminação de sangue pelo vômito, indicativo de sangramento digestivo alto.",
     "popular": "Vomitou sangue.",
     "clinico": "Hematêmese",
@@ -136,7 +136,7 @@ def dicionario_sintomas():
     }
 },
 
-"Aumento do volume abdominal (distensão)": {
+"Aumento do volume abdominal": {
     "definicao": "Acúmulo de gás, líquido ou massa que aumenta o tamanho do abdome.",
     "popular": "Barriga inchada de repente.",
     "clinico": "Distensão abdominal",
@@ -154,7 +154,7 @@ def dicionario_sintomas():
     }
 },
 
-"Sangue na urina (hematúria)": {
+"Sangue na urina": {
     "definicao": "Presença de sangue na urina, visível ou microscópica.",
     "popular": "Urina saindo com sangue.",
     "clinico": "Hematúria",
