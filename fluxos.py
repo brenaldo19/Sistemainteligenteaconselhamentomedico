@@ -97,8 +97,8 @@ def eh_fluxo(label):
     return normalizar(label) in FLUXOS
 
 # 1) CHIADO NO PEITO (SIBILOS)
-FLUXOS[normalizar("Chiado no peito (sibilos)")] = {
-    "label": "Chiado no peito (sibilos)",
+FLUXOS[normalizar("Chiado no peito")] = {
+    "label": "Chiado no peito",
     "perguntas": [
         {
             "id": "quadro",
@@ -145,8 +145,8 @@ FLUXOS[normalizar("Chiado no peito (sibilos)")] = {
 }
 
 # 2) TOSSE COM SANGUE (HEMOPTISE)
-FLUXOS[normalizar("Tosse com sangue (hemoptise)")] = {
-    "label": "Tosse com sangue (hemoptise)",
+FLUXOS[normalizar("Tosse com sangue")] = {
+    "label": "Tosse com sangue ",
     "perguntas": [
         {
             "id": "volume",
@@ -307,8 +307,8 @@ FLUXOS[normalizar("Dormência em parte do corpo")] = {
     ]
 }
 # 6) CRISES DE MOVIMENTOS REPETITIVOS (MIOCLONIAS)
-FLUXOS[normalizar("Crises de movimentos repetitivos (mioclonias)")] = {
-    "label": "Crises de movimentos repetitivos (mioclonias)",
+FLUXOS[normalizar("Crises de movimentos repetitivos ")] = {
+    "label": "Crises de movimentos repetitivos ",
     "perguntas": [
         {
             "id": "frequencia",
@@ -355,8 +355,8 @@ FLUXOS[normalizar("Crises de movimentos repetitivos (mioclonias)")] = {
 
 
 # 8) VISÃO DUPLA (DIPLOPIA)
-FLUXOS[normalizar("Visão dupla (diplopia)")] = {
-    "label": "Visão dupla (diplopia)",
+FLUXOS[normalizar("Visão dupla ")] = {
+    "label": "Visão dupla ",
     "perguntas": [
         {
             "id": "inicio",
@@ -446,8 +446,8 @@ FLUXOS[normalizar("Pele fria e úmida associada a mal-estar")] = {
 }
 
 # 10) VÔMITO COM SANGUE (HEMATÊMESE)
-FLUXOS[normalizar("Vômito com sangue (hematêmese)")] = {
-    "label": "Vômito com sangue (hematêmese)",
+FLUXOS[normalizar("Vômito com sangue ")] = {
+    "label": "Vômito com sangue",
     "perguntas": [
         {
             "id": "volume",
@@ -483,8 +483,8 @@ FLUXOS[normalizar("Vômito com sangue (hematêmese)")] = {
 }
 
 # 11) AUMENTO DO VOLUME ABDOMINAL (DISTENSÃO)
-FLUXOS[normalizar("Aumento do volume abdominal (distensão)")] = {
-    "label": "Aumento do volume abdominal (distensão)",
+FLUXOS[normalizar("Aumento do volume abdominal ")] = {
+    "label": "Aumento do volume abdominal",
     "perguntas": [
         {
             "id": "instalacao",
@@ -531,8 +531,8 @@ FLUXOS[normalizar("Aumento do volume abdominal (distensão)")] = {
 }
 
 # 12) SANGUE NA URINA (HEMATÚRIA)
-FLUXOS[normalizar("Sangue na urina (hematúria)")] = {
-    "label": "Sangue na urina (hematúria)",
+FLUXOS[normalizar("Sangue na urina ")] = {
+    "label": "Sangue na urina",
     "perguntas": [
         {
             "id": "intensidade",
@@ -710,8 +710,8 @@ FLUXOS[normalizar("Dor pélvica cíclica")] = {
 }
 
 # 16) DOR MUSCULAR DIFUSA (MIALGIA)
-FLUXOS[normalizar("Dor muscular difusa (mialgia)")] = {
-    "label": "Dor muscular difusa (mialgia)",
+FLUXOS[normalizar("Dor muscular difusa ")] = {
+    "label": "Dor muscular difusa ",
     "perguntas": [
         {
             "id": "intensidade",
