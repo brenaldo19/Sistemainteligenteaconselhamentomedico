@@ -29,6 +29,324 @@ def dicionario_sintomas():
             "Trauma de cabeça/coluna": "Bateu a cabeça ou coluna durante o afogamento."
         }
     },
+        "Chiado no peito (sibilos)": {
+    "definicao": "Som agudo/assobiado na respiração por estreitamento das vias aéreas, podendo causar dispneia.",
+    "popular": "Peito chiando, como um assobio ao respirar.",
+    "clinico": "Sibilância / Broncoespasmo",
+    "termos": {
+        "Chiado intenso, dificuldade para falar": "Respiração muito difícil, a ponto de falar por frases curtas.",
+        "Chiado moderado, falta de ar em repouso": "Falta de ar mesmo sentado/deitado, com chiado evidente.",
+        "Chiado leve apenas ao esforço": "Aparece quando caminha/corre, alivia em repouso.",
+        "Chiado ocasional, sem falta de ar": "Assobio esporádico sem esforço respiratório.",
+        "Súbito, em minutos": "Início repentino, minutos após gatilho.",
+        "Horas": "Instalação ao longo de algumas horas.",
+        "Dias": "Sintomas que evoluem há dias.",
+        "Histórico de asma/bronquite": "Doenças reativas das vias aéreas.",
+        "Uso de inalador sem melhora": "Tentativa com broncodilatador falhou.",
+        "Idade ≤ 4 anos": "Criança pequena (maior risco).",
+        "Idade ≥ 67 anos": "Idoso (maior risco)."
+    }
+},
+
+"Tosse com sangue (hemoptise)": {
+    "definicao": "Eliminação de sangue pelas vias aéreas inferiores durante a tosse.",
+    "popular": "Cuspindo sangue ao tossir.",
+    "clinico": "Hemoptise",
+    "termos": {
+        "Grande volume (≥ 200 ml)": "Sangramento volumoso, risco de asfixia/choque.",
+        "Moderado (até 200 ml)": "Sangue visível, porém não maciço.",
+        "Pequeno volume (estrias de sangue)": "Apenas listras de sangue no catarro.",
+        "Persistente há dias": "Vários episódios ao longo de dias.",
+        "Episódico, apenas uma vez": "Evento único, sem recorrência.",
+        "Histórico de tuberculose/câncer pulmonar": "Doenças graves associadas.",
+        "Febre e perda de peso": "Sinais constitucionais.",
+        "Tabagismo intenso": "Fator de risco pulmonar importante."
+    }
+},
+
+"Rouquidão súbita ou persistente": {
+    "definicao": "Alteração da qualidade da voz por disfonia aguda ou crônica.",
+    "popular": "Voz rouca ou falhando.",
+    "clinico": "Disfonia",
+    "termos": {
+        "Mais de 3 semanas": "Rouquidão crônica/prolongada.",
+        "Entre 1–3 semanas": "Duração intermediária.",
+        "Menos de 1 semana": "Quadro inicial/recente.",
+        "Dificuldade para respirar": "Sinal de comprometimento de via aérea.",
+        "Dor ou dificuldade para engolir": "Odinofagia/disfagia associada.",
+        "Sangue na saliva": "Sinal de alarme.",
+        "Tabagismo/álcool em excesso": "Fatores de risco para lesões laríngeas."
+    }
+},
+
+"Expectoração com odor fétido": {
+    "definicao": "Produção de secreção respiratória com cheiro pútrido, sugestiva de infecção anaeróbia.",
+    "popular": "Catarro com cheiro muito ruim.",
+    "clinico": "Expectoração fétida (infecção anaeróbia/abscesso pulmonar)",
+    "termos": {
+        "Grande volume purulento": "Muito catarro espesso e amarelado/esverdeado.",
+        "Moderado": "Quantidade intermediária de secreção.",
+        "Pequeno volume": "Pouco catarro.",
+        "Febre alta": "Temperatura elevada persistente.",
+        "Dor torácica": "Dor no peito ao respirar/tossir.",
+        "Perda de peso": "Emagrecimento associado.",
+        "Halitose": "Mau hálito marcante."
+    }
+},
+"Visão dupla (diplopia)": {
+    "definicao": "Percepção de duas imagens de um único objeto, causada por desalinhamento ocular ou alteração neurológica.",
+    "popular": "Enxerga tudo duplicado.",
+    "clinico": "Diplopia",
+    "termos": {
+        "Súbito (minutos/horas)": "Início abrupto da visão dupla.",
+        "Progressivo (dias+)": "Apareceu ao longo de dias.",
+        "Intermitente": "Vai e volta.",
+        "Pálpebra caída (ptose) ou desvio ocular": "Alteração visível nos olhos.",
+        "Dor de cabeça intensa": "Cefaleia forte junto à diplopia.",
+        "Fraqueza/fala alterada": "Déficit neurológico associado.",
+        "História de trauma ocular/craniano recente": "Diplopia após pancada ou acidente."
+    }
+},
+
+"Pele fria e úmida associada a mal-estar": {
+    "definicao": "Sudorese fria com hipotensão ou mal-estar, comum em choque, síncope ou isquemia cardíaca.",
+    "popular": "Pessoa ficou fria e suada de repente.",
+    "clinico": "Sudorese fria / Sinais de baixo débito",
+    "termos": {
+        "Mal-estar intenso com tontura/pré-síncope": "Sensação de desmaio iminente com fraqueza intensa.",
+        "Náusea, sudorese e fraqueza": "Sintomas vegetativos em conjunto.",
+        "Leve indisposição": "Quadro brando.",
+        "Dor/pressão no peito associada": "Sinal cardíaco grave.",
+        "Muito baixa (hipotensão)": "Pressão arterial marcadamente baixa."
+    }
+},
+
+"Vômito com sangue (hematêmese)": {
+    "definicao": "Eliminação de sangue pelo vômito, indicativo de sangramento digestivo alto.",
+    "popular": "Vomitou sangue.",
+    "clinico": "Hematêmese",
+    "termos": {
+        "Grande volume/“em jato”": "Sangue abundante ao vomitar.",
+        "Moderado": "Sangue em quantidade intermediária.",
+        "Traços/estrias de sangue": "Pequena quantidade misturada ao vômito.",
+        "Fezes pretas (melena) ou sangue nas fezes": "Sinais de sangramento digestivo.",
+        "Tontura ou desmaio": "Instabilidade hemodinâmica.",
+        "Dor abdominal intensa": "Quadro associado de abdome agudo.",
+        "Uso de AAS/AINEs/álcool": "Fatores de risco de gastrite/úlcera."
+    }
+},
+
+"Aumento do volume abdominal (distensão)": {
+    "definicao": "Acúmulo de gás, líquido ou massa que aumenta o tamanho do abdome.",
+    "popular": "Barriga inchada de repente.",
+    "clinico": "Distensão abdominal",
+    "termos": {
+        "Súbita (horas)": "Instalação abrupta.",
+        "Dias": "Evolução subaguda.",
+        "Semanas+": "Aumento progressivo crônico.",
+        "Vômitos biliosos/fecaloides": "Obstrução intestinal grave.",
+        "Ausência de evacuação/eliminações": "Constipação grave/íleo.",
+        "Febre": "Infecção associada.",
+        "Dor abdominal intensa": "Sinal de gravidade abdominal.",
+        "Cirurgia abdominal recente": "Histórico cirúrgico predisponente.",
+        "Hérnia conhecida": "Possível encarceramento.",
+        "Doença hepática conhecida": "Ascite como causa."
+    }
+},
+
+"Sangue na urina (hematúria)": {
+    "definicao": "Presença de sangue na urina, visível ou microscópica.",
+    "popular": "Urina saindo com sangue.",
+    "clinico": "Hematúria",
+    "termos": {
+        "Urina vermelha/“colorida” a olho nu": "Sangue visível claramente.",
+        "Apenas traços (suspeita microscópica)": "Presença mínima detectada.",
+        "Dor lombar/cólica": "Sugestivo de cálculo renal.",
+        "Febre/calafrios": "Infecção urinária complicada.",
+        "Coágulos ao urinar": "Sangramento volumoso com obstrução.",
+        "Dor/ardor para urinar": "Sintoma associado de cistite/uretrite.",
+        "Uso de anticoagulantes": "Risco aumentado de sangramento.",
+        "Histórico de cálculos": "Litíase urinária prévia.",
+        "Trauma abdominal/perineal": "Causa traumática de hematúria."
+    }
+},
+
+"Corrimento uretral anormal": {
+    "definicao": "Eliminação anormal de secreção pela uretra masculina, geralmente infecciosa.",
+    "popular": "Saída de pus ou secreção pelo pênis.",
+    "clinico": "Uretrite",
+    "termos": {
+        "Purulento (espesso, amarelado/esverdeado)": "Secreção típica de infecção bacteriana.",
+        "Clareado/transparente": "Secreção aquosa menos intensa.",
+        "Pequena secreção esporádica": "Sintoma leve/intermitente.",
+        "Ardência ao urinar": "Disúria associada.",
+        "Febre": "Infecção sistêmica.",
+        "Dor testicular": "Possível epididimite/orquite.",
+        "Úlcera/lesão genital": "Sugere IST associada.",
+        "Relação sexual desprotegida recente": "Fator de risco importante.",
+        "Parceiros múltiplos": "Risco aumentado.",
+        "IST prévia": "Histórico relevante."
+    }
+},
+
+"Corrimento vaginal fétido": {
+    "definicao": "Secreção vaginal com odor desagradável, geralmente infecciosa.",
+    "popular": "Corrimento vaginal com mau cheiro.",
+    "clinico": "Vaginite / Vulvovaginite",
+    "termos": {
+        "Odor muito forte/fétido": "Mau cheiro intenso.",
+        "Odor perceptível, mas não intenso": "Cheiro notável, porém leve.",
+        "Sem odor significativo": "Sem mau cheiro.",
+        "Espesso e purulento": "Secreção amarelada/verde.",
+        "Acre/branco esfarelado": "Corrimento tipo candidíase.",
+        "Aquoso": "Corrimento fluido.",
+        "Febre/dor abdominal": "Infecção pélvica grave.",
+        "Prurido vaginal": "Coceira local.",
+        "Dor pélvica": "Sinal associado."
+    }
+},
+ "Dor pélvica cíclica": {
+    "definicao": "Dor localizada na região pélvica, recorrente em ciclos, geralmente relacionada à menstruação.",
+    "popular": "Dor no baixo ventre que vem e vai junto da menstruação.",
+    "clinico": "Dismenorreia / Dor pélvica cíclica",
+    "termos": {
+        "Dor incapacitante (não realiza atividades)": "Dor tão intensa que impede tarefas do dia a dia.",
+        "Dor moderada (atrapalha atividades)": "Dor forte mas ainda permite algumas atividades.",
+        "Dor leve suportável": "Desconforto menor.",
+        "Sempre presente em menstruação": "Aparece em todos os ciclos menstruais.",
+        "Ocasional, variável": "Nem sempre aparece ou varia muito.",
+        "Sem relação clara": "Não segue o ciclo menstrual.",
+        "Sangramento intenso": "Fluxo menstrual maior que o habitual.",
+        "Febre": "Sinal de infecção/inflamação associada.",
+        "Infertilidade/diagnóstico de endometriose": "Histórico clínico relevante."
+    }
+},
+
+"Dor muscular difusa (mialgia)": {
+    "definicao": "Dor generalizada nos músculos, de intensidade variável, podendo estar ligada a infecção ou esforço.",
+    "popular": "Dores no corpo todo.",
+    "clinico": "Mialgia",
+    "termos": {
+        "Dor intensa generalizada": "Dores musculares muito fortes.",
+        "Dor moderada difusa": "Dores mais leves, porém em várias regiões.",
+        "Dor leve": "Desconforto pequeno.",
+        "Febre": "Sinal de infecção viral ou bacteriana.",
+        "Fraqueza intensa": "Dificuldade para realizar esforços.",
+        "Exposição a esforço excessivo": "Prática de atividade intensa.",
+        "Uso de estatinas/medicações": "Medicamentos que podem causar mialgia."
+    }
+},
+
+"Rigidez matinal nas articulações": {
+    "definicao": "Sensação de enrijecimento articular após períodos de repouso, comum em doenças reumáticas.",
+    "popular": "Articulações travadas ao acordar.",
+    "clinico": "Rigidez articular matinal",
+    "termos": {
+        "≥ 1 hora": "Rigidez prolongada, sugestiva de doença inflamatória.",
+        "30–60 min": "Rigidez de duração intermediária.",
+        "< 30 min": "Rigidez curta, comum em artrose leve.",
+        "Diariamente": "Presente todos os dias.",
+        "Algumas vezes na semana": "Frequência intermediária.",
+        "Esporádico": "Poucas vezes.",
+        "Pequenas articulações (mãos/pés)": "Rigidez em articulações pequenas.",
+        "Grandes articulações": "Rigidez em joelhos, ombros etc.",
+        "Generalizado": "Atinge várias articulações ao mesmo tempo."
+    }
+},
+
+"Intolerância ao frio": {
+    "definicao": "Sensibilidade anormal a temperaturas baixas, comum em distúrbios hormonais como hipotireoidismo.",
+    "popular": "Sente frio exagerado, mesmo quando outros não sentem.",
+    "clinico": "Sensibilidade aumentada ao frio",
+    "termos": {
+        "Extrema, mesmo em ambientes quentes": "Sente frio mesmo no calor.",
+        "Moderada, facilmente sente frio": "Tolera pouco ambientes frescos.",
+        "Leve, tolerável": "Apenas desconforto leve.",
+        "Cansaço/fraqueza": "Astenia associada.",
+        "Ganho de peso": "Aumento de peso sem explicação clara.",
+        "Pele seca/cabelos quebradiços": "Alterações cutâneas associadas."
+    }
+},
+
+"Intolerância ao calor": {
+    "definicao": "Sensibilidade anormal ao calor, comum em distúrbios como hipertireoidismo.",
+    "popular": "Sente muito calor, mais do que os outros.",
+    "clinico": "Sensibilidade aumentada ao calor",
+    "termos": {
+        "Extrema, sensação insuportável": "Mal-estar intenso ao calor.",
+        "Moderada, desconforto frequente": "Incomoda-se facilmente com calor.",
+        "Leve, tolerável": "Apenas desconforto leve.",
+        "Sudorese excessiva": "Transpiração exagerada.",
+        "Perda de peso inexplicada": "Emagrecimento sem dieta.",
+        "Palpitações/tremores": "Sintomas associados de hiperatividade metabólica."
+    }
+},
+
+"Ataques de pânico": {
+    "definicao": "Crises súbitas de medo intenso acompanhadas de sintomas físicos autonômicos.",
+    "popular": "Crise de ansiedade muito forte, com sensação de morrer.",
+    "clinico": "Transtorno do pânico (crise aguda)",
+    "termos": {
+        "Múltiplas vezes na semana": "Crises recorrentes em poucos dias.",
+        "Uma vez por semana": "Crise semanal.",
+        "Episódico raro": "Eventos isolados.",
+        "Sensação de morte iminente": "Medo intenso e irracional.",
+        "Palpitações/tremores": "Sintomas autonômicos presentes.",
+        "Falta de ar": "Dificuldade para respirar durante a crise.",
+        "Tontura/desmaio": "Instabilidade ou perda de consciência breve."
+    }
+},
+
+"Ideação suicida": {
+    "definicao": "Presença de pensamentos relacionados a tirar a própria vida, com ou sem plano.",
+    "popular": "Pessoa pensa em se matar.",
+    "clinico": "Ideação suicida",
+    "termos": {
+        "Plano ativo de se machucar": "Existe método definido e intenção.",
+        "Pensamentos frequentes sem plano": "Idéias recorrentes, mas sem estratégia definida.",
+        "Pensamentos ocasionais": "Pensamentos esporádicos.",
+        "Tentativa prévia": "Histórico de tentativa de suicídio.",
+        "Transtorno psiquiátrico diagnosticado": "Depressão, bipolaridade, esquizofrenia etc.",
+        "Abuso de álcool/drogas": "Fator de risco importante.",
+        "Isolamento social": "Ausência de apoio social/familiar.",
+        "Apoio familiar/pessoal presente": "Rede de suporte existente."
+    }
+},
+       
+
+"Dormência em parte do corpo": {
+    "definicao": "Perda/alteração de sensibilidade (parestesia) localizada.",
+    "popular": "Parte do corpo ‘formigando’ ou ‘adormecida’.",
+    "clinico": "Parestesia / Hipoestesia",
+    "termos": {
+        "Um lado inteiro do corpo (hemicorpo)": "Comprometimento de todo um lado (sugere evento neurológico).",
+        "Braço ou perna isolados": "Acometimento segmentar de um membro.",
+        "Dedos ou extremidades apenas": "Regiões distais com formigamento.",
+        "Súbito (em segundos/minutos)": "Instalação abrupta.",
+        "Progressivo (horas/dias)": "Evolução gradativa.",
+        "Intermitente": "Vai e volta.",
+        "Dificuldade para falar": "Afeta linguagem/fala.",
+        "Alteração de visão": "Visão turva/escurecida/dupla.",
+        "Fraqueza em membro": "Perda de força associada."
+    }
+},
+
+"Crises de movimentos repetitivos (mioclonias)": {
+    "definicao": "Espasmos musculares rápidos e involuntários, recorrentes.",
+    "popular": "Trancos/soluços musculares repetidos.",
+    "clinico": "Mioclonias",
+    "termos": {
+        "Múltiplos episódios por hora": "Crises muito frequentes.",
+        "Várias vezes ao dia": "Diversos episódios diários.",
+        "Episódios esporádicos": "Eventos raros.",
+        "Perda de consciência": "Desmaio durante os episódios.",
+        "Confusão ou amnésia pós-episódio": "Desorientação depois da crise.",
+        "Consciência preservada": "Permanece acordado e orientado.",
+        "Trauma craniano recente": "Batida na cabeça recente.",
+        "Febre": "Temperatura elevada.",
+        "Déficit neurológico focal": "Fraqueza/alteração em região específica."
+    }
+},
 
     "Fratura ou luxação": {
         "definicao": "Ruptura óssea (fratura) ou deslocamento da articulação (luxação).",
