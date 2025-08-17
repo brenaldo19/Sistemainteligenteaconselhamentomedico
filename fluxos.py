@@ -223,53 +223,6 @@ FLUXOS[normalizar("Afogamento")] = {
     ]
 }
 
-# 3) QUEIMADURA (GENÉRICA, SEM TIPO)
-FLUXOS[normalizar("Queimadura")] = {
-    "label": "Queimadura (genérica, sem tipo)",
-    "perguntas": [
-        {
-            "id": "extensao",
-            "label": "Extensão/gravidade aparente:",
-            "tipo": "radio",
-            "opcoes": {
-                "Extensa, com bolhas grandes/dermóide ou áreas escuras": 3.5,
-                "Moderada, bolhas pequenas ou dor intensa localizada": 2.0,
-                "Superficial (vermelhidão leve), pequena área": 0.6,
-                "Mínima, sem bolhas": 0.2
-            }
-        },
-        {
-            "id": "local",
-            "label": "Local atingido:",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Face/pescoço": 1.5,
-                "Mãos/pés/genitália": 1.5,
-                "Grandes articulações": 1.0
-            }
-        },
-        {
-            "id": "agente",
-            "label": "Agente provável:",
-            "tipo": "radio",
-            "opcoes": {
-                "Química/ elétrica": 2.0,
-                "Térmica (fogo/escaldadura)": 1.0,
-                "Solar": 0.4
-            }
-        },
-        {
-            "id": "riscos",
-            "label": "Fatores de risco:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Inalação de fumaça": 2.0,
-                "Idade ≤ 4 anos": 0.8,
-                "Idade ≥ 67 anos": 0.6,
-                "Doenças crônicas importantes": 0.4
-            }
-        }
-    ],
     "regras_excecao": [
         {"se": {"agente": "Química/ elétrica"}, "min_cor": "vermelho"},
         {"se": {"riscos": ["Inalação de fumaça"]}, "min_cor": "vermelho"},
