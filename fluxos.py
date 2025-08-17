@@ -5353,65 +5353,7 @@ FLUXOS[normalizar("Dor no ombro ou braço")] = {
     ]
 }
 
-# ===============================
-# 3) ALERGIA CUTÂNEA
-# ===============================
-FLUXOS[normalizar("Alergia cutânea")] = {
-    "label": "Alergia cutânea",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Como está a pele?",
-            "tipo": "radio",
-            "opcoes": {
-                "Lesão com inchaço e coceira intensa": 2.0,
-                "Mancha vermelha espalhada com descamação": 1.2,
-                "Irritação leve e localizada": 0.6,
-                "Lesão pequena e assintomática": 0.2
-            }
-        },
-        {
-            "id": "extensao",
-            "label": "Qual a extensão?",
-            "tipo": "radio",
-            "opcoes": {
-                "Espalhada pelo corpo": 0.8,
-                "Apenas em uma área": 0.2
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Tem algum destes sinais?",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Inchaço de lábios/rosto ou falta de ar": 1.8,
-                "Febre": 0.6,
-                "Dor/ardor importantes": 0.6
-            }
-        },
-        {
-            "id": "fatores",
-            "label": "O que pode ter causado?",
-            "tipo": "radio",
-            "opcoes": {
-                "Alimento/remédio/picada": 0.8,
-                "Produto químico/novo cosmético": 0.6,
-                "Sem fator claro": 0.0
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Lesão com inchaço e coceira intensa"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Inchaço de lábios/rosto ou falta de ar"]}, "min_cor": "vermelho"},
-        {"se": {"quadro": "Mancha vermelha espalhada com descamação", "extensao": "Espalhada pelo corpo"}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (5.8, "vermelho"),
-        (3.2, "laranja"),
-        (1.6, "amarelo"),
-        (0.0, "verde")
-    ]
-}
+
 
 # ===============================
 # 4) SANGRAMENTO GASTROINTESTINAL
@@ -6377,53 +6319,6 @@ FLUXOS[normalizar("Dor durante relação sexual")] = {
     ]
 }
 
-FLUXOS[normalizar("Suspeita de daltonismo")] = {
-    "label": "Suspeita de daltonismo",
-    "perguntas": [
-        {
-            "id": "inicio",
-            "label": "Quando percebeu a alteração de cores?",
-            "tipo": "radio",
-            "opcoes": {
-                "Desde a infância (sempre foi assim)": 0.1,
-                "Percebi há meses/anos": 0.3,
-                "Início súbito (dias/semanas)": 1.4
-            }
-        },
-        {
-            "id": "lateralidade",
-            "label": "A alteração é em um ou nos dois olhos?",
-            "tipo": "radio",
-            "opcoes": {
-                "Um olho apenas": 1.0,
-                "Ambos os olhos": 0.4,
-                "Não consigo dizer": 0.3
-            }
-        },
-        {
-            "id": "associados",
-            "label": "Sinais associados",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Dor ocular": 1.6,
-                "Queda de acuidade visual": 1.6,
-                "Fotofobia": 0.8,
-                "Cefaleia": 0.6,
-                "Olho vermelho": 0.8
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"inicio": "Início súbito (dias/semanas)", "associados": ["Dor ocular", "Queda de acuidade visual"]}, "min_cor": "vermelho"},
-        {"se": {"lateralidade": "Um olho apenas", "associados": ["Olho vermelho", "Dor ocular"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (4.5, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
 FLUXOS[normalizar("Ausência de menstruação")] = {
     "label": "Ausência de menstruação",
     "perguntas": [
