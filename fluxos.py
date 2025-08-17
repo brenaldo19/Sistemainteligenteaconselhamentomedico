@@ -96,6 +96,52 @@ def labels_fluxos():
 def eh_fluxo(label):
     return normalizar(label) in FLUXOS
 
+FLUXOS[normalizar("Dor muscular localizada (cãibra)")] = {
+    "label": "Dor muscular localizada (cãibra)",
+    "perguntas": [
+        {
+            "id": "intensidade",
+            "label": "Intensidade da dor/espasmo:",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor muito forte, impede movimento": 2.5,
+                "Dor moderada, melhora ao alongar": 1.2,
+                "Dor leve e passageira": 0.4
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Duração da cãibra:",
+            "tipo": "radio",
+            "opcoes": {
+                "≥ 10 minutos ou repetitiva": 1.5,
+                "Entre 2–10 minutos": 0.8,
+                "< 2 minutos": 0.2
+            }
+        },
+        {
+            "id": "contexto",
+            "label": "Contexto de surgimento:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Durante exercício físico": 0.6,
+                "Durante o sono": 0.4,
+                "Desidratação/uso de diuréticos": 0.6,
+                "Histórico de insuficiência renal/hepática": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"intensidade": "Dor muito forte, impede movimento"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (3.5, "vermelho"),
+        (2.0, "laranja"),
+        (1.0, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 # 1) CHIADO NO PEITO (SIBILOS)
 FLUXOS[normalizar("Chiado no peito")] = {
     "label": "Chiado no peito",
