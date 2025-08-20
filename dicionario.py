@@ -864,59 +864,6 @@ def dicionario_sintomas():
         }
     },
 
-"Icterícia neonatal": {
-    "definicao": "Coloração amarelada da pele em recém-nascidos, geralmente nos primeiros dias de vida.",
-    "popular": "Quando o bebê fica amarelinho, principalmente no rosto e barriga. Às vezes pode estar mais sonolento.",
-    "clinico": "Icterícia em recém-nascidos",
-    "termos": {
-        "Sonolência excessiva": "O bebê dorme demais, mais do que o normal.",
-        "Amarelado moderado até o abdome": "A cor amarelada desce do rosto até a barriga.",
-        "Melhora espontânea": "O amarelado melhora sozinho, sem tratamento."
-        }
-    },
-
-"Queda em criança": {
-    "definicao": "Acidente com impacto físico, como tombos, que pode causar machucados leves ou preocupantes.",
-    "popular": "Quando a criança cai, bate a cabeça ou o corpo, e depois age diferente ou fica com hematoma.",
-    "clinico": "Trauma leve ou moderado em pediatria",
-    "termos": {
-        "Perda de consciência": "A criança desmaiou ou ficou desacordada por alguns segundos.",
-        "Convulsão": "Movimentos involuntários do corpo ou rigidez, com olhar parado ou perda de consciência.",
-        "Vômitos repetidos": "Vomitou várias vezes seguidas após a queda.",
-        "Sangue/fluido saindo do ouvido ou nariz": "Saída de sangue ou líquido claro depois da batida.",
-        "Muito sonolenta/confusa": "Dorme demais, está lenta ou diferente do habitual."
-        }
-    },
-
-"Vômito em criança": {
-    "definicao": "Expulsão do conteúdo do estômago pela boca, podendo ocorrer em jato e várias vezes.",
-    "popular": "Quando a criança vomita com força, várias vezes, e parece estar desidratando.",
-    "clinico": "Vômitos persistentes em pediatria",
-    "termos": {
-        "Mais de 5 vezes em 6h": "Vomitou muitas vezes num curto período.",
-        "Com sangue ou verde-escuro": "Vômito vermelho/escuro (sangue) ou verde (bile).",
-        "Com muco ou restos alimentares": "Vômito com catarro/ranho ou pedaços de comida.",
-        "Apenas líquido claro": "Vômito transparente, parecido com água.",
-        "Febre alta": "Temperatura geralmente acima de 38,5°C.",
-        "Letargia/confusão": "Muito mole/sonolenta ou sem reagir direito.",
-        "Dificuldade para beber líquidos": "Recusa água/soro ou vomita logo após tentar beber."
-        }
-    },
-
-"Diarreia em criança": {
-    "definicao": "Evacuações frequentes e líquidas, que podem causar desidratação.",
-    "popular": "Quando a criança faz cocô mole várias vezes ao dia e começa a mostrar sinais de que está desidratada.",
-    "clinico": "Diarreia aguda pediátrica",
-    "termos": {
-        "Mais de 5 dias": "Diarreia que não melhora depois de vários dias.",
-        "Com sangue ou pretas": "Fezes com sangue visível ou muito escuras (tipo borra de café).",
-        "Muito aquosas": "Fezes líquidas, como água.",
-        "Febre alta": "Temperatura geralmente acima de 38,5°C.",
-        "Letargia/confusão": "Muito mole/sonolenta ou sem reagir direito.",
-        "Boca seca ou olhos fundos": "Sinais de desidratação: sem saliva, poucas lágrimas, olhos afundados."
-        }
-    },
-
 "Sensibilidade à luz ou som": {
     "definicao": "Maior incômodo causado por barulhos ou luz, mesmo que não sejam intensos.",
     "popular": "Quando a luz ou o som começa a incomodar mais do que o normal — dá dor de cabeça, irritação ou mal-estar.",
@@ -1564,59 +1511,6 @@ def dicionario_sintomas():
         }
     },
 
-"Incontinência urinária em idosos": {
-    "definicao": "Perda involuntária de urina, comum na população idosa por fatores musculares, neurológicos ou medicamentos.",
-    "popular": "O idoso começa a fazer xixi sem perceber ou não consegue chegar ao banheiro a tempo. Pode acontecer à noite ou durante o dia, com ou sem aviso.",
-    "clinico": "Incontinência urinária senil",
-    "termos": {
-        "Incontinência": "Perda involuntária de urina.",
-        "Dor/ardência ao urinar": "Queimação durante a micção (disúria).",
-        "Cateter vesical": "Tubo colocado na bexiga para drenar urina.",
-        "Imobilidade": "Dificuldade de se mover ou ficar de pé.",
-        "Diurético": "Remédio que aumenta a produção de urina.",
-        "Sedativo": "Medicamento que reduz ansiedade e dá sono."
-        }
-    },
-
-"Queda em idosos": {
-    "definicao": "Perda de equilíbrio ou escorregão que leva ao chão, com ou sem lesão.",
-    "popular": "Quando o idoso cai sozinho, tropeça, escorrega ou perde a força. Pode bater a cabeça, quebrar ossos ou ficar muito assustado.",
-    "clinico": "Queda de altura do próprio corpo",
-    "termos": {
-        "Fratura": "Quebra de osso.",
-        "Incapacidade de apoiar o peso": "Não conseguir sustentar o corpo sobre a perna.",
-        "Anticoagulante": "Medicamento que afina o sangue e aumenta risco de sangramento.",
-        "Laceração": "Corte profundo na pele."
-
-        }
-    },
-
-"Delírio em idosos": {
-    "definicao": "Confusão mental repentina, com alteração na atenção, memória e comportamento.",
-    "popular": "Quando o idoso começa a falar coisa sem sentido, se perde no tempo e espaço ou vê coisas que não existem. Pode surgir de repente e piorar à noite.",
-    "clinico": "Delirium",
-    "termos": {
-        "Desorientação": "Perda da noção de tempo, lugar ou pessoa.",
-        "Alucinações": "Ver/ouvir coisas que não existem.",
-        "Flutuação de consciência": "Oscilações entre momentos de lucidez e confusão.",
-        "Fala enrolada": "Dificuldade para articular palavras.",
-        "Desidratação": "Falta de líquidos no corpo (boca seca, pouca urina)."
-        }
-    },
-
-"Trauma grave": {
-    "definicao": "Lesão corporal severa que coloca a vida em risco, como batidas fortes, atropelamentos ou quedas de altura.",
-    "popular": "Quando a pessoa se machuca seriamente, com muito sangue, fratura exposta, dificuldade pra respirar ou inconsciência.",
-    "clinico": "Trauma de alta energia",
-    "termos": {
-        "Fratura exposta": "Quebra de osso com ferida aberta, deixando o osso em contato com o exterior.",
-        "Sangramento grave": "Perda de sangue em grande volume ou de forma contínua, difícil de estancar.",
-        "Hematoma": "Mancha roxa sob a pele causada por acúmulo de sangue após trauma.",
-        "Incapacidade de apoiar o peso": "Impossibilidade de sustentar o corpo sobre a perna por dor ou fraqueza.",
-        "Anticoagulante": "Remédio que afina o sangue e aumenta o risco de sangramentos.",
-        "Politrauma": "Trauma que atinge várias partes do corpo ao mesmo tempo."
-        }
-    },
     
 "Dor de dente": {
     "definicao": "Dor localizada nos dentes, podendo ser constante ou pulsante.",
