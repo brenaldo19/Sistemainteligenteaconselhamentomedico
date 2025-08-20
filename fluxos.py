@@ -96,51 +96,7 @@ def labels_fluxos():
 def eh_fluxo(label):
     return normalizar(label) in FLUXOS
 
-FLUXOS[normalizar("Dor muscular localizada ")] = {
-    "label": "Dor muscular localizada ",
-    "perguntas": [
-        {
-            "id": "intensidade",
-            "label": "Intensidade da dor/espasmo:",
-            "tipo": "radio",
-            "opcoes": {
-                "Dor muito forte, impede movimento": 2.5,
-                "Dor moderada, melhora ao alongar": 1.2,
-                "Dor leve e passageira": 0.4
-            }
-        },
-        {
-            "id": "duracao",
-            "label": "Duração da cãibra:",
-            "tipo": "radio",
-            "opcoes": {
-                "≥ 10 minutos ou repetitiva": 1.5,
-                "Entre 2–10 minutos": 0.8,
-                "< 2 minutos": 0.2
-            }
-        },
-        {
-            "id": "contexto",
-            "label": "Contexto de surgimento:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Durante exercício físico": 0.6,
-                "Durante o sono": 0.4,
-                "Desidratação/uso de diuréticos": 0.6,
-                "Histórico de insuficiência renal/hepática": 0.8
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"intensidade": "Dor muito forte, impede movimento"}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (3.5, "vermelho"),
-        (2.0, "laranja"),
-        (1.0, "amarelo"),
-        (0.0, "verde")
-    ]
-}
+
 # 1) TONTURA / SENSAÇÃO DE DESMAIO
 FLUXOS[normalizar("Tontura")] = {
     "label": "Tontura",
@@ -402,52 +358,6 @@ FLUXOS[normalizar("Dormência em parte do corpo")] = {
     "regras_excecao": [
         {"se": {"local": "Um lado inteiro do corpo (hemicorpo)"}, "min_cor": "vermelho"},
         {"se": {"inicio": "Súbito (em segundos/minutos)"}, "min_cor": "vermelho"}
-    ],
-    "mapeamento_cor": [
-        (5.5, "vermelho"),
-        (3.0, "laranja"),
-        (1.2, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-# 6) CRISES DE MOVIMENTOS REPETITIVOS (MIOCLONIAS)
-FLUXOS[normalizar("Crises de movimentos repetitivos ")] = {
-    "label": "Crises de movimentos repetitivos ",
-    "perguntas": [
-        {
-            "id": "frequencia",
-            "label": "Frequência dos episódios:",
-            "tipo": "radio",
-            "opcoes": {
-                "Múltiplos episódios por hora": 3.0,
-                "Várias vezes ao dia": 2.0,
-                "Episódios esporádicos": 0.6
-            }
-        },
-        {
-            "id": "consciência",
-            "label": "Consciência durante os episódios:",
-            "tipo": "radio",
-            "opcoes": {
-                "Perda de consciência": 3.0,
-                "Confusão ou amnésia pós-episódio": 1.5,
-                "Consciência preservada": 0.4
-            }
-        },
-        {
-            "id": "associados",
-            "label": "Sinais associados:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Trauma craniano recente": 1.5,
-                "Febre": 1.0,
-                "Déficit neurológico focal": 2.0
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"consciência": "Perda de consciência"}, "min_cor": "vermelho"},
-        {"se": {"associados": "Déficit neurológico focal"}, "min_cor": "vermelho"}
     ],
     "mapeamento_cor": [
         (5.5, "vermelho"),
@@ -813,145 +723,79 @@ FLUXOS[normalizar("Dor pélvica cíclica")] = {
     ]
 }
 
-# 16) DOR MUSCULAR DIFUSA (MIALGIA)
-FLUXOS[normalizar("Dor muscular difusa ")] = {
-    "label": "Dor muscular difusa ",
+# 1) DOR MUSCULAR
+FLUXOS[normalizar("Dor muscular")] = {
+    "label": "Dor muscular",
     "perguntas": [
         {
-            "id": "intensidade",
-            "label": "Intensidade da dor:",
+            "id": "quadro",
+            "label": "Intensidade e impacto:",
             "tipo": "radio",
             "opcoes": {
-                "Dor intensa generalizada": 2.0,
-                "Dor moderada difusa": 1.0,
-                "Dor leve": 0.4
+                "Dor intensa, desproporcional, pior à palpação ou movimento": 3.5,
+                "Dor moderada que limita atividades": 2.0,
+                "Dor leve após esforço": 0.8,
+                "Desconforto muscular ocasional": 0.3
             }
         },
         {
-            "id": "associados",
-            "label": "Sintomas associados:",
+            "id": "inicio",
+            "label": "Início dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 1.0,
+                "Dias": 0.4,
+                "Semanas ou mais": 0.2
+            }
+        },
+        {
+            "id": "local",
+            "label": "Distribuição da dor:",
+            "tipo": "radio",
+            "opcoes": {
+                "Difusa (vários grupos musculares)": 0.8,
+                "Localizada (um ponto/segmento)": 0.4
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Sinais associados / fatores de risco:",
             "tipo": "multiselect",
             "opcoes": {
-                "Febre": 1.0,
-                "Fraqueza intensa": 1.5,
-                "Exposição a esforço excessivo": 0.6,
-                "Uso de estatinas/medicações": 0.8
+                "Trauma importante recente": 2.0,
+                "Esforço extenuante/treino intenso": 0.8,
+                "Edema rígido/progressivo na região (empastamento)": 2.0,
+                "Fraqueza progressiva do membro": 1.8,
+                "Urina escura (cor de coca-cola)": 2.5,
+                "Febre ou mal-estar geral": 1.2,
+                "Dor com vermelhidão e calor local": 1.5,
+                "Uso de estatinas/antivirais/antipsicóticos": 0.8,
+                "Picada animal/inseto recente": 0.6,
+                "Idade ≤ 4 anos": 0.6,
+                "Idade ≥ 67 anos": 0.6
             }
         }
     ],
-    "mapeamento_cor": [
-        (3.0, "vermelho"),
-        (2.0, "laranja"),
-        (1.0, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-
-# 17) RIGIDEZ MATINAL NAS ARTICULAÇÕES
-FLUXOS[normalizar("Rigidez matinal nas articulações")] = {
-    "label": "Rigidez matinal nas articulações",
-    "perguntas": [
-        {
-            "id": "duracao",
-            "label": "Duração da rigidez pela manhã:",
-            "tipo": "radio",
-            "opcoes": {
-                "≥ 1 hora": 2.0,
-                "30–60 min": 1.5,
-                "< 30 min": 0.4
-            }
-        },
-        {
-            "id": "frequencia",
-            "label": "Frequência dos sintomas:",
-            "tipo": "radio",
-            "opcoes": {
-                "Diariamente": 1.5,
-                "Algumas vezes na semana": 0.6,
-                "Esporádico": 0.2
-            }
-        },
-        {
-            "id": "locais",
-            "label": "Locais acometidos:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Pequenas articulações (mãos/pés)": 1.0,
-                "Grandes articulações": 0.6,
-                "Generalizado": 0.8
-            }
-        }
+    "regras_excecao": [
+        {"se": {"quadro": "Dor intensa, desproporcional, pior à palpação ou movimento"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Urina escura (cor de coca-cola)"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Edema rígido/progressivo na região (empastamento)"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Fraqueza progressiva do membro"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Trauma importante recente"}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
+        (5.0, "vermelho"),
         (3.0, "laranja"),
-        (1.5, "amarelo"),
+        (1.2, "amarelo"),
         (0.0, "verde")
     ]
 }
 
-# 18) INTOLERÂNCIA AO FRIO
-FLUXOS[normalizar("Intolerância ao frio")] = {
-    "label": "Intolerância ao frio",
-    "perguntas": [
-        {
-            "id": "grau",
-            "label": "Grau de intolerância:",
-            "tipo": "radio",
-            "opcoes": {
-                "Extrema, mesmo em ambientes quentes": 2.0,
-                "Moderada, facilmente sente frio": 1.0,
-                "Leve, tolerável": 0.4
-            }
-        },
-        {
-            "id": "associados",
-            "label": "Sintomas associados:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Cansaço/fraqueza": 1.0,
-                "Ganho de peso": 0.6,
-                "Pele seca/cabelos quebradiços": 0.6
-            }
-        }
-    ],
-    "mapeamento_cor": [
-        (2.5, "laranja"),
-        (1.0, "amarelo"),
-        (0.0, "verde")
-    ]
-}
 
-# 19) INTOLERÂNCIA AO CALOR
-FLUXOS[normalizar("Intolerância ao calor")] = {
-    "label": "Intolerância ao calor",
-    "perguntas": [
-        {
-            "id": "grau",
-            "label": "Grau de intolerância:",
-            "tipo": "radio",
-            "opcoes": {
-                "Extrema, sensação insuportável": 2.0,
-                "Moderada, desconforto frequente": 1.0,
-                "Leve, tolerável": 0.4
-            }
-        },
-        {
-            "id": "associados",
-            "label": "Sintomas associados:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Sudorese excessiva": 1.0,
-                "Perda de peso inexplicada": 0.8,
-                "Palpitações/tremores": 1.0
-            }
-        }
-    ],
-    "mapeamento_cor": [
-        (2.5, "laranja"),
-        (1.0, "amarelo"),
-        (0.0, "verde")
-    ]
-}
+
+
+
+
 
 # 20) ATAQUES DE PÂNICO
 FLUXOS[normalizar("Ataques de pânico")] = {
@@ -4126,68 +3970,6 @@ FLUXOS[normalizar("Formigamento ou perda de força")] = {
     ]
 }
 
-# ===============================
-# INCHAÇO
-# ===============================
-FLUXOS[normalizar("Inchaço incomum")] = {
-    "label": "Inchaço incomum",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Como está o inchaço?",
-            "tipo": "radio",
-            "opcoes": {
-                "Inchaço súbito em uma perna com dor intensa": 2.0,
-                "Inchaço generalizado com falta de ar": 1.6,
-                "Inchaço leve no final do dia": 0.6,
-                "Leve retenção sem desconforto": 0.2
-            }
-        },
-        {
-            "id": "local",
-            "label": "Onde é mais evidente?",
-            "tipo": "radio",
-            "opcoes": {
-                "Panturrilha/perna única": 1.2,
-                "Ambas as pernas": 0.6,
-                "Rosto/pálpebras/manhã": 0.4
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Tem algo junto?",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Dor na panturrilha/área quente e vermelha": 1.2,
-                "Falta de ar": 1.5,
-                "Ganho rápido de peso (dias)": 0.8
-            }
-        },
-        {
-            "id": "fatores_risco",
-            "label": "Algum fator presente?",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Cirurgia ou imobilização recente": 1.0,
-                "Pílula/terapia hormonal": 0.8,
-                "Câncer ativo": 0.8,
-                "Insuficiência cardíaca/renal": 0.8
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Inchaço súbito em uma perna com dor intensa"}, "min_cor": "vermelho"},
-        {"se": {"quadro": "Inchaço generalizado com falta de ar"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Falta de ar"]}, "min_cor": "vermelho"},
-        {"se": {"fatores_risco": ["Cirurgia ou imobilização recente", "Pílula/terapia hormonal", "Câncer ativo"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.5, "laranja"),
-        (1.8, "amarelo"),
-        (0.0, "verde")
-    ]
-}
 
 # ===============================
 # SANGRAMENTO VAGINAL
@@ -4980,66 +4762,6 @@ FLUXOS[normalizar("Palpitações")] = {
         (0.0, "verde")
     ]
 }
-# ===============================
-# Dor nas articulações
-# ===============================
-FLUXOS[normalizar("Dor nas articulações")] = {
-    "label": "Dor nas articulações",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Qual opção descreve melhor?",
-            "tipo": "radio",
-            "opcoes": {
-                "Dor súbita com inchaço e dificuldade de movimentar": 2.0,
-                "Dor intensa após trauma ou inflamação visível": 1.4,
-                "Dor moderada que piora com o uso": 0.6,
-                "Dor leve que melhora com repouso": 0.2
-            }
-        },
-        {
-            "id": "local",
-            "label": "Quantas articulações estão afetadas?",
-            "tipo": "radio",
-            "opcoes": {
-                "Várias articulações": 0.8,
-                "Apenas uma": 0.3
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Tem algum destes sinais?",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Vermelhidão intensa e calor local": 1.0,
-                "Febre (≥ 38,5°C)": 1.0,
-                "Deformidade visível": 1.2
-            }
-        },
-        {
-            "id": "fatores_risco",
-            "label": "Fatores de risco:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Trauma recente": 0.8,
-                "Prótese articular": 1.0,
-                "Doença reumática conhecida": 0.6
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Dor súbita com inchaço e dificuldade de movimentar"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Deformidade visível"]}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Febre (≥ 38,5°C)"], "local": "Apenas uma"}, "min_cor": "laranja"},
-        {"se": {"fatores_risco": ["Prótese articular"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (5.8, "vermelho"),
-        (3.2, "laranja"),
-        (1.6, "amarelo"),
-        (0.0, "verde")
-    ]
-}
 
 # ===============================
 # COCEIRA (PRURIDO)
@@ -5810,66 +5532,7 @@ FLUXOS[normalizar("Dificuldade para engolir")] = {
     ]
 }
 
-# ===============================
-# 8) TREMores
-# ===============================
-FLUXOS[normalizar("Tremores ou movimentos involuntários")] = {
-    "label": "Tremores ou movimentos involuntários",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Como está agora?",
-            "tipo": "radio",
-            "opcoes": {
-                "Tremores com perda de consciência ou força": 2.0,
-                "Movimentos anormais contínuos com dificuldade para parar": 1.2,
-                "Tremores leves em repouso": 0.6,
-                "Episódio isolado e breve": 0.2
-            }
-        },
-        {
-            "id": "inicio",
-            "label": "Quando começou?",
-            "tipo": "radio",
-            "opcoes": {
-                "De repente (minutos/horas)": 1.0,
-                "Aos poucos (dias/meses)": 0.4
-            }
-        },
-        {
-            "id": "sinais",
-            "label": "Tem algum destes sinais?",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Confusão/sonolência após o episódio": 1.0,
-                "Dor de cabeça forte": 0.8,
-                "Queda/trauma associado": 1.0
-            }
-        },
-        {
-            "id": "fatores",
-            "label": "O que pode ter contribuído?",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Álcool/droga/abstinência": 0.8,
-                "Uso/suspensão de remédio (ex.: benzodiazepínico)": 1.0,
-                "Febre/infecção recente": 0.6
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Tremores com perda de consciência ou força"}, "min_cor": "vermelho"},
-        {"se": {"quadro": "Movimentos anormais contínuos com dificuldade para parar"}, "min_cor": "laranja"},
-        {"se": {"sinais": ["Queda/trauma associado"]}, "min_cor": "laranja"},
-        {"se": {"fatores": ["Uso/suspensão de remédio (ex.: benzodiazepínico)"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (5.8, "vermelho"),
-        (3.2, "laranja"),
-        (1.6, "amarelo"),
-        (0.0, "verde")
-    ]
-}
+
 
 # ===============================
 # 9) RETENÇÃO URINÁRIA
@@ -6735,53 +6398,6 @@ FLUXOS[normalizar("Hemorragia gengival intensa")] = {
     ]
 }
 
-FLUXOS[normalizar("Edema inexplicado")] = {
-    "label": "Edema inexplicado",
-    "perguntas": [
-        {
-            "id": "localizacao",
-            "label": "Onde está o inchaço?",
-            "tipo": "radio",
-            "opcoes": {
-                "Um lado do corpo apenas": 1.4,
-                "Ambos os lados": 0.6,
-                "Rosto/pálpebras": 1.0
-            }
-        },
-        {
-            "id": "velocidade",
-            "label": "Velocidade de aparecimento",
-            "tipo": "radio",
-            "opcoes": {
-                "Súbito (minutos/horas)": 1.6,
-                "Em poucos dias": 1.0,
-                "Progressivo em semanas": 0.6
-            }
-        },
-        {
-            "id": "associados",
-            "label": "Sinais associados:",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Falta de ar": 1.6,
-                "Dor no peito": 1.6,
-                "Febre": 0.8,
-                "Vermelhidão/dor local": 1.2,
-                "Aumento súbito de peso": 0.8
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"velocidade": "Súbito (minutos/horas)", "associados": ["Falta de ar", "Dor no peito"]}, "min_cor": "vermelho"},
-        {"se": {"localizacao": "Um lado apenas", "associados": ["Vermelhidão/dor local"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (5.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
 
 FLUXOS[normalizar("Mãos ou pés frios e arroxeados")] = {
     "label": "Mãos ou pés frios e arroxeados",
