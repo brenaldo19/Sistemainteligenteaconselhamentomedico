@@ -16,20 +16,7 @@ def dicionario_sintomas():
             "Espasmos musculares persistentes": "Contrações involuntárias após o choque."
         }
     },
-    "Dor muscular localizada (cãibra)": {
-        "definicao": "Contração involuntária, súbita e dolorosa de um músculo ou grupo muscular.",
-        "popular": "Músculo travou, deu cãibra.",
-        "clinico": "Espasmo muscular / Cãibra",
-        "termos": {
-            "Dor intensa e súbita": "Dor forte que aparece de repente em um músculo.",
-            "Contração muscular visível": "O músculo fica duro ou repuxado.",
-            "Alívio ao alongar ou massagear": "Melhora quando estica ou faz massagem.",
-            "Cãibra durante exercício": "Aparece durante atividade física.",
-            "Cãibra noturna": "Surge à noite, geralmente em repouso.",
-            "Recorrente": "Acontece repetidamente ao longo de dias ou semanas.",
-            "Associação com desidratação ou medicamentos": "Relacionada a falta de líquidos ou uso de diuréticos."
-    }
-},
+
 
     "Afogamento": {
         "definicao": "Aspiração de água ou outro líquido que compromete a respiração e oxigenação.",
@@ -235,65 +222,25 @@ def dicionario_sintomas():
     }
 },
 
-"Dor muscular difusa (mialgia)": {
-    "definicao": "Dor generalizada nos músculos, de intensidade variável, podendo estar ligada a infecção ou esforço.",
-    "popular": "Dores no corpo todo.",
-    "clinico": "Mialgia",
+"Dor muscular" = {
+    "definicao": "Dor em tecido muscular que pode ser localizada (um segmento) ou difusa (vários grupos), com ou sem relação a esforço ou trauma.",
+    "popular": "Músculo doendo: pode ser numa parte só (tipo ombro/panturrilha) ou no corpo todo, depois de treino, esforço ou mesmo sem motivo claro.",
+    "clinico": "Mialgia localizada ou difusa; considerar causas mecânicas, inflamatórias, infecciosas, metabólicas (ex.: rabdomiólise) e medicamentosas (ex.: estatinas).",
     "termos": {
-        "Dor intensa generalizada": "Dores musculares muito fortes.",
-        "Dor moderada difusa": "Dores mais leves, porém em várias regiões.",
-        "Dor leve": "Desconforto pequeno.",
-        "Febre": "Sinal de infecção viral ou bacteriana.",
-        "Fraqueza intensa": "Dificuldade para realizar esforços.",
-        "Exposição a esforço excessivo": "Prática de atividade intensa.",
-        "Uso de estatinas/medicações": "Medicamentos que podem causar mialgia."
+        "Dor intensa, desproporcional": "Dor muito forte e fora do comum para o estímulo; pensar síndrome compartimental/rabdomiólise.",
+        "Dor moderada que limita atividades": "Impacta tarefas do dia a dia, mas sem sinais de alarme claros.",
+        "Dor leve pós-esforço": "Relacionada a treino/atividade; costuma melhorar com repouso/hidratação.",
+        "Desconforto muscular ocasional": "Episódios isolados e leves.",
+        "Difusa": "Vários grupos musculares; avaliar febre, mal-estar, uso de medicações.",
+        "Localizada": "Um ponto/segmento; investigar trauma/esforço local.",
+        "Trauma importante": "Batida/lesão relevante",
+        "Esforço extenuante": "Sobrecarga muscular; risco de lesão/rabdomiólise se associado a outros sinais.",
+        "Edema rígido (empastamento)": "Inchaço duro e progressivo",
+        "Fraqueza progressiva": "Piora funcional",
     }
 },
 
-"Rigidez matinal nas articulações": {
-    "definicao": "Sensação de enrijecimento articular após períodos de repouso, comum em doenças reumáticas.",
-    "popular": "Articulações travadas ao acordar.",
-    "clinico": "Rigidez articular matinal",
-    "termos": {
-        "≥ 1 hora": "Rigidez prolongada, sugestiva de doença inflamatória.",
-        "30–60 min": "Rigidez de duração intermediária.",
-        "< 30 min": "Rigidez curta, comum em artrose leve.",
-        "Diariamente": "Presente todos os dias.",
-        "Algumas vezes na semana": "Frequência intermediária.",
-        "Esporádico": "Poucas vezes.",
-        "Pequenas articulações (mãos/pés)": "Rigidez em articulações pequenas.",
-        "Grandes articulações": "Rigidez em joelhos, ombros etc.",
-        "Generalizado": "Atinge várias articulações ao mesmo tempo."
-    }
-},
 
-"Intolerância ao frio": {
-    "definicao": "Sensibilidade anormal a temperaturas baixas, comum em distúrbios hormonais como hipotireoidismo.",
-    "popular": "Sente frio exagerado, mesmo quando outros não sentem.",
-    "clinico": "Sensibilidade aumentada ao frio",
-    "termos": {
-        "Extrema, mesmo em ambientes quentes": "Sente frio mesmo no calor.",
-        "Moderada, facilmente sente frio": "Tolera pouco ambientes frescos.",
-        "Leve, tolerável": "Apenas desconforto leve.",
-        "Cansaço/fraqueza": "Astenia associada.",
-        "Ganho de peso": "Aumento de peso sem explicação clara.",
-        "Pele seca/cabelos quebradiços": "Alterações cutâneas associadas."
-    }
-},
-
-"Intolerância ao calor": {
-    "definicao": "Sensibilidade anormal ao calor, comum em distúrbios como hipertireoidismo.",
-    "popular": "Sente muito calor, mais do que os outros.",
-    "clinico": "Sensibilidade aumentada ao calor",
-    "termos": {
-        "Extrema, sensação insuportável": "Mal-estar intenso ao calor.",
-        "Moderada, desconforto frequente": "Incomoda-se facilmente com calor.",
-        "Leve, tolerável": "Apenas desconforto leve.",
-        "Sudorese excessiva": "Transpiração exagerada.",
-        "Perda de peso inexplicada": "Emagrecimento sem dieta.",
-        "Palpitações/tremores": "Sintomas associados de hiperatividade metabólica."
-    }
-},
 
 "Ataques de pânico": {
     "definicao": "Crises súbitas de medo intenso acompanhadas de sintomas físicos autonômicos.",
@@ -343,21 +290,20 @@ def dicionario_sintomas():
         "Fraqueza em membro": "Perda de força associada."
     }
 },
-
-"Crises de movimentos repetitivos (mioclonias)": {
-    "definicao": "Espasmos musculares rápidos e involuntários, recorrentes.",
-    "popular": "Trancos/soluços musculares repetidos.",
-    "clinico": "Mioclonias",
+"Dor e rigidez articular" = {
+    "definicao": "Dor em articulações com sensação de travamento, podendo limitar movimentos.",
+    "popular": "Junta doendo e ‘dura’, pior de manhã ou após ficar parado; às vezes fica inchada.",
+    "clinico": "Artralgia com ou sem rigidez; diferenciar padrão inflamatório (rigidez prolongada) de mecânico.",
     "termos": {
-        "Múltiplos episódios por hora": "Crises muito frequentes.",
-        "Várias vezes ao dia": "Diversos episódios diários.",
-        "Episódios esporádicos": "Eventos raros.",
-        "Perda de consciência": "Desmaio durante os episódios.",
-        "Confusão ou amnésia pós-episódio": "Desorientação depois da crise.",
-        "Consciência preservada": "Permanece acordado e orientado.",
-        "Trauma craniano recente": "Batida na cabeça recente.",
-        "Febre": "Temperatura elevada.",
-        "Déficit neurológico focal": "Fraqueza/alteração em região específica."
+        "Dor intensa": "Incapacidade de mover a articulação afetada.",
+        "Rigidez matinal ≥ 60 min": "Sugere padrão inflamatório.",
+        "Inchaço evidente": "Aumento de volume palpável/visível.",
+        "Monoarticular": "Acomete uma única articulação.",
+        "Poliarticular": "Acomete várias articulações.",
+        "Articulação quente/vermelha": "Sinal de inflamação importante; suspeitar de artrite séptica.",
+        "Febre": "Reforça etiologia infecciosa/inflamatória.",
+        "Trauma recente": "Sugere lesão mecânica.",
+        "Ferida/punção recente": "Risco de infecção articular."
     }
 },
 
@@ -553,22 +499,7 @@ def dicionario_sintomas():
     }
 },
 
-"Edema inexplicado": {
-    "definicao": "Acúmulo anormal de líquido nos tecidos, causando inchaço, sem causa aparente imediata.",
-    "popular": "Inchaço no corpo sem motivo claro.",
-    "clinico": "Edema",
-    "termos": {
-        "Um lado apenas": "Inchaço localizado em apenas um membro ou parte do corpo.",
-        "Ambos os lados": "Inchaço simétrico, como nas duas pernas.",
-        "Rosto/pálpebras": "Inchaço visível no rosto ou nos olhos.",
-        "Súbito (minutos/horas)": "Inchaço que aparece rapidamente, em poucas horas ou minutos.",
-        "Falta de ar": "Dificuldade para respirar.",
-        "Dor no peito": "Dor na região torácica.",
-        "Febre": "Temperatura do corpo elevada.",
-        "Vermelhidão/dor local": "Área inchada e dolorida, possivelmente inflamada.",
-        "Aumento súbito de peso": "Ganho de peso rápido, sem explicação."
-    }
-},
+
 "Perda súbita de coordenação": {
     "definicao": "Dificuldade repentina para realizar movimentos coordenados, podendo indicar problemas neurológicos graves como AVC.",
     "popular": "Perdeu de repente a capacidade de se mover de forma coordenada.",
@@ -1038,16 +969,7 @@ def dicionario_sintomas():
         }
     },
 
-"Tremores ou movimentos involuntários": {
-    "definicao": "Movimentos que o corpo faz sozinho, sem controle consciente, podendo ser leves ou fortes.",
-    "popular": "Quando a mão ou o corpo começa a tremer sem motivo ou faz movimentos esquisitos sozinho, sem conseguir parar.",
-    "clinico": "Movimentos involuntários ou tremores",
-    "termos": {
-        "Tremores": "Movimentos involuntários do corpo, geralmente nas mãos.",
-        "Espasmos": "Contrações rápidas e fora de controle dos músculos.",
-        "Rigidez muscular": "Quando o músculo fica duro e difícil de mexer."
-        }
-    },
+
 
 "Dificuldade pra engolir": {
     "definicao": "Sensação de que a comida ou líquido não desce corretamente pela garganta.",
@@ -1297,18 +1219,6 @@ def dicionario_sintomas():
         }
     },
 
-"Inchaço incomum": {
-    "definicao": "Acúmulo de líquido em partes do corpo, especialmente mãos, pernas, rosto ou barriga.",
-    "popular": "Quando alguma parte do corpo incha de repente, incha tudo ao mesmo tempo ou parece só um leve acúmulo de água. Pode ter várias causas.",
-    "clinico": "Edema",
-    "termos": {
-        "Panturrilha/perna única": "Inchaço em uma perna, principalmente na batata da perna.",
-        "Ganho rápido de peso": "Aumento de vários quilos em poucos dias por retenção.",
-        "Pílula/terapia hormonal": "Uso de anticoncepcionais ou reposição hormonal.",
-        "Imobilização": "Ficar muito tempo sem mexer a perna (gesso, viagem longa)."
-        }
-    },
-
 "Hipotensão": {
     "definicao": "Pressão arterial abaixo dos níveis normais, podendo causar tontura, fraqueza ou desmaio.",
     "popular": "Quando a pressão está baixa e a pessoa fica fraca, pálida ou com sensação de desmaio.",
@@ -1554,17 +1464,6 @@ def dicionario_sintomas():
         }
     },
 
-"Dor nas articulações": {
-    "definicao": "Dor ou desconforto nas juntas (joelho, ombro, cotovelo, etc.).",
-    "popular": "É quando dói o joelho, ombro ou outra articulação, principalmente ao se mexer ou depois de uma batida. Pode inchar e ficar quente.",
-    "clinico": "Artralgia",
-    "termos": {
-        "Dor súbita com inchaço e dificuldade de movimentar": "Apareceu de repente, está inchado e difícil de mexer.",
-        "Dor intensa após trauma ou inflamação visível": "Dói muito depois de bater ou quando está visivelmente inchado/vermelho.",
-        "Dor moderada que piora com o uso": "Dói um pouco e piora quando mexe ou anda.",
-        "Dor leve que melhora com repouso": "Dói pouco e melhora quando descansa."
-        }
-    },
 
 "Dor no peito": {
     "definicao": "Dor ou pressão no peito, que pode vir do coração, dos pulmões ou da musculatura.",
