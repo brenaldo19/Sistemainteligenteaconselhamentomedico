@@ -203,6 +203,125 @@ FLUXOS[normalizar("Chiado no peito")] = {
         (0.0, "verde")
     ]
 }
+# 4) INTOLERÂNCIA TÉRMICA
+FLUXOS[normalizar("Intolerância térmica")] = {
+    "label": "Intolerância térmica",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Intensidade/impacto:",
+            "tipo": "radio",
+            "opcoes": {
+                "Desconforto intenso que impede atividades": 2.5,
+                "Desconforto moderado": 1.2,
+                "Leve/ambiental (tolerável)": 0.3
+            }
+        },
+        {
+            "id": "predominio",
+            "label": "Predomínio:",
+            "tipo": "radio",
+            "opcoes": {
+                "Ao calor": 0.4,
+                "Ao frio": 0.4
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (horas/dias)": 0.6,
+                "Semanas ou mais": 0.2
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Sinais associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Temperatura ≥ 40 °C ou confusão": 3.0,
+                "Pele muito quente e seca": 1.5,
+                "Suor excessivo/palpitações/perda de peso": 0.8,
+                "Pele seca/constipação/ganho de peso": 0.8,
+                "Desidratação (pouca urina, vômitos/diarreia)": 1.0,
+                "Uso de medicamentos (betabloqueadores/anticolinérgicos/hormônios)": 0.4,
+                "Menopausa/ondas de calor": 0.3
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"riscos": "Temperatura ≥ 40 °C ou confusão"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Desidratação (pouca urina, vômitos/diarreia)"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# 5) MOVIMENTOS INVOLUNTÁRIOS
+FLUXOS[normalizar("Movimentos involuntários")] = {
+    "label": "Movimentos involuntários",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Intensidade/impacto:",
+            "tipo": "radio",
+            "opcoes": {
+                "Movimentos generalizados com queda ou confusão": 4.0,
+                "Movimentos intensos que impedem tarefas": 2.5,
+                "Movimentos leves/intermitentes": 0.5
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (segundos/minutos)": 1.0,
+                "Dias": 0.4,
+                "Semanas ou mais": 0.2
+            }
+        },
+        {
+            "id": "tipo",
+            "label": "Tipo principal:",
+            "tipo": "radio",
+            "opcoes": {
+                "Tremor (repouso/ação)": 0.4,
+                "Soluços musculares breves (mioclonia)": 0.6,
+                "Tiques (piscar/gestos repetitivos)": 0.3
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Sinais associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Alteração de consciência/mordedura de língua/urina": 3.0,
+                "Febre e rigidez": 2.0,
+                "Trauma craniano recente": 2.0,
+                "Uso de neurolépticos/metoclopramida/lítio": 1.2,
+                "Álcool/drogas": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Movimentos generalizados com queda ou confusão"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Alteração de consciência/mordedura de língua/urina"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Febre e rigidez"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Trauma craniano recente"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Uso de neurolépticos/metoclopramida/lítio"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
 
 # 2) TOSSE COM SANGUE (HEMOPTISE)
 FLUXOS[normalizar("Tosse com sangue")] = {
