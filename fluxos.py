@@ -590,6 +590,130 @@ FLUXOS[normalizar("Sangue na urina ")] = {
         (0.0, "verde")
     ]
 }
+# 2) DOR E RIGIDEZ ARTICULAR
+FLUXOS[normalizar("Dor e rigidez articular")] = {
+    "label": "Dor e rigidez articular",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Intensidade e impacto:",
+            "tipo": "radio",
+            "opcoes": {
+                "Dor intensa, não consegue mover a articulação": 3.5,
+                "Dor moderada com limitação": 2.0,
+                "Dor leve, melhora com repouso": 0.6
+            }
+        },
+        {
+            "id": "duracao",
+            "label": "Duração/início:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (minutos/horas)": 0.8,
+                "Dias": 0.4,
+                "Semanas ou mais": 0.2
+            }
+        },
+        {
+            "id": "padrao",
+            "label": "Padrão de acometimento:",
+            "tipo": "radio",
+            "opcoes": {
+                "Uma articulação (monoarticular)": 0.8,
+                "Várias articulações": 0.4
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Sinais associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Rigidez matinal ≥ 60 min": 0.8,
+                "Inchaço evidente": 0.8,
+                "Febre": 1.2,
+                "Articulação muito quente/vermelha": 2.5,
+                "Trauma recente": 1.0,
+                "Ferida/punção recente na articulação": 1.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"riscos": "Articulação muito quente/vermelha"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Ferida/punção recente na articulação"}, "min_cor": "vermelho"},
+        {"se": {"padrao": "Uma articulação (monoarticular)", "riscos": "Febre"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Trauma recente"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+# 3) EDEMA / INCHAÇO
+FLUXOS[normalizar("Edema/Inchaço")] = {
+    "label": "Edema/Inchaço",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Intensidade/impacto:",
+            "tipo": "radio",
+            "opcoes": {
+                "Inchaço súbito e doloroso": 3.0,
+                "Inchaço moderado que piora ao longo do dia": 1.5,
+                "Inchaço leve/ocasional": 0.4
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito (horas)": 1.0,
+                "Dias": 0.5,
+                "Semanas ou mais": 0.2
+            }
+        },
+        {
+            "id": "local",
+            "label": "Localização do inchaço:",
+            "tipo": "radio",
+            "opcoes": {
+                "Uma perna/braço (unilateral)": 1.2,
+                "Ambas as pernas (bilateral)": 0.6,
+                "Face/lábios": 2.0
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Sinais associados:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Dor em panturrilha": 2.5,
+                "Falta de ar súbita ou dor no peito": 2.5,
+                "Vermelhidão e calor local": 1.5,
+                "Febre": 1.0,
+                "Piora ao deitar/ortopneia": 1.0,
+                "Uso recente de medicamentos (hormônios, AINEs, bloqueadores de cálcio)": 0.4,
+                "Picada/contato alérgico": 0.6,
+                "Gravidez": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"local": "Face/lábios"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Dor em panturrilha"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Falta de ar súbita ou dor no peito"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Vermelhidão e calor local", "quadro": "Inchaço súbito e doloroso"}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
+
 # 13) CORRIMENTO URETRAL ANORMAL
 FLUXOS[normalizar("Corrimento uretral anormal")] = {
     "label": "Corrimento uretral anormal",
