@@ -120,6 +120,21 @@ def dicionario_sintomas():
         "Muito baixa (hipotensão)": "Pressão arterial marcadamente baixa."
     }
 },
+"Edema/Inchaço" = {
+    "definicao": "Aumento de volume em parte do corpo por acúmulo de líquido, localizado ou generalizado.",
+    "popular": "Parte do corpo inchada (perna, braço ou rosto). Pode aparecer de repente ou aumentar ao longo do dia.",
+    "clinico": "Edema localizado (venoso/linfático/inflamatório) ou bilateral/generalizado (cardíaco/renal/hepático/medicamentoso).",
+    "termos": {
+        "Unilateral": "Uma perna/braço só; pensar trombose ou inflamação localizada.",
+        "Bilateral": "Ambas as pernas; comum em causas venosas, cardíacas ou medicamentos.",
+        "Súbito": "Começou em horas; atenção a trombose/angioedema.",
+        "Face/lábios": "Sugere angioedema; risco de via aérea.",
+        "Dor em panturrilha": "Sinal clássico de TVP.",
+        "Falta de ar/dor torácica": "Suspeita de embolia pulmonar.",
+        "Vermelhidão/calor": "Sugere celulite/inflamação.",
+        "Ortopneia": "Piora ao deitar; pensar congestão cardíaca."
+    }
+}
 
 "Vômito com sangue": {
     "definicao": "Eliminação de sangue pelo vômito, indicativo de sangramento digestivo alto.",
@@ -304,6 +319,20 @@ def dicionario_sintomas():
         "Febre": "Reforça etiologia infecciosa/inflamatória.",
         "Trauma recente": "Sugere lesão mecânica.",
         "Ferida/punção recente": "Risco de infecção articular."
+    }
+},
+"Intolerância térmica" = {
+    "definicao": "Sensibilidade exagerada ao calor ou ao frio, fora do esperado para o ambiente.",
+    "popular": "A pessoa sente muito mais calor ou frio que o normal, a ponto de atrapalhar o dia.",
+    "clinico": "Hipersensibilidade térmica; investigar causas endócrinas/autonômicas e efeitos de fármacos.",
+    "termos": {
+        "Ao calor": "Desconforto predominante com temperaturas altas.",
+        "Ao frio": "Desconforto predominante com temperaturas baixas.",
+        "Temperatura ≥ 40 °C ou confusão": "Critério de gravidade compatível com golpe de calor.",
+        "Pele muito quente e seca": "Sugere falha da sudorese na hipertermia.",
+        "Suor/palpitações/perda de peso": "Pistas para hipertiroidismo ou disautonomia.",
+        "Pele seca/constipação/ganho de peso": "Pistas para hipotireoidismo.",
+        "Desidratação": "Pouca urina, vômitos/diarreia ou incapacidade de hidratar."
     }
 },
 
