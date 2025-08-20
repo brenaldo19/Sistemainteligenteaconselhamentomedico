@@ -2109,6 +2109,13 @@ FLUXOS[normalizar("Incontinência urinária")] = {
             }
         }
     ],
+            "id": "fatores_risco",
+            "label": "Condições associadas (se houver):",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≥ 67 anos": 0.8
+            }
+        }
     "regras_excecao": [
         {"se": {"gravidade": "Perda total de controle com dor ou febre"}, "min_cor": "vermelho"},
         {"se": {"gravidade": "Urina escapando frequentemente sem aviso"}, "min_cor": "laranja"}
@@ -2179,184 +2186,7 @@ FLUXOS[normalizar("Coriza e espirros")] = {
         (0.0, "verde")
     ]
 }
-# Fluxograma: Incontinência urinária em idosos
-FLUXOS[normalizar("Incontinência urinária em idosos")] = {
-    "label": "Incontinência urinária em idosos",
-    "perguntas": [
-        {
-            "id": "gravidade",
-            "label": "Qual é a situação principal?",
-            "tipo": "radio",
-            "opcoes": {
-                "Perda total do controle urinário com febre ou confusão": 3.5,
-                "Incontinência frequente e súbita, com ardência": 2.0,
-                "Gotejamento ou perda leve ao se movimentar": 1.0,
-                "Leves escapes ocasionais sem outros sintomas": 0.0
-            }
-        },
-        {
-            "id": "duracao",
-            "label": "Há quanto tempo isso ocorre?",
-            "tipo": "radio",
-            "opcoes": {
-                "Mais de 4 semanas": 1.0,
-                "Entre 2 e 4 semanas": 0.5,
-                "Menos de 2 semanas": 0.2
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Sinais associados (selecione os que tiver):",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Febre": 0.8,
-                "Dor/ardência ao urinar": 0.8,
-                "Dor no baixo-ventre": 0.5,
-                "Confusão ou sonolência": 1.0
-            }
-        },
-        {
-            "id": "fatores_risco",
-            "label": "Algum fator de risco se aplica?",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Cateter vesical recente": 0.8,
-                "Imobilidade ou queda recente": 0.5,
-                "Início/ajuste de medicamento (diurético/sedativo)": 0.6,
-                "Histórico de incontinência prévia": 0.3
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"gravidade": "Perda total do controle urinário com febre ou confusão"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Febre", "Dor/ardência ao urinar"]}, "min_cor": "laranja"},
-        {"se": {"fatores_risco": ["Cateter vesical recente"], "sinais_associados": ["Febre"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-# Fluxograma: Queda em idosos
-FLUXOS[normalizar("Queda em idosos")] = {
-    "label": "Queda em idosos",
-    "perguntas": [
-        {
-            "id": "gravidade_queda",
-            "label": "Como foi a queda?",
-            "tipo": "radio",
-            "opcoes": {
-                "Queda com perda de consciência ou fratura": 3.5,
-                "Queda com dor intensa ou dificuldade para se levantar": 2.0,
-                "Queda leve com dor local e hematoma": 1.0,
-                "Tombos esporádicos sem dor ou lesão": 0.0
-            }
-        },
-        {
-            "id": "cabeca",
-            "label": "Houve batida na cabeça?",
-            "tipo": "radio",
-            "opcoes": {
-                "Sim, bateu a cabeça": 1.2,
-                "Não bateu a cabeça": 0.0
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Sinais associados (selecione os que tiver):",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Dor em quadril ou incapacidade de apoiar o peso": 1.2,
-                "Uso de anticoagulante": 1.0,
-                "Tontura persistente": 0.8,
-                "Corte/laceração com sangramento": 0.6
-            }
-        },
-        {
-            "id": "tempo",
-            "label": "Quando ocorreu?",
-            "tipo": "radio",
-            "opcoes": {
-                "Menos de 24h": 1.0,
-                "Entre 1 e 7 dias": 0.5,
-                "Mais de 7 dias": 0.2
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"gravidade_queda": "Queda com perda de consciência ou fratura"}, "min_cor": "vermelho"},
-        {"se": {"cabeca": "Sim, bateu a cabeça", "sinais_associados": ["Uso de anticoagulante"]}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Dor em quadril ou incapacidade de apoiar o peso"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-# Fluxograma: Delírio em idosos
-FLUXOS[normalizar("Delírio em idosos")] = {
-    "label": "Delírio em idosos",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Qual situação descreve melhor?",
-            "tipo": "radio",
-            "opcoes": {
-                "Desorientação súbita com agitação ou alucinações": 3.5,
-                "Confusão mental com alteração de comportamento e/ou flutuação de consciência": 2.0,
-                "Esquecimento leve e dificuldade para responder": 1.0,
-                "Ligeira confusão passageira, mas estável": 0.0
-            }
-        },
-        {
-            "id": "tempo",
-            "label": "Quando começaram as alterações?",
-            "tipo": "radio",
-            "opcoes": {
-                "Nas últimas 24h": 1.0,
-                "Há 2–7 dias": 0.6,
-                "Há mais de 7 dias": 0.3
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Sinais associados (selecione os que tiver):",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Febre": 0.8,
-                "Urina com ardor/cheiro forte": 0.7,
-                "Sonolência excessiva": 1.0,
-                "Fala enrolada": 1.0,
-                "Queda recente": 0.6
-            }
-        },
-        {
-            "id": "fatores",
-            "label": "Algum fator desencadeante se aplica?",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Uso recente de sedativos/antialérgicos": 0.7,
-                "Desidratação (boca seca, pouca urina)": 0.8,
-                "Infecção conhecida (urina/pulmão)": 1.0
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Desorientação súbita com agitação ou alucinações"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Fala enrolada", "Sonolência excessiva"]}, "min_cor": "laranja"},
-        {"se": {"sinais_associados": ["Febre"], "fatores": ["Infecção conhecida (urina/pulmão)"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
+
 # Fluxograma: Trauma grave
 FLUXOS[normalizar("Trauma grave")] = {
     "label": "Trauma grave",
@@ -3386,55 +3216,6 @@ FLUXOS[normalizar("Trabalho de parto")] = {
     ]
 }
 
-# -----------------------------
-# FEBRE EM LACTENTE
-# -----------------------------
-FLUXOS[normalizar("Febre em lactente")] = {
-    "label": "Febre em lactente",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Qual é o quadro principal?",
-            "tipo": "radio",
-            "opcoes": {
-                "Febre alta persistente com prostração ou recusa alimentar": 3.5,
-                "Febre alta mas bebê responde a estímulos": 2.0,
-                "Febre leve com comportamento preservado": 1.0,
-                "Febre passageira e sem outros sintomas": 0.0
-            }
-        },
-        {
-            "id": "duracao",
-            "label": "Duração da febre",
-            "tipo": "radio",
-            "opcoes": {
-                "Mais de 48 horas": 1.0,
-                "Menos de 48 horas": 0.4
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Sinais associados",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Vômitos persistentes": 1.0,
-                "Respiração acelerada/dificuldade para respirar": 1.3,
-                "Manchas anormais na pele": 1.3
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Febre alta persistente com prostração ou recusa alimentar"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Respiração acelerada/dificuldade para respirar", "Manchas anormais na pele"]}, "min_cor": "vermelho"},
-        {"se": {"duracao": "Mais de 48 horas"}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
 
 # -----------------------------
 # CHORO PERSISTENTE
@@ -3477,54 +3258,6 @@ FLUXOS[normalizar("Choro persistente")] = {
     ]
 }
 
-# -----------------------------
-# ICTERÍCIA NEONATAL
-# -----------------------------
-FLUXOS[normalizar("Icterícia neonatal")] = {
-    "label": "Icterícia neonatal",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Qual é o grau de amarelado?",
-            "tipo": "radio",
-            "opcoes": {
-                "Icterícia intensa em face e corpo com sonolência excessiva": 3.5,
-                "Amarelado moderado até o abdome": 2.0,
-                "Amarelado leve no rosto e olhos": 1.0,
-                "Discreto e com melhora espontânea": 0.0
-            }
-        },
-        {
-            "id": "inicio",
-            "label": "Quando começou?",
-            "tipo": "radio",
-            "opcoes": {
-                "Primeiras 24 horas de vida": 1.3,
-                "Após 2º dia de vida": 0.6
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Sinais associados",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Dificuldade para mamar": 1.0,
-                "Fezes esbranquiçadas": 1.3
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Icterícia intensa em face e corpo com sonolência excessiva"}, "min_cor": "vermelho"},
-        {"se": {"inicio": "Primeiras 24 horas de vida"}, "min_cor": "laranja"},
-        {"se": {"sinais_associados": ["Fezes esbranquiçadas", "Dificuldade para mamar"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
 
 FLUXOS[normalizar("Dor no peito")] = {
     "label": "Dor no peito",
@@ -3591,146 +3324,6 @@ FLUXOS[normalizar("Dor no peito")] = {
         (0.0, "verde")
     ]
 }
-# --- QUEDA EM CRIANÇA ---
-FLUXOS[normalizar("Queda em criança")] = {
-    "label": "Queda em criança",
-    "perguntas": [
-        {
-            "id": "local_bateu",
-            "label": "Onde a criança bateu?",
-            "tipo": "radio",
-            "opcoes": {
-                "Cabeça": 1.8,
-                "Outro local": 0.4
-            }
-        },
-        {
-            "id": "sinais_graves",
-            "label": "A criança apresentou algum destes sinais logo após a queda?",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Perda de consciência": 2.0,
-                "Convulsão": 1.8,
-                "Vômitos repetidos": 1.2,
-                "Sangue/fluido saindo do ouvido ou nariz": 1.8
-            }
-        },
-        {
-            "id": "comportamento",
-            "label": "Como está o comportamento da criança?",
-            "tipo": "radio",
-            "opcoes": {
-                "Muito sonolenta/confusa": 1.2,
-                "Normal": 0.0
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"local_bateu": "Cabeça", "sinais_graves": ["Perda de consciência", "Convulsão"]}, "min_cor": "vermelho"},
-        {"se": {"sinais_graves": ["Sangue/fluido saindo do ouvido ou nariz"]}, "min_cor": "vermelho"}
-    ],
-    "mapeamento_cor": [
-        (5.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-
-# --- VÔMITO EM CRIANÇA ---
-FLUXOS[normalizar("Vômito em criança")] = {
-    "label": "Vômito em criança",
-    "perguntas": [
-        {
-            "id": "frequencia",
-            "label": "Com que frequência está vomitando?",
-            "tipo": "radio",
-            "opcoes": {
-                "Mais de 5 vezes em 6h": 1.5,
-                "De 3 a 5 vezes em 6h": 0.9,
-                "Menos de 3 vezes": 0.3
-            }
-        },
-        {
-            "id": "aspecto",
-            "label": "Como é o vômito?",
-            "tipo": "radio",
-            "opcoes": {
-                "Com sangue ou verde-escuro": 2.0,
-                "Com muco ou restos alimentares": 0.5,
-                "Apenas líquido claro": 0.2
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Sinais associados:",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Febre alta": 1.0,
-                "Letargia/confusão": 1.5,
-                "Dificuldade para beber líquidos": 0.8
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"aspecto": "Com sangue ou verde-escuro"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Letargia/confusão"]}, "min_cor": "vermelho"}
-    ],
-    "mapeamento_cor": [
-        (5.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-
-# --- DIARREIA EM CRIANÇA ---
-FLUXOS[normalizar("Diarreia em criança")] = {
-    "label": "Diarreia em criança",
-    "perguntas": [
-        {
-            "id": "duracao",
-            "label": "Há quanto tempo está com diarreia?",
-            "tipo": "radio",
-            "opcoes": {
-                "Mais de 5 dias": 1.2,
-                "3 a 5 dias": 0.6,
-                "Menos de 3 dias": 0.2
-            }
-        },
-        {
-            "id": "aspecto",
-            "label": "Como está a aparência das fezes?",
-            "tipo": "radio",
-            "opcoes": {
-                "Com sangue ou pretas": 2.0,
-                "Muito aquosas": 1.0,
-                "Normais para diarreia": 0.2
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Sinais associados:",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Febre alta": 1.0,
-                "Letargia/confusão": 1.5,
-                "Boca seca ou olhos fundos": 1.0
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"aspecto": "Com sangue ou pretas"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Letargia/confusão"]}, "min_cor": "vermelho"}
-    ],
-    "mapeamento_cor": [
-        (5.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-
 # ===============================
 # FALTA DE AR
 # ===============================
@@ -3888,6 +3481,15 @@ FLUXOS[normalizar("Trauma ou queda")] = {
             }
         }
     ],
+            {
+            "id": "fatores_risco",
+            "label": "Condições associadas (se houver):",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≥ 67 anos" (> anos)": 2.0,
+                "Idade ≤ 6 anos": 0.7
+            }
+        }
     "regras_excecao": [
         {"se": {"sintomas": ["Perda de consciência na hora do trauma"]}, "min_cor": "vermelho"},
         {"se": {"sintomas": ["Sangramento importante que não para"]}, "min_cor": "vermelho"},
@@ -4003,7 +3605,8 @@ FLUXOS[normalizar("Dor abdominal")] = {
             "tipo": "multiselect",
             "opcoes": {
                 "Gravidez": 0.8,
-                "Idade ≥ 67 anos": 0.6
+                "Idade ≥ 67 anos": 0.6,
+                "Idade ≤ 6 anos": 0.9
             }
         }
     ],
@@ -6190,9 +5793,11 @@ FLUXOS[normalizar("Icterícia")] = {
                 "Uso de álcool/medicamento recente": 0.6,
                 "Hepatite conhecida/contato de risco": 0.8,
                 "Cálculo na vesícula conhecido": 0.6
+                "Paciente com menos de 6 meses de vida": 2.5
             }
         }
     ],
+
     "regras_excecao": [
         {"se": {"quadro": "Icterícia intensa com dor abdominal ou vômito"}, "min_cor": "vermelho"},
         {"se": {"sinais": ["Fezes claras (acinzentadas)"]}, "min_cor": "vermelho"},
@@ -6479,7 +6084,8 @@ FLUXOS[normalizar("Febre")] = {
             "opcoes": {
                 "Confusão mental": 1.8,
                 "Rigidez na nuca": 1.5,
-                "Falta de ar intensa": 1.5
+                "Falta de ar intensa": 1.5,
+                "Lactente": 1.8
             }
         }
     ],
@@ -6527,10 +6133,18 @@ FLUXOS[normalizar("Delírio ou alucinações")] = {
                 "Cefaleia intensa": 1.0,
                 "Confusão/desorientação": 1.6,
                 "Uso recente de álcool/drogas ou abstinência": 1.2,
-                "Idoso (>65 anos) ou criança": 1.0
+                "Idade ≥ 67 anos": 1.0
+                "Idade ≤ 6 anos": 0.8
             }
         }
     ],
+            "id": "fatores_risco",
+            "label": "Condições associadas (se houver):",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade ≥ 67 anos": 1.0
+            }
+        }
     "regras_excecao": [
         {"se": {"sinais_associados": ["Rigidez na nuca"]}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Confusão/desorientação"]}, "min_cor": "laranja"},
@@ -6578,7 +6192,7 @@ FLUXOS[normalizar("Perda de memória")] = {
                 "Trauma craniano recente": 1.6,
                 "Uso de sedativos/álcool": 0.8,
                 "Febre": 0.8,
-                "Idoso (>65 anos)": 0.6,
+                "Idade ≥ 67 anos": 0.6,
                 "Doenças prévias (hipotireoidismo, depressão)": 0.4
             }
         }
