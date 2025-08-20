@@ -1207,16 +1207,7 @@ def dicionario_sintomas():
         }
     },
 
-"Desmaio ou tontura": {
-    "definicao": "Sensação de perda de equilíbrio ou apagão súbito, com ou sem perda de consciência.",
-    "popular": "Quando a pessoa sente que vai cair, vê tudo girando ou chega a desmaiar por segundos ou minutos.",
-    "clinico": "Síncope ou pré-síncope",
-    "termos": {
-        "Perda de consciência prolongada": "Ficou desacordado por mais tempo que um desmaio rápido.",
-        "Suor frio e palidez intensa": "Suor excessivo com pele muito pálida.",
-        "Arritmia": "Batimentos do coração fora do ritmo normal."
-        }
-    },
+
 
 "Dificuldade respiratória": {
     "definicao": "Problema mecânico para puxar ou soltar o ar, com esforço visível para respirar.",
@@ -1228,6 +1219,26 @@ def dicionario_sintomas():
         "Asma/bronquite/DPOC": "Doenças que dificultam a passagem de ar."
         }
     },
+    "Tontura / sensação de desmaio": {
+        "definicao": "Sensação de instabilidade, cabeça leve ou vertigem, podendo evoluir para perda breve de consciência (síncope).",
+        "popular": "Aquele momento em que tudo gira ou escurece, parece que vai cair. Pode ser só fraqueza ao levantar ou chegar a ‘apagar’ por alguns segundos.",
+        "clinico": "Pré-síncope ou síncope (inclui vertigem quando referido como sensação rotatória).",
+        "termos": {
+            # Intensidade / quadro
+            "Desmaio/queda": "Perda breve de consciência com queda associada.",
+            "Tontura intensa": "Não consegue ficar em pé sem ajuda; risco de queda.",
+            "Tontura leve episódica": "Vem e vai, sem queda ou limitação importante.",
+
+            # Sinais associados / fatores de risco
+            "Palpitações": "Batimento acelerado ou irregular.",
+            "Déficit neurológico": "Fraqueza, fala enrolada ou visão dupla; alerta neurológico.",
+            "Trauma recente na cabeça": "Bateu a cabeça; risco de complicação.",
+            "Hipotensão": "Pressão baixa conhecida ou medida.",
+            "Hipoglicemia": "Açúcar baixo no sangue; comum em diabéticos.",
+            "Desidratação": "Pouca urina, boca seca, vômitos/diarreia.",
+        }
+    }
+}
 
 "Falta de ar": {
     "definicao": "Sensação subjetiva de que o ar não está entrando o suficiente, mesmo sem esforço visível.",
@@ -1578,17 +1589,7 @@ def dicionario_sintomas():
         "Sensibilidade à luz": "Luz incomoda e piora a dor."
         }
     },
-"Sensação de desmaio": {
-    "definicao": "Sensação de desequilíbrio, fraqueza ou como se fosse desmaiar.",
-    "popular": "É quando parece que tudo gira ou que vai cair. Pode dar visão escura, fraqueza e suor frio.",
-    "clinico": "Pré-síncope ou vertigem",
-    "termos": {
-        "Fraqueza súbita com visão turva e suor frio": "Sensação repentina de fraqueza, visão embaçada e suor frio.",
-        "Tontura persistente com sensação de queda iminente": "Tontura que continua e dá a impressão de que vai cair.",
-        "Sensação leve de cabeça vazia ou instabilidade": "Leve sensação de cabeça leve ou falta de firmeza ao andar.",
-        "Episódio pontual que já passou": "Sensação de desmaio que aconteceu mas já cessou."
-        }
-    },
+
 "Formigamento ou perda de força": {
     "definicao": "Sensação de dormência, formigamento ou fraqueza em uma parte do corpo.",
     "popular": "Pode parecer que a mão ou perna está dormente ou sem força. Se for de repente, é mais preocupante.",
