@@ -57,9 +57,7 @@ def dicionario_sintomas():
         "Horas": "Instalação ao longo de algumas horas.",
         "Dias": "Sintomas que evoluem há dias.",
         "Histórico de asma/bronquite": "Doenças reativas das vias aéreas.",
-        "Uso de inalador sem melhora": "Tentativa com broncodilatador falhou.",
-        "Idade ≤ 4 anos": "Criança pequena (maior risco).",
-        "Idade ≥ 67 anos": "Idoso (maior risco)."
+        "Uso de inalador sem melhora": "Tentativa com broncodilatador falhou."
     }
 },
 
@@ -669,8 +667,7 @@ def dicionario_sintomas():
         "Rigidez na nuca": "Dificuldade ou dor para flexionar o pescoço.",
         "Cefaleia intensa": "Dor de cabeça forte.",
         "Confusão/desorientação": "Não sabe onde está, que dia é ou quem são as pessoas ao redor.",
-        "Uso recente de álcool/drogas ou abstinência": "Início dos sintomas após consumo ou suspensão de álcool ou drogas.",
-        "Idoso (>65 anos) ou criança": "Idade de maior risco para complicações."
+        "Uso recente de álcool/drogas ou abstinência": "Início dos sintomas após consumo ou suspensão de álcool ou drogas."
     }
 },
 
@@ -690,7 +687,6 @@ def dicionario_sintomas():
         "Trauma craniano recente": "Bateu a cabeça recentemente.",
         "Uso de sedativos/álcool": "Consumo de medicamentos ou substâncias que afetam o sistema nervoso.",
         "Febre": "Temperatura corporal elevada.",
-        "Idoso (>65 anos)": "Idade avançada, fator de risco para comprometimento cognitivo.",
         "Doenças prévias (hipotireoidismo, depressão)": "Histórico de doenças que podem afetar a memória."
     }
 },
