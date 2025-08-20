@@ -141,6 +141,64 @@ FLUXOS[normalizar("Dor muscular localizada ")] = {
         (0.0, "verde")
     ]
 }
+# 1) TONTURA / SENSAÇÃO DE DESMAIO
+FLUXOS[normalizar("Tontura")] = {
+    "label": "Tontura",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Intensidade dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Tontura com desmaio recente ou queda": 4.0,
+                "Tontura intensa, não consegue ficar em pé": 3.0,
+                "Tontura moderada principalmente ao levantar": 1.5,
+                "Tontura leve, episódica": 0.5
+            }
+        },
+        {
+            "id": "inicio",
+            "label": "Início dos sintomas:",
+            "tipo": "radio",
+            "opcoes": {
+                "Súbito, em minutos": 1.2,
+                "Em algumas horas": 0.6,
+                "Dias ou semanas": 0.2
+            }
+        },
+        {
+            "id": "riscos",
+            "label": "Sinais associados / fatores de risco:",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Dor no peito ou falta de ar": 2.0,
+                "Palpitações ou batimento irregular": 1.5,
+                "Déficit neurológico (fraqueza, fala embolada, visão dupla)": 2.5,
+                "Rigidez de nuca ou febre alta": 1.5,
+                "Trauma recente na cabeça": 2.0,
+                "Queda de pressão conhecida (hipotensão)": 1.0,
+                "Suspeita de hipoglicemia (diabetes, tremor/sudorese)": 1.0,
+                "Desidratação (vômitos/diarreia, pouca urina)": 0.8,
+                "Uso de álcool, sedativos ou drogas": 0.7,
+                "Gravidez": 0.6,
+                "Idade ≤ 4 anos": 0.6,
+                "Idade ≥ 67 anos": 0.6
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Tontura com desmaio recente ou queda"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Dor no peito ou falta de ar"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Déficit neurológico (fraqueza, fala embolada, visão dupla)"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Trauma recente na cabeça"}, "min_cor": "vermelho"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
+        (0.0, "verde")
+    ]
+}
 
 # 1) CHIADO NO PEITO (SIBILOS)
 FLUXOS[normalizar("Chiado no peito")] = {
@@ -3675,67 +3733,6 @@ FLUXOS[normalizar("Sangramento ativo")] = {
 }
 
 # ===============================
-# DESMAIO / TONTURA
-# ===============================
-FLUXOS[normalizar("Desmaio ou tontura")] = {
-    "label": "Desmaio ou tontura",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Qual opção descreve melhor?",
-            "tipo": "radio",
-            "opcoes": {
-                "Desmaio com perda de consciência prolongada": 2.0,
-                "Desmaio com recuperação, mas com confusão ou palidez": 1.2,
-                "Tontura ao levantar, sem outros sintomas": 0.6,
-                "Sensação leve de desequilíbrio": 0.2
-            }
-        },
-        {
-            "id": "gatilho",
-            "label": "O que desencadeou?",
-            "tipo": "radio",
-            "opcoes": {
-                "Dor no peito/palpitação/falta de ar": 1.5,
-                "Calor, ficar muito tempo em pé ou levantar rápido": 0.6,
-                "Sem gatilho claro": 0.4
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Houve algum destes?",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Trauma na queda (bateu a cabeça)": 1.3,
-                "Suor frio e palidez intensa": 1.0
-            }
-        },
-        {
-            "id": "fatores_risco",
-            "label": "Histórico/condições:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Arritmia/Doença cardíaca": 1.2,
-                "Uso de anticoagulante": 0.8,
-                "Diabetes com uso de insulina/hipoglicemiante": 0.8
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Desmaio com perda de consciência prolongada"}, "min_cor": "vermelho"},
-        {"se": {"gatilho": "Dor no peito/palpitação/falta de ar"}, "min_cor": "laranja"},
-        {"se": {"sinais_associados": ["Trauma na queda (bateu a cabeça)"]}, "min_cor": "vermelho"},
-        {"se": {"fatores_risco": ["Arritmia/Doença cardíaca"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.5, "laranja"),
-        (1.8, "amarelo"),
-        (0.0, "verde")
-    ]
-}
-
-# ===============================
 # COMPORTAMENTO ESTRANHO
 # ===============================
 FLUXOS[normalizar("Comportamento estranho à normalidade")] = {
@@ -4922,66 +4919,7 @@ FLUXOS[normalizar("Diarreia")] = {
     ]
 }
 
-# ===============================
-# SENSAÇÃO DE DESMAIO
-# ===============================
-FLUXOS[normalizar("Sensação de desmaio")] = {
-    "label": "Sensação de desmaio",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "O que você está sentindo?",
-            "tipo": "radio",
-            "opcoes": {
-                "Fraqueza súbita com visão turva e suor frio": 2.0,
-                "Tontura persistente com sensação de queda iminente": 1.2,
-                "Sensação leve de cabeça vazia ou instabilidade": 0.6,
-                "Episódio pontual que já passou": 0.2
-            }
-        },
-        {
-            "id": "gatilho",
-            "label": "O que desencadeou?",
-            "tipo": "radio",
-            "opcoes": {
-                "Dor no peito/palpitação/falta de ar": 1.5,
-                "Calor, ficar muito tempo em pé ou levantar rápido": 0.6,
-                "Sem gatilho claro": 0.4
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Apareceu junto:",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Palidez e suor frio": 0.8,
-                "Trauma na queda (bateu a cabeça)": 1.2
-            }
-        },
-        {
-            "id": "fatores_risco",
-            "label": "Histórico/condições:",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Arritmia/doença cardíaca": 1.2,
-                "Diabetes (insulina/hipoglicemiante)": 0.8,
-                "Uso de anticoagulante": 0.8
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Fraqueza súbita com visão turva e suor frio"}, "min_cor": "vermelho"},
-        {"se": {"gatilho": "Dor no peito/palpitação/falta de ar"}, "min_cor": "laranja"},
-        {"se": {"sinais_associados": ["Trauma na queda (bateu a cabeça)"]}, "min_cor": "vermelho"},
-        {"se": {"fatores_risco": ["Arritmia/doença cardíaca"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.5, "laranja"),
-        (1.8, "amarelo"),
-        (0.0, "verde")
-    ]
-}
+
 
 # ===============================
 # PALPITAÇÕES
