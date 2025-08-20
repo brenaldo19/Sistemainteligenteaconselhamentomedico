@@ -4905,7 +4905,8 @@ FLUXOS[normalizar("Diarreia")] = {
             "opcoes": {
                 "Idade ≥ 67 anos": 0.6,
                 "Imunossupressão": 0.8,
-                "Viagem recente/água/ alimento suspeito": 0.6
+                "Viagem recente/água/ alimento suspeito": 0.6,
+                "Idade ≤ 6 anos": 0.7
             }
         }
     ],
