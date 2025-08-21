@@ -1,5 +1,5 @@
 def dicionario_sintomas():
-    d={
+    d={                                                                                 
     "Acidente elétrico": {
         "definicao": "Exposição ao choque elétrico, podendo causar queimaduras, arritmias e comprometimento de órgãos vitais.",
         "popular": "Pessoa levou um choque elétrico.",
@@ -576,21 +576,7 @@ def dicionario_sintomas():
     }
 },
 
-"Sudorese noturna": {
-    "definicao": "Suor excessivo durante o sono, podendo encharcar roupas ou lençóis.",
-    "popular": "Suor forte à noite, a ponto de molhar roupa e cama.",
-    "clinico": "Hiperidrose noturna",
-    "termos": {
-        "≥ 4 semanas": "Sudorese persistente por um mês ou mais.",
-        "Encharca roupa/lençol": "Suor tão intenso que molha roupas e lençol.",
-        "Febre": "Temperatura do corpo elevada.",
-        "Perda de peso não intencional": "Emagrecimento sem estar tentando.",
-        "Tosse há > 2 semanas": "Tosse persistente por mais de duas semanas.",
-        "Tosse com sangue": "Presença de sangue ao tossir.",
-        "Inchaço dos linfonodos": "Gânglios aumentados no pescoço, axilas ou virilha.",
-        "Palpitações/ansiedade": "Sensação de coração acelerado ou ansiedade intensa."
-    }
-},
+
 
 "Perda de peso súbita": {
     "definicao": "Emagrecimento rápido e não intencional em um curto período de tempo.",
@@ -1046,16 +1032,18 @@ def dicionario_sintomas():
         }
     },
 
-"Sangramento gastrointestinal": {
-    "definicao": "Presença de sangue na evacuação ou vômito, geralmente indicando sangramento interno.",
-    "popular": "Quando sai sangue pelo vômito ou pelas fezes, o que pode assustar e indicar problema no estômago ou intestino.",
-    "clinico": "Hemorragia digestiva",
+
+"Sangramento gastrointestinal",
+    "definicao": "Perda de sangue em qualquer ponto do tubo digestivo, percebida como sangue vermelho vivo pelo ânus ou fezes escuras (melena).",
+    "popular": "Sangue saindo pelo ânus ou fezes pretas como borra de café. Pode ser pouco (no papel) ou muito (escorrendo/enchendo vaso).",
+    "clinico": "Hemorragia digestiva alta/baixa; qualificar por cor (hematoquezia vs. melena), volume, estabilidade hemodinâmica e uso de anticoagulantes.",
     "termos": {
-        "Fezes escuras": "Fezes pretas ou com cor de piche, indicando sangue digerido.",
-        "Vômito com sangue": "Quando o vômito sai com sangue vermelho vivo ou escuro.",
-        "Hematêmese": "Nome técnico para vômito com sangue."
-        }
-    },
+        "Vermelho vivo": "Sangue recente pelo ânus (hematoquezia), sugere foco baixo ou sangramento alto muito intenso.",
+        "Fezes pretas (melena)": "Sangue digerido; usualmente sangramento alto.",
+        "Sangue no papel": "Volume pequeno, muitas vezes benigno, mas requer avaliação se persistente."
+    }
+},
+
 
 "Dor no ombro ou braço": {
     "definicao": "Dor localizada ou que se espalha entre o ombro e o braço, podendo indicar lesão ou outro problema.",
@@ -1374,17 +1362,7 @@ def dicionario_sintomas():
     },
 
 
-"Sangramento retal": {
-    "definicao": "Presença de sangue saindo pelo ânus, geralmente visível nas fezes ou no papel higiênico.",
-    "popular": "Quando sai sangue pelo ânus ao evacuar. Pode ser pouco ou muito, e o sangue geralmente é vermelho vivo.",
-    "clinico": "Rectorragia",
-    "termos": {
-        "Sangramento intenso que não para com pressão direta": "Nariz sangrando muito e sem parar mesmo com pressão.",
-        "Sangramento moderado que reaparece durante o dia": "Nariz sangra um pouco, mas volta a sangrar mais tarde no mesmo dia.",
-        "Sangramento leve após esforço ou espirro": "Nariz sangra levemente depois de esforço ou espirrar.",
-        "Sangramento isolado e já controlado": "Nariz sangrou uma vez e já parou."
-        }
-    },
+
 
 "Confusão mental": {
     "definicao": "Alteração da clareza de pensamento, com dificuldade para entender, lembrar ou se orientar.",
