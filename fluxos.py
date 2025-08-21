@@ -2743,66 +2743,7 @@ FLUXOS[normalizar("Ferida não-traumática")] = {
     ]
 }
 
-# Fluxograma: Sangramento retal
-FLUXOS[normalizar("Sangramento retal")] = {
-    "label": "Sangramento retal",
-    "perguntas": [
-        {
-            "id": "quadro",
-            "label": "Como foi o sangramento?",
-            "tipo": "radio",
-            "opcoes": {
-                "Sangue vermelho vivo em grande quantidade": 3.5,
-                "Sangue moderado com dor abdominal": 2.0,
-                "Poucas gotas de sangue no papel higiênico": 1.0,
-                "Sangramento leve e isolado": 0.2
-            }
-        },
-        {
-            "id": "tempo",
-            "label": "Quando começou?",
-            "tipo": "radio",
-            "opcoes": {
-                "Hoje": 1.0,
-                "Há 2–7 dias": 0.6,
-                "Há mais de 7 dias": 0.3
-            }
-        },
-        {
-            "id": "sinais_associados",
-            "label": "Sinais associados (selecione os que tiver):",
-            "tipo": "checkbox",
-            "opcoes": {
-                "Tontura ou fraqueza": 1.0,
-                "Dor anal intensa": 0.8,
-                "Fezes pretas (melena)": 1.5,
-                "Febre": 0.7
-            }
-        },
-        {
-            "id": "fatores_risco",
-            "label": "Algum fator se aplica?",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Uso de anticoagulante": 1.0,
-                "Cirrose/doença hepática": 0.9,
-                "Constipação crônica": 0.5
-            }
-        }
-    ],
-    "regras_excecao": [
-        {"se": {"quadro": "Sangue vermelho vivo em grande quantidade"}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Fezes pretas (melena)"]}, "min_cor": "vermelho"},
-        {"se": {"sinais_associados": ["Tontura ou fraqueza"]}, "min_cor": "laranja"},
-        {"se": {"fatores_risco": ["Uso de anticoagulante"]}, "min_cor": "laranja"}
-    ],
-    "mapeamento_cor": [
-        (6.0, "vermelho"),
-        (3.0, "laranja"),
-        (1.5, "amarelo"),
-        (0.0, "verde")
-    ]
-}
+
 # -----------------------------
 # CONFUSÃO MENTAL
 # -----------------------------
@@ -5537,67 +5478,73 @@ FLUXOS[normalizar("Dor no ombro ou braço")] = {
 
 
 
-# ===============================
-# 4) SANGRAMENTO GASTROINTESTINAL
-# ===============================
-FLUXOS[normalizar("Sangramento gastrointestinal")] = {
-    "label": "Sangramento gastrointestinal",
+# === SANGRAMENTO GASTROINTESTINAL (unificado: inclui sangue vivo e fezes pretas) ===
+ROTULO = "Sangramento gastrointestinal"
+SID = normalizar(ROTULO)
+
+FLUXOS[SID] = {
+    "label": ROTULO,
     "perguntas": [
         {
             "id": "quadro",
-            "label": "Como está o sangramento nas fezes?",
+            "label": "Intensidade/impacto:",
             "tipo": "radio",
             "opcoes": {
-                "Fezes com sangue vivo ou pretas com mal-estar": 2.0,
-                "Sangue moderado sem dor intensa": 1.2,
-                "Pequena presença de sangue isolada": 0.6,
-                "Observação leve e sem sintomas associados": 0.2
+                "Sangramento volumoso com tontura/desmaio": 4.0,
+                "Sangramento moderado e contínuo": 2.5,
+                "Fezes pretas (melena) ou sangue misturado às fezes": 1.8,
+                "Sangue leve apenas no papel": 0.6
             }
         },
         {
-            "id": "frequencia",
-            "label": "Com que frequência apareceu?",
+            "id": "inicio",
+            "label": "Início:",
             "tipo": "radio",
             "opcoes": {
-                "Em todas/maioria das evacuações": 1.0,
-                "Em algumas evacuações": 0.6,
-                "Apenas uma vez": 0.2
+                "Súbito (horas)": 1.0,
+                "Dias": 0.5,
+                "Semanas ou mais": 0.2
             }
         },
         {
-            "id": "sinais",
-            "label": "Sinais associados:",
-            "tipo": "checkbox",
+            "id": "caracteristica",
+            "label": "Característica do sangue:",
+            "tipo": "radio",
             "opcoes": {
-                "Tontura/fraqueza": 1.0,
-                "Dor abdominal forte": 1.0,
-                "Vômitos com sangue": 1.6
+                "Vermelho vivo (pelo ânus)": 1.5,
+                "Preto/borra de café (melena)": 1.5,
+                "Coágulos": 1.0
             }
         },
         {
             "id": "riscos",
-            "label": "Fatores de risco:",
+            "label": "Sinais associados / fatores:",
             "tipo": "multiselect",
             "opcoes": {
-                "Uso de anticoagulante/AAS": 1.0,
-                "Álcool em excesso": 0.6,
-                "Doença hepática conhecida": 0.8
+                "Vômito com sangue": 3.0,
+                "Tontura/palidez/sudorese": 2.5,
+                "Dor abdominal forte persistente": 1.2,
+                "Uso de anticoagulante/AAS": 1.5,
+                "Doença hepática/cirrose": 1.2,
+                "Idade ≥ 67 anos": 0.6
             }
         }
     ],
     "regras_excecao": [
-        {"se": {"quadro": "Fezes com sangue vivo ou pretas com mal-estar"}, "min_cor": "vermelho"},
-        {"se": {"sinais": ["Vômitos com sangue"]}, "min_cor": "vermelho"},
-        {"se": {"riscos": ["Uso de anticoagulante/AAS"], "frequencia": "Em todas/maioria das evacuações"}, "min_cor": "laranja"},
-        {"se": {"sinais": ["Tontura/fraqueza"]}, "min_cor": "laranja"}
+        {"se": {"quadro": "Sangramento volumoso com tontura/desmaio"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Vômito com sangue"}, "min_cor": "vermelho"},
+        {"se": {"riscos": "Tontura/palidez/sudorese"}, "min_cor": "vermelho"},
+        {"se": {"caracteristica": "Preto/borra de café (melena)"}, "min_cor": "laranja"},
+        {"se": {"riscos": "Uso de anticoagulante/AAS"}, "min_cor": "laranja"}
     ],
     "mapeamento_cor": [
-        (6.2, "vermelho"),
-        (3.4, "laranja"),
-        (1.7, "amarelo"),
+        (5.0, "vermelho"),
+        (3.0, "laranja"),
+        (1.2, "amarelo"),
         (0.0, "verde")
     ]
 }
+
 
 # ===============================
 # 5) CORPO ESTRANHO NA GARGANTA
