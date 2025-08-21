@@ -178,8 +178,6 @@ sistemas_autotestes = {
         "Menstruação Excessiva",
         "Ausência de Menstruação",
         # Digestivo
-        "Dificuldade para engolir",
-        "Diferenciação entre sangramento retal e gastrointestinal",
         # Check-list físico
         "Palpação de Linfonodos (Check-list)",
     ],
