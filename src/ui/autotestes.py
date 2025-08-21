@@ -1065,19 +1065,6 @@ def render_menstruacao_excessiva():
             st.success("✅ Sem evidência forte de excesso.")
 
 
-# ========== DIFERENCIAÇÃO: SANGRAMENTO RETAL x GI ==========
-def render_diferenciar_sangramento_ret_gi():
-    st.subheader("🩸 Diferenciar Sangramento Retal vs Gastrointestinal")
-    resp = st.radio("Característica observada:", ["Nenhuma","Sangue vermelho vivo","Sangue escuro/fezes enegrecidas"], index=0)
-    if st.button("Resultado"):
-        if resp == "Sangue vermelho vivo":
-            st.warning("⚠️ Possível origem retal/anal. Avaliar.")
-        elif resp == "Sangue escuro/fezes enegrecidas":
-            st.error("🚨 Possível sangramento gastrointestinal. Procure atendimento.")
-        else:
-            st.success("✅ Sem sangramento detectado.")
-
-
 # ========== PERDA DE MEMÓRIA (INÍCIO + RED FLAGS) ==========
 def render_perda_memoria():
     st.subheader("🧠 Perda de Memória (Início + Red Flags)")
