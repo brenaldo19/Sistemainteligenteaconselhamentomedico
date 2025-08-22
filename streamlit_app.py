@@ -19,29 +19,7 @@ from logica import (
     calcular_ajuste_por_fatores_conservador,
 )
 from fluxos import FLUXOS, coletar_respostas_fluxo, pontuar_fluxo, labels_fluxos, eh_fluxo
-# --- topo do app.py ---
-import streamlit as st
-import joblib
-import os, pathlib, urllib.request
 
-MODEL_LOCAL = pathlib.Path("modelo_sintomas_v2.pkl")
-MODEL_URL = os.getenv("MODEL_URL", "")  # defina no Render
-
-def ensure_model():
-    if MODEL_LOCAL.exists():
-        return str(MODEL_LOCAL)
-    if not MODEL_URL:
-        raise RuntimeError("MODEL_URL não configurada e modelo não encontrado localmente.")
-    urllib.request.urlretrieve(MODEL_URL, MODEL_LOCAL)
-    return str(MODEL_LOCAL)
-
-@st.cache_resource
-def load_model():
-    path = ensure_model()
-    model = joblib.load(path)
-    return model
-
-model = load_model()
 
 # ---------------- Session state inicial ----------------
 # Estado inicial unificado
