@@ -5937,7 +5937,7 @@ FLUXOS[normalizar("Delírio ou alucinações")] = {
             "opcoes": {
                 "Idade ≥ 67 anos": 1.0
             }
-        }
+        
     "regras_excecao": [
         {"se": {"sinais_associados": ["Rigidez na nuca"]}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Confusão/desorientação"]}, "min_cor": "laranja"},
