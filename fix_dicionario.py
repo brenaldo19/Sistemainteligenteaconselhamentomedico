@@ -1,4 +1,4 @@
-# fix_dicionario.py
+# fix_dicionario.py   
 import re, sys, shutil, io, tokenize, pathlib, difflib
 
 PATH = pathlib.Path("dicionario.py")
