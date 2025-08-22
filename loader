@@ -1,0 +1,26 @@
+# utils_loader.py
+import os, pathlib, joblib
+
+MODEL_LOCAL = pathlib.Path("modelo_sintomas_v2.pkl")
+
+def _download_model():
+    # Opção 1: usar ID do Drive (recomendado p/ arquivo grande)
+    file_id = os.getenv("MODEL_FILE_ID", "")
+    if file_id:
+        import gdown  # precisa estar no requirements.txt
+        gdown.download(id=file_id, output=str(MODEL_LOCAL), quiet=False)
+        return
+
+    # Opção 2: usar URL direto (uc?export=download&id=...)
+    url = os.getenv("MODEL_URL", "")
+    if url:
+        import urllib.request
+        urllib.request.urlretrieve(url, MODEL_LOCAL)
+        return
+
+    raise RuntimeError("Defina MODEL_FILE_ID (Drive) ou MODEL_URL.")
+
+def load_model():
+    if not MODEL_LOCAL.exists():
+        _download_model()
+    return joblib.load(MODEL_LOCAL)
