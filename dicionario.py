@@ -133,7 +133,7 @@ def dicionario_sintomas():
         "Muito baixa (hipotensão)": "Pressão arterial marcadamente baixa."
     }
 },
-"Edema/Inchaço" = {
+"Edema/Inchaço" {
     "definicao": "Aumento de volume em parte do corpo por acúmulo de líquido, localizado ou generalizado.",
     "popular": "Parte do corpo inchada (perna, braço ou rosto). Pode aparecer de repente ou aumentar ao longo do dia.",
     "clinico": "Edema localizado (venoso/linfático/inflamatório) ou bilateral/generalizado (cardíaco/renal/hepático/medicamentoso).",
@@ -250,7 +250,7 @@ def dicionario_sintomas():
     }
 },
 
-"Dor muscular" = {
+"Dor muscular" {
     "definicao": "Dor em tecido muscular que pode ser localizada (um segmento) ou difusa (vários grupos), com ou sem relação a esforço ou trauma.",
     "popular": "Músculo doendo: pode ser numa parte só (tipo ombro/panturrilha) ou no corpo todo, depois de treino, esforço ou mesmo sem motivo claro.",
     "clinico": "Mialgia localizada ou difusa; considerar causas mecânicas, inflamatórias, infecciosas, metabólicas (ex.: rabdomiólise) e medicamentosas (ex.: estatinas).",
@@ -318,7 +318,7 @@ def dicionario_sintomas():
         "Fraqueza em membro": "Perda de força associada."
     }
 },
-"Dor e rigidez articular" = {
+"Dor e rigidez articular" {
     "definicao": "Dor em articulações com sensação de travamento, podendo limitar movimentos.",
     "popular": "Junta doendo e ‘dura’, pior de manhã ou após ficar parado; às vezes fica inchada.",
     "clinico": "Artralgia com ou sem rigidez; diferenciar padrão inflamatório (rigidez prolongada) de mecânico.",
@@ -334,7 +334,7 @@ def dicionario_sintomas():
         "Ferida/punção recente": "Risco de infecção articular."
     }
 },
-"Intolerância térmica" = {
+"Intolerância térmica" {
     "definicao": "Sensibilidade exagerada ao calor ou ao frio, fora do esperado para o ambiente.",
     "popular": "A pessoa sente muito mais calor ou frio que o normal, a ponto de atrapalhar o dia.",
     "clinico": "Hipersensibilidade térmica; investigar causas endócrinas/autonômicas e efeitos de fármacos.",
