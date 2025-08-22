@@ -3573,7 +3573,7 @@ FLUXOS[normalizar("Trauma ou queda")] = {
             "label": "Condições associadas (se houver):",
             "tipo": "multiselect",
             "opcoes": {
-                "Idade ≥ 67 anos (> anos)": 2.0,
+                "Idade ≥ 67 anos": 2.0,
                 "Idade ≤ 6 anos": 0.7
             }
         }
