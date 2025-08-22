@@ -3568,7 +3568,7 @@ FLUXOS[normalizar("Trauma ou queda")] = {
             }
         }
     ],
-            {
+        {
             "id": "fatores_risco",
             "label": "Condições associadas (se houver):",
             "tipo": "multiselect",
