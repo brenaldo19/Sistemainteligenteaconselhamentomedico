@@ -1586,7 +1586,7 @@ def dicionario_sintomas():
         "Fezes amolecidas por curto período": "Fezes mais moles do que o normal, por pouco tempo."
         }
     }
-}
+
     return dict(sorted(d.items()))
 
 dic = dicionario_sintomas()
