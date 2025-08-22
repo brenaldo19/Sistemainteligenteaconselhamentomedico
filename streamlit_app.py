@@ -19,6 +19,29 @@ from logica import (
     calcular_ajuste_por_fatores_conservador,
 )
 from fluxos import FLUXOS, coletar_respostas_fluxo, pontuar_fluxo, labels_fluxos, eh_fluxo
+# --- topo do app.py ---
+import streamlit as st
+import joblib
+import os, pathlib, urllib.request
+
+MODEL_LOCAL = pathlib.Path("modelo_sintomas_v2.pkl")
+MODEL_URL = os.getenv("MODEL_URL", "")  # defina no Render
+
+def ensure_model():
+    if MODEL_LOCAL.exists():
+        return str(MODEL_LOCAL)
+    if not MODEL_URL:
+        raise RuntimeError("MODEL_URL não configurada e modelo não encontrado localmente.")
+    urllib.request.urlretrieve(MODEL_URL, MODEL_LOCAL)
+    return str(MODEL_LOCAL)
+
+@st.cache_resource
+def load_model():
+    path = ensure_model()
+    model = joblib.load(path)
+    return model
+
+model = load_model()
 
 # ---------------- Session state inicial ----------------
 # Estado inicial unificado
@@ -293,7 +316,94 @@ elif opcao == "Autotestes para apuração de sintoma":
         st.error("Teste ainda não implementado. Me diga o nome que eu te mando o render_* correspondente.")
     else:
         func()
+# === Sidebar: entrada opcional de texto livre ===
+st.sidebar.header("Entrada livre (opcional)")
+use_free_text = st.sidebar.checkbox("Usar texto livre", value=False)
+free_text = st.sidebar.text_area(
+    "Descreva os sintomas",
+    placeholder="ex.: acordei suando frio, tontura e peito apertado...",
+    height=140
+) if use_free_text else ""
 
+# --- Área principal (o resto da sua UI já existente) ---
+st.title("Classificação de Sintomas")
+
+# Se você já tem inputs na área principal que montam um texto, guarde em `texto_principal`.
+# Se não tiver, mantenha este campo simples:
+texto_principal = st.text_area(
+    "Entrada principal",
+    placeholder="Se não usar a sidebar, digite aqui...",
+    height=140
+)
+
+col1, col2 = st.columns(2)
+with col1:
+    analisar = st.button("Analisar")
+with col2:
+    limpar = st.button("Limpar")
+
+if limpar:
+    st.experimental_rerun()
+
+def predict_labels_generic(model, texts, thr_default=0.35):
+    """
+    Usa o que existir:
+    - model.predict_labels (se sua classe custom tiver)
+    - ou model.predict_proba + classes_ com threshold
+    - ou model.predict (binário)
+    """
+    # 1) método custom
+    if hasattr(model, "predict_labels"):
+        return model.predict_labels(texts)
+
+    # 2) proba + classes
+    try:
+        proba = model.predict_proba(texts)
+        # tenta achar classes_ numa pipeline ou direto
+        classes_ = None
+        if hasattr(model, "named_steps") and "clf" in model.named_steps:
+            classes_ = getattr(model.named_steps["clf"], "classes_", None)
+        if classes_ is None:
+            classes_ = getattr(model, "classes_", None)
+        if classes_ is None:
+            raise AttributeError("Sem classes_")
+
+        out = []
+        for row in proba:
+            picked = [classes_[i] for i, p in enumerate(row) if float(p) >= thr_default]
+            out.append(picked)
+        return out
+    except Exception:
+        pass
+
+    # 3) fallback: predict binário
+    y = model.predict(texts)
+    classes_ = None
+    if hasattr(model, "named_steps") and "clf" in model.named_steps:
+        classes_ = getattr(model.named_steps["clf"], "classes_", None)
+    if classes_ is None:
+        classes_ = getattr(model, "classes_", None)
+    if classes_ is None:
+        # sem classes, retorna o que vier
+        return [y[0] if len(y)==1 else y]
+
+    out = []
+    for row in y:
+        labels = [classes_[i] for i, v in enumerate(row) if v == 1]
+        out.append(labels)
+    return out
+
+if analisar:
+    entrada = free_text if use_free_text else texto_principal
+    if not entrada.strip():
+        st.warning("Digite algo para analisar.")
+    else:
+        labels = predict_labels_generic(model, [entrada])[0]
+        if labels:
+            st.success("Sintomas detectados:")
+            st.write(", ".join(map(str, labels)))
+        else:
+            st.info("Nenhum sintoma atingiu o limiar mínimo.")
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
 # =============================
