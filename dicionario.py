@@ -16,7 +16,7 @@ def dicionario_sintomas():
             "Espasmos musculares persistentes": "Contrações involuntárias após o choque."
         }
     },
-"Movimentos involuntários": = {
+"Movimentos involuntários": {
     "definicao": "Movimentos que a pessoa não controla, como tremores, ‘soluços’ musculares breves ou tiques.",
     "popular": "Mãos tremendo, sacudidas rápidas ou gestos repetidos que a pessoa não consegue segurar.",
     "clinico": "Movimentos anormais não propositais (tremor, mioclonia, tique); diferenciar de crise convulsiva.",
