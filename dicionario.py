@@ -1189,8 +1189,8 @@ def dicionario_sintomas():
             "Hipoglicemia": "Açúcar baixo no sangue; comum em diabéticos.",
             "Desidratação": "Pouca urina, boca seca, vômitos/diarreia.",
         }
-    }
-}
+    },
+
 
 "Falta de ar": {
     "definicao": "Sensação subjetiva de que o ar não está entrando o suficiente, mesmo sem esforço visível.",
