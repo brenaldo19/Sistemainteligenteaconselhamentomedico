@@ -3575,6 +3575,7 @@ FLUXOS[normalizar("Trauma ou queda")] = {
                 "Idade ≥ 67 anos": 2.0,
                 "Idade ≤ 6 anos": 0.7
             }
+            }
          ],
     "regras_excecao": [
         {"se": {"sintomas": ["Perda de consciência na hora do trauma"]}, "min_cor": "vermelho"},
