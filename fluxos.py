@@ -5644,7 +5644,7 @@ FLUXOS[normalizar("Icterícia")] = {
             "opcoes": {
                 "Uso de álcool/medicamento recente": 0.6,
                 "Hepatite conhecida/contato de risco": 0.8,
-                "Cálculo na vesícula conhecido": 0.6
+                "Cálculo na vesícula conhecido": 0.6,
                 "Paciente com menos de 6 meses de vida": 2.5
             }
         }
