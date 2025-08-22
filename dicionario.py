@@ -1584,9 +1584,9 @@ def dicionario_sintomas():
         "Várias evacuações líquidas com febre ou dor abdominal": "Evacuações frequentes e líquidas acompanhadas de febre ou dor de barriga.",
         "Episódio isolado de diarreia sem outros sintomas": "Um único episódio de fezes líquidas sem outros problemas.",
         "Fezes amolecidas por curto período": "Fezes mais moles do que o normal, por pouco tempo."
-        }
     }
-
+}
+}
     return dict(sorted(d.items()))
 
 dic = dicionario_sintomas()
