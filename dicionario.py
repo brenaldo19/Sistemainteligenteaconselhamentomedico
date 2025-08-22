@@ -1033,7 +1033,7 @@ def dicionario_sintomas():
     },
 
 
-"Sangramento gastrointestinal"{
+"Sangramento gastrointestinal": {
     "definicao": "Perda de sangue em qualquer ponto do tubo digestivo, percebida como sangue vermelho vivo pelo ânus ou fezes escuras (melena).",
     "popular": "Sangue saindo pelo ânus ou fezes pretas como borra de café. Pode ser pouco (no papel) ou muito (escorrendo/enchendo vaso).",
     "clinico": "Hemorragia digestiva alta/baixa; qualificar por cor (hematoquezia vs. melena), volume, estabilidade hemodinâmica e uso de anticoagulantes.",
