@@ -3566,9 +3566,8 @@ FLUXOS[normalizar("Trauma ou queda")] = {
                 "Cabeça/peito/barriga": 1.2,
                 "Braços/pernas": 0.4
             }
-        }
-    ],
-        {
+        },
+            {
             "id": "fatores_risco",
             "label": "Condições associadas (se houver):",
             "tipo": "multiselect",
@@ -3576,7 +3575,7 @@ FLUXOS[normalizar("Trauma ou queda")] = {
                 "Idade ≥ 67 anos": 2.0,
                 "Idade ≤ 6 anos": 0.7
             }
-        }
+         ],
     "regras_excecao": [
         {"se": {"sintomas": ["Perda de consciência na hora do trauma"]}, "min_cor": "vermelho"},
         {"se": {"sintomas": ["Sangramento importante que não para"]}, "min_cor": "vermelho"},
