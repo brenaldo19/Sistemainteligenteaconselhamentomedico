@@ -1,7 +1,7 @@
 # utils_loader.py
 import os, pathlib, joblib
 
-MODEL_LOCAL = pathlib.Path("modelo_sintomas_v2.pkl")
+MODEL_LOCAL = pathlib.Path("modelo_sintomas_v3_nolex.pkl")
 
 def _download_model():
     # Opção 1: usar ID do Drive (recomendado p/ arquivo grande)
