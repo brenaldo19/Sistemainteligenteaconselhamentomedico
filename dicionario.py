@@ -147,7 +147,7 @@ def dicionario_sintomas():
         "Vermelhidão/calor": "Sugere celulite/inflamação.",
         "Ortopneia": "Piora ao deitar; pensar congestão cardíaca."
     }
-}
+},
 
 "Vômito com sangue": {
     "definicao": "Eliminação de sangue pelo vômito, indicativo de sangramento digestivo alto.",
