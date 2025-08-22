@@ -2252,15 +2252,16 @@ FLUXOS[normalizar("Incontinência urinária")] = {
                 "Parto vaginal múltiplo": 0.6,
                 "Doença neurológica diagnosticada": 1.0
             }
-        }
-    ],
-            "id": "fatores_risco",
+        },
+        {
+            "id": "condicoes",
             "label": "Condições associadas (se houver):",
             "tipo": "multiselect",
             "opcoes": {
                 "Idade ≥ 67 anos": 0.8
             }
         }
+    ],
     "regras_excecao": [
         {"se": {"gravidade": "Perda total de controle com dor ou febre"}, "min_cor": "vermelho"},
         {"se": {"gravidade": "Urina escapando frequentemente sem aviso"}, "min_cor": "laranja"}
