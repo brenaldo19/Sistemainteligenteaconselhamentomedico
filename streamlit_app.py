@@ -19,6 +19,17 @@ from logica import (
     calcular_ajuste_por_fatores_conservador,
 )
 from fluxos import FLUXOS, coletar_respostas_fluxo, pontuar_fluxo, labels_fluxos, eh_fluxo
+# app.py (trecho)
+import streamlit as st
+from utils_loader import load_model
+
+st.set_page_config(page_title="Classificação de Sintomas", layout="centered")
+
+@st.cache_resource
+def bootstrap():
+    return load_model()
+
+model = bootstrap()
 
 
 # ---------------- Session state inicial ----------------
