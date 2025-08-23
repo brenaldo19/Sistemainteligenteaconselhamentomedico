@@ -5930,13 +5930,7 @@ FLUXOS[normalizar("Delírio ou alucinações")] = {
                 "Idade ≤ 6 anos": 0.8
             }
         }
-    ],
-            "id": "fatores_risco",
-            "label": "Condições associadas (se houver):",
-            "tipo": "multiselect",
-            "opcoes": {
-                "Idade ≥ 67 anos": 1.0
-            }
+    ]
         
     "regras_excecao": [
         {"se": {"sinais_associados": ["Rigidez na nuca"]}, "min_cor": "vermelho"},
