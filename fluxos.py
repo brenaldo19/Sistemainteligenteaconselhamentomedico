@@ -5894,6 +5894,7 @@ FLUXOS[normalizar("Febre")] = {
     ]
 }
 FLUXOS[normalizar("Delírio ou alucinações")] = {
+FLUXOS[normalizar("Delírio ou alucinações")] = {
     "label": "Delírio ou alucinações",
     "perguntas": [
         {
@@ -5930,8 +5931,7 @@ FLUXOS[normalizar("Delírio ou alucinações")] = {
                 "Idade ≤ 6 anos": 0.8
             }
         }
-    ]
-        
+    ],  # ← vírgula corrigida aqui
     "regras_excecao": [
         {"se": {"sinais_associados": ["Rigidez na nuca"]}, "min_cor": "vermelho"},
         {"se": {"sinais_associados": ["Confusão/desorientação"]}, "min_cor": "laranja"},
