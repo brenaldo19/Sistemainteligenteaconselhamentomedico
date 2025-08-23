@@ -5894,7 +5894,6 @@ FLUXOS[normalizar("Febre")] = {
     ]
 }
 FLUXOS[normalizar("Delírio ou alucinações")] = {
-FLUXOS[normalizar("Delírio ou alucinações")] = {
     "label": "Delírio ou alucinações",
     "perguntas": [
         {
