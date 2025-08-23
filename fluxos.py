@@ -5926,7 +5926,7 @@ FLUXOS[normalizar("Delírio ou alucinações")] = {
                 "Cefaleia intensa": 1.0,
                 "Confusão/desorientação": 1.6,
                 "Uso recente de álcool/drogas ou abstinência": 1.2,
-                "Idade ≥ 67 anos": 1.0
+                "Idade ≥ 67 anos": 1.0,
                 "Idade ≤ 6 anos": 0.8
             }
         }
