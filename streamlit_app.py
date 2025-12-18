@@ -132,9 +132,7 @@ sistemas_autotestes = {
     "🧠 Neurológico": [
         "Tempo de Reação",
         "Memória Curta",
-        "Reflexo Seletivo",
         "Coordenação Fina",
-        "Toque Rápido (10s)",
         "Equilíbrio",
         "Humor e Ansiedade",
         "Humor na última semana",
@@ -190,9 +188,7 @@ router = {
     # Neurológico
     "Tempo de Reação": render_tempo_de_reacao,
     "Memória Curta": render_memoria_curta,
-    "Reflexo Seletivo": render_reflexo_seletivo,
     "Coordenação Fina": render_coordenacao_fina,
-    "Toque Rápido (10s)": render_toque_rapido_10s,
     "Equilíbrio": render_equilibrio,
     "Humor e Ansiedade": render_humor_ansiedade,
     "Humor na última semana": render_humor_ultima_semana,
