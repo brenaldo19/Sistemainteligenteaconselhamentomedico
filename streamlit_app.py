@@ -105,7 +105,7 @@ st.session_state.setdefault("etapa", 1)
 ETAPA_ATUAL = int(st.session_state.get("etapa", 1))
 
 base_opcoes = ["Nenhuma", "Dicionário de sintomas"]
-if ETAPA_ATUAL = 2:
+if ETAPA_ATUAL == 2:
     base_opcoes.append("Autotestes para apuração de sintoma")
 
 # preserva escolha válida; se usuário voltar da etapa 2 para 1, força "Nenhuma"
