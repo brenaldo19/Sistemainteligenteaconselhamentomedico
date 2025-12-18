@@ -23,11 +23,6 @@ from fluxos import FLUXOS, coletar_respostas_fluxo, pontuar_fluxo, labels_fluxos
 import streamlit as st
 from utils_loader import load_model
 
-@st.cache_resource
-def bootstrap():
-    return load_model()
-
-model = bootstrap()
 
 
 # ---------------- Session state inicial ----------------
@@ -302,95 +297,7 @@ elif opcao == "Autotestes para apuração de sintoma":
         st.error("Teste ainda não implementado. Me diga o nome que eu te mando o render_* correspondente.")
     else:
         func()
-# app.py
-import streamlit as st
-from utils_loader import have_model, download_model, load_model
 
-st.set_page_config(page_title="Classificação de Sintomas", layout="centered")
-st.title("Classificação de Sintomas")
-
-# Estado do modelo na sessão
-if "model_ready" not in st.session_state:
-    st.session_state.model_ready = have_model()
-
-# Bloco para baixar o modelo (se necessário)
-if not st.session_state.model_ready:
-    st.warning("O modelo ainda não foi baixado no servidor.")
-    if st.button("Baixar modelo agora"):
-        with st.spinner("Baixando o modelo do Drive..."):
-            try:
-                download_model()
-                st.session_state.model_ready = True
-                st.success("Modelo baixado com sucesso!")
-            except Exception as e:
-                st.error(f"Falha ao baixar: {e}")
-
-# Inputs
-use_free_text = st.sidebar.checkbox("Usar texto livre", value=False)
-free_text = st.sidebar.text_area("Descreva os sintomas", height=140) if use_free_text else ""
-texto_principal = st.text_area("Entrada principal", height=140)
-
-col1, col2 = st.columns(2)
-with col1:
-    analisar = st.button("Analisar")
-with col2:
-    limpar = st.button("Limpar")
-
-if limpar:
-    st.session_state.model_ready = have_model()
-    st.experimental_rerun()
-
-def predict_labels_generic(model, texts, thr_default=0.35):
-    if hasattr(model, "predict_labels"):
-        return model.predict_labels(texts)
-    try:
-        proba = model.predict_proba(texts)
-        classes_ = None
-        if hasattr(model, "named_steps") and "clf" in model.named_steps:
-            classes_ = getattr(model.named_steps["clf"], "classes_", None)
-        if classes_ is None:
-            classes_ = getattr(model, "classes_", None)
-        if classes_ is None:
-            raise AttributeError("Sem classes_")
-        out = []
-        for row in proba:
-            picked = [classes_[i] for i, p in enumerate(row) if float(p) >= thr_default]
-            out.append(picked)
-        return out
-    except Exception:
-        pass
-    y = model.predict(texts)
-    classes_ = None
-    if hasattr(model, "named_steps") and "clf" in model.named_steps:
-        classes_ = getattr(model.named_steps["clf"], "classes_", None)
-    if classes_ is None:
-        classes_ = getattr(model, "classes_", None)
-    if classes_ is None:
-        return [y[0] if len(y)==1 else y]
-    out = []
-    for row in y:
-        labels = [classes_[i] for i, v in enumerate(row) if v == 1]
-        out.append(labels)
-    return out
-
-if analisar:
-    entrada = free_text if use_free_text else texto_principal
-    if not entrada.strip():
-        st.warning("Digite algo para analisar.")
-    else:
-        if not st.session_state.model_ready:
-            st.error("Baixe o modelo primeiro (botão acima).")
-        else:
-            try:
-                model = load_model()
-                labels = predict_labels_generic(model, [entrada])[0]
-                if labels:
-                    st.success("Sintomas detectados:")
-                    st.write(", ".join(map(str, labels)))
-                else:
-                    st.info("Nenhum sintoma atingiu o limiar mínimo.")
-            except Exception as e:
-                st.error(f"Erro ao carregar/predizer: {e}")
 
 # =============================
 # ETAPA 1 – FORMULÁRIO INICIAL
