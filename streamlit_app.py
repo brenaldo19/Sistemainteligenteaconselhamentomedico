@@ -110,7 +110,7 @@ if ETAPA_ATUAL = 2:
 
 # preserva escolha válida; se usuário voltar da etapa 2 para 1, força "Nenhuma"
 opcao_atual = st.session_state.get("sidebar_opcao", "Nenhuma")
-if opcao_atual == "Autotestes para apuração de sintoma" and ETAPA_ATUAL < 2:
+if opcao_atual == "Autotestes para apuração de sintoma" and ETAPA_ATUAL == 2:
     opcao_atual = "Nenhuma"
 
 opcao = st.sidebar.selectbox(
@@ -123,7 +123,7 @@ opcao = st.sidebar.selectbox(
 subteste = None
 
 # Guardrail extra: se tentar burlar via estado, bloqueia aqui
-if opcao == "Autotestes para apuração de sintoma" and ETAPA_ATUAL == 2:
+if opcao == "Autotestes para apuração de sintoma" and ETAPA_ATUAL < 2:
     st.sidebar.warning("Autotestes são liberados apenas na etapa 2.")
     opcao = "Nenhuma"
 
