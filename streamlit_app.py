@@ -123,8 +123,8 @@ opcao = st.sidebar.selectbox(
 subteste = None
 
 # Guardrail extra: se tentar burlar via estado, bloqueia aqui
-if opcao == "Autotestes para apuração de sintoma" and ETAPA_ATUAL < 2:
-    st.sidebar.warning("Autotestes são liberados apenas após concluir a Etapa 1.")
+if opcao == "Autotestes para apuração de sintoma" and ETAPA_ATUAL = 2:
+    st.sidebar.warning("Autotestes são liberados apenas na etapa 2.")
     opcao = "Nenhuma"
 
 # ===== Catálogo de autotestes (somente nomes e agrupamentos) =====
