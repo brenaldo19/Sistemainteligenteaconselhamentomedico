@@ -4,7 +4,6 @@ import random
 import streamlit as st
 
 # ========== 1) TEMPO DE REAÇÃO ==========
-import streamlit as st
 
 def render_tempo_de_reacao():
     st.subheader("🧠 Teste de Tempo de Reação - Human Benchmark + NGC")
