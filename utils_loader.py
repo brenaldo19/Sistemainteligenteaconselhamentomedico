@@ -43,6 +43,11 @@ def _download_asset(owner: str, repo: str, asset_id: int, dest: Path):
             if chunk: f.write(chunk)
     if dest.stat().st_size == 0:
         raise RuntimeError("Arquivo baixado com tamanho 0.")
+import os
+
+os.environ["MODEL_OWNER"] = "nome_do_dono"
+os.environ["MODEL_REPO"] = "nome_do_repo"
+os.environ["MODEL_ASSET"] = "arquivo_do_modelo"
 
 def _ensure_model_file() -> Path:
     owner = os.getenv("MODEL_OWNER")
