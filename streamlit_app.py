@@ -21,7 +21,6 @@ from logica import (
 from fluxos import FLUXOS, coletar_respostas_fluxo, pontuar_fluxo, labels_fluxos, eh_fluxo
 # app.py (trecho)
 import streamlit as st
-from utils_loader import load_model
 
 
 
