@@ -4,86 +4,75 @@ import random
 import streamlit as st
 
 # ========== 1) TEMPO DE REAÇÃO ==========
+import streamlit as st
+
 def render_tempo_de_reacao():
-    import streamlit as st
+    st.subheader("🧠 Teste de Tempo de Reação via Human Benchmark")
+    st.info("⚠️ Vá para o site do [Human Benchmark](https://www.humanbenchmark.com/tests/reactiontime) e faça o teste.\n\nDepois, insira a média do seu tempo de reação (em ms) abaixo.")
 
-    st.subheader("🧠 Teste de Tempo de Reação (via Human Benchmark)")
+    # --- Inputs do usuário ---
+    st.session_state.setdefault("sexo", "Outro")
+    sexo = st.selectbox("Sexo:", ["Masculino", "Feminino", "Outro"], index=2)
+    st.session_state.sexo = sexo
 
-    st.markdown(
-        """
-        ⚠️ Para medir seu tempo de reação, use este teste oficial:
-        [Human Benchmark - Reaction Time](https://www.humanbenchmark.com/tests/reactiontime)
-        """
-    )
-    st.info("Após completar o teste, anote a **média** do seu tempo de reação (em milissegundos) para inserir abaixo.")
+    # Massa e altura para calcular IMC
+    massa = st.number_input("Peso (kg):", min_value=1.0, value=70.0)
+    altura = st.number_input("Altura (cm):", min_value=50.0, value=170.0)
+    imc = massa / ((altura / 100) ** 2)
+    st.session_state.imc = imc
 
-    # ---- Informações do usuário ----
-    if "sexo" not in st.session_state:
-        st.session_state.sexo = st.radio("Selecione seu sexo:", ["Masculino", "Feminino", "Outro"])
-    
-    if "idade" not in st.session_state:
-        st.session_state.idade = st.number_input("Idade:", min_value=1, max_value=120, value=30)
-    
-    if "massa" not in st.session_state:
-        st.session_state.massa = st.number_input("Massa (kg):", min_value=10.0, max_value=300.0, value=70.0)
-    
-    if "altura" not in st.session_state:
-        st.session_state.altura = st.number_input("Altura (m):", min_value=0.5, max_value=2.5, value=1.70)
-    
-    st.session_state.imc = st.session_state.massa / (st.session_state.altura ** 2)
+    # Pergunta gravidez só se sexo feminino
+    gravida = False
+    if sexo == "Feminino":
+        gravida = st.checkbox("Grávida?")
+    st.session_state.gravida = gravida
 
-    if st.session_state.sexo == "Feminino" and "gravida" not in st.session_state:
-        st.session_state.gravida = st.radio("Está grávida?", ["Não", "Sim"])
-
-    # ---- Inserção do tempo médio do Human Benchmark ----
+    # Tempo de reação
     tempo = st.number_input("⏱️ Insira a média do seu tempo de reação (ms):", min_value=1, value=225)
 
     if st.button("📊 Calcular resultados"):
         st.session_state.resultados = [tempo]
-        media = tempo
+        media = tempo  # média única do Human Benchmark
 
         # Ajustes por idade, IMC, gravidez e riscos
-        idade = st.session_state.idade
-        imc = st.session_state.imc
-        sexo = st.session_state.sexo
-        gravidez = st.session_state.get("gravida", False)
+        idade = st.session_state.get("idade", 30)
         riscos = st.session_state.get("grupos_risco_refinados", [])
 
-        base = 225  # média esperada em ms
+        base = 225  # base média do benchmark em ms
 
         # Ajustes por idade
         if idade <= 7:
-            base += 20
+            base += 50
         elif idade <= 16:
-            base += 10
+            base += 25
         elif idade <= 35:
             base += 0
         elif idade <= 58:
             base += 10
         else:
-            base += 20
+            base += 25
 
         # Ajustes por IMC
         if imc < 16:
-            base += 10
+            base += 25
         elif imc >= 30:
-            base += 5
+            base += 10
 
         # Gravidez
-        if str(gravidez).lower() in ["sim", "true", "1"]:
+        if gravida:
             base += 20
 
         # Riscos específicos
         if "neurológica" in riscos or "psiquiátrica" in riscos:
-            base += 10
+            base += 25
         if "cardíaca" in riscos:
-            base += 5
+            base += 10
         if "respiratória" in riscos:
-            base += 5
+            base += 10
 
-        # Janela de tolerância de 25%
-        lim_inferior = int(base * 0.75)
-        lim_superior = int(base * 1.25)
+        # Janela de tolerância ±25%
+        lim_inferior = base * 0.75
+        lim_superior = base * 1.25
 
         st.markdown("---")
         st.subheader(f"🏁 Seu tempo médio: **{media} ms**")
@@ -96,11 +85,13 @@ def render_tempo_de_reacao():
         else:
             st.info("✅ Seu tempo está **dentro do esperado**.")
 
+        # Botão para refazer o teste
         if st.button("🔁 Refazer o teste"):
-            for k in ["resultados", "gravida", "sexo", "idade", "massa", "altura", "imc"]:
+            for k in ["sexo", "gravida", "imc", "resultados"]:
                 if k in st.session_state:
                     del st.session_state[k]
             st.rerun()
+
 
 # ========== 2) CALAFrIOS ==========
 def render_calafrios():
