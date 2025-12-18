@@ -22,7 +22,7 @@ from fluxos import FLUXOS, coletar_respostas_fluxo, pontuar_fluxo, labels_fluxos
 # app.py (trecho)
 import streamlit as st
 
-
+st.set_page_config(page_title="Sistema de Triagem", layout="centered")
 
 # ---------------- Session state inicial ----------------
 # Estado inicial unificado
@@ -96,8 +96,6 @@ if manual_aberto:
 from dicionario import dic
 # Todos os renders dos autotestes
 from src.ui.autotestes import *
-
-st.set_page_config(page_title="Sistema de Triagem", layout="centered")
 
 # --- ESTADO INICIAL (mínimo necessário) ---
 st.session_state.setdefault("etapa", 1)
