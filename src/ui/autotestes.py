@@ -5,10 +5,19 @@ import streamlit as st
 
 # ========== 1) TEMPO DE REAÇÃO ==========
 def render_tempo_de_reacao():
+    import streamlit as st
 
-    st.subheader("🧠 Teste de Tempo de Reação")
+    st.subheader("🧠 Teste de Tempo de Reação (via Human Benchmark)")
 
-    # ---- Sessão inicial: informações do usuário ----
+    st.markdown(
+        """
+        ⚠️ Para medir seu tempo de reação, use este teste oficial:
+        [Human Benchmark - Reaction Time](https://www.humanbenchmark.com/tests/reactiontime)
+        """
+    )
+    st.info("Após completar o teste, anote a **média** do seu tempo de reação (em milissegundos) para inserir abaixo.")
+
+    # ---- Informações do usuário ----
     if "sexo" not in st.session_state:
         st.session_state.sexo = st.radio("Selecione seu sexo:", ["Masculino", "Feminino", "Outro"])
     
@@ -21,27 +30,17 @@ def render_tempo_de_reacao():
     if "altura" not in st.session_state:
         st.session_state.altura = st.number_input("Altura (m):", min_value=0.5, max_value=2.5, value=1.70)
     
-    # Calcula IMC automaticamente
     st.session_state.imc = st.session_state.massa / (st.session_state.altura ** 2)
 
-    # Pergunta gravidez só se for sexo feminino
     if st.session_state.sexo == "Feminino" and "gravida" not in st.session_state:
         st.session_state.gravida = st.radio("Está grávida?", ["Não", "Sim"])
-    st.markdown(
-        "2️⃣ Faça o teste de tempo de reação no Human Benchmark e insira seus tempos (em segundos, separados por vírgula):\n\n"
-        "[🖱️ Human Benchmark - Reaction Time Test](https://humanbenchmark.com/tests/reactiontime)"
-    )
-    tempos_input = st.text_input("⏱️ Seus tempos de reação (ex: 0.22,0.23,0.24)")
 
-    if tempos_input:
-        try:
-            tempos = [float(t.strip()) for t in tempos_input.split(",") if t.strip()]
-            if not tempos:
-                st.error("Insira pelo menos um tempo válido!")
-                return
+    # ---- Inserção do tempo médio do Human Benchmark ----
+    tempo = st.number_input("⏱️ Insira a média do seu tempo de reação (ms):", min_value=1, value=225)
 
-            media = sum(tempos) / len(tempos)
-
+    if st.button("📊 Calcular resultados"):
+        st.session_state.resultados = [tempo]
+        media = tempo
 
         # Ajustes por idade, IMC, gravidez e riscos
         idade = st.session_state.idade
@@ -50,8 +49,9 @@ def render_tempo_de_reacao():
         gravidez = st.session_state.get("gravida", False)
         riscos = st.session_state.get("grupos_risco_refinados", [])
 
-        base = 225  # média em ms
+        base = 225  # média esperada em ms
 
+        # Ajustes por idade
         if idade <= 7:
             base += 20
         elif idade <= 16:
@@ -63,46 +63,45 @@ def render_tempo_de_reacao():
         else:
             base += 20
 
+        # Ajustes por IMC
         if imc < 16:
             base += 10
         elif imc >= 30:
             base += 5
 
+        # Gravidez
         if str(gravidez).lower() in ["sim", "true", "1"]:
             base += 20
 
+        # Riscos específicos
         if "neurológica" in riscos or "psiquiátrica" in riscos:
             base += 10
         if "cardíaca" in riscos:
             base += 5
         if "respiratória" in riscos:
             base += 5
-            
-        lim_inferior = base * 0.75
-        lim_superior = base * 1.25
+
+        # Janela de tolerância de 25%
+        lim_inferior = int(base * 0.75)
+        lim_superior = int(base * 1.25)
 
         st.markdown("---")
-        st.subheader(f"🏁 Média final: **{media:.3f} s**")
+        st.subheader(f"🏁 Seu tempo médio: **{media} ms**")
 
-            if media < lim_inferior:
-                st.success("⚡ Seu tempo está **acima do esperado**. Excelente reflexo!")
-            elif media > lim_superior:
-                st.warning("🐢 Seu tempo está **abaixo do esperado**. Considere repetir o teste mais tarde.")
-                st.markdown("🔎 Possíveis sintomas relacionados: **Hipoglicemia, Hipotensão/colapso, Formigamento ou perda de força**")
-            else:
-                st.info("✅ Seu tempo está **dentro do esperado**.")
+        if media < lim_inferior:
+            st.success("⚡ Seu tempo está **acima do esperado**. Excelente reflexo!")
+        elif media > lim_superior:
+            st.warning("🐢 Seu tempo está **abaixo do esperado**. Considere repetir o teste mais tarde.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Hipoglicemia, Hipotensão/colapso, Formigamento ou perda de força**")
+        else:
+            st.info("✅ Seu tempo está **dentro do esperado**.")
 
-            # Mostrar tempos individuais
-            st.markdown("📊 **Tempos individuais:**")
-            for i, t in enumerate(tempos, start=1):
-                st.write(f"Tentativa {i}: {t:.3f} s")
+        if st.button("🔁 Refazer o teste"):
+            for k in ["resultados", "gravida", "sexo", "idade", "massa", "altura", "imc"]:
+                if k in st.session_state:
+                    del st.session_state[k]
+            st.rerun()
 
-            # Reset
-            if st.button("🔁 Refazer o teste"):
-                st.experimental_rerun()
-
-        except ValueError:
-            st.error("Formato inválido! Use números separados por vírgula, ex: 220,240,230")
 # ========== 2) CALAFrIOS ==========
 def render_calafrios():
     st.subheader("🥶 Teste de Calafrios (Temperatura + Contexto)")
