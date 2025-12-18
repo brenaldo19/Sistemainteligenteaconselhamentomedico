@@ -476,7 +476,7 @@ def render_percepcao_cores():
     st.markdown(html, unsafe_allow_html=True)
     resp = st.text_input("Digite as cores que enxerga (separe por vírgulas):").lower()
     if st.button("Ver resultado"):
-        corretas = ["vermelho","verde","azul","amarelo","turquesa"]
+        corretas = ["vermelho","verde","azul","amarelo","azul"]
         entrada = [c.strip() for c in resp.split(",") if c.strip()]
         acertos = [c for c in entrada if c in corretas]
         st.success(f"Acertou {len(acertos)}: {', '.join(acertos) or '—'}")
