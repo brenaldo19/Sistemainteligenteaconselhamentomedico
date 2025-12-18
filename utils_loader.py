@@ -44,31 +44,17 @@ def _download_asset(owner: str, repo: str, asset_id: int, dest: Path):
     if dest.stat().st_size == 0:
         raise RuntimeError("Arquivo baixado com tamanho 0.")
 
-import os
 from pathlib import Path
 
 def _ensure_model_file() -> Path:
-    local_path = Path("models/modelo.pkl")  # AJUSTA
+    model_path = Path("models/modelo.pkl")  # AJUSTA O NOME SE PRECISAR
 
-    if local_path.exists():
-        return local_path
-
-    owner = os.getenv("MODEL_OWNER")
-    repo  = os.getenv("MODEL_REPO")
-    tag   = os.getenv("MODEL_TAG", "latest")
-    asset = os.getenv("MODEL_ASSET")
-
-    if not all([owner, repo, asset]):
+    if not model_path.exists():
         raise RuntimeError(
-            "Modelo não encontrado localmente e variáveis "
-            "MODEL_OWNER, MODEL_REPO e MODEL_ASSET não definidas."
+            f"Modelo não encontrado em {model_path.resolve()}"
         )
 
-    # aqui entraria teu código de download do release
-    # depois de baixar:
-    # return Path(caminho_baixado)
-
-    raise RuntimeError("Download do modelo ainda não implementado.")
+    return model_path
 
 
     local_dir = Path("/opt/render/project/src/models")
