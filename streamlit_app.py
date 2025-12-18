@@ -274,7 +274,6 @@ router = {
     "Ausência de Menstruação": render_ausencia_menstruacao,
 
     "Dificuldade para engolir": render_dificuldade_engolir,
-    "Diferenciação entre sangramento retal e gastrointestinal": render_diferenciar_sangramento_ret_gi,
 
     "Palpação de Linfonodos (Check-list)": render_linfonodos,
 }
