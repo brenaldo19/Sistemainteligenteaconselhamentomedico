@@ -32,14 +32,14 @@ def render_tempo_de_reacao():
             st.session_state.delay = random.uniform(3, 7)
             st.session_state.ready = False
             st.session_state.testando = True
-            st.rerun()
+            st.experimental_rerun()
 
         # 2) Entrou no ciclo mas ainda não liberou o clique: espera o delay e libera
         elif st.session_state.testando and not st.session_state.ready:
             time.sleep(st.session_state.delay)
             st.session_state.start_time = time.time()
             st.session_state.ready = True
-            st.rerun()
+            st.experimental_rerun()
 
         # 3) Clique liberado
         else:  # testando == True and ready == True
@@ -58,7 +58,7 @@ def render_tempo_de_reacao():
                 st.session_state.testando = False
                 st.session_state.ready = False
                 st.session_state.start_time = None
-                st.rerun()
+                st.experimental_rerun()
 
         # info de progresso
         if st.session_state.tentativa == 1:
@@ -72,7 +72,7 @@ def render_tempo_de_reacao():
             for k in ["tentativa", "resultados", "testando", "ready", "start_time", "delay"]:
                 if k in st.session_state:
                     del st.session_state[k]
-            st.rerun()
+            st.experimental_rerun()
 
     # ---- Finalização: já fez 1 treino + 7 válidas ----
     else:
@@ -145,7 +145,7 @@ def render_tempo_de_reacao():
             for k in ["tentativa", "resultados", "testando", "ready", "start_time", "delay"]:
                 if k in st.session_state:
                     del st.session_state[k]
-            st.rerun()
+            st.experimental_rerun()
 
 
 # ========== 2) CALAFrIOS ==========
@@ -283,7 +283,7 @@ def render_memoria_curta():
         st.write(" | ".join(st.session_state.mc_palavras))
         time.sleep(8)
         st.session_state.mc_mostrar = False
-        st.rerun()
+        st.experimental_rerun()
     else:
         resposta = st.text_input("Digite as palavras separadas por vírgula:")
         if st.button("Ver resultado"):
@@ -295,7 +295,7 @@ def render_memoria_curta():
         if st.button("Refazer"):
             for k in ["mc_palavras","mc_mostrar"]:
                 if k in st.session_state: del st.session_state[k]
-            st.rerun()
+            st.experimental_rerun()
 
 
 # ========== 8) ALTERAÇÕES NA FALA ==========
@@ -398,18 +398,18 @@ def render_respiracao():
     if not st.session_state.fr_contando:
         if st.button("Iniciar 30s"):
             st.session_state.fr_contando = True
-            st.rerun()
+            st.experimental_rerun()
     else:
         st.info("⏳ Conte suas respirações por 30 segundos…")
         time.sleep(30)
         st.session_state.fr_contando = False
-        st.rerun()
+        st.experimental_rerun()
 
     if not st.session_state.fr_contando and st.session_state.fr_valor is None:
         resp = st.number_input("Respirações em 30s", 0, 50, step=1)
         if st.button("Ver resultado"):
             st.session_state.fr_valor = resp * 2
-            st.rerun()
+            st.experimental_rerun()
 
     if st.session_state.fr_valor is not None:
         freq = st.session_state.fr_valor
@@ -434,7 +434,7 @@ def render_respiracao():
         if st.button("Refazer (Respiração)"):
             for k in ["fr_contando","fr_valor"]:
                 if k in st.session_state: del st.session_state[k]
-            st.rerun()
+            st.experimental_rerun()
 
 # ========== TR-10s: TOQUE RÁPIDO (10s) ==========
 def render_toque_rapido_10s():
@@ -459,7 +459,7 @@ def render_toque_rapido_10s():
                 st.session_state.tr10_inicio = time.perf_counter()
                 st.session_state.tr10_contagem = 0
                 st.session_state.tr10_finalizou = False
-                st.rerun()
+                st.experimental_rerun()
         else:
             if st.session_state.tr10_inicio is not None:
                 dec = time.perf_counter() - st.session_state.tr10_inicio
@@ -469,7 +469,7 @@ def render_toque_rapido_10s():
                     st.session_state.tr10_inicio = None
                     st.session_state.tr10_finalizou = True
                     st.success("Tempo encerrado!")
-                    st.rerun()
+                    st.experimental_rerun()
             else:
                 st.success("Tempo encerrado!")
 
@@ -477,7 +477,7 @@ def render_toque_rapido_10s():
         if st.session_state.tr10_inicio is not None and not st.session_state.tr10_finalizou:
             if st.button("Clique!"):
                 st.session_state.tr10_contagem += 1
-                st.rerun()
+                st.experimental_rerun()
         else:
             st.button("Clique!", disabled=True)
 
@@ -496,7 +496,7 @@ def render_toque_rapido_10s():
     if st.button("Refazer (Toque Rápido 10s)"):
         for k in ["tr10_inicio","tr10_contagem","tr10_finalizou"]:
             if k in st.session_state: del st.session_state[k]
-        st.rerun()
+        st.experimental_rerun()
 
 
 # ========== DIFERENCIAR FALTA DE AR x DIFICULDADE RESPIRATÓRIA ==========
@@ -555,7 +555,7 @@ def render_visao_contraste():
     if st.button("Refazer (Visão)"):
         for k in ["vis_numeros","vis_contrastes"]:
             if k in st.session_state: del st.session_state[k]
-        st.rerun()
+        st.experimental_rerun()
 
 
 # ========== CAMPO VISUAL ==========
@@ -611,23 +611,23 @@ def render_cardiaco():
 
     if st.session_state.c_etapa == 0:
         if st.button("Iniciar esforço (1 min senta-levanta)"):
-            st.session_state.c_etapa = 1; st.rerun()
+            st.session_state.c_etapa = 1; st.experimental_rerun()
     elif st.session_state.c_etapa == 1:
         st.info("⏳ Faça 1 minuto de senta-levanta.")
-        time.sleep(60); st.session_state.c_etapa = 2; st.rerun()
+        time.sleep(60); st.session_state.c_etapa = 2; st.experimental_rerun()
     elif st.session_state.c_etapa == 2:
         st.success("✅ Termine e sente-se. Prepare contagem de 15s.")
-        if st.button("Iniciar 15s"): st.session_state.c_etapa = 3; st.rerun()
+        if st.button("Iniciar 15s"): st.session_state.c_etapa = 3; st.experimental_rerun()
     elif st.session_state.c_etapa == 3:
         st.info("⏳ Conte batimentos por 15s…")
-        time.sleep(15); st.session_state.c_etapa = 4; st.rerun()
+        time.sleep(15); st.session_state.c_etapa = 4; st.experimental_rerun()
     elif st.session_state.c_etapa == 4:
         bat = st.number_input("Batimentos em 15s:", 0, 100, step=1)
         if st.button("Ver resultado"):
             st.session_state.c_bpm15 = bat
             st.session_state.c_fc = bat * 4
             st.session_state.c_etapa = 5
-            st.rerun()
+            st.experimental_rerun()
     elif st.session_state.c_etapa == 5:
         fc = st.session_state.c_fc
         idade = st.session_state.get("idade", 30)
@@ -651,7 +651,7 @@ def render_cardiaco():
         if st.button("Refazer (Cardíaco)"):
             for k in ["c_etapa","c_bpm15","c_fc"]:
                 if k in st.session_state: del st.session_state[k]
-            st.rerun()
+            st.experimental_rerun()
 
 
 # ========== RECUPERAÇÃO CARDÍACA ==========
@@ -702,12 +702,12 @@ def render_apneia_simples():
     if st.session_state.ap_inicio is None:
         if st.button("Iniciar (prender agora)"):
             st.session_state.ap_inicio = time.perf_counter()
-            st.rerun()
+            st.experimental_rerun()
     else:
         if st.button("Soltei o ar (parar)"):
             st.session_state.ap_tempo = round(time.perf_counter() - st.session_state.ap_inicio)
             st.session_state.ap_inicio = None
-            st.rerun()
+            st.experimental_rerun()
 
     if st.session_state.ap_tempo is not None:
         t = st.session_state.ap_tempo
@@ -723,7 +723,7 @@ def render_apneia_simples():
         if st.button("Refazer (Apneia)"):
             for k in ["ap_inicio","ap_tempo"]:
                 if k in st.session_state: del st.session_state[k]
-            st.rerun()
+            st.experimental_rerun()
 
 
 # ========== SOPRO SUSTENTADO ==========
@@ -736,12 +736,12 @@ def render_sopro_sustentado():
     if st.session_state.sp_inicio is None:
         if st.button("Começar sopro"):
             st.session_state.sp_inicio = time.perf_counter()
-            st.rerun()
+            st.experimental_rerun()
     else:
         if st.button("Parei"):
             st.session_state.sp_tempo = round(time.perf_counter() - st.session_state.sp_inicio)
             st.session_state.sp_inicio = None
-            st.rerun()
+            st.experimental_rerun()
 
     if st.session_state.sp_tempo is not None:
         t = st.session_state.sp_tempo
@@ -755,7 +755,7 @@ def render_sopro_sustentado():
         if st.button("Refazer (Sopro)"):
             for k in ["sp_inicio","sp_tempo"]:
                 if k in st.session_state: del st.session_state[k]
-            st.rerun()
+            st.experimental_rerun()
 
 def render_nodulo_mama():
     st.subheader("🧪 Nódulo na Mama")
@@ -861,7 +861,7 @@ def render_enchimento_capilar():
         else:
             st.error("🚨 Lento — possível problema circulatório.")
     if st.button("Refazer (Capilar)"):
-        st.rerun()
+        st.experimental_rerun()
 
 
 # ========== FORÇA DA MÃO ==========
@@ -874,11 +874,11 @@ def render_forca_da_mao():
     if st.session_state.pg_etapa in ["direita","esquerda"]:
         lado = st.session_state.pg_etapa
         if st.button(f"Iniciar mão {lado} (1 min)"):
-            st.session_state.pg_etapa = f"{lado}_timer"; st.rerun()
+            st.session_state.pg_etapa = f"{lado}_timer"; st.experimental_rerun()
     elif st.session_state.pg_etapa.endswith("_timer"):
         lado = st.session_state.pg_etapa.replace("_timer","")
         st.info(f"⏳ Segure a garrafa com a mão **{lado}** por 1 minuto.")
-        time.sleep(60); st.session_state.pg_etapa = f"{lado}_result"; st.rerun()
+        time.sleep(60); st.session_state.pg_etapa = f"{lado}_result"; st.experimental_rerun()
     elif st.session_state.pg_etapa.endswith("_result"):
         lado = st.session_state.pg_etapa.replace("_result","")
         terminou = st.radio(f"Aguentou 60s na mão {lado}?", ["Sim","Não"], key=f"pg_term_{lado}")
@@ -887,7 +887,7 @@ def render_forca_da_mao():
             score = (0 if terminou=="Sim" else 1) + (1 if any(s in ["Tremor","Formigamento","Dor"] for s in sentiu) else 0)
             st.session_state.pg_result[lado] = score
             st.session_state.pg_etapa = "esquerda" if lado=="direita" else "fim"
-            st.rerun()
+            st.experimental_rerun()
     elif st.session_state.pg_etapa == "fim":
         d = st.session_state.pg_result.get("direita",0)
         e = st.session_state.pg_result.get("esquerda",0)
@@ -901,7 +901,7 @@ def render_forca_da_mao():
         if st.button("Refazer (Força da mão)"):
             for k in ["pg_etapa","pg_result"]:
                 if k in st.session_state: del st.session_state[k]
-            st.rerun()
+            st.experimental_rerun()
 
 
 # ========== SUBIR ESCADA COM UMA PERNA ==========
@@ -927,10 +927,10 @@ def render_hidratacao():
     st.session_state.setdefault("hid_etapa", 0)
     if st.session_state.hid_etapa == 0:
         if st.button("Iniciar cronômetro 2s (belisque a pele)"):
-            st.session_state.hid_etapa = 1; st.rerun()
+            st.session_state.hid_etapa = 1; st.experimental_rerun()
     elif st.session_state.hid_etapa == 1:
         st.info("⏳ Segure a pele por 2 segundos…")
-        time.sleep(2); st.success("✅ Solte e observe!"); st.session_state.hid_etapa = 2; st.rerun()
+        time.sleep(2); st.success("✅ Solte e observe!"); st.session_state.hid_etapa = 2; st.experimental_rerun()
     elif st.session_state.hid_etapa == 2:
         resultado = st.radio("Após soltar, o que ocorreu?", ["Voltou imediatamente","Ficou enrugada/demorou"], index=0)
         if st.button("Ver resultado"):
@@ -939,7 +939,7 @@ def render_hidratacao():
             else:
                 st.error("🚨 Pode haver desidratação. Beba água e observe.")
         if st.button("Refazer (Hidratação)"):
-            del st.session_state.hid_etapa; st.rerun()
+            del st.session_state.hid_etapa; st.experimental_rerun()
 
 
 # ========== ICTERÍCIA NEONATAL ==========
@@ -1136,12 +1136,12 @@ def render_reflexo_seletivo():
                 clicou = (atual == 7)
                 dados["respostas"].append(("clicou", atual))
                 dados["indice"] += 1
-                st.rerun()
+                st.experimental_rerun()
         with col2:
             if st.button("Ignorar", key=f"ignorar_{dados['indice']}"):
                 dados["respostas"].append(("ignorou", atual))
                 dados["indice"] += 1
-                st.rerun()
+                st.experimental_rerun()
     else:
         st.subheader("📊 Resultado do Teste")
 
@@ -1166,7 +1166,7 @@ def render_reflexo_seletivo():
 
         if st.button("Refazer teste (Reflexo Seletivo)"):
             del st.session_state["clique_reflexo"]
-            st.rerun()
+            st.experimental_rerun()
 
 
 # ======================= COORDENAÇÃO FINA =======================
@@ -1303,13 +1303,13 @@ def render_contagem_em_uma_respiracao():
         if st.session_state.onebreath_inicio is None:
             if st.button("Iniciar"):
                 st.session_state.onebreath_inicio = time.perf_counter()
-                st.rerun()
+                st.experimental_rerun()
         else:
             st.info("Contando... fale em voz alta até precisar inspirar novamente.")
     with col2:
         if st.button("Terminei"):
             st.session_state.onebreath_inicio = None
-            st.rerun()
+            st.experimental_rerun()
 
     contagem = st.number_input("Digite o último número que conseguiu falar em um fôlego:", min_value=0, step=1, value=0)
     if st.button("Ver resultado (Contagem em um fôlego)"):
@@ -1505,7 +1505,7 @@ def render_urinario():
             st.error("🚨 Alterações percebidas. Considere procurar urologista ou clínico.")
             st.markdown("🔎 Possíveis sintomas relacionados: **Alterações urinárias; retenção ou incontinência (depende do caso)**")
         if st.button("Refazer teste urinário"):
-            st.rerun()
+            st.experimental_rerun()
             # ======================= ENERGIA MATINAL =======================
 def render_energia_matinal():
     st.subheader("☕ Teste de Energia ao Acordar")
