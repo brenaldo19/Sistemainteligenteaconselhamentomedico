@@ -4,24 +4,20 @@ import random
 import streamlit as st
 
 # ========== 1) TEMPO DE REAÇÃO ==========
-import streamlit as st
-
 def render_tempo_de_reacao():
     st.subheader("🧠 Teste de Tempo de Reação via Human Benchmark")
     st.info("⚠️ Vá para o site do [Human Benchmark](https://www.humanbenchmark.com/tests/reactiontime) e faça o teste.\n\nDepois, insira a média do seu tempo de reação (em ms) abaixo.")
 
     # --- Inputs do usuário ---
-    st.session_state.setdefault("sexo", "Outro")
     sexo = st.selectbox("Sexo:", ["Masculino", "Feminino", "Outro"], index=2)
     st.session_state.sexo = sexo
 
-    # Massa e altura para calcular IMC
     massa = st.number_input("Peso (kg):", min_value=1.0, value=70.0)
     altura = st.number_input("Altura (cm):", min_value=50.0, value=170.0)
     imc = massa / ((altura / 100) ** 2)
     st.session_state.imc = imc
 
-    # Pergunta gravidez só se sexo feminino
+    # Gravidez só se sexo feminino
     gravida = False
     if sexo == "Feminino":
         gravida = st.checkbox("Grávida?")
@@ -32,7 +28,7 @@ def render_tempo_de_reacao():
 
     if st.button("📊 Calcular resultados"):
         st.session_state.resultados = [tempo]
-        media = tempo  # média única do Human Benchmark
+        media = tempo
 
         # Ajustes por idade, IMC, gravidez e riscos
         idade = st.session_state.get("idade", 30)
@@ -90,9 +86,7 @@ def render_tempo_de_reacao():
             for k in ["sexo", "gravida", "imc", "resultados"]:
                 if k in st.session_state:
                     del st.session_state[k]
-            st.rerun()
-
-
+            st.experimental_rerun()
 # ========== 2) CALAFrIOS ==========
 def render_calafrios():
     st.subheader("🥶 Teste de Calafrios (Temperatura + Contexto)")
