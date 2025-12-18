@@ -4,99 +4,146 @@ import random
 import streamlit as st
 
 # ========== 1) TEMPO DE REAÇÃO ==========
-
 def render_tempo_de_reacao():
-    st.subheader("🧠 Teste de Tempo de Reação - Human Benchmark + NGC")
+    import streamlit as st
+    import time
+    import random
 
-    st.markdown(
-        "1️⃣ Preencha seus dados pessoais abaixo (NGC):"
-    )
+    st.subheader("🧠 Teste de Tempo de Reação")
+    st.warning("⚠️ A primeira tentativa é apenas um treino e **não será contabilizada** na média final.")
 
-    idade = st.number_input("Idade", min_value=1, max_value=120, value=30)
-    imc = st.number_input("IMC", min_value=10.0, max_value=50.0, value=22.0)
-    sexo = st.selectbox("Sexo", ["Masculino", "Feminino", "Outro"])
-    gravida = st.selectbox("Gravidez?", ["Não", "Sim"])
-    riscos = st.multiselect(
-        "Grupos de risco específicos",
-        ["neurológica", "psiquiátrica", "cardíaca", "respiratória"]
-    )
+    # ---- Sessão inicial: informações do usuário ----
+    if "sexo" not in st.session_state:
+        st.session_state.sexo = st.radio("Selecione seu sexo:", ["Masculino", "Feminino", "Outro"])
+    
+    if "idade" not in st.session_state:
+        st.session_state.idade = st.number_input("Idade:", min_value=1, max_value=120, value=30)
+    
+    if "massa" not in st.session_state:
+        st.session_state.massa = st.number_input("Massa (kg):", min_value=10.0, max_value=300.0, value=70.0)
+    
+    if "altura" not in st.session_state:
+        st.session_state.altura = st.number_input("Altura (m):", min_value=0.5, max_value=2.5, value=1.70)
+    
+    # Calcula IMC automaticamente
+    st.session_state.imc = st.session_state.massa / (st.session_state.altura ** 2)
 
-    st.markdown(
-        "2️⃣ Faça o teste de tempo de reação no Human Benchmark e insira seus tempos (em segundos, separados por vírgula):\n\n"
-        "[🖱️ Human Benchmark - Reaction Time Test](https://humanbenchmark.com/tests/reactiontime)"
-    )
+    # Pergunta gravidez só se for sexo feminino
+    if st.session_state.sexo == "Feminino" and "gravida" not in st.session_state:
+        st.session_state.gravida = st.radio("Está grávida?", ["Não", "Sim"])
 
-    tempos_input = st.text_input("⏱️ Seus tempos de reação (ex: 0.22,0.23,0.24)")
+    # ---- Estados do teste ----
+    st.session_state.setdefault("tentativa", 1)        # 1 = treino; 2..8 = válidas
+    st.session_state.setdefault("resultados", [])      # guarda 7 tempos válidos
+    st.session_state.setdefault("testando", False)     # está no ciclo do teste?
+    st.session_state.setdefault("ready", False)        # já liberou o clique?
+    st.session_state.setdefault("start_time", None)    # início do tempo de reação
+    st.session_state.setdefault("delay", None)         # atraso aleatório antes do clique
 
-    if tempos_input:
-        try:
-            tempos = [float(t.strip()) for t in tempos_input.split(",") if t.strip()]
-            if not tempos:
-                st.error("Insira pelo menos um tempo válido!")
-                return
+    CORRECAO_SISTEMA = 0.47
 
-            media = sum(tempos) / len(tempos)
+    # ---- Fluxo principal do teste ----
+    if st.session_state.tentativa <= 8:
+        if not st.session_state.testando:
+            st.session_state.delay = random.uniform(3, 7)
+            st.session_state.ready = False
+            st.session_state.testando = True
+            st.rerun()
+        elif st.session_state.testando and not st.session_state.ready:
+            time.sleep(st.session_state.delay)
+            st.session_state.start_time = time.time()
+            st.session_state.ready = True
+            st.rerun()
+        else:
+            st.success("✅ Clique agora!")
+            # Input para "Enter" como clique
+            enter = st.text_input("Pressione Enter e envie para registrar o tempo:", "")
+            if enter == "":
+                fim = time.time()
+                bruto = fim - (st.session_state.start_time or fim)
+                tempo_reacao = max(0.01, bruto - CORRECAO_SISTEMA)
+                if st.session_state.tentativa != 1:
+                    st.session_state.resultados.append(tempo_reacao)
+                st.session_state.tentativa += 1
+                st.session_state.testando = False
+                st.session_state.ready = False
+                st.session_state.start_time = None
+                st.rerun()
 
-            # ===== Base de tempo média realista =====
-            base = 0.225  # média geral do Human Benchmark
+        if st.session_state.tentativa == 1:
+            st.caption("🎯 Tentativa de treino")
+        else:
+            feitas = len(st.session_state.resultados)
+            st.caption(f"📌 Tentativas válidas registradas: {feitas}/7")
 
-            # Ajustes por idade
-            if idade <= 7:
-                base += 0.020
-            elif idade <= 16:
-                base += 0.010
-            elif idade <= 35:
-                base += 0.0
-            elif idade <= 58:
-                base += 0.015
-            else:
-                base += 0.025
+        if st.button("🔁 Recomeçar teste de reação"):
+            for k in ["tentativa", "resultados", "testando", "ready", "start_time", "delay"]:
+                if k in st.session_state:
+                    del st.session_state[k]
+            st.rerun()
 
-            # Ajustes por IMC
-            if imc < 16:
-                base += 0.010
-            elif imc >= 30:
-                base += 0.005
+    else:
+        # ---- Resultados finais ----
+        st.subheader("⏱️ Resultados")
+        for i, r in enumerate(st.session_state.resultados, start=2):
+            st.write(f"Tentativa {i}: ⏱️ {r:.2f} s")
 
-            # Gravidez
-            if str(gravida).lower() in ["sim", "true", "1"]:
-                base += 0.008
+        media = sum(st.session_state.resultados) / len(st.session_state.resultados) if st.session_state.resultados else 0.0
 
-            # Riscos específicos
-            if "neurológica" in riscos or "psiquiátrica" in riscos:
-                base += 0.010
-            if "cardíaca" in riscos:
-                base += 0.005
-            if "respiratória" in riscos:
-                base += 0.005
+        # Ajustes por idade, IMC, gravidez e riscos
+        idade = st.session_state.idade
+        imc = st.session_state.imc
+        sexo = st.session_state.sexo
+        gravidez = st.session_state.get("gravida", False)
+        riscos = st.session_state.get("grupos_risco_refinados", [])
 
-            # Janela de tolerância de 25%
-            lim_inferior = base * 0.75
-            lim_superior = base * 1.25
+        base = 0.225  # média ajustada para tempo real
 
-            st.markdown("---")
-            st.subheader(f"🏁 Média dos seus tempos: **{media:.3f} s**")
+        if idade <= 7:
+            base += 0.02
+        elif idade <= 16:
+            base += 0.01
+        elif idade <= 35:
+            base += 0.0
+        elif idade <= 58:
+            base += 0.02
+        else:
+            base += 0.03
 
-            # Feedback
-            if media < lim_inferior:
-                st.success("⚡ Seu tempo está **acima do esperado**. Excelente reflexo!")
-            elif media > lim_superior:
-                st.warning("🐢 Seu tempo está **abaixo do esperado**. Considere repetir o teste mais tarde.")
-                st.markdown("🔎 Possíveis sintomas relacionados: **Hipoglicemia, Hipotensão/colapso, Formigamento ou perda de força**")
-            else:
-                st.info("✅ Seu tempo está **dentro do esperado**.")
+        if imc < 16:
+            base += 0.01
+        elif imc >= 30:
+            base += 0.01
 
-            # Mostrar tempos individuais
-            st.markdown("📊 **Tempos individuais:**")
-            for i, t in enumerate(tempos, start=1):
-                st.write(f"Tentativa {i}: {t:.3f} s")
+        if str(gravidez).lower() in ["sim", "true", "1"]:
+            base += 0.02
 
-            # Reset
-            if st.button("🔁 Refazer o teste"):
-                st.experimental_rerun()
+        if "neurológica" in riscos or "psiquiátrica" in riscos:
+            base += 0.02
+        if "cardíaca" in riscos:
+            base += 0.01
+        if "respiratória" in riscos:
+            base += 0.01
 
-        except ValueError:
-            st.error("Formato inválido! Use números separados por vírgula, ex: 0.22,0.23,0.24")
+        lim_inferior = base * 0.75
+        lim_superior = base * 1.25
+
+        st.markdown("---")
+        st.subheader(f"🏁 Média final: **{media:.3f} s**")
+
+        if media < lim_inferior:
+            st.success("⚡ Seu tempo está **acima do esperado**. Excelente reflexo!")
+        elif media > lim_superior:
+            st.warning("🐢 Seu tempo está **abaixo do esperado**. Considere repetir o teste mais tarde.")
+            st.markdown("🔎 Possíveis sintomas relacionados: **Hipoglicemia, Hipotensão/colapso, Formigamento ou perda de força**")
+        else:
+            st.info("✅ Seu tempo está **dentro do esperado**.")
+
+        if st.button("🔁 Refazer o teste"):
+            for k in ["tentativa", "resultados", "testando", "ready", "start_time", "delay"]:
+                if k in st.session_state:
+                    del st.session_state[k]
+            st.rerun()
 
 # ========== 2) CALAFrIOS ==========
 def render_calafrios():
