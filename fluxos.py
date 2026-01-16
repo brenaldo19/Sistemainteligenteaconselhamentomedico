@@ -1076,20 +1076,18 @@ FLUXOS[normalizar("Ataques de pânico")] = {
 # 21) IDEAÇÃO SUICIDA
 FLUXOS[normalizar("Ideação suicida")] = {
     "label": "Ideação suicida",
-
-{
-    "id": "mensagem_apoio",
-    "label": "Mensagem de apoio",
-    "tipo": "texto",
-    "valor": (
-        "Você não está sozinho. O que você está sentindo é importante e merece atenção.\n\n"
-        "Se estiver em risco ou se sentindo sobrecarregado, procure ajuda agora:\n"
-        "• CVV – Centro de Valorização da Vida: 188 (24h, gratuito)\n"
-        "• Emergência: 190 ou 192\n\n"
-        "Se puder, converse com alguém de confiança ou busque apoio profissional."
-    )
-},
-
+    "mensagem_apoio": {
+        "id": "mensagem_apoio",
+        "label": "Mensagem de apoio",
+        "tipo": "texto",
+        "valor": (
+            "Você não está sozinho. O que você está sentindo é importante e merece atenção.\n\n"
+            "Se estiver em risco ou se sentindo sobrecarregado, procure ajuda agora:\n"
+            "• CVV – Centro de Valorização da Vida: 188 (24h, gratuito)\n"
+            "• Emergência: 190 ou 192\n\n"
+            "Se puder, converse com alguém de confiança ou busque apoio profissional."
+        )
+    },
     "perguntas": [
         {
             "id": "ideacao",
@@ -1121,11 +1119,9 @@ FLUXOS[normalizar("Ideação suicida")] = {
             }
         }
     ],
-
     "regras_excecao": [
         {"se": {"ideacao": "Plano ativo de se machucar"}, "min_cor": "vermelho"}
     ],
-
     "mapeamento_cor": [
         (6.0, "vermelho"),
         (3.0, "laranja"),
