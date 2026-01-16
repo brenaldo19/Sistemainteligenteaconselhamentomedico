@@ -1076,18 +1076,35 @@ FLUXOS[normalizar("Ataques de pânico")] = {
 # 21) IDEAÇÃO SUICIDA
 FLUXOS[normalizar("Ideação suicida")] = {
     "label": "Ideação suicida",
-    "mensagem_apoio": {
-        "id": "mensagem_apoio",
-        "label": "Mensagem de apoio",
-        "tipo": "texto",
-        "valor": (
-            "Você não está sozinho. O que você está sentindo é importante e merece atenção.\n\n"
-            "Se estiver em risco ou se sentindo sobrecarregado, procure ajuda agora:\n"
-            "• CVV – Centro de Valorização da Vida: 188 (24h, gratuito)\n"
-            "• Emergência: 190 ou 192\n\n"
-            "Se puder, converse com alguém de confiança ou busque apoio profissional."
-        )
+
+    # =========================
+    # PERGUNTA DE APOIO (CONDICIONAL)
+    # =========================
+    "pergunta_apoio": {
+        "id": "apoio_ideacao",
+        "label": (
+            "Você não está sozinho. O que você está sentindo é importante.\n\n"
+            "Buscar ajuda agora pode fazer diferença. Você consegue entrar em contato "
+            "com um serviço de apoio ou alguém de confiança neste momento?\n\n"
+            "📞 CVV – 188 (24h, gratuito)\n"
+            "🚨 Emergência: 190 ou 192"
+        ),
+        "tipo": "radio",
+        "opcoes": {
+            "Sim, vou buscar ajuda agora": "ok",
+            "Não, não consigo buscar ajuda no momento": "risco"
+        },
+
+        # 🔴 override explícito (não entra na soma)
+        "override_cor": {
+            "se_resposta": "risco",
+            "cor": "vermelho"
+        }
     },
+
+    # =========================
+    # PERGUNTAS CLÍNICAS
+    # =========================
     "perguntas": [
         {
             "id": "ideacao",
@@ -1119,9 +1136,20 @@ FLUXOS[normalizar("Ideação suicida")] = {
             }
         }
     ],
+
+    # =========================
+    # REGRAS DE EXCEÇÃO
+    # =========================
     "regras_excecao": [
-        {"se": {"ideacao": "Plano ativo de se machucar"}, "min_cor": "vermelho"}
+        {
+            "se": {"ideacao": "Plano ativo de se machucar"},
+            "min_cor": "vermelho"
+        }
     ],
+
+    # =========================
+    # MAPA DE COR NORMAL
+    # =========================
     "mapeamento_cor": [
         (6.0, "vermelho"),
         (3.0, "laranja"),
