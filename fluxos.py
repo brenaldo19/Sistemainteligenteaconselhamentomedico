@@ -1088,7 +1088,7 @@ FLUXOS[normalizar("Ideação suicida")] = {
         "• Emergência: 190 ou 192\n\n"
         "Se puder, converse com alguém de confiança ou busque apoio profissional."
     )
-}
+},
 
     "perguntas": [
         {
