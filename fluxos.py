@@ -1157,8 +1157,7 @@ FLUXOS[normalizar("Ideação suicida")] = {
         {
             "se": {"ideacao": "Plano ativo de se machucar"},"min_cor": "vermelho"},
             "se": {"apoio_ideacao": "Sim, vou buscar ajuda agora"},"max_cor": "verde"}
-        
-    ],
+],
 
     # =========================
     # MAPA DE COR NORMAL
