@@ -282,6 +282,156 @@ FLUXOS[normalizar("Intolerância térmica")] = {
         (0.0, "verde")
     ]
 }
+FLUXOS[normalizar("Constipação")] = {
+    "label": "Prisão de Ventre (Constipação)",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual a intensidade e duração?",
+            "tipo": "radio",
+            "opcoes": {
+                "Não evacua há mais de 5 dias, com dor intensa e inchaço": 4.0,
+                "Não evacua há 3-4 dias, com muito desconforto": 2.5,
+                "Evacua com dificuldade e fezes ressecadas há semanas": 1.5,
+                "Mudança recente no padrão, mas com algum movimento intestinal": 0.8,
+                "Desconforto leve, padrão habitual apenas um pouco devagar": 0.3
+            }
+        },
+        {
+            "id": "sinais_alarme",
+            "label": "Você apresenta algum destes sintomas?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Vômitos": 1.5,
+                "Sangue vivo nas fezes ou no papel higiênico": 1.2,
+                "Dor abdominal muito forte e constante": 1.2,
+                "Perda de peso não intencional": 1.0,
+                "Inchaço abdominal muito pronunciado": 0.8
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Quais desses fatores se aplicam a você?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de câncer colorretal na família": 1.0,
+                "Idade acima de 55 anos com mudança recente no padrão": 0.8,
+                "Uso crônico de laxantes": 0.5,
+                "Dieta pobre em fibras e baixa ingestão de água": 0.4
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Não evacua há mais de 5 dias, com dor intensa e inchaço"}, "min_cor": "laranja"},
+        {"se": {"sinais_alarme": ["Vômitos", "Dor abdominal muito forte e constante"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),   # Raríssimo para constipação, mas possível com múltiplos sinais graves
+        (3.5, "laranja"),    # Risco de obstrução, necessidade de avaliação urgente
+        (1.8, "amarelo"),    # Caso crônico ou com sinais de alerta, precisa de consulta
+        (0.0, "verde")       # Constipação funcional simples, orientação de estilo de vida
+    ]
+}
+FLUXOS[normalizar("Congestão Nasal")] = {
+    "label": "Congestão Nasal (Nariz Entupido)",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Qual a intensidade e duração do entupimento?",
+            "tipo": "radio",
+            "opcoes": {
+                "Congestão total que não melhora com nada, há semanas": 2.5,
+                "Congestão com dor forte no rosto/ouvido, febre": 2.0,
+                "Congestão que piora à noite, com coceira/espirros": 1.2,
+                "Congestão leve/moderada, acompanhada de coriza e espirros": 0.6,
+                "Congestão passageira, melhora com lavagem nasal": 0.2
+            }
+        },
+        {
+            "id": "sinais_alarme",
+            "label": "Você apresenta algum destes sintomas?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Falta de ar ou chiado no peito": 1.5,
+                "Dor de cabeça muito forte e persistente": 1.2,
+                "Secreção nasal com pus ou sangue": 1.0,
+                "Inchaço ou vermelhidão ao redor dos olhos": 0.8,
+                "Febre alta (acima de 38.5°C) que não cede": 0.8
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Quais dessas situações se aplicam a você?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de rinite alérgica ou sinusite crônica": 0.5,
+                "Suspeita de desvio de septo ou trauma nasal": 0.5,
+                "Recém-nascido ou bebê com menos de 3 meses": 1.0,
+                "Sistema imunológico comprometido": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"sinais_alarme": ["Falta de ar ou chiado no peito"]}, "min_cor": "laranja"},
+        {"se": {"fatores_risco": ["Recém-nascido ou bebê com menos de 3 meses"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (4.5, "vermelho"),   # Muito raro, apenas com múltiplas bandeiras vermelhas
+        (3.0, "laranja"),    # Sinais de complicação (ex: sinusite grave, falta de ar)
+        (1.5, "amarelo"),    # Caso crônico ou com sinais de infecção
+        (0.0, "verde")       # Congestão viral ou alérgica simples
+    ]
+}
+FLUXOS[normalizar("Mudança no Hábito Intestinal")] = {
+    "label": "Mudança no Hábito Intestinal",
+    "perguntas": [
+        {
+            "id": "tipo_mudanca",
+            "label": "Descreva a mudança principal:",
+            "tipo": "radio",
+            "opcoes": {
+                "Fezes muito finas ('em fita') ou sensação de evacuação incompleta": 3.0,
+                "Alternância entre diarreia e prisão de ventre": 1.8,
+                "Surgimento de diarreia persistente (semanas)": 1.5,
+                "Prisão de ventre nova e persistente": 1.2,
+                "Mudança leve e temporária (dias), relacionada à dieta": 0.4
+            }
+        },
+        {
+            "id": "sinais_alarme",
+            "label": "Você apresenta algum destes sintomas associados?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Sangue vivo ou escuro nas fezes": 1.8,
+                "Dor abdominal forte e constante": 1.5,
+                "Perda de peso não intencional": 1.5,
+                "Anemia recente ou palidez": 1.2,
+                "Vômitos persistentes": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Quais desses fatores se aplicam a você?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Idade acima de 45 anos (principalmente >55)": 1.2,
+                "Histórico familiar de câncer colorretal ou intestinal": 1.5,
+                "Histórico pessoal de pólipos ou doença inflamatória intestinal": 1.0
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"tipo_mudanca": "Fezes muito finas ('em fita') ou sensação de evacuação incompleta"}, "min_cor": "laranja"},
+        {"se": {"sinais_alarme": ["Sangue vivo ou escuro nas fezes", "Perda de peso não intencional"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.5, "vermelho"),   # Múltiplos sinais de alarme graves
+        (3.5, "laranja"),    # Presença de um sinal de alarme importante (como sangue ou fezes em fita)
+        (2.0, "amarelo"),     # Mudança persistente sem sinais alarmantes óbvios
+        (0.0, "verde")       # Mudança leve e recente, provavelmente dietética
+    ]
+}
+
 # 5) MOVIMENTOS INVOLUNTÁRIOS
 FLUXOS[normalizar("Movimentos involuntários")] = {
     "label": "Movimentos involuntários",
@@ -341,6 +491,154 @@ FLUXOS[normalizar("Movimentos involuntários")] = {
         (3.0, "laranja"),
         (1.2, "amarelo"),
         (0.0, "verde")
+    ]
+}
+FLUXOS[normalizar("Fezes Claras")] = {
+    "label": "Fezes Claras/Esbranquiçadas",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Descreva as fezes e a duração:",
+            "tipo": "radio",
+            "opcoes": {
+                "Fezes brancas/arcilosas há vários dias, com dor abdominal e urina escura": 4.0,
+                "Fezes consistentemente claras/esbranquiçadas há semanas": 3.0,
+                "Fezes intermitentemente claras, sem outros sintomas": 1.5,
+                "Fezes levemente mais claras que o normal, apenas uma vez": 0.3
+            }
+        },
+        {
+            "id": "sinais_alarme",
+            "label": "Você apresenta algum destes sintomas associados?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Pele ou olhos amarelados (Icterícia)": 2.0,
+                "Urina cor de chá escuro": 1.8,
+                "Coceira intensa no corpo": 1.2,
+                "Febre com calafrios": 1.0,
+                "Dor abdominal superior direita constante": 1.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Quais dessas situações se aplicam a você?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de pedra na vesícula ou cirurgia biliar": 1.2,
+                "Histórico de doença hepática (hepatite, cirrose)": 1.5,
+                "Uso recente de alguns medicamentos (ex: paracetamol em excesso)": 0.8
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"quadro": "Fezes brancas/arcilosas há vários dias, com dor abdominal e urina escura"}, "min_cor": "vermelho"},
+        {"se": {"sinais_alarme": ["Pele ou olhos amarelados (Icterícia)", "Urina cor de chá escuro"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),  # Obstrução biliar completa com icterícia - emergência
+        (3.5, "laranja"),   # Sinais claros de problema hepatobiliar - avaliação urgente
+        (1.8, "amarelo"),   # Fezes claras persistentes sem outros sintomas - precisa investigar
+        (0.0, "verde")      # Isolado e transitório, provavelmente inofensivo
+    ]
+}
+FLUXOS[normalizar("Fadiga Crônica")] = {
+    "label": "Cansaço Excessivo (Fadiga)",
+    "perguntas": [
+        {
+            "id": "quadro",
+            "label": "Como você descreve seu cansaço?",
+            "tipo": "radio",
+            "opcoes": {
+                "Impossibilitado de fazer tarefas diárias, cansaço extremo ao mínimo esforço": 3.5,
+                "Cansaço intenso que não melhora com repouso, há semanas": 2.8,
+                "Cansaço que limita atividades, mas consigo trabalhar": 1.5,
+                "Cansaço moderado, melhora parcialmente com repouso": 0.8,
+                "Senso de cansaço leve, mas persistente": 0.3
+            }
+        },
+        {
+            "id": "sinais_alarme",
+            "label": "Você apresenta algum destes sintomas?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Febre persistente ou suores noturnos": 1.5,
+                "Perda de peso não intencional significativa": 1.8,
+                "Falta de ar ao esforço leve ou em repouso": 1.5,
+                "Linfonodos aumentados (ínguas) no pescoço, axila ou virilha": 1.2,
+                "Depressão profunda ou ideação suicida": 2.0
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Quais dessas situações se aplicam a você?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Histórico de anemia ou doença tireoidiana": 1.0,
+                "Diagnóstico prévio de síndrome da fadiga crônica ou fibromialgia": 0.8,
+                "Uso de medicamentos que causam fadiga (ex: alguns para pressão)": 0.5,
+                "Estresse intenso ou esgotamento profissional (burnout)": 0.5
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"sinais_alarme": ["Depressão profunda ou ideação suicida"]}, "min_cor": "laranja"},
+        {"se": {"sinais_alarme": ["Perda de peso não intencional significativa", "Febre persistente ou suores noturnos"]}, "min_cor": "laranja"}
+    ],
+    "mapeamento_cor": [
+        (5.0, "vermelho"),   # Múltiplos sinais de doença sistêmica grave
+        (3.5, "laranja"),    # Presença de "red flags" como febre, perda de peso ou depressão grave
+        (2.0, "amarelo"),    # Fadiga limitante sem causas óbvias, precisa de investigação
+        (0.0, "verde")       # Cansaço leve provavelmente relacionado a estilo de vida
+    ]
+}
+FLUXOS[normalizar("Alteração nas Unhas")] = {
+    "label": "Alteração nas Unhas",
+    "perguntas": [
+        {
+            "id": "tipo_alteracao",
+            "label": "Qual é a principal alteração que você observa?",
+            "tipo": "radio",
+            "opcoes": {
+                "Unhas muito quebradiças ou com sulcos profundos": 1.2,
+                "Unhas com coloração anormal (amarelas, esverdeadas, escuras)": 2.0,
+                "Unhas com formato de colher (afundadas) ou curvadas para baixo": 1.8,
+                "Unhas com linhas escuras verticais (nova ocorrência)": 2.5,
+                "Unhas descolando do leito (onicólise), com ou sem dor": 1.5,
+                "Manchas brancas pequenas e esparsas (mais comum e benigno)": 0.2
+            }
+        },
+        {
+            "id": "sinais_alarme",
+            "label": "Você apresenta algum destes sintomas associados?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Febre, mal-estar ou suores noturnos": 1.2,
+                "Lesões ou alterações na pele em outras partes do corpo": 1.0,
+                "Falta de ar ou cansaço extremo (sinais de anemia)": 1.0,
+                "Dor ou inchaço ao redor da unha (infecção)": 0.8,
+                "Histórico de trauma na unha afetada": -0.5  # Reduz a preocupação se for a causa óbvia
+            }
+        },
+        {
+            "id": "fatores_risco",
+            "label": "Quais dessas situações se aplicam a você?",
+            "tipo": "multiselect",
+            "opcoes": {
+                "Diagnóstico prévio de psoríase ou doença de pele": 0.8,
+                "Exposição frequente a produtos químicos/umidade": 0.5,
+                "Idade avançada (aumenta chance de alterações benignas)": 0.3
+            }
+        }
+    ],
+    "regras_excecao": [
+        {"se": {"tipo_alteracao": "Unhas com linhas escuras verticais (nova ocorrência)"}, "min_cor": "laranja"},
+        {"se": {"sinais_alarme": ["Febre, mal-estar ou suores noturnos"]}, "min_cor": "amarelo"}
+    ],
+    "mapeamento_cor": [
+        (4.0, "vermelho"),   # Muito raro, mas possível em infecções graves ou doenças sistêmicas avançadas
+        (2.8, "laranja"),    # Sinais de possível melanoma (linha escura nova) ou doença sistêmica importante
+        (1.5, "amarelo"),    # Alteração significativa que precisa de avaliação dermatológica eletiva
+        (0.0, "verde")       # Alteração benigna (manchas brancas) ou relacionada a trauma claro
     ]
 }
 
