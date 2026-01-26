@@ -141,7 +141,7 @@ def dicionario_sintomas():
         "Uso recente de alguns medicamentos (ex: paracetamol em excesso)": "Tomou muito remédio recentemente."
     }
 },
-"Fadiga Cronica": {
+"Fadiga Crônica": {
     "definicao": "Cansaço extremo e persistente que não melhora com o repouso e interfere nas atividades diárias.",
     "popular": "Cansaço extremo que não passa dormindo.",
     "clinico": "Astenia / Fadiga Crônica",
@@ -162,7 +162,7 @@ def dicionario_sintomas():
         "Estresse intenso ou esgotamento profissional (burnout)": "Estresse muito forte no trabalho ou vida."
     }
 },
-"Alteracao nas Unhas": {
+"Alteração nas Unhas": {
     "definicao": "Mudanças na cor, formato, textura ou espessura das unhas das mãos ou pés.",
     "popular": "Unhas fracas, manchadas ou com formato diferente.",
     "clinico": "Onicopatia",
