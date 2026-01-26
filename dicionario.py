@@ -60,7 +60,7 @@ def dicionario_sintomas():
         "Uso de inalador sem melhora": "Tentativa com broncodilatador falhou."
     }
 },
-"Constipacao": {
+"Constipação": {
     "definicao": "Evacuação difícil ou infrequente, com fezes ressecadas e duras.",
     "popular": "Prisão de ventre, intestino preso.",
     "clinico": "Obstipação Intestinal",
@@ -102,7 +102,7 @@ def dicionario_sintomas():
         "Sistema imunológico comprometido": "Imunidade baixa (ex: HIV, quimioterapia, uso de corticoides)."
     }
 },
-"Mudanca no Habito Intestinal": {
+"Mudanca no Hábito Intestinal": {
     "definicao": "Alteração significativa e persistente na frequência, consistência ou formato das fezes.",
     "popular": "O jeito de evacuar mudou; intestino desregulado.",
     "clinico": "Alteração do Hábito Intestinal",
