@@ -162,7 +162,7 @@ def dicionario_sintomas():
         "Estresse intenso ou esgotamento profissional (burnout)": "Estresse muito forte no trabalho ou vida."
     }
 },
-"Alteração nas Unhas": {
+"Alterações nas Unhas": {
     "definicao": "Mudanças na cor, formato, textura ou espessura das unhas das mãos ou pés.",
     "popular": "Unhas fracas, manchadas ou com formato diferente.",
     "clinico": "Onicopatia",
