@@ -16,6 +16,10 @@ def max_cor(*cores):
     idx = [ORDEM_CORES.index(c) for c in cores if c in ORDEM_CORES]
     return ORDEM_CORES[max(idx)] if idx else "verde"
 
+def min_cor(*cores):
+    idx = [ORDEM_CORES.index(c) for c in cores if c in ORDEM_CORES]
+    return ORDEM_CORES[min(idx)] if idx else "verde"
+
 def score_para_cor(score, tabela):
     # tabela: [(limiar, "cor"), ...]
     tabela_ord = sorted(tabela, key=lambda x: x[0], reverse=True)
