@@ -182,7 +182,7 @@ def dicionario_sintomas():
         "Exposição frequente a produtos químicos/umidade": "Trabalha muito com água ou produtos químicos.",
         "Idade avançada (aumenta chance de alterações benignas)": "Ter idade avançada."
     }
-}
+},
 
 "Tosse com sangue ": {
     "definicao": "Eliminação de sangue pelas vias aéreas inferiores durante a tosse.",
