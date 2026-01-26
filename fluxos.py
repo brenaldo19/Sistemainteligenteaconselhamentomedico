@@ -1084,17 +1084,19 @@ FLUXOS[normalizar("Ideação suicida")] = {
         {
             "id": "apoio_ideacao",
             "label": (
-            "Você não está sozinho. O que você está sentindo é importante.\n\n"
-            "Buscar ajuda agora pode fazer diferença. Você consegue entrar em contato "
-            "com um serviço de apoio ou alguém de confiança neste momento?\n\n"
-            "📞 CVV – 188 (24h, gratuito)\n"
-            "🚨 Emergência: 190 ou 192"
-        ),
-        "tipo": "radio",
-        "opcoes": {
-            "Sim, vou buscar ajuda agora": 0.1,
-            "Não, não consigo buscar ajuda no momento": "7.5"
+                "Você não está sozinho. O que você está sentindo é importante.\n\n"
+                "Buscar ajuda agora pode fazer diferença. Você consegue entrar em contato "
+                "com um serviço de apoio ou alguém de confiança neste momento?\n\n"
+                "📞 CVV – 188 (24h, gratuito)\n"
+                "🚨 Emergência: 190 ou 192"
+            ),
+            "tipo": "radio",
+            "opcoes": {
+                "Sim, vou buscar ajuda agora": 0.1,
+                "Não, não consigo buscar ajuda no momento": 7.5
+            }
         },
+        {
             "id": "ideacao",
             "label": "Pensamentos suicidas:",
             "tipo": "radio",
@@ -1124,6 +1126,7 @@ FLUXOS[normalizar("Ideação suicida")] = {
             }
         }
     ],
+
 
     # =========================
     # REGRAS DE EXCEÇÃO
