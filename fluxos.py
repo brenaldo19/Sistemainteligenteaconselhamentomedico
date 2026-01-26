@@ -72,7 +72,25 @@ def pontuar_fluxo(sintoma_label, respostas):
             score += sum(opcoes.get(x, 0.0) for x in (r or []))
 
     cor_base = score_para_cor(score, cfg["mapeamento_cor"])
-    min_cor = None
+def pontuar_fluxo(sintoma_label, respostas):
+    chave = normalizar(sintoma_label)
+    cfg = FLUXOS[chave]
+    score = 0.0
+    for p in cfg["perguntas"]:
+        pid, tipo, opcoes = p["id"], p["tipo"], p["opcoes"]
+        r = respostas.get(pid)
+        if r is None:
+            continue
+        if tipo == "radio":
+            score += opcoes.get(r, 0.0)
+        elif tipo in ("checkbox", "multiselect"):
+            score += sum(opcoes.get(x, 0.0) for x in (r or []))
+
+    cor_base = score_para_cor(score, cfg["mapeamento_cor"])
+    
+    # MUDEI O NOME DA VARIÁVEL AQUI:
+    cor_minima = None
+    
     for regra in cfg.get("regras_excecao", []):
         cond = regra["se"]
         ok = True
@@ -86,9 +104,13 @@ def pontuar_fluxo(sintoma_label, respostas):
                     ok = False
         if ok:
             cand = regra["min_cor"]
-            min_cor = cand if not min_cor else max_cor(min_cor, cand)
-    cor_final = max_cor(cor_base, min_cor) if min_cor else cor_base
+            # USA A FUNÇÃO max_cor COM A VARIÁVEL RENOMEADA:
+            cor_minima = cand if not cor_minima else max_cor(cor_minima, cand)
+    
+    # USA A VARIÁVEL RENOMEADA:
+    cor_final = max_cor(cor_base, cor_minima) if cor_minima else cor_base
     return cor_final, score
+
 
 def labels_fluxos():
     return [cfg.get("label", k.replace("_", " ").title()) for k, cfg in FLUXOS.items()]
