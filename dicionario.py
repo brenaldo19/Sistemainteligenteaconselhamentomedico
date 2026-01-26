@@ -60,6 +60,129 @@ def dicionario_sintomas():
         "Uso de inalador sem melhora": "Tentativa com broncodilatador falhou."
     }
 },
+"Constipacao": {
+    "definicao": "Evacuação difícil ou infrequente, com fezes ressecadas e duras.",
+    "popular": "Prisão de ventre, intestino preso.",
+    "clinico": "Obstipação Intestinal",
+    "termos": {
+        "Não evacua há mais de 5 dias, com dor intensa e inchaço": "Intestino parado há muitos dias, com barriga muito inchada e dolorida.",
+        "Não evacua há 3-4 dias, com muito desconforto": "Intestino preso há alguns dias, com sensação de inchaço e mal-estar.",
+        "Evacua com dificuldade e fezes ressecadas há semanas": "Sempre faz força para evacuar e as fezes são duras, há bastante tempo.",
+        "Mudança recente no padrão, mas com algum movimento intestinal": "O jeito de evacuar mudou (ex: ficou mais difícil), mas ainda vai ao banheiro.",
+        "Desconforto leve, padrão habitual apenas um pouco devagar": "Intestino um pouco mais lento que o normal, com incômodo leve.",
+        "Vômitos": "Enjoo extremo chegando a vomitar.",
+        "Sangue vivo nas fezes ou no papel higiênico": "Sangue vermelho visível ao evacuar ou limpar-se.",
+        "Dor abdominal muito forte e constante": "Dor forte na barriga que não passa.",
+        "Perda de peso não intencional": "Emagrecer sem fazer dieta ou exercício.",
+        "Inchaço abdominal muito pronunciado": "Barriga muito inchada e estufada.",
+        "Histórico de câncer colorretal na família": "Parente próximo (pais, irmãos) teve câncer no intestino.",
+        "Idade acima de 55 anos com mudança recente no padrão": "Ter mais de 55 anos e o funcionamento do intestino ter mudado agora.",
+        "Uso crônico de laxantes": "Toma remédio para soltar o intestino com frequência.",
+        "Dieta pobre em fibras e baixa ingestão de água": "Come poucas frutas/verduras e bebe pouca água."
+    }
+},
+"Congestao Nasal": {
+    "definicao": "Obstrução das passagens nasais, dificultando a respiração pelo nariz.",
+    "popular": "Nariz entupido, nariz tampado.",
+    "clinico": "Obstrução Nasal / Rinorreia",
+    "termos": {
+        "Congestão total que não melhora com nada, há semanas": "Nariz totalmente entupido o tempo todo, há semanas, e nada alivia.",
+        "Congestão com dor forte no rosto/ouvido, febre": "Nariz entupido com dor na maçã do rosto, ouvido ou febre.",
+        "Congestão que piora à noite, com coceira/espirros": "Nariz fica pior à noite ou empoeirado, com espirros.",
+        "Congestão leve/moderada, acompanhada de coriza e espirros": "Nariz meio entupido, com coriza (catarro líquido) e espirros.",
+        "Congestão passageira, melhora com lavagem nasal": "Entupimento que vai e volta, melhora ao lavar o nariz.",
+        "Falta de ar ou chiado no peito": "Dificuldade para respirar ou peito chiando.",
+        "Dor de cabeça muito forte e persistente": "Dor de cabeça forte que não passa.",
+        "Secreção nasal com pus ou sangue": "Catarro nasal grosso, amarelo-esverdeado ou com sangue.",
+        "Inchaço ou vermelhidão ao redor dos olhos": "Olhos ou pálpebras inchadas e vermelhas.",
+        "Febre alta (acima de 38.5°C) que não cede": "Febre alta que não baixa com remédio.",
+        "Histórico de rinite alérgica ou sinusite crônica": "Já teve diagnóstico de rinite (alergia nasal) ou sinusite de repetição.",
+        "Suspeita de desvio de septo ou trauma nasal": "Acha que o osso do nariz é torto ou teve algum machucado.",
+        "Recém-nascido ou bebê com menos de 3 meses": "Bebê muito novinho (menos de 3 meses).",
+        "Sistema imunológico comprometido": "Imunidade baixa (ex: HIV, quimioterapia, uso de corticoides)."
+    }
+},
+"Mudanca no Habito Intestinal": {
+    "definicao": "Alteração significativa e persistente na frequência, consistência ou formato das fezes.",
+    "popular": "O jeito de evacuar mudou; intestino desregulado.",
+    "clinico": "Alteração do Hábito Intestinal",
+    "termos": {
+        "Fezes muito finas ('em fita') ou sensação de evacuação incompleta": "Fezes finas como uma fita ou sensação de que ainda precisa evacuar mais.",
+        "Alternância entre diarreia e prisão de ventre": "Fases de intestino solto e intestino preso alternando.",
+        "Surgimento de diarreia persistente (semanas)": "Diarreia que dura semanas.",
+        "Prisão de ventre nova e persistente": "Intestino preso começou agora e não voltou ao normal.",
+        "Mudança leve e temporária (dias), relacionada à dieta": "Mudança passageira, de poucos dias, depois de comer algo diferente.",
+        "Sangue vivo ou escuro nas fezes": "Sangue vermelho ou fezes muito escuras (como borra de café).",
+        "Dor abdominal forte e constante": "Dor forte na barriga que não alivia.",
+        "Perda de peso não intencional": "Emagrecer sem tentar.",
+        "Anemia recente ou palidez": "Diagnóstico recente de anemia ou pele pálida/cansada.",
+        "Vômitos persistentes": "Vomitar várias vezes seguidas.",
+        "Idade acima de 45 anos (principalmente >55)": "Ter mais de 45 (ou 55) anos.",
+        "Histórico familiar de câncer colorretal ou intestinal": "Parente próximo com câncer no intestino.",
+        "Histórico pessoal de pólipos ou doença inflamatória intestinal": "Já teve pólipo no intestino ou doença como Crohn/Retocolite."
+    }
+},
+"Fezes Claras": {
+    "definicao": "Fezes esbranquiçadas, cor de massa de modelar, indicando possível problema no fígado ou vesícula.",
+    "popular": "Cocô branco, cor de argila.",
+    "clinico": "Acolia Fecal",
+    "termos": {
+        "Fezes brancas/arcilosas há vários dias, com dor abdominal e urina escura": "Cocô branco há dias, com dor na barriga e xixi muito escuro (cor de chá).",
+        "Fezes consistentemente claras/esbranquiçadas há semanas": "Cocô sempre muito claro, há semanas.",
+        "Fezes intermitentemente claras, sem outros sintomas": "Cocô claro só às vezes, sem outros sintomas.",
+        "Fezes levemente mais claras que o normal, apenas uma vez": "Cocô só um pouco mais claro uma vez.",
+        "Pele ou olhos amarelados (Icterícia)": "Pele ou parte branca dos olhos amareladas.",
+        "Urina cor de chá escuro": "Xixi muito escuro, marrom.",
+        "Coceira intensa no corpo": "Coceira forte em todo o corpo, sem rash.",
+        "Febre com calafrios": "Febre alta com sensação de frio intenso.",
+        "Dor abdominal superior direita constante": "Dor constante no lado direito superior da barriga.",
+        "Histórico de pedra na vesícula ou cirurgia biliar": "Já teve pedra na vesícula ou operação.",
+        "Histórico de doença hepática (hepatite, cirrose)": "Já teve hepatite ou cirrose.",
+        "Uso recente de alguns medicamentos (ex: paracetamol em excesso)": "Tomou muito remédio recentemente."
+    }
+},
+"Fadiga Cronica": {
+    "definicao": "Cansaço extremo e persistente que não melhora com o repouso e interfere nas atividades diárias.",
+    "popular": "Cansaço extremo que não passa dormindo.",
+    "clinico": "Astenia / Fadiga Crônica",
+    "termos": {
+        "Impossibilitado de fazer tarefas diárias, cansaço extremo ao mínimo esforço": "Não consegue fazer tarefas básicas, cansaço extremo com esforço mínimo.",
+        "Cansaço intenso que não melhora com repouso, há semanas": "Cansaço forte que não passa mesmo dormindo, há semanas.",
+        "Cansaço que limita atividades, mas consigo trabalhar": "Cansaço que atrapalha lazer/exercícios, mas ainda trabalha.",
+        "Cansaço moderado, melhora parcialmente com repouso": "Cansaço que melhora um pouco ao descansar.",
+        "Senso de cansaço leve, mas persistente": "Sempre se sente um pouco cansado.",
+        "Febre persistente ou suores noturnos": "Febre baixa constante ou suor forte à noite (molha pijama).",
+        "Perda de peso não intencional significativa": "Emagrecer bastante sem fazer dieta.",
+        "Falta de ar ao esforço leve ou em repouso": "Ficar ofegante com pouco esforço ou até parado.",
+        "Linfonodos aumentados (ínguas) no pescoço, axila ou virilha": "Carocinhos aumentados no pescoço, axila ou virilha.",
+        "Depressão profunda ou ideação suicida": "Tristeza profunda ou pensamentos em se machucar.",
+        "Histórico de anemia ou doença tireoidiana": "Já teve anemia ou problema na tireoide.",
+        "Diagnóstico prévio de síndrome da fadiga crônica ou fibromialgia": "Já tem diagnóstico de síndrome do cansaço crônico ou fibromialgia.",
+        "Uso de medicamentos que causam fadiga (ex: alguns para pressão)": "Toma remédio que dá cansaço.",
+        "Estresse intenso ou esgotamento profissional (burnout)": "Estresse muito forte no trabalho ou vida."
+    }
+},
+"Alteracao nas Unhas": {
+    "definicao": "Mudanças na cor, formato, textura ou espessura das unhas das mãos ou pés.",
+    "popular": "Unhas fracas, manchadas ou com formato diferente.",
+    "clinico": "Onicopatia",
+    "termos": {
+        "Unhas muito quebradiças ou com sulcos profundos": "Unhas que quebram fácil ou com sulcos/linhas profundas.",
+        "Unhas com coloração anormal (amarelas, esverdeadas, escuras)": "Unhas com cor diferente (amarelo, verde, preto).",
+        "Unhas com formato de colher (afundadas) ou curvadas para baixo": "Unhas afundadas como colher ou curvadas para baixo.",
+        "Unhas com linhas escuras verticais (nova ocorrência)": "Linha escura nova na unha, no sentido do crescimento.",
+        "Unhas descolando do leito (onicólise), com ou sem dor": "Unha se soltando da carne por baixo.",
+        "Manchas brancas pequenas e esparsas (mais comum e benigno)": "Pontinhos brancos na unha.",
+        "Febre, mal-estar ou suores noturnos": "Febre, sensação de doença ou suor noturno.",
+        "Lesões ou alterações na pele em outras partes do corpo": "Manchas/lesões na pele em outros lugares.",
+        "Falta de ar ou cansaço extremo (sinais de anemia)": "Falta de ar ou cansaço forte.",
+        "Dor ou inchaço ao redor da unha (infecção)": "Dor e vermelhidão ao redor da unha.",
+        "Histórico de trauma na unha afetada": "Unha machucada recentemente.",
+        "Diagnóstico prévio de psoríase ou doença de pele": "Já tem psoríase ou outra doença de pele.",
+        "Exposição frequente a produtos químicos/umidade": "Trabalha muito com água ou produtos químicos.",
+        "Idade avançada (aumenta chance de alterações benignas)": "Ter idade avançada."
+    }
+}
 
 "Tosse com sangue ": {
     "definicao": "Eliminação de sangue pelas vias aéreas inferiores durante a tosse.",
