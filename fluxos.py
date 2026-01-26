@@ -1093,7 +1093,7 @@ FLUXOS[normalizar("Ideação suicida")] = {
         "tipo": "radio",
         "opcoes": {
             "Sim, vou buscar ajuda agora": 0.1,
-            "Não, não consigo buscar ajuda no momento": "risco"
+            "Não, não consigo buscar ajuda no momento": "7.5"
         },
             "id": "ideacao",
             "label": "Pensamentos suicidas:",
