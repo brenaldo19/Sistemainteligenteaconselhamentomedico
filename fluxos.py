@@ -592,7 +592,7 @@ FLUXOS[normalizar("Fadiga Crônica")] = {
     ]
 }
 FLUXOS[normalizar("Alteração nas Unhas")] = {
-    "label": "Alteração nas Unhas",
+    "label": "Alterações nas Unhas",
     "perguntas": [
         {
             "id": "tipo_alteracao",
