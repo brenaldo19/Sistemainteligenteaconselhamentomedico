@@ -1131,10 +1131,15 @@ FLUXOS[normalizar("Ideação suicida")] = {
     # =========================
     # REGRAS DE EXCEÇÃO
     # =========================
-    "regras_excecao": [
-        {
-            "se": {"ideacao": "Plano ativo de se machucar"},"min_cor": "vermelho"},
-           {"se": {"apoio_ideacao": "Sim, vou buscar ajuda agora"},"max_cor": "verde"}
+"regras_excecao": [
+    {
+        "se": {"ideacao": "Plano ativo de se machucar"},
+        "min_cor": "vermelho"
+    },  # <- VÍRGULA AQUI!
+    {
+        "se": {"apoio_ideacao": "Sim, vou buscar ajuda agora"},
+        "max_cor": "verde"
+    }
 ],
 
     # =========================
